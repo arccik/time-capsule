@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { api } from "~/utils/api";
 import Loader from "../layout/Loader";
-import { UseFormRegister, UseFormSetValue } from "react-hook-form";
-import { Capsule } from "~/types/capsule";
-import { SendingMethod } from "@prisma/client";
+import { type UseFormRegister } from "react-hook-form";
+import { type Capsule } from "~/types/capsule";
+import { type SendingMethod } from "@prisma/client";
 
 export default function SendingMethodButtons({
   register,
-  setValue,
-}: {
+}: // setValue,
+{
   register: UseFormRegister<Capsule>;
-  setValue: UseFormSetValue<Capsule>;
+  // setValue: UseFormSetValue<Capsule>;
 }) {
   const [selectedMethods, setSelectedMethods] = useState<
     { id: string; name: string }[] | []
@@ -18,9 +18,9 @@ export default function SendingMethodButtons({
   const { data: sendingMethods, status } =
     api.capsule.getAllSendingMethods.useQuery();
 
-  useEffect(() => {
-    setValue("sendingMethod", selectedMethods);
-  }, [selectedMethods]);
+  // useEffect(() => {
+  //   setValue("sendingMethod", selectedMethods);
+  // }, [selectedMethods]);
 
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {

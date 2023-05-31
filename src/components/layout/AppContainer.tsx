@@ -1,7 +1,10 @@
 import React from "react";
-import BottomNavigation from "./BottomNavigation";
 
-export default function AppContainer({ children }: any) {
+export default function AppContainer({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />

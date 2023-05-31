@@ -1,7 +1,7 @@
 import React from "react";
 import Loader from "~/components/layout/Loader";
 import { api } from "~/utils/api";
-import { BsCapsule, BsTrash, BsPersonBoundingBox } from "react-icons/bs";
+import { BsCapsule, BsTrash } from "react-icons/bs";
 
 const formatTime = (time: Date): string => {
   const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -19,7 +19,10 @@ export default function BuriedCapsules() {
       <div className="m-6">
         <p className="text-3xl font-bold"> Buried Capsules</p>
         {capsuleData.map((capsule) => (
-          <div className="alert m-2 flex w-[95%] flex-row shadow-lg ">
+          <div
+            key={capsule.id}
+            className="alert m-2 flex w-[95%] flex-row shadow-lg "
+          >
             <div>
               <BsCapsule />
               <span>

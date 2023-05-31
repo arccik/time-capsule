@@ -3,7 +3,7 @@ import { env } from "~/env.mjs";
 
 export default async function sendEmail() {
   // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     service: "gmail",
     // host: env.SMTP_HOST,
     // port: Number(env.SMTP_PORT),
@@ -15,7 +15,7 @@ export default async function sendEmail() {
   });
   console.log("----------------", env.SMTP_USER, env.SMTP_PASSWORD);
   // send mail with defined transport object
-  let info = await transporter.sendMail({
+  const info = await transporter.sendMail({
     from: '"Fred Foo 👻" <arccik@gmail.com>', // sender address
     to: "bar@example.com, arccik@gmail.com", // list of receivers
     subject: "Hello ✔", // Subject line

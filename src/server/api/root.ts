@@ -1,4 +1,4 @@
-import { sendingRouter } from "~/server/api/routers/sending";
+// import { sendingRouter } from "~/server/api/routers/sending";
 import { createTRPCRouter } from "~/server/api/trpc";
 import { capsuleRouter } from "./routers/capsule";
 
@@ -9,7 +9,7 @@ import { capsuleRouter } from "./routers/capsule";
  */
 export const appRouter = createTRPCRouter({
   capsule: capsuleRouter,
-  sending: sendingRouter,
+  // sending: sendingRouter,
 });
 
 // export type definition of API

@@ -1,4 +1,4 @@
-import { UseFormRegisterReturn } from "react-hook-form/dist/types";
+import type { UseFormRegisterReturn } from "react-hook-form/dist/types";
 
 export default function AgeRange({ rest }: { rest: UseFormRegisterReturn }) {
   return (

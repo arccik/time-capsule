@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const AiCountdown = ({ time }: { time: Date }) => {
+
+const AiCountdown = ({ time }: { time: Date | undefined }) => {
   const [countdown, setCountdown] = useState({
     years: 0,
 
@@ -9,6 +10,7 @@ const AiCountdown = ({ time }: { time: Date }) => {
   });
 
   useEffect(() => {
+    if (!time) return;
     const calculateCountdown = () => {
       const currentDate = new Date().valueOf();
       const targetDate = new Date(time).valueOf();
@@ -55,8 +57,7 @@ const AiCountdown = ({ time }: { time: Date }) => {
           key={key}
         >
           <span className="countdown font-mono text-5xl">
-            {/* @ts-ignore */}
-            <span style={{ "--value": value }}></span>
+            <span style={{ "--value": value } as React.CSSProperties}></span>
           </span>
           {key}
         </div>

@@ -1,12 +1,14 @@
 import React from "react";
-import { FieldErrors } from "react-hook-form";
-import { Capsule } from "~/types/capsule";
+import type { FieldErrors } from "react-hook-form";
+import type { Capsule } from "~/types/capsule";
 
 export default function FormErrors({
   errors,
 }: {
   errors: FieldErrors<Capsule>;
 }) {
+  console.log("FORM ERROR SS ", errors);
+  if (!errors) return null;
   const errorMessages = Object.entries(errors).map(([key, value]) => (
     <div className="alert alert-error shadow-lg" key={key}>
       <div>
@@ -23,7 +25,7 @@ export default function FormErrors({
             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <span>{key.toUpperCase() + ": " + value.message}</span>
+        <span>{value ? `${key.toUpperCase()} required` : ""}</span>
       </div>
     </div>
   ));

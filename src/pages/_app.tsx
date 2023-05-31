@@ -4,6 +4,8 @@ import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import Header from "~/components/layout/Header";
+import { type ReactElement } from "react";
+import { type NextPage } from "next";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -19,7 +21,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   );
 };
 
-function Auth({ children }: any) {
+function Auth({ children }: { children: ReactElement<Element, NextPage> }) {
   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
   const { status } = useSession({ required: true });
 

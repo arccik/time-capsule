@@ -1,8 +1,7 @@
 import React from "react";
 
-type Props = {};
 
-export default function BottomNavigation({}: Props) {
+export default function BottomNavigation() {
   return (
     <div className="btm-nav ">
       <button className="hover:active">

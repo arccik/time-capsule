@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 
-export default function profile() {
+export default function Profile() {
   const { data: sessionData, status } = useSession();
   if (status === "loading") return <div>Loading...</div>;
 

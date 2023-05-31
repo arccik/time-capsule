@@ -1,8 +1,7 @@
 import React from "react";
 
-type Props = {};
 
-export default function Footer({}: Props) {
+export default function Footer() {
   return (
     <footer className="card-body">
       <h2 className="card-title">Life hack</h2>

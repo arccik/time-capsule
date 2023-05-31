@@ -2,12 +2,11 @@ import React from "react";
 import Image from "next/image";
 import AgeRange from "~/components/capsule-form/AgeRange";
 import { api } from "~/utils/api";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addYears } from "~/lib/addDays";
 import AiCountdown from "./AICountDown";
-import SendingMethodButtons from "./SendingMethodButtons";
-import { createCapsuleSchema, Capsule } from "~/types/capsule";
+import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
 import ContactDetails from "./ContactDetails";
@@ -15,9 +14,9 @@ import ContactDetails from "./ContactDetails";
 export default function TimeCapsuleForm() {
   const router = useRouter();
   const saveCapsule = api.capsule.create.useMutation({
-    onSuccess: (data: any) => {
+    onSuccess: async (data) => {
       console.log("Data Save !", data);
-      router.push(`/dashboard`);
+      await router.push(`/dashboard`);
     },
   });
 
@@ -25,7 +24,7 @@ export default function TimeCapsuleForm() {
     register,
     handleSubmit,
     watch,
-    setValue,
+    getValues,
     formState: { errors },
   } = useForm<Capsule>({ resolver: zodResolver(createCapsuleSchema) });
 
@@ -37,11 +36,10 @@ export default function TimeCapsuleForm() {
 
   const onSubmit: SubmitHandler<Capsule> = (data) => {
     console.log("Submit Data : ", data);
-    saveCapsule.mutate(data);
-    console.log("on submit data", data);
+    const response = saveCapsule.mutate(data);
+    console.log("on submit data", data, response);
   };
 
-  console.log("RENDER: ", watch());
   return (
     <div className="grid-flow-cols card glass grid grid-cols-1 gap-4 transition-all duration-150 md:grid-cols-2">
       <div className="self-center justify-self-center">
@@ -52,8 +50,8 @@ export default function TimeCapsuleForm() {
           alt="time capsule"
         />
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="m-3 space-y-4">
-        <AiCountdown time={watch("dateTime")} />
+      <form onSubmit={void handleSubmit(onSubmit)} className="m-3 space-y-4">
+        <AiCountdown time={getValues("dateTime")} />
         <AgeRange
           rest={register("dateTime", {
             setValueAs: (v: string) => {
@@ -70,7 +68,7 @@ export default function TimeCapsuleForm() {
             placeholder="Message"
             rows={5}
             className={`textarea-bordered textarea textarea-lg w-full border-2  focus:border-blue-800 ${
-              errors.message && "textarea-secondary text-secondary "
+              errors.message ? "textarea-secondary text-secondary " : ""
             }`}
           ></textarea>
           {errors.message && (
@@ -81,7 +79,6 @@ export default function TimeCapsuleForm() {
         </div>
 
         <p className="text-md">How you looking to recieve it ?</p>
-        {/* <SendingMethodButtons setValue={setValue} register={register} /> */}
         <ContactDetails />
         <pre>{JSON.stringify(watch(), null, 2)}</pre>
         <FormErrors errors={errors} />
