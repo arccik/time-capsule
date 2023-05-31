@@ -1,28 +1,36 @@
-# Create T3 App
+# Virtual Time Capsule
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+The Virtual Time Capsule project allows users to create and bury virtual time capsules, and receive notifications when the specified timeout period expires. It provides a platform for users to preserve memories, thoughts, and messages that can be shared with future generations.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- Create and customize virtual time capsules: Users can create their own time capsules, set a timeout period, and add various digital content such as photos, videos, documents, and messages.
+- Burial location tracking: Users can specify the location where they "bury" their virtual time capsule, providing an additional layer of personalization.
+- Notification system: Users will receive notifications via email or other communication channels when the timeout period for their time capsule expires.
+- Secure authentication: The project uses Next.js with NextAuth for authentication, ensuring secure user registration and login processes.
+- Database integration: The project integrates with a specified database using the provided `DATABASE_URL` environment variable to store user information and time capsule details.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Prerequisites
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+To run the Virtual Time Capsule project locally, you will need the following environment variables set in a `.env` file or your preferred environment configuration:
 
-## Learn More
+- `DATABASE_URL`: The URL for connecting to your chosen database.
+- `NEXTAUTH_SECRET`: A secret key used for securing authentication in NextAuth.
+- `NEXTAUTH_URL`: The URL where your application will be hosted.
+- `SMTP_USER`: The username or email address for the SMTP server used to send email notifications.
+- `SMTP_PASSWORD`: The password for the SMTP server.
+- `SMTP_HOST`: The SMTP server host.
+- `SMTP_PORT`: The SMTP server port.
+- `EMAIL_FROM`: The email address from which the notifications will be sent.
+- `DISCORD_CLIENT_ID`: The client ID for Discord integration, if applicable.
+- `DISCORD_CLIENT_SECRET`: The client secret for Discord integration, if applicable.
+- `GOOGLE_CLIENT_ID`: The client ID for Google integration, if applicable.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Installation and Usage
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+1. Clone the repository and navigate to the project directory.
+2. Install dependencies by running `npm install`.
+3. Set up the required environment variables by creating a `.env` file or configuring your preferred environment configuration.
+4. Start the application using `npm run dev`.
+5. Access the Virtual Time Capsule application by visiting the specified `NEXTAUTH_URL` in your browser.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
