@@ -10,6 +10,7 @@ import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
 import ContactDetails from "./ContactDetails";
+import SendingMethodButtons from "./SendingMethodButtons";
 
 export default function TimeCapsuleForm() {
   const router = useRouter();
@@ -77,9 +78,10 @@ export default function TimeCapsuleForm() {
             </p>
           )}
         </div>
-
+        <input type="file" />
         <p className="text-md">How you looking to recieve it ?</p>
         <ContactDetails />
+        {/* <SendingMethodButtons register={register} /> */}
         <pre>{JSON.stringify(watch(), null, 2)}</pre>
         <FormErrors errors={errors} />
 
@@ -87,7 +89,7 @@ export default function TimeCapsuleForm() {
           <div>
             <button
               disabled={Object.keys(errors).length > 0}
-              className="btn-primary btn"
+              className="btn-primary btn w-full"
             >
               Send
             </button>
