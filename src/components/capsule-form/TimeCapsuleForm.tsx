@@ -50,9 +50,9 @@ export default function TimeCapsuleForm() {
           src="/images/locked_in_a_time.png"
           alt="time capsule"
         />
+        <AiCountdown time={getValues("dateTime")} />
       </div>
       <form onSubmit={void handleSubmit(onSubmit)} className="m-3 space-y-4">
-        <AiCountdown time={getValues("dateTime")} />
         <AgeRange
           rest={register("dateTime", {
             setValueAs: (v: string) => {
@@ -78,7 +78,13 @@ export default function TimeCapsuleForm() {
             </p>
           )}
         </div>
-        <input type="file" />
+        <span className="-mb-0 block font-mono text-xs">
+          Upload a image to be part of your time capsule
+        </span>
+        <input
+          type="file"
+          className="file-input-bordered file-input-secondary file-input w-full max-w-xs"
+        />
         <p className="text-md">How you looking to recieve it ?</p>
         <ContactDetails />
         {/* <SendingMethodButtons register={register} /> */}

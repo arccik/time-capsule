@@ -14,6 +14,7 @@ const formatTime = (time: Date): string => {
 export default function BuriedCapsules() {
   const { data: capsuleData, status } = api.capsule.getAll.useQuery();
   if (status !== "success") return <Loader />;
+  if (capsuleData.length === 0) return null;
   return (
     <>
       <div className="m-6">

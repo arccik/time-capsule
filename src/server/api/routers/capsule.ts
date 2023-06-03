@@ -52,4 +52,11 @@ export const capsuleRouter = createTRPCRouter({
         include: { sendingMethod: true },
       });
     }),
+  getOpenCapsules: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.capsule.findMany({
+      where: {
+        public: true,
+      },
+    });
+  }),
 });

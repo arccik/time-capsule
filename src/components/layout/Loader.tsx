@@ -1,3 +1,3 @@
 export default function Loader() {
-  return <progress className="progress bg-secondary-content"></progress>;
+  return <span className="loading-ring loading-lg loading bg-primary"></span>;
 }

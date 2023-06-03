@@ -8,7 +8,7 @@ export default function StatsBar() {
   if (status === "loading") return <Loader />;
 
   return (
-    <div className="stats stats-vertical shadow">
+    <div className="stats stats-vertical min-w-full  shadow">
       <div className="stat">
         <div className="stat-figure text-primary">
           <BsCapsulePill className="text-4xl" />
@@ -29,7 +29,9 @@ export default function StatsBar() {
         <div className="stat-value text-secondary">
           {capsulesData?.filter((v) => v.public).length}
         </div>
-        <div className="stat-desc">21% more than last month</div>
+        <div className="stat-desc text-primary">
+          will be visible on main page
+        </div>
       </div>
 
       <div className="stat">

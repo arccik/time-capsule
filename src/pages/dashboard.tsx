@@ -6,7 +6,7 @@ import StatsBar from "~/components/dashboard/StatsBar";
 export default function DashboardPage() {
   return (
     <>
-      <section className=" grid grid-flow-row md:grid-flow-col">
+      <section className="grid grid-flow-row justify-center md:grid-flow-col">
         <StatsBar />
         <BuriedCapsules />
       </section>

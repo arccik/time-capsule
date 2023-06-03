@@ -50,7 +50,7 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
   }, [time]);
 
   return (
-    <div className="grid auto-cols-max grid-flow-col justify-center gap-5 text-center">
+    <div className="relative -top-[100px] grid auto-cols-max grid-flow-col justify-center gap-5 text-center">
       {Object.entries(countdown).map(([key, value]) => (
         <div
           className="rounded-box flex flex-col bg-neutral p-2 text-neutral-content"
