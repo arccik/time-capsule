@@ -1,10 +1,9 @@
 import React from "react";
 import { api } from "~/utils/api";
-import Loader from "../layout/Loader";
 import Image from "next/image";
 
 export default function OpenCapsules() {
-  const { data: capsuleData, status } = api.capsule.getOpenCapsules.useQuery();
+  const { data: capsuleData } = api.capsule.getOpenCapsules.useQuery();
 
   console.log("Open Capsules ", capsuleData);
   // if (status !== "success") return <Loader />;
@@ -27,7 +26,7 @@ export default function OpenCapsules() {
             <h2 className="card-title">Capsule from Armando!</h2>
             <p>If a dog chews shoes whose shoes does he choose?</p>
             <div className="card-actions justify-end">
-              <div className="badge badge-primary  rounded-full">
+              <div className="badge-primary badge  rounded-full">
                 5 Years ago
               </div>
             </div>

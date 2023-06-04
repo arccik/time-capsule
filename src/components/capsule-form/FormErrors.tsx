@@ -7,7 +7,6 @@ export default function FormErrors({
 }: {
   errors: FieldErrors<Capsule>;
 }) {
-  console.log("FORM ERROR SS ", errors);
   if (!errors) return null;
   const errorMessages = Object.entries(errors).map(([key, value]) => (
     <div className="alert alert-error shadow-lg" key={key}>

@@ -1,13 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type Props = {};
-
-export default function Hero({}: Props) {
+export default function Hero() {
   return (
     <div className="hero bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
-        <img
+        <Image
+          width={359}
+          height={469}
+          alt="Time Capsule old"
           src="/images/locked_in_a_time.png"
           className="max-w-sm rounded-lg"
         />

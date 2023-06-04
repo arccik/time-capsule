@@ -48,7 +48,7 @@ export const env = createEnv({
 
     // SupaBase Storage
     SUPABASE_STORAGE_URL: z.string(),
-    SUPABASE_SERVICE_KEY: z.string()
+    SUPABASE_SERVICE_KEY: z.string(),
 
     // Twilio sending sms and calls
     TWILIO_ACCOUNT_SID: z.string(),
@@ -95,7 +95,7 @@ export const env = createEnv({
     POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
     DATABASE_SUPABASE_URL: process.env.DATABASE_SUPABASE_URL,
     SUPABASE_STORAGE_URL: process.env.SUPABASE_STORAGE_URL,
-    SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY
+    SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY,
     TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
     TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN
   },

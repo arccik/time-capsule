@@ -1,11 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import sendEmail from "~/lib/emailTransporter";
+// import sendEmail from "~/lib/emailTransporter";
 import schedule from "node-schedule";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     const date = new Date(2023, 6, 4, 11, 13, 0);
 

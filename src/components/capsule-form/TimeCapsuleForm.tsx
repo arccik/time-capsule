@@ -9,8 +9,8 @@ import AiCountdown from "./AICountDown";
 import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
-import ContactDetails from "./ContactDetails";
-import SendingMethodButtons from "./SendingMethodButtons";
+// import ContactDetails from "./ContactDetails";
+// import SendingMethodButtons from "./SendingMethodButtons";
 
 export default function TimeCapsuleForm() {
   const router = useRouter();
@@ -78,15 +78,14 @@ export default function TimeCapsuleForm() {
             </p>
           )}
         </div>
-        <span className="-mb-0 block font-mono text-xs">
+        {/* <span className="-mb-0 block font-mono text-xs">
           Upload a image to be part of your time capsule
         </span>
         <input
           type="file"
           className="file-input-bordered file-input-secondary file-input w-full max-w-xs"
-        />
-        <p className="text-md">How you looking to recieve it ?</p>
-        <ContactDetails />
+        /> */}
+        {/* <ContactDetails setValue={setValue} /> */}
         {/* <SendingMethodButtons register={register} /> */}
         <pre>{JSON.stringify(watch(), null, 2)}</pre>
         <FormErrors errors={errors} />
@@ -96,6 +95,7 @@ export default function TimeCapsuleForm() {
             <button
               disabled={Object.keys(errors).length > 0}
               className="btn-primary btn w-full"
+              type="submit"
             >
               Send
             </button>
@@ -103,7 +103,9 @@ export default function TimeCapsuleForm() {
           <div>
             <div className="form-control">
               <label className="label cursor-pointer">
-                <span className="label-text">Make it public when open</span>
+                <span className="label-text">
+                  When open will be visible on main page ?
+                </span>
                 <input
                   type="checkbox"
                   className="checkbox-primary checkbox"

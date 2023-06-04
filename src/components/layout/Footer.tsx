@@ -1,9 +1,8 @@
 import React from "react";
 import { FaSlackHash, FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa";
 
-type Props = {};
 
-export default function Footer({}: Props) {
+export default function Footer() {
   return (
     <footer className="footer footer-center bg-primary p-10 text-primary-content">
       <div>

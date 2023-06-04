@@ -6,6 +6,7 @@ import "~/styles/globals.css";
 import Header from "~/components/layout/Header";
 import { type ReactElement } from "react";
 import { type NextPage } from "next";
+import Loader from "~/components/layout/Loader";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -14,9 +15,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <Header />
-      {/* <Auth> */}
-      <Component {...pageProps} />
-      {/* </Auth> */}
+      <Auth>
+        <Component {...pageProps} />
+      </Auth>
     </SessionProvider>
   );
 };
@@ -26,7 +27,7 @@ function Auth({ children }: { children: ReactElement<Element, NextPage> }) {
   const { status } = useSession({ required: true });
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return children;

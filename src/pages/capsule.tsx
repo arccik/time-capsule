@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Footer from "~/components/capsule-form/CapsuleFooter";
+import CapsuleFooter from "~/components/capsule-form/CapsuleFooter";
 import Hero from "~/components/capsule-form/CapsulePageHero";
 
 import TimeCapsuleForm from "~/components/capsule-form/TimeCapsuleForm";
@@ -16,10 +16,10 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col items-center bg-gradient-to-b from-[#76452e] to-[#55716f]">
+      <main className="flex flex-col items-center bg-gradient-to-b from-[#9069f9] to-[#692e76]">
         <Hero />
         <TimeCapsuleForm />
-        <Footer />
+        <CapsuleFooter />
       </main>
     </>
   );
