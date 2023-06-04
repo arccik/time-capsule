@@ -9,15 +9,16 @@ import AiCountdown from "./AICountDown";
 import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
-// import ContactDetails from "./ContactDetails";
+import ContactDetails from "./ContactDetails";
 // import SendingMethodButtons from "./SendingMethodButtons";
+import { motion } from "framer-motion";
 
 export default function TimeCapsuleForm() {
   const router = useRouter();
   const saveCapsule = api.capsule.create.useMutation({
     onSuccess: async (data) => {
       console.log("Data Save !", data);
-      await router.push(`/dashboard`);
+      // await router.push(`/dashboard`);
     },
   });
 
@@ -26,19 +27,21 @@ export default function TimeCapsuleForm() {
     handleSubmit,
     watch,
     getValues,
+    unregister,
     formState: { errors },
   } = useForm<Capsule>({ resolver: zodResolver(createCapsuleSchema) });
 
-  // const formetter = new Intl.DateTimeFormat("en-GB", {
-  //   dateStyle: "medium",
-  //   timeStyle: "short",
-  // });
-  // const whenOpen = formetter.format(watch("dateTime"));
+  const formetter = new Intl.DateTimeFormat("en-GB", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+  const whenOpen = formetter.format(watch("dateTime"));
 
   const onSubmit: SubmitHandler<Capsule> = (data) => {
-    console.log("Submit Data : ", data);
-    const response = saveCapsule.mutate(data);
-    console.log("on submit data", data, response);
+    console.log("Submit Data : ", createCapsuleSchema.safeParse(data));
+
+    // const response = saveCapsule.mutate(data);
+    // console.log("on submit data", data, response);
   };
 
   return (
@@ -52,7 +55,7 @@ export default function TimeCapsuleForm() {
         />
         <AiCountdown time={getValues("dateTime")} />
       </div>
-      <form onSubmit={void handleSubmit(onSubmit)} className="m-3 space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="m-3 space-y-4">
         <AgeRange
           rest={register("dateTime", {
             setValueAs: (v: string) => {
@@ -61,7 +64,11 @@ export default function TimeCapsuleForm() {
             },
           })}
         />
-        <div>
+        <motion.div
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <label htmlFor="messageField">Write the message to future you</label>
           <textarea
             id="messageField"
@@ -77,7 +84,7 @@ export default function TimeCapsuleForm() {
               {errors.message?.message}
             </p>
           )}
-        </div>
+        </motion.div>
         {/* <span className="-mb-0 block font-mono text-xs">
           Upload a image to be part of your time capsule
         </span>
@@ -85,11 +92,24 @@ export default function TimeCapsuleForm() {
           type="file"
           className="file-input-bordered file-input-secondary file-input w-full max-w-xs"
         /> */}
-        {/* <ContactDetails setValue={setValue} /> */}
+        <ContactDetails register={register} unregister={unregister} />
         {/* <SendingMethodButtons register={register} /> */}
-        <pre>{JSON.stringify(watch(), null, 2)}</pre>
         <FormErrors errors={errors} />
 
+        <div>
+          <div className="form-control">
+            <label className="label cursor-pointer">
+              <span className="label-text">
+                Make it visible to everyone when opened ?
+              </span>
+              <input
+                type="checkbox"
+                className="checkbox-primary checkbox"
+                {...register("public")}
+              />
+            </label>
+          </div>
+        </div>
         <div className="grid grid-flow-col">
           <div>
             <button
@@ -99,20 +119,6 @@ export default function TimeCapsuleForm() {
             >
               Send
             </button>
-          </div>
-          <div>
-            <div className="form-control">
-              <label className="label cursor-pointer">
-                <span className="label-text">
-                  When open will be visible on main page ?
-                </span>
-                <input
-                  type="checkbox"
-                  className="checkbox-primary checkbox"
-                  {...register("public")}
-                />
-              </label>
-            </div>
           </div>
         </div>
       </form>

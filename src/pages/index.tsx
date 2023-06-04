@@ -9,7 +9,7 @@ export default function HomePage() {
       <main>
         <Hero />
         <OpenCapsules />
-        <div className="hero md:h-96">
+        <div className="hero mx-auto h-[600px] w-[96%]">
           <div className="hero-content flex-col lg:flex-row">
             <div>
               <h1 className="text-5xl font-bold">
@@ -24,10 +24,10 @@ export default function HomePage() {
               <button className="btn-secondary btn">Get Started</button>
             </div>
             <Image
-              width={200}
+              width={400}
               height={200}
-              src="/images/TC.png"
-              className="max-w-sm rounded-lg"
+              src="/images/Time-Capsule-picture.jpg"
+              className="max-w-sm rounded-lg border-2 border-gray-200 shadow-md"
               alt="TC"
             />
           </div>

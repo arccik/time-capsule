@@ -12,8 +12,20 @@ const formatTime = (time: Date): string => {
 };
 
 export default function BuriedCapsules() {
-  const { data: capsuleData, status } = api.capsule.getAll.useQuery();
-  if (status !== "success") return <Loader />;
+  const {
+    data: capsuleData,
+    status: capsuleStatus,
+    refetch,
+  } = api.capsule.getAll.useQuery();
+  const deleteCapsule = api.capsule.delete.useMutation({
+    onSuccess: () => refetch(),
+  });
+
+  const handleDelete = async (id: string) => {
+    deleteCapsule.mutate({ id });
+  };
+
+  if (capsuleStatus !== "success") return <Loader />;
   if (capsuleData.length === 0) return null;
   return (
     <>
@@ -35,7 +47,10 @@ export default function BuriedCapsules() {
             </div>
             <div className="flex-none">
               <button className="btn-secondary btn">
-                <BsTrash className="text-2xl" />
+                <BsTrash
+                  className="text-2xl"
+                  onClick={() => handleDelete(capsule.id)}
+                />
               </button>
             </div>
           </div>

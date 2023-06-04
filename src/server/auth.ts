@@ -5,7 +5,7 @@ import {
   type NextAuthOptions,
   type DefaultSession,
 } from "next-auth";
-// import EmailProvider from "next-auth/providers/email";
+import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
@@ -52,17 +52,17 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
-    // EmailProvider({
-    //   server: {
-    //     host: env.SMTP_HOST,
-    //     port: Number(env.SMTP_PORT),
-    //     auth: {
-    //       user: env.SMTP_USER,
-    //       pass: env.SMTP_PASSWORD,
-    //     },
-    //   },
-    //   from: env.EMAIL_FROM,
-    // }),
+    EmailProvider({
+      server: {
+        host: env.SMTP_HOST,
+        port: Number(env.SMTP_PORT),
+        auth: {
+          user: env.SMTP_USER,
+          pass: env.SMTP_PASSWORD,
+        },
+      },
+      from: env.EMAIL_FROM,
+    }),
     /**
      * ...add more providers here.
      *

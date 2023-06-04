@@ -46,11 +46,17 @@ export const capsuleRouter = createTRPCRouter({
         recipientName: input.recipientName,
         public: input.public,
         userId: ctx.session.user.id,
+        sms: input.sms,
       };
       return ctx.prisma.capsule.create({
         data: capsule,
         include: { sendingMethod: true },
       });
+    }),
+  delete: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.capsule.delete({ where: { id: input.id } });
     }),
   getOpenCapsules: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.capsule.findMany({

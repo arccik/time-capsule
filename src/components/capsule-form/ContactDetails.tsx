@@ -4,7 +4,11 @@ import { api } from "~/utils/api";
 import Loader from "../layout/Loader";
 
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
-import { type UseFormSetValue } from "react-hook-form";
+import type {
+  UseFormRegister,
+  UseFormResetField,
+  UseFormUnregister,
+} from "react-hook-form";
 import { type Capsule } from "~/types/capsule";
 
 type ContactMethods = {
@@ -12,15 +16,17 @@ type ContactMethods = {
 };
 
 export default function ContactDetails({
-  setValue,
+  register,
+  unregister,
 }: {
-  setValue: UseFormSetValue<Capsule>;
+  register: UseFormRegister<Capsule>;
+  unregister: UseFormUnregister<Capsule>;
 }) {
   const [state, setState] = useState<ContactMethods>({
     email: false,
     sms: false,
     whatsapp: false,
-    call: false,
+    phone: false,
   });
 
   const { data: sendingMethods, status } =
@@ -28,6 +34,10 @@ export default function ContactDetails({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
+    if (!e.target.checked) {
+      unregister(e.target.name as keyof Capsule);
+      console.log("UNREGISTTRIIIIII ", e.target.name);
+    }
   };
 
   const contactMethodsSelected = Object.keys(state).filter(
@@ -92,12 +102,16 @@ export default function ContactDetails({
                   </span>
                 </label>
                 <input
-                  onChange={(e) =>
-                    setValue(
-                      method as "email" | "sms" | "call" | "whatsapp",
-                      e.target.value
-                    )
-                  }
+                  {...register(
+                    method as
+                      | "email"
+                      | "post"
+                      | "phone"
+                      | "sms"
+                      | "whatsapp"
+                      | "call"
+                      | "address"
+                  )}
                   type="text"
                   placeholder="Must be provided"
                   className="input-bordered input-error input w-full"

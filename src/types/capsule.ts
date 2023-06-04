@@ -3,7 +3,7 @@ import z from "zod";
 export const createCapsuleSchema = z.object({
   senderName: z.string().optional(),
   dateTime: z.date(),
-  message: z.string(),
+  message: z.string().min(5, "Message must be at least 5 characters"),
   recipientName: z.string().optional(),
   sendingMethod: z
     .array(z.object({ id: z.string(), name: z.string() }))
