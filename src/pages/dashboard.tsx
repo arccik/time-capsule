@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "~/components/capsule-form/Footer";
+import Footer from "~/components/capsule-form/CapsuleFooter";
 import BuriedCapsules from "~/components/dashboard/BuriedCapsules";
 import StatsBar from "~/components/dashboard/StatsBar";
 

@@ -4,10 +4,8 @@ import React from "react";
 import Loader from "./Loader";
 import Image from "next/image";
 
-
 export default function Header() {
   const { data: sessionData, status } = useSession();
-  if (status === "loading") return <Loader />;
 
   return (
     <div className="navbar bg-base-100">
@@ -16,42 +14,67 @@ export default function Header() {
           Time Blad Capsule
         </Link>
       </div>
-      <div className="flex-none gap-2">
-        <div className="dropdown-end dropdown">
-          <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
-            <div className="w-10 rounded-full">
-              {sessionData?.user.image && (
-                <Image
-                  width={60}
-                  height={60}
-                  alt="avatar"
-                  src={sessionData?.user.image}
-                />
-              )}
+      {status === "loading" ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="flex-none gap-2 md:hidden">
+            <div className="dropdown-end dropdown">
+              <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
+                <div className="w-10 rounded-full">
+                  {sessionData?.user.image && (
+                    <Image
+                      width={60}
+                      height={60}
+                      alt="avatar"
+                      src={sessionData?.user.image}
+                    />
+                  )}
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
+              >
+                <li>
+                  <Link href="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <Link href="/capsule">Create a Capsule</Link>
+                </li>
+                <li>
+                  <Link href="/profile" className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </Link>
+                </li>
+                <li onClick={() => void signOut()}>
+                  <a>Logout</a>
+                </li>
+              </ul>
             </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
-          >
-            <li>
-              <Link href="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link href="/capsule">Capsule jump</Link>
-            </li>
-            <li>
-              <Link href="/profile" className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </Link>
-            </li>
-            <li onClick={() => void signOut()}>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+          </div>
+
+          <div className="hidden flex-none gap-2 md:block">
+            <ul className="menu menu-horizontal px-1">
+              <li>
+                <Link href="/capsule">Create a Capsule</Link>
+              </li>
+              <li>
+                <Link href="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <Link href="/profile" className="justify-between">
+                  Profile
+                </Link>
+              </li>
+              <li onClick={() => void signOut()}>
+                <a>Logout</a>
+              </li>
+            </ul>
+          </div>
+        </>
+      )}
     </div>
   );
 }

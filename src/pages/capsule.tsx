@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Footer from "~/components/capsule-form/Footer";
-import Hero from "~/components/capsule-form/Hero";
+import Footer from "~/components/capsule-form/CapsuleFooter";
+import Hero from "~/components/capsule-form/CapsulePageHero";
 
 import TimeCapsuleForm from "~/components/capsule-form/TimeCapsuleForm";
 
