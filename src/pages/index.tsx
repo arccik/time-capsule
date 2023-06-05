@@ -1,39 +1,28 @@
-import OpenCapsules from "~/components/open-capsule/OpenCapsules";
-import Footer from "~/components/layout/Footer";
-import Hero from "~/components/layout/Hero";
-// import Image from "next/image";
+import { type NextPage } from "next";
+import Head from "next/head";
+import CapsuleFooter from "~/components/capsule-form/CapsuleFooter";
+import Hero from "~/components/capsule-form/CapsulePageHero";
 
-export default function HomePage() {
+import TimeCapsuleForm from "~/components/capsule-form/TimeCapsuleForm";
+
+const Home: NextPage = () => {
   return (
     <>
-      <main>
+      <Head>
+        <title>Time Capsule Online</title>
+        <meta
+          name="description"
+          content="This website will be soon available"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className="flex flex-col items-center bg-gradient-to-b from-[#9069f9] to-[#692e76]">
         <Hero />
-        <OpenCapsules />
-        <div className="hero mx-auto h-[600px] w-[96%]">
-          <div className="hero-content flex-col lg:flex-row">
-            <div>
-              <h1 className="text-5xl font-bold">
-                Create a special day in the future
-              </h1>
-              <p className="py-6">
-                Once you have created a time capsule, filled out the recipient
-                information, and choose a date for it to be sent, our system
-                will store your time capsule and automatically send it out on
-                the specified day.
-              </p>
-              <button className="btn-secondary btn">Get Started</button>
-            </div>
-            {/* <Image
-              width={400}
-              height={200}
-              src="/images/time-capsule-logo.png"
-              className="max-w-sm rounded-lg border-2 border-gray-200 shadow-md"
-              alt="TC"
-            /> */}
-          </div>
-        </div>
+        <TimeCapsuleForm />
+        <CapsuleFooter />
       </main>
-      <Footer />
     </>
   );
-}
+};
+
+export default Home;

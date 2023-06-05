@@ -3,17 +3,18 @@ import Link from "next/link";
 import React from "react";
 import Loader from "./Loader";
 import Image from "next/image";
+import { TfiMenu } from "react-icons/tfi";
 
 export default function Header() {
   const { data: sessionData, status } = useSession();
 
-  const menuItems = (
+  const menuItems = sessionData?.user ? (
     <>
       <li>
         <Link href="/dashboard">Dashboard</Link>
       </li>
       <li>
-        <Link href="/capsule">Create a Capsule</Link>
+        <Link href="/">Write a Capsule</Link>
       </li>
       <li>
         <Link href="/profile" className="justify-between">
@@ -23,6 +24,18 @@ export default function Header() {
       </li>
       <li onClick={() => void signOut()}>
         <a className="text-red-400">Logout</a>
+      </li>
+    </>
+  ) : (
+    <>
+      <li>
+        <Link href="/">Write a Capsule</Link>
+      </li>
+      <li>
+        <Link href="/open-capsules">Read Public Capsule</Link>
+      </li>
+      <li>
+        <Link href="/api/auth/signin">Login</Link>
       </li>
     </>
   );
@@ -48,18 +61,20 @@ export default function Header() {
         <>
           <div className="flex-none gap-2 md:hidden">
             <div className="dropdown-end dropdown">
-              <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
-                <div className="w-10 rounded-full">
-                  {sessionData?.user.image && (
+              {sessionData?.user.image ? (
+                <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
+                  <div className="w-10 rounded-full">
                     <Image
                       width={60}
                       height={60}
                       alt="avatar"
                       src={sessionData?.user.image}
                     />
-                  )}
-                </div>
-              </label>
+                  </div>
+                </label>
+              ) : (
+                <TfiMenu className="m-2 cursor-pointer text-xl" tabIndex={0} />
+              )}
               <ul
                 tabIndex={0}
                 className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"

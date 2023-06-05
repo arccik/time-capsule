@@ -10,8 +10,10 @@ import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
 import ContactDetails from "./ContactDetails";
+import { useSession } from "next-auth/react";
 
 export default function TimeCapsuleForm() {
+  const { data: sessionData } = useSession();
   const router = useRouter();
   const saveCapsule = api.capsule.create.useMutation<Capsule>({
     onSuccess: async (data) => {
@@ -28,8 +30,6 @@ export default function TimeCapsuleForm() {
     formState: { errors },
   } = useForm<Capsule>({ resolver: zodResolver(createCapsuleSchema) });
 
-
-
   const onSubmit: SubmitHandler<Capsule> = (data): void => {
     if (createCapsuleSchema.safeParse(data).success === false) {
       return;
@@ -44,21 +44,11 @@ export default function TimeCapsuleForm() {
         onSubmit={(event) => void handleSubmit(onSubmit)(event)}
         className="m-3 space-y-4"
       >
-        <AgeRange
-          rest={register("dateTime", {
-            setValueAs: (v: string) => {
-              const today = new Date();
-              return addYears(today, parseInt(v));
-            },
-          })}
-        />
         <div>
           <label htmlFor="messageField">Write the message to future you</label>
           <textarea
             id="messageField"
             {...register("message")}
-            defaultValue={`Dear Mahovni,
-            Here you can write any message`}
             placeholder="Message"
             rows={5}
             className={`textarea-bordered textarea textarea-lg w-full   focus:border-blue-800 ${
@@ -73,6 +63,17 @@ export default function TimeCapsuleForm() {
           )}
         </div>
 
+        <AgeRange
+          rest={register("dateTime", {
+            setValueAs: (v: string) => {
+              const today = new Date();
+              return addYears(today, parseInt(v));
+            },
+          })}
+        />
+        <div className="m-5 self-center justify-self-center">
+          <AiCountdown time={getValues("dateTime")} />
+        </div>
         <ContactDetails register={register} unregister={unregister} />
         <FormErrors errors={errors} />
 
@@ -91,18 +92,25 @@ export default function TimeCapsuleForm() {
           </div>
         </div>
         <div className="grid grid-flow-col">
-          <div>
+          {sessionData?.user ? (
+            <div>
+              <button
+                disabled={Object.keys(errors).length > 0}
+                className="btn-secondary btn w-full"
+                type="submit"
+              >
+                Send to the Future
+              </button>
+            </div>
+          ) : (
             <button
-              disabled={Object.keys(errors).length > 0}
               className="btn-secondary btn w-full"
-              type="submit"
+              type="button"
+              onClick={() => router.push("/api/auth/signin")}
             >
-              Send to the Future
+              Sign in to send the message
             </button>
-          </div>
-        </div>
-        <div className="m-5 self-center justify-self-center">
-          <AiCountdown time={getValues("dateTime")} />
+          )}
         </div>
       </form>
     </div>

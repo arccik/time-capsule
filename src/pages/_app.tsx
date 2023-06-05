@@ -15,23 +15,23 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <Header />
-      <Auth>
-        <Component {...pageProps} />
-      </Auth>
+      {/* <Auth> */}
+      <Component {...pageProps} />
+      {/* </Auth> */}
     </SessionProvider>
   );
 };
 
-function Auth({ children }: { children: ReactElement<Element, NextPage> }) {
-  // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
-  const { status } = useSession({ required: true });
+// function Auth({ children }: { children: ReactElement<Element, NextPage> }) {
+//   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
+//   const { status } = useSession({ required: true });
 
-  if (status === "loading") {
-    return <Loader />;
-  }
+//   if (status === "loading") {
+//     return <Loader />;
+//   }
 
-  return children;
-}
+//   return children;
+// }
 
 
 
