@@ -7,7 +7,7 @@ export default function Footer() {
       <h2 className="card-title">Life hack</h2>
       <p>Click to find our how does this stuff is working here!</p>
       <div className="card-actions justify-end">
-        <button className="btn-secondary btn-block btn">Learn now!</button>
+        <button className="btn-primary btn-sm btn">Learn now!</button>
       </div>
     </footer>
   );

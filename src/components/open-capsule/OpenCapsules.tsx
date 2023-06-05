@@ -9,7 +9,7 @@ export default function OpenCapsules() {
   // if (status !== "success") return <Loader />;
   // if (!capsuleData.length) return null;
   return (
-    <div className="grid grid-flow-col gap-3 overflow-auto  bg-purple-200 hover:overflow-scroll">
+    <div className="grid grid-flow-col gap-3 overflow-auto  bg-slate-200 shadow-inner hover:overflow-scroll">
       <h1 className="ml-10 self-center text-3xl font-bold text-primary">
         Opened & <b className="text-secondary">Published</b>
       </h1>

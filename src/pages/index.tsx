@@ -1,7 +1,7 @@
 import OpenCapsules from "~/components/open-capsule/OpenCapsules";
 import Footer from "~/components/layout/Footer";
 import Hero from "~/components/layout/Hero";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function HomePage() {
   return (
@@ -23,13 +23,13 @@ export default function HomePage() {
               </p>
               <button className="btn-secondary btn">Get Started</button>
             </div>
-            <Image
+            {/* <Image
               width={400}
               height={200}
-              src="/images/Time-Capsule-picture.jpg"
+              src="/images/time-capsule-logo.png"
               className="max-w-sm rounded-lg border-2 border-gray-200 shadow-md"
               alt="TC"
-            />
+            /> */}
           </div>
         </div>
       </main>

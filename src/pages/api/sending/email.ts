@@ -10,7 +10,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       console.log("The world is going to end today.");
     });
     // const response = await sendEmail();
-    res.status(200).json({ message: "Hello World" });
+    res.status(200).json({ message: "Hello World", job });
   } else {
     res.status(405).json({ message: "Method not allowed" });
   }

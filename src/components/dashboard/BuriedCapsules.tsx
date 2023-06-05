@@ -21,7 +21,7 @@ export default function BuriedCapsules() {
     onSuccess: () => refetch(),
   });
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = (id: string) => {
     deleteCapsule.mutate({ id });
   };
 

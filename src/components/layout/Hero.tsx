@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Hero() {
   return (
-    <div className="hero bg-base-100 md:h-[500px]">
+    <div className="hero bg-base-100 ">
       <div className="hero-content flex-col lg:flex-row">
         <Image
           width={300}

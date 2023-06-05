@@ -6,7 +6,7 @@ import Loader from "../layout/Loader";
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 import type {
   UseFormRegister,
-  UseFormResetField,
+  // UseFormResetField,
   UseFormUnregister,
 } from "react-hook-form";
 import { type Capsule } from "~/types/capsule";
@@ -49,7 +49,7 @@ export default function ContactDetails({
   return (
     <>
       <div className="border-3 w-full rounded-lg bg-slate-100 p-6 pt-4 shadow-lg">
-        <p className="font-bold">How you wonna open your time capsule ?</p>
+        <p className="font-bold">Deliver by</p>
         <span className="text-xs text-primary">
           Check how would you like to be notified
         </span>
@@ -98,7 +98,7 @@ export default function ContactDetails({
                 <label className="label">
                   <span className="label-text">{method.toUpperCase()}</span>
                   <span className="label-text-alt">
-                    To receive time capsule by {method}
+                    Your message will be delivered by {method}
                   </span>
                 </label>
                 <input
@@ -113,8 +113,12 @@ export default function ContactDetails({
                       | "address"
                   )}
                   type="text"
-                  placeholder="Must be provided"
-                  className="input-bordered input-error input w-full"
+                  placeholder={
+                    method === "email"
+                      ? "Enter email address"
+                      : "Enter phone number"
+                  }
+                  className="input-bordered input w-full"
                 />
               </motion.div>
             ))}

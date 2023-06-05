@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import AgeRange from "~/components/capsule-form/AgeRange";
 import { api } from "~/utils/api";
 import { useForm, type SubmitHandler } from "react-hook-form";
@@ -10,52 +10,40 @@ import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
 import ContactDetails from "./ContactDetails";
-// import SendingMethodButtons from "./SendingMethodButtons";
-import { motion } from "framer-motion";
 
 export default function TimeCapsuleForm() {
   const router = useRouter();
-  const saveCapsule = api.capsule.create.useMutation({
+  const saveCapsule = api.capsule.create.useMutation<Capsule>({
     onSuccess: async (data) => {
       console.log("Data Save !", data);
-      // await router.push(`/dashboard`);
+      await router.push(`/dashboard`);
     },
   });
 
   const {
     register,
     handleSubmit,
-    watch,
     getValues,
     unregister,
     formState: { errors },
   } = useForm<Capsule>({ resolver: zodResolver(createCapsuleSchema) });
 
-  const formetter = new Intl.DateTimeFormat("en-GB", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-  const whenOpen = formetter.format(watch("dateTime"));
 
-  const onSubmit: SubmitHandler<Capsule> = (data) => {
-    console.log("Submit Data : ", createCapsuleSchema.safeParse(data));
 
-    // const response = saveCapsule.mutate(data);
-    // console.log("on submit data", data, response);
+  const onSubmit: SubmitHandler<Capsule> = (data): void => {
+    if (createCapsuleSchema.safeParse(data).success === false) {
+      return;
+    }
+    const response = saveCapsule.mutate(data);
+    console.log("on submit data", data, response);
   };
 
   return (
     <div className="grid-flow-cols card glass grid grid-cols-1 gap-4 transition-all duration-150 md:grid-cols-2">
-      <div className="self-center justify-self-center">
-        <Image
-          height={240}
-          width={300}
-          src="/images/locked_in_a_time.png"
-          alt="time capsule"
-        />
-        <AiCountdown time={getValues("dateTime")} />
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="m-3 space-y-4">
+      <form
+        onSubmit={(event) => void handleSubmit(onSubmit)(event)}
+        className="m-3 space-y-4"
+      >
         <AgeRange
           rest={register("dateTime", {
             setValueAs: (v: string) => {
@@ -64,11 +52,7 @@ export default function TimeCapsuleForm() {
             },
           })}
         />
-        <motion.div
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div>
           <label htmlFor="messageField">Write the message to future you</label>
           <textarea
             id="messageField"
@@ -79,21 +63,15 @@ export default function TimeCapsuleForm() {
               errors.message ? "textarea-secondary text-secondary " : ""
             }`}
           ></textarea>
+
           {errors.message && (
             <p className="text-sx text-right leading-tight text-red-600">
               {errors.message?.message}
             </p>
           )}
-        </motion.div>
-        {/* <span className="-mb-0 block font-mono text-xs">
-          Upload a image to be part of your time capsule
-        </span>
-        <input
-          type="file"
-          className="file-input-bordered file-input-secondary file-input w-full max-w-xs"
-        /> */}
+        </div>
+
         <ContactDetails register={register} unregister={unregister} />
-        {/* <SendingMethodButtons register={register} /> */}
         <FormErrors errors={errors} />
 
         <div>
@@ -114,12 +92,15 @@ export default function TimeCapsuleForm() {
           <div>
             <button
               disabled={Object.keys(errors).length > 0}
-              className="btn-primary btn w-full"
+              className="btn-secondary btn w-full"
               type="submit"
             >
-              Send
+              Send to the Future
             </button>
           </div>
+        </div>
+        <div className="m-5 self-center justify-self-center">
+          <AiCountdown time={getValues("dateTime")} />
         </div>
       </form>
     </div>
