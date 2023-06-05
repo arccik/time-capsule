@@ -30,38 +30,6 @@ export default function AgeRange({
         <span>37 years</span>
         <span>50 years</span>
       </div>
-      <div className="btn-group m-1 mt-5 flex w-full content-center justify-center">
-        <input
-          type="radio"
-          name="options"
-          data-title="6 month"
-          className="btn-primary glass btn-sm btn"
-        />
-        <input
-          type="radio"
-          name="options"
-          data-title="1 Year"
-          className="btn-primary glass btn-sm btn"
-        />
-        <input
-          type="radio"
-          name="options"
-          data-title="2 Years"
-          className="btn-primary glass btn-sm btn"
-        />
-        <input
-          type="radio"
-          name="options"
-          data-title="5 Years"
-          className="btn-primary glass btn-sm btn"
-        />
-        <input
-          type="radio"
-          name="options"
-          data-title="10 Years"
-          className="btn-primary glass btn-sm btn"
-        />
-      </div>
     </>
   );
 }

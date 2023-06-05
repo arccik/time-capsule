@@ -9,12 +9,12 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Time Capsule Online</title>
+        <title>Message to the future</title>
         <meta
           name="description"
           content="This website will be soon available"
         />
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <main className="flex flex-col items-center bg-gradient-to-b from-[#9069f9] to-[#692e76]">
         <Hero />

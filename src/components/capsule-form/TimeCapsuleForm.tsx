@@ -39,13 +39,18 @@ export default function TimeCapsuleForm() {
   };
 
   return (
-    <div className="grid-flow-cols card glass grid grid-cols-1 gap-4 transition-all duration-150 ">
+    <div className="grid-flow-cols card glass mt-10 grid grid-cols-1  transition-all duration-150">
+      <p className="m-4 text-2xl font-bold text-white">
+        A letter from today date
+      </p>
       <form
         onSubmit={(event) => void handleSubmit(onSubmit)(event)}
         className="m-3 space-y-4"
       >
         <div>
-          <label htmlFor="messageField">Write the message to future you</label>
+          <label htmlFor="messageField" className="text-white">
+            Write something to make you smile
+          </label>
           <textarea
             id="messageField"
             {...register("message")}
@@ -71,7 +76,15 @@ export default function TimeCapsuleForm() {
             },
           })}
         />
-        <div className="m-5 self-center justify-self-center">
+        {/* <input
+          type="range"
+          className="range range-primary"
+          min="0"
+          max="10"
+          step="2"
+          {...register("dateTime")}
+        /> */}
+        <div className="input-range m-5 self-center justify-self-center">
           <AiCountdown time={getValues("dateTime")} />
         </div>
         <ContactDetails register={register} unregister={unregister} />
@@ -106,7 +119,7 @@ export default function TimeCapsuleForm() {
             <button
               className="btn-secondary btn w-full"
               type="button"
-              onClick={() => router.push("/api/auth/signin")}
+              onClick={() => void router.push("/api/auth/signin")}
             >
               Sign in to send the message
             </button>

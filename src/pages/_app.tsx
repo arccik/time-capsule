@@ -1,12 +1,12 @@
 import { type Session } from "next-auth";
-import { SessionProvider, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import Header from "~/components/layout/Header";
-import { type ReactElement } from "react";
-import { type NextPage } from "next";
-import Loader from "~/components/layout/Loader";
+// import { type ReactElement } from "react";
+// import { type NextPage } from "next";
+// import Loader from "~/components/layout/Loader";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
