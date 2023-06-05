@@ -39,7 +39,7 @@ export default function TimeCapsuleForm() {
   };
 
   return (
-    <div className="grid-flow-cols card glass grid grid-cols-1 gap-4 transition-all duration-150 md:grid-cols-2">
+    <div className="grid-flow-cols card glass grid grid-cols-1 gap-4 transition-all duration-150 ">
       <form
         onSubmit={(event) => void handleSubmit(onSubmit)(event)}
         className="m-3 space-y-4"
@@ -57,9 +57,11 @@ export default function TimeCapsuleForm() {
           <textarea
             id="messageField"
             {...register("message")}
+            defaultValue={`Dear Mahovni,
+            Here you can write any message`}
             placeholder="Message"
             rows={5}
-            className={`textarea-bordered textarea textarea-lg w-full border-2  focus:border-blue-800 ${
+            className={`textarea-bordered textarea textarea-lg w-full   focus:border-blue-800 ${
               errors.message ? "textarea-secondary text-secondary " : ""
             }`}
           ></textarea>
