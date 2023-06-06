@@ -11,6 +11,9 @@ export default function Header() {
   const menuItems = sessionData?.user ? (
     <>
       <li>
+        <Link href="/capsule">Read Public Capsule</Link>
+      </li>
+      <li>
         <Link href="/dashboard">Dashboard</Link>
       </li>
       <li>
@@ -32,7 +35,7 @@ export default function Header() {
         <Link href="/">Write a Capsule</Link>
       </li>
       <li>
-        <Link href="/open-capsules">Read Public Capsule</Link>
+        <Link href="/capsule">Read Public Capsule</Link>
       </li>
       <li>
         <Link href="/api/auth/signin">Login</Link>

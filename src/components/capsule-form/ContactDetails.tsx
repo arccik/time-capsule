@@ -4,11 +4,7 @@ import { api } from "~/utils/api";
 import Loader from "../layout/Loader";
 
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
-import type {
-  UseFormRegister,
-  // UseFormResetField,
-  UseFormUnregister,
-} from "react-hook-form";
+import type { UseFormRegister, UseFormUnregister } from "react-hook-form";
 import { type Capsule } from "~/types/capsule";
 
 type ContactMethods = {
@@ -36,7 +32,6 @@ export default function ContactDetails({
     setState({ ...state, [e.target.name]: e.target.checked });
     if (!e.target.checked) {
       unregister(e.target.name as keyof Capsule);
-      console.log("UNREGISTTRIIIIII ", e.target.name);
     }
   };
 
@@ -51,17 +46,14 @@ export default function ContactDetails({
       <div className="border-3 w-full rounded-lg bg-slate-100 p-6 pt-4 shadow-lg">
         <p className="font-bold">Deliver by</p>
         <span className="text-xs text-primary">
-          Check how would you like to be notified
+          Select the method to recieve your time capsule
         </span>
 
-        <div className="mt-4 flex">
+        <div className="mt-4 flex  justify-between">
           {sendingMethods &&
             sendingMethods.map((method) => (
-              <div
-                className="flex items-center justify-between"
-                key={method.id}
-              >
-                <p className="p-2 text-sm">{method.name}</p>
+              <div className="flex items-center" key={method.id}>
+                <p className="text-sm">{method.name}</p>
                 <label className="swap-rotate swap ">
                   {/* <!-- this hidden checkbox controls the state --> */}
                   <input

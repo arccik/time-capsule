@@ -47,21 +47,39 @@ export const capsuleRouter = createTRPCRouter({
         public: input.public,
         userId: ctx.session.user.id,
         sms: input.sms,
+        subject: input.subject,
+        openIn: input.openIn,
       };
       return ctx.prisma.capsule.create({
         data: capsule,
         include: { sendingMethod: true },
       });
     }),
+  like: protectedProcedure.input(z.object({ id: z.string() })).mutation(({ctx, input}) => {
+    return ctx.prisma.capsule.update({
+      where: { id: input.id },
+      data: {
+        likes: {
+          connect: {
+            id: ctx.session.user.id
+          }
+        }
+      }
+    })
+  
+  }),
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(({ ctx, input }) => {
       return ctx.prisma.capsule.delete({ where: { id: input.id } });
     }),
-  getOpenCapsules: protectedProcedure.query(({ ctx }) => {
+  getOpenCapsules: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.capsule.findMany({
       where: {
         public: true,
+      },
+      include: {
+        user: true,
       },
     });
   }),

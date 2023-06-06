@@ -55,6 +55,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
     Capsule       Capsule[]
+    Like          Like[]
 }
 
 model VerificationToken {
@@ -73,7 +74,6 @@ model Capsule {
     message       String // @db.Text
     sendingMethod SendingMethod[]
     public        Boolean         @default(false)
-    userId        String
     email         String?
     phone         String?
     post          String?
@@ -82,9 +82,13 @@ model Capsule {
     call          String?
     image         String?
     opened        Boolean         @default(false)
+    userId        String
     user          User            @relation(fields: [userId], references: [id])
     createdAt     DateTime        @default(now())
     updatedAt     DateTime        @updatedAt
+    openIn        Int?
+    subject       String?
+    likes         Like[]
 }
 
 model SendingMethod {
@@ -92,4 +96,14 @@ model SendingMethod {
     name      String
     Capsule   Capsule? @relation(fields: [capsuleId], references: [id])
     capsuleId String?
+}
+
+model Like {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    capsuleId String
+    capsule   Capsule  @relation(fields: [capsuleId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

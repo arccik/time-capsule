@@ -9,7 +9,9 @@ export default function Footer() {
         <FaSlackHash className="text-5xl" />
         <p className="font-bold">
           Time Capsule Industry LTD <br />
-          Providing reliable virtual time capsules
+          <span className="text-secondary">
+            Providing reliable virtual time capsules
+          </span>
         </p>
         <p>Copyright © 2023 - All mahovny reserved</p>
       </div>

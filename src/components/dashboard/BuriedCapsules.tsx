@@ -2,14 +2,7 @@ import React from "react";
 import Loader from "~/components/layout/Loader";
 import { api } from "~/utils/api";
 import { BsCapsule, BsTrash } from "react-icons/bs";
-
-const formatTime = (time: Date): string => {
-  const formatter = new Intl.DateTimeFormat("en-GB", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-  return formatter.format(time);
-};
+import dateFormatter from "~/lib/dateFormatter";
 
 export default function BuriedCapsules() {
   const {
@@ -39,7 +32,7 @@ export default function BuriedCapsules() {
             <div>
               <BsCapsule />
               <span>
-                <p>Will be open at {formatTime(capsule.dateTime)}</p>
+                <p>Will be open at {dateFormatter(capsule.dateTime)}</p>
                 <span className="text-xs text-primary-focus">
                   {capsule.public ? "Public" : "Private"}
                 </span>

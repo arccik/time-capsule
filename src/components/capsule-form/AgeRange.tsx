@@ -12,7 +12,7 @@ export default function AgeRange({
   // setValue: UseFormSetValue<Capsule>;
 }) {
   return (
-    <>
+    <section className="mt-5">
       <div>
         <p className="text-center text-sm">Deliver in</p>
         <input
@@ -30,6 +30,6 @@ export default function AgeRange({
         <span>37 years</span>
         <span>50 years</span>
       </div>
-    </>
+    </section>
   );
 }

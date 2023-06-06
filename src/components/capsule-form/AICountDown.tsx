@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 const AiCountdown = ({ time }: { time: Date | undefined }) => {
   const [countdown, setCountdown] = useState({
     years: 0,
-
     minutes: 0,
     seconds: 0,
   });
@@ -21,9 +20,9 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
       //   const months = Math.floor(
       //     (totalSeconds % (3600 * 24 * 365)) / (3600 * 24 * 30)
       //   );
-      //   const days = Math.floor(
-      //     ((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) / (3600 * 24)
-      //   );
+      // const days = Math.floor(
+      //   ((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) / (3600 * 24)
+      // );
       //   const hours = Math.floor(
       //     (((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) %
       //       (3600 * 24)) /
@@ -53,7 +52,7 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
     <div className="relative  grid auto-cols-max grid-flow-col justify-center gap-5 text-center">
       {Object.entries(countdown).map(([key, value]) => (
         <div
-          className="rounded-box flex flex-col bg-neutral p-2 text-neutral-content"
+          className="rounded-box  flex flex-col bg-primary p-2 text-neutral-content shadow-md"
           key={key}
         >
           <span className="countdown font-mono text-5xl">
