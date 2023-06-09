@@ -73,7 +73,7 @@ model Capsule {
     recipientName String?
     dateTime      DateTime
     message       String // @db.Text
-    sendingMethod SendingMethod[] 
+    sendingMethod String[] 
     public        Boolean         @default(false)
     email         String?
     phone         String?
@@ -94,12 +94,12 @@ model Capsule {
 }
 
 
-model SendingMethod {
-    id        String   @id @default(uuid())
-    name      String
-    Capsule   Capsule? @relation(fields: [capsuleId], references: [id])
-    capsuleId String?
-}
+// model SendingMethod {
+//     id        String   @id @default(uuid())
+//     name      String
+//     Capsule   Capsule? @relation(fields: [capsuleId], references: [id])
+//     capsuleId String?
+// }
 
 model Like {
     id        String   @id @default(cuid())

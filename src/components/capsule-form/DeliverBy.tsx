@@ -36,38 +36,23 @@ export default function DeliverBy({
     phone: false,
   });
 
-  const { data: sendingMethods, status } =
-    api.capsule.getAllSendingMethods.useQuery();
-
-  const handleChange = ({
-    e,
-    id,
-  }: {
-    e: React.ChangeEvent<HTMLInputElement>;
-    id: string;
-  }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
-    let clickedMethods = getValue("sendingMethod") || [];
-
+    const savedSendingMethods = getValue("sendingMethod") || [];
     if (!e.target.checked) {
       unregister(e.target.name as keyof Capsule);
       setValue(
         "sendingMethod",
-        clickedMethods?.filter((m) => m.name !== e.target.name)
+        savedSendingMethods.filter((v) => v !== e.target.name)
       );
     } else {
-      setValue("sendingMethod", [
-        ...clickedMethods,
-        { id: id, name: e.target.name },
-      ]);
+      setValue("sendingMethod", [...savedSendingMethods, e.target.name]);
     }
   };
 
   const contactMethodsSelected = Object.keys(state).filter(
     (key) => state[key] === true
   );
-
-  if (status !== "success") return <Loader />;
 
   return (
     <>
@@ -78,25 +63,19 @@ export default function DeliverBy({
         </span>
 
         <div className="mt-4 flex  justify-between">
-          {sendingMethods &&
-            sendingMethods.map((method) => (
-              <div className="flex items-center" key={method.id}>
-                <p className="text-sm">{method.name}</p>
-                <label className="swap-rotate swap ">
-                  {/* <!-- this hidden checkbox controls the state --> */}
-                  <input
-                    type="checkbox"
-                    onChange={(e) => handleChange({ e, id: method.id })}
-                    name={method.name}
-                    id={method.id}
-                  />
-                  {/* <!-- hamburger icon --> */}
-                  <MdCheckBox className="swap-on w-full text-5xl" />
-                  {/* <!-- close icon --> */}
-                  <MdCheckBoxOutlineBlank className="swap-off w-full text-5xl" />
-                </label>
-              </div>
-            ))}
+          {["email", "call", "sms", "whatsapp"].map((method) => (
+            <div className="flex items-center" key={method}>
+              <p className="text-sm">{method}</p>
+              <label className="swap-rotate swap ">
+                {/* <!-- this hidden checkbox controls the state --> */}
+                <input type="checkbox" onChange={handleChange} name={method} />
+                {/* <!-- hamburger icon --> */}
+                <MdCheckBox className="swap-on w-full text-5xl" />
+                {/* <!-- close icon --> */}
+                <MdCheckBoxOutlineBlank className="swap-off w-full text-5xl" />
+              </label>
+            </div>
+          ))}
         </div>
       </div>
       <AnimatePresence>

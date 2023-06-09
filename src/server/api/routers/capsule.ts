@@ -18,29 +18,25 @@ export const capsuleRouter = createTRPCRouter({
       where: { userId: ctx.session.user.id },
     });
   }),
-  getAllSendingMethods: protectedProcedure.query(({ ctx }) => {
-    return ctx.prisma.sendingMethod.findMany({
-      include: { Capsule: false },
-    });
-  }),
-  getSendingMethod: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .query(({ ctx, input }) => {
-      return ctx.prisma.sendingMethod.findFirst({ where: { id: input.id } });
-    }),
+  // getAllSendingMethods: protectedProcedure.query(({ ctx }) => {
+  //   return ctx.prisma.sendingMethod.findMany({
+  //     include: { Capsule: false },
+  //   });
+  // }),
+  // getSendingMethod: protectedProcedure
+  //   .input(z.object({ id: z.string() }))
+  //   .query(({ ctx, input }) => {
+  //     return ctx.prisma.sendingMethod.findFirst({ where: { id: input.id } });
+  //   }),
   create: protectedProcedure
     .input(createCapsuleSchema)
     .mutation(({ ctx, input }) => {
-      const listOfMethodIds = input.sendingMethod?.map((method) => method.id);
-
       const capsule = {
         dateTime: input.dateTime,
         post: input.post,
         phone: input.phone,
         email: input.email,
-        sendingMethod: {
-          connect: listOfMethodIds?.map((id) => ({ id })),
-        },
+        sendingMethod: input.sendingMethod,
         message: input.message,
         senderName: input.senderName,
         recipientName: input.recipientName,
@@ -52,7 +48,6 @@ export const capsuleRouter = createTRPCRouter({
       };
       return ctx.prisma.capsule.create({
         data: capsule,
-        include: { sendingMethod: true },
       });
     }),
   like: protectedProcedure

@@ -7,8 +7,8 @@ import CommentBar from "./CommentBar";
 // import LikeButton from "./LikeButton";
 
 export default function OpenCapsules() {
-  const { data: capsuleData, status } = api.capsule.getOpenCapsules.useQuery();
 
+  const { data: capsuleData, status } = api.capsule.getOpenCapsules.useQuery();
   if (status !== "success") return <Loader />;
   if (!capsuleData?.length) return null;
   return (
