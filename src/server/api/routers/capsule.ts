@@ -75,6 +75,7 @@ export const capsuleRouter = createTRPCRouter({
     }),
   getOpenCapsules: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.capsule.findMany({
+      orderBy: { dateTime: "desc" },
       where: {
         public: true,
       },

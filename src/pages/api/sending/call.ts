@@ -5,17 +5,19 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Twilio } from "twilio";
+import { z } from "zod";
 const twilioClient = new Twilio(accountSid, authToken);
+
+const zodChecker = z.object({ number: z.string(), message: z.string() });
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    if (req.body?.number === undefined || req.body?.message === undefined) {
-      return res.status(405).json({ message: "Number or message Missing" });
-    }
-    const { number, message }: { number: string; message: string } = req?.body;
-    if (!number || !message) {
-      return res.status(405).json({ message: "Number or message Missing" });
-    }
+    const { message, number } = zodChecker.parse(req.body);
+
+    if (!message || number) {
+      return res.status(400).json({ message: "Invalid Input" });
+    } 
+      
     twilioClient.calls
       .create({
         twiml: `<Response><Say>${message}</Say></Response>`,

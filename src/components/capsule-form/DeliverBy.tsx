@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { api } from "~/utils/api";
-import Loader from "../layout/Loader";
 
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 import type {

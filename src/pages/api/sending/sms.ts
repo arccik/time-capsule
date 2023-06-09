@@ -1,13 +1,16 @@
 import { Twilio } from "twilio";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { z } from "zod";
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioClient = new Twilio(accountSid, authToken);
 
+const smsSchema = z.object({ number: z.string(), message: z.string() });
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    const { number, message }: { number: string; message: string } = req.body;
+    const { message, number } = smsSchema.parse(req.body);
     if (!number || !message) {
       return res.status(405).json({ message: "Number or message Missing" });
     }

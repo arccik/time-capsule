@@ -61,6 +61,14 @@ export default function TimeCapsuleForm() {
             break;
           case "public":
             setValue(key, capsuleInStorage[key]);
+          case "sms":
+            setValue(key, capsuleInStorage[key]);
+          case "call":
+            setValue(key, capsuleInStorage[key]);
+          case "whatsapp":
+            setValue(key, capsuleInStorage[key]);
+          case "email":
+            setValue(key, capsuleInStorage[key]);
           default:
             break;
         }

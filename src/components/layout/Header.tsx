@@ -11,10 +11,10 @@ export default function Header() {
     status === "authenticated" ? (
       <>
         <li>
-          <Link href="/open-capsules"> Public Capsules</Link>
+          <Link href="/dashboard">Dashboard</Link>
         </li>
         <li>
-          <Link href="/dashboard">Dashboard</Link>
+          <Link href="/open-capsules"> Public Capsules</Link>
         </li>
         <li>
           <Link href="/">Write a Capsule</Link>
