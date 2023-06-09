@@ -1,22 +1,33 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { api } from "~/utils/api";
 import Loader from "../layout/Loader";
 
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
-import type { UseFormRegister, UseFormUnregister } from "react-hook-form";
+import type {
+  UseFormGetValues,
+  UseFormRegister,
+  UseFormSetValue,
+  // UseFormSetValue,
+  UseFormUnregister,
+} from "react-hook-form";
 import { type Capsule } from "~/types/capsule";
 
 type ContactMethods = {
   [key: string]: boolean;
 };
 
-export default function ContactDetails({
+export default function DeliverBy({
   register,
   unregister,
-}: {
+  setValue,
+  getValue,
+}: // s
+{
   register: UseFormRegister<Capsule>;
   unregister: UseFormUnregister<Capsule>;
+  setValue: UseFormSetValue<Capsule>;
+  getValue: UseFormGetValues<Capsule>;
 }) {
   const [state, setState] = useState<ContactMethods>({
     email: false,
@@ -28,10 +39,27 @@ export default function ContactDetails({
   const { data: sendingMethods, status } =
     api.capsule.getAllSendingMethods.useQuery();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = ({
+    e,
+    id,
+  }: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    id: string;
+  }) => {
     setState({ ...state, [e.target.name]: e.target.checked });
+    let clickedMethods = getValue("sendingMethod") || [];
+
     if (!e.target.checked) {
       unregister(e.target.name as keyof Capsule);
+      setValue(
+        "sendingMethod",
+        clickedMethods?.filter((m) => m.name !== e.target.name)
+      );
+    } else {
+      setValue("sendingMethod", [
+        ...clickedMethods,
+        { id: id, name: e.target.name },
+      ]);
     }
   };
 
@@ -58,8 +86,9 @@ export default function ContactDetails({
                   {/* <!-- this hidden checkbox controls the state --> */}
                   <input
                     type="checkbox"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange({ e, id: method.id })}
                     name={method.name}
+                    id={method.id}
                   />
                   {/* <!-- hamburger icon --> */}
                   <MdCheckBox className="swap-on w-full text-5xl" />
@@ -94,16 +123,7 @@ export default function ContactDetails({
                   </span>
                 </label>
                 <input
-                  {...register(
-                    method as
-                      | "email"
-                      | "post"
-                      | "phone"
-                      | "sms"
-                      | "whatsapp"
-                      | "call"
-                      | "address"
-                  )}
+                  {...register(method as "email" | "sms" | "whatsapp" | "call")}
                   type="text"
                   placeholder={
                     method === "email"

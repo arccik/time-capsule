@@ -9,18 +9,15 @@ const twilioClient = new Twilio(accountSid, authToken);
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    if (req.body?.number === undefined || req.body?.message === undefined) {
-      return res.status(405).json({ message: "Number or message Missing" });
-    }
-    const { number, message }: { number: string; message: string } = req?.body;
+    const { number, message }: { number: string; message: string } = req.body;
     if (!number || !message) {
       return res.status(405).json({ message: "Number or message Missing" });
     }
-    twilioClient.calls
+    twilioClient.messages
       .create({
-        twiml: `<Response><Say>${message}</Say></Response>`,
-        to: number,
         from: "+447360265035",
+        to: `whatsapp:${number}`,
+        body: message,
       })
       .then((call) => console.log(call.sid))
       .catch((e) => console.error(e));

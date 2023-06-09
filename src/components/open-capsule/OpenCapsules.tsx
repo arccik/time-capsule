@@ -1,8 +1,9 @@
-import React from "react";
 import { api } from "~/utils/api";
 import Loader from "../layout/Loader";
 
 import TimeAgo from "timeago-react";
+import LikeButton from "./LikeButton";
+import CommentBar from "./CommentBar";
 // import LikeButton from "./LikeButton";
 
 export default function OpenCapsules() {
@@ -25,9 +26,9 @@ export default function OpenCapsules() {
             <p className="font- max-h-[160px] overflow-hidden whitespace-pre-line text-sm">
               {capsule.message}
             </p>
-            <div className="card-actions justify-between">
-              <button className="btn-primary btn-sm btn">Like</button>
-              <button className="btn-primary btn-sm btn">Comments</button>
+            <div className="card-actions ">
+              <LikeButton id={capsule.id} />
+              <CommentBar id={capsule.id} />
             </div>
           </div>
         </div>

@@ -1,6 +1,5 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
 import Loader from "./Loader";
 import Image from "next/image";
 import { TfiMenu } from "react-icons/tfi";
@@ -8,43 +7,44 @@ import { TfiMenu } from "react-icons/tfi";
 export default function Header() {
   const { data: sessionData, status } = useSession();
 
-  const menuItems = sessionData?.user ? (
-    <>
-      <li>
-        <Link href="/capsule">Read Public Capsule</Link>
-      </li>
-      <li>
-        <Link href="/dashboard">Dashboard</Link>
-      </li>
-      <li>
-        <Link href="/">Write a Capsule</Link>
-      </li>
-      <li>
-        <Link href="/profile" className="justify-between">
-          Profile
-          <span className="badge">Beta</span>
-        </Link>
-      </li>
-      <li onClick={() => void signOut()}>
-        <a className="text-red-400">Logout</a>
-      </li>
-    </>
-  ) : (
-    <>
-      <li>
-        <Link href="/">Write a Capsule</Link>
-      </li>
-      <li>
-        <Link href="/capsule">Read Public Capsule</Link>
-      </li>
-      <li>
-        <Link href="/api/auth/signin">Login</Link>
-      </li>
-    </>
-  );
+  const menuItems =
+    status === "authenticated" ? (
+      <>
+        <li>
+          <Link href="/open-capsules"> Public Capsules</Link>
+        </li>
+        <li>
+          <Link href="/dashboard">Dashboard</Link>
+        </li>
+        <li>
+          <Link href="/">Write a Capsule</Link>
+        </li>
+        <li>
+          <Link href="/profile" className="justify-between">
+            Profile
+            <span className="badge">Beta</span>
+          </Link>
+        </li>
+        <li onClick={() => void signOut()}>
+          <a className="text-red-400">Logout</a>
+        </li>
+      </>
+    ) : (
+      <>
+        <li>
+          <Link href="/">Write a Capsule</Link>
+        </li>
+        <li>
+          <Link href="/capsule">Public Capsules</Link>
+        </li>
+        <li>
+          <Link href="/api/auth/signin">Login</Link>
+        </li>
+      </>
+    );
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 transition-all duration-500">
       <div className="flex-1">
         <Link
           href="/"
@@ -58,6 +58,7 @@ export default function Header() {
           </div>
         </Link>
       </div>
+
       {status === "loading" ? (
         <Loader />
       ) : (

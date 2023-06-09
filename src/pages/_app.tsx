@@ -16,6 +16,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <Header />
       {/* <Auth> */}
+
       <Component {...pageProps} />
       {/* </Auth> */}
     </SessionProvider>

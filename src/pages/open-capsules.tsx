@@ -1,12 +1,11 @@
 import OpenCapsules from "~/components/open-capsule/OpenCapsules";
 import Footer from "~/components/layout/Footer";
 import Hero from "~/components/layout/Hero";
-// import Image from "next/image";
 
 export default function OpenCapsulesPage() {
   return (
     <>
-      <main>
+      <main className="container mx-auto w-[800px] px-4">
         <Hero />
         <OpenCapsules />
         <div className="hero mx-auto h-[600px] w-[96%]">
@@ -23,13 +22,6 @@ export default function OpenCapsulesPage() {
               </p>
               <button className="btn-secondary btn">Get Started</button>
             </div>
-            {/* <Image
-              width={400}
-              height={200}
-              src="/images/time-capsule-logo.png"
-              className="max-w-sm rounded-lg border-2 border-gray-200 shadow-md"
-              alt="TC"
-            /> */}
           </div>
         </div>
       </main>

@@ -52,7 +52,7 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
     <div className="relative  grid auto-cols-max grid-flow-col justify-center gap-5 text-center">
       {Object.entries(countdown).map(([key, value]) => (
         <div
-          className="rounded-box  flex flex-col bg-primary p-2 text-neutral-content shadow-md"
+          className="rounded-box  flex flex-col bg-primary p-2 text-neutral-content drop-shadow-xl"
           key={key}
         >
           <span className="countdown font-mono text-5xl">

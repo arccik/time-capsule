@@ -1,26 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { api } from "~/utils/api";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import Loader from "../layout/Loader";
+import { useSession } from "next-auth/react";
 
-type Props = {
-  id: string;
-};
+export default function LikeButton({ id }: { id: string }) {
+  const {
+    data: totalLikes,
+    status: likesStatus,
+    refetch: refetchTotal,
+  } = api.capsule.totalLikes.useQuery({ id });
 
-export default function LikeButton({ id }: Props) {
-  const proccedLike = api.capsule.like.useMutation({
-    onSuccess: () => setPressed(true),
+  const {
+    data: liked,
+    status: checkStatus,
+    refetch: refetchLiked,
+  } = api.like.checkIfLiked.useQuery({
+    id,
   });
-  console.log("LIKE BUTTON :)) ", id);
-  const [pressed, setPressed] = useState(true);
+
+  const proccedLike = api.capsule.like.useMutation({
+    onSuccess: async () => {
+      await refetchTotal();
+      await refetchLiked();
+      setPressed(true);
+    },
+  });
+  const { status } = useSession();
+  const [pressed, setPressed] = useState(false);
+
+  useEffect(() => {
+    setPressed(!!liked);
+  }, [liked]);
+
+  if (likesStatus === "loading" || checkStatus === "loading") return <Loader />;
+
+  const handleLike = () => {
+    setPressed((prev) => !prev);
+    proccedLike.mutate({ id });
+  };
 
   if (pressed)
-    return <button className="btn-secondary btn-sm btn">Liked</button>;
+    return (
+      <button onClick={handleLike} className="btn-secondary btn-xs btn">
+        {totalLikes}{" "}
+        <AiFillHeart className="ml-2 mr-2" size={18} color="#fff" />
+        Liked
+      </button>
+    );
 
   return (
     <button
-      onClick={() => proccedLike.mutate({ id })}
-      className="btn-primary btn-sm btn"
+      onClick={handleLike}
+      className="btn-primary btn-xs btn"
+      disabled={status === "unauthenticated"}
     >
-      Like
+      {totalLikes}{" "}
+      <AiOutlineHeart className="ml-2 mr-2" size={18} color="#fff" /> Like
     </button>
   );
 }

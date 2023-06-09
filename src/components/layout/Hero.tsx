@@ -4,11 +4,11 @@ import React from "react";
 
 export default function Hero() {
   return (
-    <div className="hero bg-base-100 ">
+    <div className="hero mb-10 bg-base-100">
       <div className="hero-content flex-col lg:flex-row">
         <Image
-          width={300}
-          height={400}
+          width={200}
+          height={300}
           alt="Time Capsule old"
           src="/images/locked_in_a_time.png"
           className="max-w-sm rounded-lg"
@@ -20,7 +20,7 @@ export default function Hero() {
             gathering digital objects or information that will be preserved and
             accessible for future generations.
           </p>
-          <Link href="/capsule" className="btn-primary btn bg-[570df8]">
+          <Link href="/" className="btn-primary btn bg-[570df8]">
             Get Started
           </Link>
         </div>

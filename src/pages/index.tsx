@@ -15,7 +15,13 @@ const Home: NextPage = () => {
         />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main className="flex flex-col items-center bg-gradient-to-b from-[#9069f9] to-[#692e76]">
+      <main
+        className="bg-base-500 flex flex-col items-center"
+        style={{
+          backgroundImage: "url('/images/know-about.jpeg')",
+          backgroundSize: "cover",
+        }}
+      >
         <TimeCapsuleForm />
         <CapsuleFooter />
       </main>
