@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import {
   createTRPCRouter,
-  // publicProcedure,
+  publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
 
@@ -18,7 +18,7 @@ export const commentRouter = createTRPCRouter({
         },
       });
     }),
-  getByCapsuleId: protectedProcedure
+  getByCapsuleId: publicProcedure
     .input(z.object({ capsuleId: z.string() }))
     .query(({ ctx, input }) => {
       return ctx.prisma.comment.findMany({

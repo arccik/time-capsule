@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import Image from "next/image";
 import AgeRange from "~/components/capsule-form/AgeRange";
 import { api } from "~/utils/api";
 import { useForm, type SubmitHandler } from "react-hook-form";
@@ -11,12 +10,9 @@ import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
 import DeliverBy from "./DeliverBy";
 import { useSession } from "next-auth/react";
-// import CapsuleSubject from "~/components/capsule-form/CapsuleSubject";
-// import useLocalStorage from "~/lib/hooks/useLocalStorage";
-import { useLocalStorage } from "usehooks-ts";
 import dateFormatter from "~/lib/dateFormatter";
 import { GrEdit } from "react-icons/gr";
-// import { z } from "zod";
+import useLocalStorage from "~/lib/hooks/useLocalStorage";
 
 export default function TimeCapsuleForm() {
   const { data: sessionData, status } = useSession();
@@ -39,18 +35,20 @@ export default function TimeCapsuleForm() {
   } = useForm<Capsule>({
     resolver: zodResolver(createCapsuleSchema),
     defaultValues: {
-      subject: `Subject: A letter from ${dateFormatter(new Date())}`,
+      subject: `A letter from ${dateFormatter(new Date())}`,
     },
   });
   const [capsuleInStorage, setCapsuleInStorage] =
-    useLocalStorage<Capsule | null>("capsuleData", null);
+    useLocalStorage("capsuleData");
 
-  console.log("TIME CAPSULE FORM :)) ", errors, watch());
   useEffect(() => {
     if (capsuleInStorage && status === "authenticated") {
       for (const key of Object.keys(capsuleInStorage)) {
         switch (key) {
           case "subject":
+            setValue(key, capsuleInStorage[key]);
+            break;
+          case "sendingMethod":
             setValue(key, capsuleInStorage[key]);
             break;
           case "dateTime":
@@ -87,9 +85,7 @@ export default function TimeCapsuleForm() {
       void router.push("/api/auth/signin");
       return;
     }
-
-    const response = saveCapsule.mutate(data);
-    console.log("on submit data", data, response);
+    saveCapsule.mutate(data);
   };
 
   return (
@@ -102,14 +98,15 @@ export default function TimeCapsuleForm() {
           <input
             {...register("subject")}
             placeholder="Subject"
-            className="placeholder-base-dark input-bordered w-full select-all rounded-lg bg-transparent p-2 pl-0 text-xl  font-bold text-base-200"
+            className="placeholder-base-dark input-bordered w-full select-all rounded-lg bg-transparent p-2 pl-0 font-bold text-base-200  md:text-xl"
             id="subject"
           />
+          <p className="mt-0 text-sm">Subject for your time capsule</p>
           <label
             className="absolute right-5 top-1  text-2xl hover:cursor-text"
             htmlFor="subject"
           >
-            <GrEdit />
+            <GrEdit color="white" />
           </label>
 
           <div>
@@ -128,7 +125,7 @@ export default function TimeCapsuleForm() {
                 {errors.message?.message}
               </p>
             )}
-
+            <input className="input-primary input" />
             <AgeRange
               date={watch("dateTime")}
               rest={register("dateTime", {

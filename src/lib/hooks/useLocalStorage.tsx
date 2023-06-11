@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { type Capsule } from "~/types/capsule";
 
-const useLocalStorage = () => {
+const useLocalStorage = (key: string = "capsuleData") => {
   const [data, setData] = useState<Capsule | null>(null);
 
   useEffect(() => {
-    const storedData = localStorage.getItem("capsuleData");
+    const storedData = localStorage.getItem(key);
     if (storedData) {
       setData(JSON.parse(storedData) as Capsule);
     }
@@ -13,7 +13,7 @@ const useLocalStorage = () => {
 
   useEffect(() => {
     if (data) {
-      localStorage.setItem("capsuleData", JSON.stringify(data));
+      localStorage.setItem(key, JSON.stringify(data));
     }
   }, [data]);
 

@@ -26,16 +26,17 @@ export default function LikeButton({ id }: { id: string }) {
       setPressed(true);
     },
   });
-  const { status } = useSession();
+  const { status: sessionStatus } = useSession();
   const [pressed, setPressed] = useState(false);
 
   useEffect(() => {
     setPressed(!!liked);
   }, [liked]);
 
-  if (likesStatus === "loading" || checkStatus === "loading") return <Loader />;
+  // if (likesStatus === "loading" || checkStatus === "loading") return <Loader />;
 
   const handleLike = () => {
+    if (sessionStatus === "unauthenticated") return;
     setPressed((prev) => !prev);
     proccedLike.mutate({ id });
   };
@@ -50,13 +51,9 @@ export default function LikeButton({ id }: { id: string }) {
     );
 
   return (
-    <button
-      onClick={handleLike}
-      className="btn-primary btn-xs btn"
-      disabled={status === "unauthenticated"}
-    >
+    <button onClick={handleLike} className="btn-primary btn-xs btn">
       {totalLikes}{" "}
-      <AiOutlineHeart className="ml-2 mr-2" size={18} color="#fff" /> Like
+      <AiOutlineHeart className="ml-2 mr-2" size={18} color="#fff" /> Like{" "}
     </button>
   );
 }

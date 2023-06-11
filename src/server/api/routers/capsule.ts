@@ -63,7 +63,7 @@ export const capsuleRouter = createTRPCRouter({
         data: { capsuleId: input.id, userId: ctx.session.user.id },
       });
     }),
-  totalLikes: protectedProcedure
+  totalLikes: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
       return ctx.prisma.like.count({ where: { capsuleId: input.id } });
