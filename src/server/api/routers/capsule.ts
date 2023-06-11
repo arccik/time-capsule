@@ -18,16 +18,7 @@ export const capsuleRouter = createTRPCRouter({
       where: { userId: ctx.session.user.id },
     });
   }),
-  // getAllSendingMethods: protectedProcedure.query(({ ctx }) => {
-  //   return ctx.prisma.sendingMethod.findMany({
-  //     include: { Capsule: false },
-  //   });
-  // }),
-  // getSendingMethod: protectedProcedure
-  //   .input(z.object({ id: z.string() }))
-  //   .query(({ ctx, input }) => {
-  //     return ctx.prisma.sendingMethod.findFirst({ where: { id: input.id } });
-  //   }),
+
   create: protectedProcedure
     .input(createCapsuleSchema)
     .mutation(({ ctx, input }) => {
@@ -81,6 +72,29 @@ export const capsuleRouter = createTRPCRouter({
       },
       include: {
         user: true,
+      },
+    });
+  }),
+  checkExpired: publicProcedure.query(({ ctx }) => {
+    console.log("Check Expired Run: ", ctx);
+    const today = new Date();
+    const startDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+    const endDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() + 1
+    );
+    return ctx.prisma.capsule.findMany({
+      // orderBy: { dateTime: "desc" },
+      where: {
+        dateTime: {
+          gte: startDate,
+          lt: endDate,
+        },
       },
     });
   }),
