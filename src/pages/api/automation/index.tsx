@@ -34,7 +34,7 @@ export default async function handler(
   } else {
     readyToBeSentCapsules.forEach((capsule) => {
       console.log(capsule.id);
-      capsule.sendingMethod.forEach(async (method) => {
+      capsule.sendingMethod.forEach((method) => {
         console.log(method);
         if (method === "call" && capsule.call) {
           twilioClient.calls
@@ -47,32 +47,38 @@ export default async function handler(
             .catch((e) => console.error(e));
         }
         if (method === "sms" && capsule.sms) {
-          twilioClient.messages.create({
-            from: "+447360265035",
-            to: capsule.sms,
-            body: capsule.message,
-          });
+          twilioClient.messages
+            .create({
+              from: "+447360265035",
+              to: capsule.sms,
+              body: capsule.message,
+            })
+            .then((call) => console.log("[sms sent] id:", call.sid))
+            .catch((e) => console.error(e));
         }
         if (method === "whatsapp" && capsule.whatsapp) {
-          twilioClient.messages.create({
-            from: "+447360265035",
-            to: `whatsapp:${capsule.whatsapp}`,
-            body: capsule.message,
-          });
+          twilioClient.messages
+            .create({
+              from: "+447360265035",
+              to: `whatsapp:${capsule.whatsapp}`,
+              body: capsule.message,
+            })
+            .then((call) => console.log("[whats app sent] id:", call.sid))
+            .catch((e) => console.error(e));
         }
         if (method === "email" && capsule.email) {
           // send email
-          const info = await transporter.sendMail({
-            from: env.EMAIL_FROM,
-            to: capsule.email,
-            subject:
-              "Hello from messageTT, your time capsule is ready to be opened",
-            text: capsule.message,
-            html: `<p>${capsule.message}</p>`,
-          });
-          if (info.messageId) {
-            // email sent}
-          }
+          transporter
+            .sendMail({
+              from: env.EMAIL_FROM,
+              to: capsule.email,
+              subject:
+                "Hello from messageTT, your time capsule is ready to be opened",
+              text: capsule.message,
+              html: `<p>${capsule.message}</p>`,
+            })
+            .then((email) => console.log("email sent to: ", email))
+            .catch((e) => console.error(e));
         }
       });
     });
