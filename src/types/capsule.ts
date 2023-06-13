@@ -1,11 +1,9 @@
 import { z } from "zod";
 
 export const createCapsuleSchema = z.object({
-  senderName: z.string().optional(),
   dateTime: z.date(),
   message: z.string().min(5, "Message must be at least 5 characters"),
-  recipientName: z.string().optional(),
-  sendingMethod: z.array(z.string()).optional(),
+  sendingMethod: z.array(z.string()),
   public: z.boolean().optional(),
   email: z.string().email().optional(),
   post: z.string().optional(),
@@ -29,19 +27,9 @@ export const createCapsuleSchema = z.object({
   // .refine(
   //   (data) => {
   //     console.log("ZOD:::: ", data);
-  //     if (!data?.call) return { message: "Call >>><<< required " };
-  //     if (data.sendingMethod?.some((v) => v.name === "email")) {
-  //       return data.email !== undefined;
-  //     }
-  //     if (data.sendingMethod?.some((v) => v.name === "sms")) {
-  //       return data.sms !== undefined;
-  //     }
-  //     if (data.sendingMethod?.some((v) => v.name === "whatsapp")) {
-  //       return data.whatsapp !== undefined;
-  //     }
-  //     return true;
+  //     return false;
   //   },
-  //   { message: "Phone field is required" }
+  //   { message: "Phone field is required", path: ["phone"] }
   // );
 
 export type Capsule = z.infer<typeof createCapsuleSchema>;

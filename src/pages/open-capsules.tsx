@@ -2,8 +2,21 @@ import OpenCapsules from "~/components/open-capsule/OpenCapsules";
 
 export default function OpenCapsulesPage() {
   return (
-    <div className="md:container md:mx-auto md:w-[600px]">
-      <OpenCapsules />
-    </div>
+    <main className="min-h-screen bg-gradient-to-r from-cyan-500 to-blue-500 p-3 md:mx-auto ">
+      <div className="mx-auto max-w-2xl">
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+        <OpenCapsules />
+      </div>
+    </main>
   );
 }

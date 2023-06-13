@@ -3,6 +3,7 @@ import Link from "next/link";
 import Loader from "./Loader";
 import Image from "next/image";
 import { TfiMenu } from "react-icons/tfi";
+import HelpDialog from "../capsule-form/HelpDialog";
 
 export default function Header() {
   const { data: sessionData, status } = useSession();
@@ -35,7 +36,7 @@ export default function Header() {
           <Link href="/">Write a Capsule</Link>
         </li>
         <li>
-          <Link href="/capsule">Public Capsules</Link>
+          <Link href="/open-capsules">Public Capsules</Link>
         </li>
         <li>
           <Link href="/api/auth/signin">Login</Link>
@@ -58,7 +59,7 @@ export default function Header() {
           </div>
         </Link>
       </div>
-
+      <HelpDialog />
       {status === "loading" ? (
         <Loader />
       ) : (

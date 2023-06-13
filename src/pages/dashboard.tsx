@@ -10,11 +10,11 @@ export default function DashboardPage() {
   if (status !== "authenticated") return null;
   return (
     <>
-      <section className="container mx-auto mb-20 mt-10 grid-flow-row md:grid md:grid-flow-col">
+      <main className="container  mx-auto mb-20 mt-10 grid-flow-row md:grid md:grid-cols-1 lg:grid-flow-col">
         <StatsBar />
         <BuriedCapsules />
         <ProPromotion />
-      </section>
+      </main>
       <Footer />
     </>
   );

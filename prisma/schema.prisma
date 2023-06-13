@@ -58,6 +58,7 @@ model User {
     Capsule       Capsule[]
     Like          Like[]
     Comment       Comment[]
+    Payment       Payment[]
 }
 
 model VerificationToken {
@@ -69,13 +70,11 @@ model VerificationToken {
 }
 
 model Capsule {
-    id            String          @id @default(cuid())
-    senderName    String?
-    recipientName String?
+    id            String    @id @default(cuid())
     dateTime      DateTime
     message       String // @db.Text
-    sendingMethod String[] 
-    public        Boolean         @default(false)
+    sendingMethod String[]
+    public        Boolean   @default(false)
     email         String?
     phone         String?
     post          String?
@@ -83,17 +82,17 @@ model Capsule {
     sms           String?
     call          String?
     image         String?
-    opened        Boolean         @default(false)
+    opened        Boolean   @default(false)
     userId        String
-    user          User            @relation(fields: [userId], references: [id])
-    createdAt     DateTime        @default(now())
-    updatedAt     DateTime        @updatedAt
+    user          User      @relation(fields: [userId], references: [id])
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
     openIn        Int?
     subject       String?
     likes         Like[]
     Comment       Comment[]
+    Payment       Payment[]
 }
-
 
 // model SendingMethod {
 //     id        String   @id @default(uuid())
@@ -121,4 +120,15 @@ model Comment {
     capsule   Capsule  @relation(fields: [capsuleId], references: [id])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+model Payment {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    capsuleId String
+    capsule   Capsule  @relation(fields: [capsuleId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    price     String?
 }

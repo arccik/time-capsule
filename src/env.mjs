@@ -51,7 +51,10 @@ export const env = createEnv({
 
     // Twilio sending sms and calls
     TWILIO_ACCOUNT_SID: z.string(),
-    TWILIO_AUTH_TOKEN: z.string()
+    TWILIO_AUTH_TOKEN: z.string(),
+    // Stripe for payments
+    STRIPE_SECRET_KEY: z.string(),
+    STRIPE_PRICE_ID: z.string()
   },
 
   /**
@@ -61,7 +64,7 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
-
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().min(1),
   },
 
   /**
@@ -95,6 +98,9 @@ export const env = createEnv({
     SUPABASE_STORAGE_URL: process.env.SUPABASE_STORAGE_URL,
     SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY,
     TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
-    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN
+    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    STRIPE_PRICE_ID: process.env.STRIPE_PRICE_ID
   },
 });

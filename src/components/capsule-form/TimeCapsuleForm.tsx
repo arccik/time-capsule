@@ -1,29 +1,33 @@
 import React, { useEffect } from "react";
-import AgeRange from "~/components/capsule-form/AgeRange";
 import { api } from "~/utils/api";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addYears } from "~/lib/addDays";
 import AiCountdown from "./AICountDown";
 import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
 import DeliverBy from "./DeliverBy";
-import { useSession } from "next-auth/react";
 import dateFormatter from "~/lib/dateFormatter";
-import { GrEdit } from "react-icons/gr";
 import useLocalStorage from "~/lib/hooks/useLocalStorage";
+// import UploadFile from "./UploadFile";
+import SendButton from "./SendButton";
+import MakePublicButton from "./MakePublicButton";
+import MessageArea from "./MessageArea";
+import SubjectField from "./SubjectField";
+import AgeRange from "./AgeRange";
+// import CheckOutBox from "../payment/CheckOutBox";
 
 export default function TimeCapsuleForm() {
-  const { data: sessionData, status } = useSession();
+  const [capsuleInStorage, setCapsuleInStorage] =
+    useLocalStorage("capsuleData");
   const router = useRouter();
+  console.log("capsuleInStorage", capsuleInStorage);
   const saveCapsule = api.capsule.create.useMutation<Capsule>({
     onSuccess: async (data) => {
       console.log("Data Save !", data);
       await router.push(`/dashboard`);
     },
   });
-
   const {
     register,
     handleSubmit,
@@ -31,6 +35,7 @@ export default function TimeCapsuleForm() {
     watch,
     setValue,
     getValues,
+    control,
     formState: { errors },
   } = useForm<Capsule>({
     resolver: zodResolver(createCapsuleSchema),
@@ -38,43 +43,27 @@ export default function TimeCapsuleForm() {
       subject: `A letter from ${dateFormatter(new Date())}`,
     },
   });
-  const [capsuleInStorage, setCapsuleInStorage] =
-    useLocalStorage("capsuleData");
 
   useEffect(() => {
-    if (capsuleInStorage && status === "authenticated") {
-      for (const key of Object.keys(capsuleInStorage)) {
-        switch (key) {
-          case "subject":
-            setValue(key, capsuleInStorage[key]);
-            break;
-          case "sendingMethod":
-            setValue(key, capsuleInStorage[key]);
-            break;
-          case "dateTime":
-            setValue(key, capsuleInStorage[key]);
-            break;
-          case "message":
-            setValue(key, capsuleInStorage[key]);
-            break;
-          case "public":
-            setValue(key, capsuleInStorage[key]);
-          case "sms":
-            setValue(key, capsuleInStorage[key]);
-          case "call":
-            setValue(key, capsuleInStorage[key]);
-          case "whatsapp":
-            setValue(key, capsuleInStorage[key]);
-          case "email":
-            setValue(key, capsuleInStorage[key]);
-          default:
-            break;
-        }
-      }
-      console.log("Data loaded from localstorage");
-      setCapsuleInStorage(null);
+    console.log("capsuleInStorage", capsuleInStorage);
+    // check if localStorage has value and if so set the form values
+    if (capsuleInStorage) {
+      if (capsuleInStorage?.call) setValue("call", capsuleInStorage.call);
+      if (capsuleInStorage?.sendingMethod)
+        setValue("sendingMethod", capsuleInStorage.sendingMethod);
+      if (capsuleInStorage?.subject)
+        setValue("subject", capsuleInStorage.subject);
+      if (capsuleInStorage?.dateTime)
+        setValue("dateTime", capsuleInStorage.dateTime);
+      if (capsuleInStorage?.message)
+        setValue("message", capsuleInStorage.message);
+      if (capsuleInStorage?.public) setValue("public", capsuleInStorage.public);
+      if (capsuleInStorage?.sms) setValue("sms", capsuleInStorage.sms);
+      if (capsuleInStorage?.whatsapp)
+        setValue("whatsapp", capsuleInStorage.whatsapp);
+      if (capsuleInStorage?.email) setValue("email", capsuleInStorage.email);
     }
-  }, [capsuleInStorage, setCapsuleInStorage, setValue, status]);
+  }, [capsuleInStorage, setCapsuleInStorage, setValue]);
 
   const onSubmit: SubmitHandler<Capsule> = (data): void => {
     if (createCapsuleSchema.safeParse(data).success === false) {
@@ -90,96 +79,35 @@ export default function TimeCapsuleForm() {
 
   return (
     <>
-      <div className="w-[700px]grid-flow-cols card glass mt-10 grid grid-cols-1  transition-all duration-150">
+      <div className="grid-flow-cols card glass mt-5 grid w-full grid-cols-1 transition-all duration-150 md:w-[700px]">
         <form
           onSubmit={(event) => void handleSubmit(onSubmit)(event)}
           className="m-3 space-y-4"
         >
-          <input
-            {...register("subject")}
-            placeholder="Subject"
-            className="placeholder-base-dark input-bordered w-full select-all rounded-lg bg-transparent p-2 pl-0 font-bold text-base-200  md:text-xl"
-            id="subject"
-          />
-          <p className="mt-0 text-sm">Subject for your time capsule</p>
-          <label
-            className="absolute right-5 top-1  text-2xl hover:cursor-text"
-            htmlFor="subject"
-          >
-            <GrEdit color="white" />
-          </label>
+          <SubjectField register={register("subject")} />
 
           <div>
-            <textarea
-              id="messageField"
-              {...register("message")}
-              placeholder="Write something that will make you smile"
-              rows={5}
-              className={`textarea-bordered textarea textarea-lg w-full drop-shadow-lg  focus:border-blue-800 md:w-[600px] ${
-                errors.message ? "textarea-secondary text-secondary " : ""
-              }`}
-            ></textarea>
-
-            {errors.message && (
-              <p className="text-sx text-right leading-tight text-red-600">
-                {errors.message?.message}
-              </p>
-            )}
-            <input className="input-primary input" />
-            <AgeRange
-              date={watch("dateTime")}
-              rest={register("dateTime", {
-                setValueAs: (v: string) => {
-                  const value = parseInt(v);
-                  setValue("openIn", value);
-                  return addYears(value);
-                },
-              })}
-            />
+            <MessageArea errors={errors} register={register("message")} />
+            {/* <UploadFile /> */}
           </div>
-
+          <AgeRange
+            date={getValues("dateTime")}
+            register={register}
+            setValue={setValue}
+            control={control}
+          />
           <DeliverBy
             register={register}
             unregister={unregister}
             setValue={setValue}
             getValue={getValues}
+            selected={capsuleInStorage?.sendingMethod}
           />
           <FormErrors errors={errors} />
-
-          <div className="input-range m-5 self-center justify-self-center ">
-            <AiCountdown time={watch("dateTime")} />
-          </div>
-          <div>
-            <div className="border-3 form-control w-full rounded-lg bg-slate-100 p-1 shadow-lg">
-              <label className="label cursor-pointer">
-                <span className="label-text">
-                  Make your capsule visible when time comes ?
-                </span>
-                <input
-                  type="checkbox"
-                  className="checkbox-primary checkbox"
-                  {...register("public")}
-                />
-              </label>
-            </div>
-          </div>
-          <div className="grid grid-flow-col">
-            {sessionData?.user ? (
-              <div>
-                <button
-                  disabled={Object.keys(errors).length > 0}
-                  className="btn-secondary btn w-full"
-                  type="submit"
-                >
-                  Send to the Future
-                </button>
-              </div>
-            ) : (
-              <button className="btn-secondary btn w-full">
-                Sign in to send the message
-              </button>
-            )}
-          </div>
+          <AiCountdown time={watch("dateTime")} />
+          <MakePublicButton {...register("public")} />
+          <SendButton disabled={Object.keys(errors).length > 0} />
+          {/* <CheckOutBox /> */}
         </form>
       </div>
     </>

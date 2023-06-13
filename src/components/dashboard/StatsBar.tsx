@@ -41,14 +41,16 @@ export default function StatsBar() {
             <BsPrescription className="text-4xl" />
           </div>
           <div className="stat-value">
-            {100 -
-              (100 / capsulesData?.length) *
-                capsulesData?.reduce((prev, curr) => {
-                  if (curr.opened) {
-                    return (prev += 1);
-                  }
-                  return prev;
-                }, 0)}
+            {Math.round(
+              100 -
+                (100 / capsulesData?.length) *
+                  capsulesData?.reduce((prev, curr) => {
+                    if (curr.opened) {
+                      return (prev += 1);
+                    }
+                    return prev;
+                  }, 0)
+            )}
             %
           </div>
           <div className="stat-title">Capsules are closed</div>

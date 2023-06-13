@@ -20,20 +20,23 @@ export default function DeliverBy({
   unregister,
   setValue,
   getValue,
+  selected,
 }: // s
 {
   register: UseFormRegister<Capsule>;
   unregister: UseFormUnregister<Capsule>;
   setValue: UseFormSetValue<Capsule>;
   getValue: UseFormGetValues<Capsule>;
+  selected: string[] | undefined;
 }) {
   const [state, setState] = useState<ContactMethods>({
-    email: false,
-    sms: false,
-    whatsapp: false,
-    phone: false,
+    email: !selected?.includes("email"),
+    sms: !!selected?.includes("sms"),
+    whatsapp: !!selected?.includes("whatsapp"),
+    phone: !!selected?.includes("phone"),
   });
 
+  console.log("delivery By ", { selected: selected?.includes("email"), state });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
     const savedSendingMethods = getValue("sendingMethod") || [];
@@ -90,7 +93,7 @@ export default function DeliverBy({
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ x: -200, opacity: 0 }}
-                className="form-control w-full max-w-lg"
+                className="form-control w-full"
                 key={method}
               >
                 <label className="label">

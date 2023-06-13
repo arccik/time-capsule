@@ -29,8 +29,6 @@ export const capsuleRouter = createTRPCRouter({
         email: input.email,
         sendingMethod: input.sendingMethod,
         message: input.message,
-        senderName: input.senderName,
-        recipientName: input.recipientName,
         public: input.public,
         userId: ctx.session.user.id,
         sms: input.sms,
@@ -64,17 +62,26 @@ export const capsuleRouter = createTRPCRouter({
     .mutation(({ ctx, input }) => {
       return ctx.prisma.capsule.delete({ where: { id: input.id } });
     }),
-  getOpenCapsules: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.capsule.findMany({
-      orderBy: { dateTime: "desc" },
-      where: {
+  getOpenCapsules: publicProcedure
+    .input(z.object({ page: z.number() }))
+    .query(({ ctx, input }) => {
+      const where = {
         public: true,
-      },
-      include: {
-        user: true,
-      },
-    });
-  }),
+        opened: true,
+      };
+      return ctx.prisma.$transaction([
+        ctx.prisma.capsule.findMany({
+          skip: 5 * (input.page - 1),
+          take: 5,
+          where,
+          orderBy: { dateTime: "desc" },
+          include: {
+            user: true,
+          },
+        }),
+        ctx.prisma.capsule.count({ where }),
+      ]);
+    }),
   checkExpired: publicProcedure.query(({ ctx }) => {
     console.log("Check Expired Run: ", ctx);
     const today = new Date();

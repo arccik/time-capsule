@@ -1,7 +1,8 @@
 export default function ProPromotion() {
   return (
-    <div className="md:col-span-2">
-      <p>Promote to Pro</p>
+    <div className="mt-5 md:col-span-2">
+      <p className="mb-1 text-3xl font-bold">Promote to Pro</p>
+
       <div className="indicator">
         <div className="card border">
           <div className="card-body">
@@ -18,6 +19,9 @@ export default function ProPromotion() {
             </ul>
           </div>
         </div>
+      </div>
+      <div className="alert m-2 flex w-[95%] flex-row shadow-lg ">
+        <p>Privetiki</p>
       </div>
     </div>
   );

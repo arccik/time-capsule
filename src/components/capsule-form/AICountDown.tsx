@@ -49,19 +49,45 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
   }, [time]);
 
   return (
-    <div className="relative  grid auto-cols-max grid-flow-col justify-center gap-5 text-center">
+    <div className="grid auto-cols-max grid-flow-col justify-center gap-5 text-center">
       {Object.entries(countdown).map(([key, value]) => (
         <div
-          className="rounded-box  flex flex-col bg-primary p-2 text-neutral-content drop-shadow-xl"
+          className="rounded-box flex flex-col bg-primary p-2 text-neutral-content drop-shadow-xl"
           key={key}
         >
-          <span className="countdown font-mono text-5xl">
+          <span className="countdown  font-mono text-5xl">
             <span style={{ "--value": value } as React.CSSProperties}></span>
           </span>
           {key}
         </div>
       ))}
     </div>
+    // <div className="grid auto-cols-max grid-flow-col gap-5 text-center">
+    //   <div className="rounded-box flex flex-col bg-neutral p-2 text-neutral-content">
+    //     <span className="countdown font-mono text-5xl">
+    //       <span style={{ "--value": 15 }}></span>
+    //     </span>
+    //     days
+    //   </div>
+    //   <div className="rounded-box flex flex-col bg-neutral p-2 text-neutral-content">
+    //     <span className="countdown font-mono text-5xl">
+    //       <span style={{ "--value": 10 }}></span>
+    //     </span>
+    //     hours
+    //   </div>
+    //   <div className="rounded-box flex flex-col bg-neutral p-2 text-neutral-content">
+    //     <span className="countdown font-mono text-5xl">
+    //       <span style={{ "--value": 24 }}></span>
+    //     </span>
+    //     min
+    //   </div>
+    //   <div className="rounded-box flex flex-col bg-neutral p-2 text-neutral-content">
+    //     <span className="countdown font-mono text-5xl">
+    //       <span style={{ "--value": 46 }}></span>
+    //     </span>
+    //     sec
+    //   </div>
+    // </div>
   );
 };
 

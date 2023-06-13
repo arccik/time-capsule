@@ -1,34 +1,47 @@
 import Image from "next/image";
 import React from "react";
 import { api } from "~/utils/api";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import Loader from "../layout/Loader";
 
-type Props = {
-  id: string;
-};
-
-export default function CommentList({ id }: Props) {
+export default function CommentList({ id }: { id: string }) {
   const [comment, setComment] = React.useState<string>("");
-  const [dropDown, setDropDown] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
   const {
     data: capsuleComment,
     status: commentStatus,
     refetch,
   } = api.comment.getByCapsuleId.useQuery({ capsuleId: id });
   const saveComment = api.comment.create.useMutation({
-    onSuccess: () => refetch(),
+    onSuccess: async () => {
+      setLoading(false);
+      await refetch();
+    },
+    onMutate: () => void setLoading(true),
   });
+
+  const deleteComment = api.comment.delete.useMutation({
+    onSuccess: async () => {
+      setLoading(false);
+      await refetch();
+    },
+    onMutate: () => setLoading(true),
+    onError: (error) =>
+      console.error("Could not delete your comment, try again", error),
+  });
+
   if (commentStatus === "loading") return <div>Loading...</div>;
   if (commentStatus === "error") return <div>Error...</div>;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("BEBBIII ", comment);
     saveComment.mutate({ capsuleId: id, body: comment });
+    setComment("");
   };
 
   return (
-    <section className="mx-auto rounded-md  bg-white  py-8 dark:bg-gray-600 lg:py-16">
-      <div className="mx-auto max-w-2xl px-4">
+    <section className="mx-auto rounded-md  bg-slate-400  pt-8  dark:shadow-xl lg:py-16">
+      <div className="mx-auto px-4">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white lg:text-2xl">
             Discussion ({capsuleComment?.length})
@@ -56,6 +69,7 @@ export default function CommentList({ id }: Props) {
             Post comment
           </button>
         </form>
+        {loading && <Loader />}
         {capsuleComment?.map((comment) => (
           <article
             className="mb-6 rounded-lg bg-white p-6 text-base dark:bg-gray-900"
@@ -82,59 +96,12 @@ export default function CommentList({ id }: Props) {
               <button
                 id="dropdownComment1Button"
                 data-dropdown-toggle="dropdownComment1"
-                className="inline-flex items-center rounded-lg bg-white p-2 text-center text-sm font-medium text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="inline-flex items-center rounded-lg bg-white p-2 text-center text-sm font-medium text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-red-700 dark:focus:ring-gray-600"
                 type="button"
-                onClick={() => setDropDown((prev) => !prev)}
+                onClick={() => deleteComment.mutate({ id: comment.id })}
               >
-                <svg
-                  className="h-5 w-5"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                </svg>
-                <span className="sr-only">Comment settings</span>
+                <RiDeleteBin6Line />
               </button>
-              <div className="reative">
-                <div
-                  id="dropdownComment1"
-                  className={`absolute right-0 z-10 mt-2 ${
-                    dropDown ? "block" : "hidden"
-                  } w-36 divide-y divide-gray-100 rounded bg-white shadow dark:divide-gray-600 dark:bg-gray-700`}
-                >
-                  <ul
-                    className="py-1 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownMenuIconHorizontalButton"
-                  >
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Edit
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Remove
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Report
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
             </footer>
             <p className="text-gray-500 dark:text-gray-400">{comment.body}</p>
           </article>
