@@ -77,32 +77,10 @@ export const capsuleRouter = createTRPCRouter({
           orderBy: { dateTime: "desc" },
           include: {
             user: true,
+            likes: true,
           },
         }),
         ctx.prisma.capsule.count({ where }),
       ]);
     }),
-  checkExpired: publicProcedure.query(({ ctx }) => {
-    console.log("Check Expired Run: ", ctx);
-    const today = new Date();
-    const startDate = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate()
-    );
-    const endDate = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate() + 1
-    );
-    return ctx.prisma.capsule.findMany({
-      // orderBy: { dateTime: "desc" },
-      where: {
-        dateTime: {
-          gte: startDate,
-          lt: endDate,
-        },
-      },
-    });
-  }),
 });

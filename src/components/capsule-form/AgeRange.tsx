@@ -21,8 +21,7 @@ type Props = {
 };
 
 export default function AgeRange({ register, date, setValue, control }: Props) {
-  const [state, setState] = useState(true);
-  console.log("Date Onn Rage ", date);
+  const [showCalendar, setShowCalendar] = useState(false);
   return (
     <div className="border-3 w-full rounded-lg bg-slate-100 p-6 pt-4 shadow-lg">
       <div className="flex flex-row justify-between gap-4">
@@ -32,13 +31,13 @@ export default function AgeRange({ register, date, setValue, control }: Props) {
           <input
             type="checkbox"
             className="toggle-secondary toggle"
-            checked={state}
-            onChange={() => setState((prev) => !prev)}
+            checked={showCalendar}
+            onChange={() => setShowCalendar((prev) => !prev)}
           />
         </div>
       </div>
 
-      {state ? (
+      {showCalendar ? (
         <Controller
           control={control}
           name="dateTime"
@@ -66,7 +65,9 @@ export default function AgeRange({ register, date, setValue, control }: Props) {
           })}
         />
       )}
-      <p className="font-bold">Deliver on {date?.toDateString()}</p>
+      <p className="font-bold">
+        Deliver on {typeof date === "object" && date?.toDateString()}
+      </p>
     </div>
   );
 }
