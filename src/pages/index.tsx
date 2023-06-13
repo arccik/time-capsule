@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <main
-        className="bg-base-500 flex flex-col items-center p-3"
+        className="bg-base-500 flex flex-col items-center"
         style={{
           backgroundImage: "url('/images/know-about.jpeg')",
           backgroundSize: "cover",

@@ -82,7 +82,7 @@ export default function TimeCapsuleForm() {
       <div className="grid-flow-cols card glass mt-5 grid w-full grid-cols-1 transition-all duration-150 md:w-[700px]">
         <form
           onSubmit={(event) => void handleSubmit(onSubmit)(event)}
-          className="m-3 space-y-4"
+          className="m-2 space-y-4"
         >
           <SubjectField register={register("subject")} />
 

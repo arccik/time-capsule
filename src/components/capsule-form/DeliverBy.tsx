@@ -36,7 +36,7 @@ export default function DeliverBy({
     phone: !!selected?.includes("phone"),
   });
 
-  console.log("delivery By ", { selected: selected?.includes("email"), state });
+  // console.log("delivery By ", { selected: selected?.includes("email"), state });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
     const savedSendingMethods = getValue("sendingMethod") || [];

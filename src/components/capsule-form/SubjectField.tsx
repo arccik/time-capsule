@@ -11,15 +11,14 @@ type Props = {
 export default function SubjectField({ register }: Props) {
   return (
     <>
-      {" "}
       <input
         {...register}
         placeholder="Subject"
-        className="placeholder-base-dark input-bordered w-full select-all rounded-lg bg-transparent p-2 pl-0 font-bold text-base-200  md:text-xl"
+        className="placeholder-base-dark input-bordered -mb-10 w-full select-all rounded-lg bg-transparent p-2 pl-0 font-bold  text-base-200 md:text-xl"
         id="subject"
       />
       <label
-        className="absolute right-5 top-1  text-2xl hover:cursor-text"
+        className="text-md absolute right-5  top-1 hover:cursor-text"
         htmlFor="subject"
       >
         <GrEdit color="white" />

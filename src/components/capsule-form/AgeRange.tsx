@@ -28,28 +28,17 @@ export default function AgeRange({ register, date, setValue, control }: Props) {
       <div className="flex flex-row justify-between gap-4">
         <p className="font-bold">Deliver on </p>
         <div className="flex flex-row gap-4">
-          <p className="font-bold text-primary">Exact Date </p>
+          <p className="font-bold text-primary">Calendar </p>
           <input
             type="checkbox"
             className="toggle-secondary toggle"
             checked={state}
             onChange={() => setState((prev) => !prev)}
           />
-          <p className="font-bold text-secondary">Years Range</p>
         </div>
       </div>
 
       {state ? (
-        <YearsRange
-          rest={register("dateTime", {
-            setValueAs: (v: string) => {
-              const value = parseInt(v);
-              setValue("openIn", value);
-              return addYears(value);
-            },
-          })}
-        />
-      ) : (
         <Controller
           control={control}
           name="dateTime"
@@ -60,12 +49,23 @@ export default function AgeRange({ register, date, setValue, control }: Props) {
                 minDate={addYears(1)}
                 className="rounded-lg border-none"
                 onChange={(date) => field.onChange(date)}
-                value={field.value}
+                value={new Date(field.value)}
               />
             </div>
           )}
         />
+      ) : (
+        <YearsRange
+          rest={register("dateTime", {
+            setValueAs: (v: string) => {
+              const value = parseInt(v);
+              setValue("openIn", value);
+              return addYears(value);
+            },
+          })}
+        />
       )}
+      <p className="font-bold">Deliver on {date?.toDateString()}</p>
     </div>
   );
 }
