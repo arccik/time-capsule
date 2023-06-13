@@ -49,7 +49,8 @@ export default function AgeRange({ register, date, setValue, control }: Props) {
                 minDate={addYears(1)}
                 className="rounded-lg border-none"
                 onChange={(date) => field.onChange(date)}
-                value={new Date(field.value)}
+                value={field.value}
+                defaultActiveStartDate={new Date()}
               />
             </div>
           )}
