@@ -7,8 +7,7 @@ import {
   Controller,
   type UseFormRegister,
   type UseFormSetValue,
-  FieldErrors,
-  FieldError,
+  type FieldError,
 } from "react-hook-form";
 import type { Capsule } from "~/types/capsule";
 import { useState } from "react";
@@ -24,9 +23,9 @@ type Props = {
 };
 
 export default function AgeRange({
-  register,
+  // register,
   date,
-  setValue,
+  // setValue,
   control,
   errors,
 }: Props) {
@@ -37,7 +36,7 @@ export default function AgeRange({
     <>
       <div
         className={`border-3 w-full  rounded-lg bg-slate-100 p-6 pt-4 shadow-lg ${
-          errors?.message && "border-2 border-red-500"
+          errors?.message ? "border-2 border-red-500" : ""
         }`}
       >
         <div className="flex flex-row justify-between gap-4">
@@ -87,11 +86,11 @@ export default function AgeRange({
                         Dayjs().add(+data.target.value, "month").toDate()
                       );
                     }}
-                    className={`range ${errors?.message && "range-error"}`}
+                    className={`range ${errors?.message ? "range-error" : ""}`}
                   />
                   <div
                     className={`flex w-full justify-between px-2 text-xs ${
-                      errors?.message && "text-red-700"
+                      errors?.message ? "text-red-700" : ""
                     } `}
                   >
                     <span>6 months</span>
