@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 import type {
+  FieldError,
+  Merge,
   UseFormGetValues,
   UseFormRegister,
   UseFormSetValue,
@@ -21,6 +23,7 @@ export default function DeliverBy({
   setValue,
   getValue,
   selected,
+  error,
 }: // s
 {
   register: UseFormRegister<Capsule>;
@@ -28,6 +31,7 @@ export default function DeliverBy({
   setValue: UseFormSetValue<Capsule>;
   getValue: UseFormGetValues<Capsule>;
   selected: string[] | undefined;
+  error: Merge<FieldError, FieldError | undefined> | undefined;
 }) {
   const [state, setState] = useState<ContactMethods>({
     email: !!selected?.includes("email"),
@@ -35,6 +39,7 @@ export default function DeliverBy({
     whatsapp: !!selected?.includes("whatsapp"),
     phone: !!selected?.includes("phone"),
   });
+  console.log("DELICERYYYY BYYY ", error);
 
   // console.log("delivery By ", { selected: selected?.includes("email"), state });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +62,11 @@ export default function DeliverBy({
 
   return (
     <>
-      <div className="border-3 w-full rounded-lg bg-slate-100 p-6 pt-4 shadow-lg">
+      <div
+        className={`border-3 w-full rounded-lg  p-6 pt-4 shadow-lg ${
+          error?.message ? "bg-red-200" : "bg-slate-100"
+        } `}
+      >
         <p className="font-bold">Deliver by</p>
         <span className="text-xs text-primary">
           Select the method to recieve your time capsule
@@ -74,6 +83,7 @@ export default function DeliverBy({
                   onChange={handleChange}
                   name={method}
                   checked={state[method]}
+                  defaultChecked={!!selected?.includes(method)}
                 />
                 {/* <!-- hamburger icon --> */}
                 <MdCheckBox className="swap-on w-full text-5xl" />

@@ -2,7 +2,7 @@ import type { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 import type { Capsule } from "~/types/capsule";
 
 type Props = {
-  register: UseFormRegisterReturn<"message">;
+  register?: UseFormRegisterReturn<"message">;
   errors: FieldErrors<Capsule>;
 };
 

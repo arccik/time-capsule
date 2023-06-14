@@ -1,7 +1,17 @@
 import { z } from "zod";
 
+
 export const createCapsuleSchema = z.object({
-  dateTime: z.date(),
+  dateTime: z
+    .date()
+    .min(
+      new Date(new Date().setMonth(new Date().getMonth() + 6)),
+      "Date must be in the future"
+    )
+    .max(
+      new Date(new Date().setFullYear(new Date().getFullYear() + 10)),
+      "Date cannot be more then 10 years"
+    ),
   message: z.string().min(5, "Message must be at least 5 characters"),
   sendingMethod: z.array(z.string()),
   public: z.boolean().optional(),

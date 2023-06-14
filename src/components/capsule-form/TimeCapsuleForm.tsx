@@ -91,6 +91,7 @@ export default function TimeCapsuleForm() {
             register={register}
             setValue={setValue}
             control={control}
+            errors={errors?.dateTime}
           />
           <DeliverBy
             register={register}
@@ -98,6 +99,7 @@ export default function TimeCapsuleForm() {
             setValue={setValue}
             getValue={getValues}
             selected={capsuleInStorage?.sendingMethod}
+            error={errors?.sendingMethod}
           />
           <FormErrors errors={errors} />
           <AiCountdown time={watch("dateTime")} />
