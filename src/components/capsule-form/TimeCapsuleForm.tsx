@@ -7,7 +7,7 @@ import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
 import DeliverBy from "./DeliverBy";
-// import dateFormatter from "~/lib/dateFormatter";
+import dateFormatter from "~/lib/dateFormatter";
 import useLocalStorage from "~/lib/hooks/useLocalStorage";
 // import UploadFile from "./UploadFile";
 import SendButton from "./SendButton";
@@ -38,6 +38,11 @@ export default function TimeCapsuleForm() {
     formState: { errors },
   } = useForm<Capsule>({
     resolver: zodResolver(createCapsuleSchema),
+    defaultValues: {
+      subject:
+        capsuleInStorage?.subject ||
+        `A Message from ${dateFormatter(new Date())}`,
+    },
   });
 
   useEffect(() => {
