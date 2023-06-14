@@ -27,9 +27,9 @@ export default function AgeRange({
           <span>9</span>
           <span>10</span>
         </div>
-        <span className="block text-center text-sm font-bold text-primary-focus">
+        {/* <span className="block text-center text-sm font-bold text-primary-focus">
           (Years)
-        </span>
+        </span> */}
       </div>
     </section>
   );

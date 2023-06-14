@@ -1,6 +1,7 @@
-// import dateFormatter from "~/lib/dateFormatter";
-import YearsRange from "./YearsRange";
 import Dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+Dayjs.extend(relativeTime);
 import {
   type Control,
   Controller,
@@ -8,7 +9,6 @@ import {
   type UseFormSetValue,
 } from "react-hook-form";
 import type { Capsule } from "~/types/capsule";
-import { addYears } from "~/lib/addDays";
 import { useState } from "react";
 
 import { Calendar } from "antd";
@@ -22,10 +22,15 @@ type Props = {
 
 export default function AgeRange({ register, date, setValue, control }: Props) {
   const [showCalendar, setShowCalendar] = useState(false);
+
+  console.log(
+    "Dayjs(date).isAfter",
+    Dayjs(date).isAfter(Dayjs().add(12, "year"))
+  );
   return (
     <div className="border-3 w-full rounded-lg bg-slate-100 p-6 pt-4 shadow-lg">
       <div className="flex flex-row justify-between gap-4">
-        <p className="font-bold">Deliver on </p>
+        <p className="font-bold">Deliver in </p>
         <div className="flex flex-row gap-4">
           <p className="font-bold text-primary">Calendar </p>
           <input
@@ -44,27 +49,70 @@ export default function AgeRange({ register, date, setValue, control }: Props) {
           render={({ field }) => (
             <div className="m-3 grid justify-center p-3">
               <Calendar
+                defaultValue={Dayjs().add(5, "month")}
+                disabledDate={(date) =>
+                  Dayjs().add(6, "month") > date ||
+                  Dayjs().add(10, "year") < date
+                }
                 fullscreen={false}
                 onChange={(data) => field.onChange(data)}
-                value={Dayjs(field.value)}
               />
             </div>
           )}
         />
       ) : (
-        <YearsRange
-          rest={register("dateTime", {
-            setValueAs: (v: string) => {
-              const value = parseInt(v);
-              setValue("openIn", value);
-              return addYears(value);
-            },
-          })}
+        <Controller
+          control={control}
+          name="openIn"
+          render={({ field }) => (
+            <section className="mt-5">
+              <div>
+                <input
+                  type="range"
+                  min="6"
+                  max="120"
+                  onChange={(data) => {
+                    setValue(
+                      "dateTime",
+                      Dayjs().add(+data.target.value, "month").toDate()
+                    );
+                    setValue("openIn", +data.target.value);
+
+                    field.onChange(data);
+                  }}
+                  value={field.value}
+                  className="range range-primary"
+                />
+                <div className="flex w-full justify-between px-2 text-xs">
+                  <span>6 months</span>
+                  <span>3 years</span>
+                  <span>5 years</span>
+                  <span>6 years</span>
+                  <span>8 years</span>
+                  <span>10 years</span>
+                </div>
+                {/* <span className="block text-center text-sm font-bold text-primary-focus">
+                  (Years)
+                </span> */}
+              </div>
+            </section>
+          )}
         />
       )}
-      <p className="font-bold">
-        Deliver on {typeof date === "object" && date?.toDateString()}
-      </p>
+      {date && (
+        <div className="mt-2">
+          {Dayjs(date).isBefore(Dayjs().add(5, "month")) ||
+          Dayjs(date).isAfter(Dayjs().add(10, "year")) ? (
+            <p className="font-bold text-red-500">
+              This date outside of allowed range (6 months to 10 years)
+            </p>
+          ) : (
+            <p className="font-bold text-secondary">
+              Will be delivered {Dayjs(date).fromNow()}
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
