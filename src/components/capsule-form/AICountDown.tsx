@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 const AiCountdown = ({ time }: { time: Date | undefined }) => {
   const [countdown, setCountdown] = useState({
     years: 0,

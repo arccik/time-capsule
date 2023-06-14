@@ -1,5 +1,6 @@
+import Link from "next/link";
 import React from "react";
-// import { FaSlackHash, FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa";
 import { GiTimeTrap } from "react-icons/gi";
 
 export default function Footer() {
@@ -15,8 +16,9 @@ export default function Footer() {
         </p>
         <p>Copyright © 2023 - All mahovny reserved</p>
       </div>
-      {/* <div>
+      <div>
         <div className="grid grid-flow-col gap-4">
+          <Link href="/privacy-policy">Privacy Policy</Link>
           <a>
             <FaTwitter className="text-2xl" />
           </a>
@@ -27,7 +29,7 @@ export default function Footer() {
             <FaFacebook className="text-2xl" />
           </a>
         </div>
-      </div> */}
+      </div>
     </footer>
   );
 }

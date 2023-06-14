@@ -30,7 +30,7 @@ export default function DeliverBy({
   selected: string[] | undefined;
 }) {
   const [state, setState] = useState<ContactMethods>({
-    email: !selected?.includes("email"),
+    email: !!selected?.includes("email"),
     sms: !!selected?.includes("sms"),
     whatsapp: !!selected?.includes("whatsapp"),
     phone: !!selected?.includes("phone"),
@@ -69,7 +69,12 @@ export default function DeliverBy({
               <p className="text-sm">{method}</p>
               <label className="swap-rotate swap ">
                 {/* <!-- this hidden checkbox controls the state --> */}
-                <input type="checkbox" onChange={handleChange} name={method} />
+                <input
+                  type="checkbox"
+                  onChange={handleChange}
+                  name={method}
+                  checked={state[method]}
+                />
                 {/* <!-- hamburger icon --> */}
                 <MdCheckBox className="swap-on w-full text-5xl" />
                 {/* <!-- close icon --> */}

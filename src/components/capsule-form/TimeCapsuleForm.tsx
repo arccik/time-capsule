@@ -7,7 +7,7 @@ import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
 import DeliverBy from "./DeliverBy";
-import dateFormatter from "~/lib/dateFormatter";
+// import dateFormatter from "~/lib/dateFormatter";
 import useLocalStorage from "~/lib/hooks/useLocalStorage";
 // import UploadFile from "./UploadFile";
 import SendButton from "./SendButton";
@@ -15,13 +15,12 @@ import MakePublicButton from "./MakePublicButton";
 import MessageArea from "./MessageArea";
 import SubjectField from "./SubjectField";
 import AgeRange from "./AgeRange";
-// import CheckOutBox from "../payment/CheckOutBox";
 
 export default function TimeCapsuleForm() {
   const [capsuleInStorage, setCapsuleInStorage] =
     useLocalStorage("capsuleData");
   const router = useRouter();
-  console.log("capsuleInStorage", capsuleInStorage);
+  // console.log("capsuleInStorage", capsuleInStorage);
   const saveCapsule = api.capsule.create.useMutation<Capsule>({
     onSuccess: async (data) => {
       console.log("Data Save !", data);
@@ -39,9 +38,6 @@ export default function TimeCapsuleForm() {
     formState: { errors },
   } = useForm<Capsule>({
     resolver: zodResolver(createCapsuleSchema),
-    defaultValues: {
-      subject: `A letter from ${dateFormatter(new Date())}`,
-    },
   });
 
   useEffect(() => {
@@ -79,7 +75,7 @@ export default function TimeCapsuleForm() {
 
   return (
     <>
-      <div className="grid-flow-cols card glass mt-5 grid w-full grid-cols-1 transition-all duration-150 md:w-[700px]">
+      <div className="grid-flow-cols card glass mb-10 mt-5 grid w-full grid-cols-1 transition-all duration-150 md:w-[700px]">
         <form
           onSubmit={(event) => void handleSubmit(onSubmit)(event)}
           className="m-2 space-y-4"
@@ -107,7 +103,6 @@ export default function TimeCapsuleForm() {
           <AiCountdown time={watch("dateTime")} />
           <MakePublicButton {...register("public")} />
           <SendButton disabled={Object.keys(errors).length > 0} />
-          {/* <CheckOutBox /> */}
         </form>
       </div>
     </>

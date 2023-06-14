@@ -13,7 +13,7 @@ export default function HelpDialog() {
       {open && (
         <div className="border-3 absolute right-2 top-8 z-10 mt-10  w-[90%] rounded-lg bg-slate-100 p-6 pt-4 shadow-lg md:w-3/5">
           <h1 className="m-2 mr-4 text-center text-xl font-bold text-primary">
-            Time Capsule{" "}
+            How it Works
           </h1>
           <p className=" font-bold">
             A Place where you can store your memories and thoughts for future

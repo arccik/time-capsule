@@ -1,7 +1,6 @@
 // import dateFormatter from "~/lib/dateFormatter";
 import YearsRange from "./YearsRange";
-import Calendar from "react-calendar";
-
+import Dayjs from "dayjs";
 import {
   type Control,
   Controller,
@@ -11,7 +10,8 @@ import {
 import type { Capsule } from "~/types/capsule";
 import { addYears } from "~/lib/addDays";
 import { useState } from "react";
-import "react-calendar/dist/Calendar.css";
+
+import { Calendar } from "antd";
 
 type Props = {
   register: UseFormRegister<Capsule>;
@@ -44,12 +44,9 @@ export default function AgeRange({ register, date, setValue, control }: Props) {
           render={({ field }) => (
             <div className="m-3 grid justify-center p-3">
               <Calendar
-                maxDate={addYears(10)}
-                minDate={addYears(1)}
-                className="rounded-lg border-none"
-                onChange={(date) => field.onChange(date)}
-                value={field.value}
-                defaultActiveStartDate={new Date()}
+                fullscreen={false}
+                onChange={(data) => field.onChange(data)}
+                value={Dayjs(field.value)}
               />
             </div>
           )}
