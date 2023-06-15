@@ -36,7 +36,7 @@ export default function SendButton({ disabled }: Props) {
             onClick={void handlePayment}
           >
             Send to the Future{" "}
-            <span className="badge-outline badge ml-3">£1</span>
+            <span className="badge-primary badge ml-3">£1</span>
           </button>
         </div>
       ) : (

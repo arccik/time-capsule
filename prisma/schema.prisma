@@ -92,6 +92,7 @@ model Capsule {
     likes         Like[]
     Comment       Comment[]
     Payment       Payment[]
+    paid          Boolean @default(false)
 }
 
 // model SendingMethod {

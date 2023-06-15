@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { api } from "~/utils/api";
+// import { api } from "~/utils/api";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AiCountdown from "./AICountDown";
@@ -15,18 +15,20 @@ import MakePublicButton from "./MakePublicButton";
 import MessageArea from "./MessageArea";
 import SubjectField from "./SubjectField";
 import AgeRange from "./AgeRange";
+import { useSession } from "next-auth/react";
 
 export default function TimeCapsuleForm() {
+  const { status } = useSession();
   const [capsuleInStorage, setCapsuleInStorage] =
     useLocalStorage("capsuleData");
   const router = useRouter();
   // console.log("capsuleInStorage", capsuleInStorage);
-  const saveCapsule = api.capsule.create.useMutation<Capsule>({
-    onSuccess: async (data) => {
-      console.log("Data Save !", data);
-      await router.push(`/dashboard`);
-    },
-  });
+  // const saveCapsule = api.capsule.create.useMutation<Capsule>({
+  //   onSuccess: async (data) => {
+  //     console.log("Data Save !", data);
+  //     await router.push(`/dashboard`);
+  //   },
+  // });
   const {
     register,
     handleSubmit,
@@ -46,7 +48,6 @@ export default function TimeCapsuleForm() {
   });
 
   useEffect(() => {
-    console.log("capsuleInStorage", capsuleInStorage);
     // check if localStorage has value and if so set the form values
     if (capsuleInStorage) {
       if (capsuleInStorage?.call) setValue("call", capsuleInStorage.call);
@@ -66,7 +67,7 @@ export default function TimeCapsuleForm() {
     }
   }, [capsuleInStorage, setCapsuleInStorage, setValue]);
 
-  const onSubmit: SubmitHandler<Capsule> = (data): void => {
+  const onSubmit: SubmitHandler<Capsule> = async (data): Promise<void> => {
     if (createCapsuleSchema.safeParse(data).success === false) {
       return;
     }
@@ -75,7 +76,20 @@ export default function TimeCapsuleForm() {
       void router.push("/api/auth/signin");
       return;
     }
-    saveCapsule.mutate(data);
+    const response: { url: string } | null = await fetch(
+      "/api/checkout_sessions",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    ).then((res) => res.json());
+    if (response?.url) {
+      window.location.href = response.url;
+    }
+
+    console.log("RESPONSE FROM CHECKOUT _ ", response);
+
+    // saveCapsule.mutate(data);
   };
 
   return (
@@ -108,7 +122,7 @@ export default function TimeCapsuleForm() {
           />
           <FormErrors errors={errors} />
           <AiCountdown time={watch("dateTime")} />
-          <MakePublicButton {...register("public")} />
+          <MakePublicButton register={register("public")} />
           <SendButton disabled={Object.keys(errors).length > 0} />
         </form>
       </div>

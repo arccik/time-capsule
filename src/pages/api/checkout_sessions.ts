@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { env } from "~/env.mjs";
-
-// const stripe = require("stripe")(env.STRIPE_SECRET_KEY);
+import { getSession } from "next-auth/react";
 import Stripe from "stripe";
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   apiVersion: "2022-11-15",
@@ -11,8 +10,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const userSession = await getSession({ req });
+  console.log("POST METHOD :: userSession", userSession);
   if (req.method === "POST") {
     try {
+      if (!userSession) {
+        throw new Error("User not authenticated");
+      }
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
         line_items: [
@@ -30,10 +34,14 @@ export default async function handler(
           ? `${req.headers.origin}/?canceled=true`
           : "",
       });
+      console.log("PAYMENT COMPLETED ", session);
+
       if (session.url) {
-        res.redirect(303, session.url);
+        return res.json({ url: session.url });
+        // return res.redirect(303, session.url);
+      } else {
+        res.status(204).json({ message: "something not right" });
       }
-      res.status(204).json({ message: "something not right" });
     } catch (err) {
       if (err instanceof Error) {
         res.status(500).json(err.message);

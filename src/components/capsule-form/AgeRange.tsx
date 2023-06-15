@@ -31,7 +31,6 @@ export default function AgeRange({
 }: Props) {
   const [showCalendar, setShowCalendar] = useState(false);
 
-  console.log("Dayjs(date).isAfter", errors);
   return (
     <>
       <div
@@ -86,13 +85,11 @@ export default function AgeRange({
                         Dayjs().add(+data.target.value, "month").toDate()
                       );
                     }}
-                    className={`range ${errors?.message ? "range-error" : ""}`}
+                    className={`range ${
+                      errors?.message ? "range-secondary" : "range-primary"
+                    }`}
                   />
-                  <div
-                    className={`flex w-full justify-between px-2 text-xs ${
-                      errors?.message ? "text-red-700" : ""
-                    } `}
-                  >
+                  <div className="flex w-full justify-between px-2 text-xs">
                     <span>6 months</span>
                     <span>3 years</span>
                     <span>5 years</span>
@@ -122,8 +119,8 @@ export default function AgeRange({
             )}
           </div>
         )}
+        <p className="text-end text-xs text-red-500">{errors?.message}</p>
       </div>
-      <p className="text-end text-xs text-red-500">{errors?.message}</p>
     </>
   );
 }

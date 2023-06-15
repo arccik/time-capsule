@@ -8,7 +8,6 @@ import type {
   UseFormGetValues,
   UseFormRegister,
   UseFormSetValue,
-  // UseFormSetValue,
   UseFormUnregister,
 } from "react-hook-form";
 import { type Capsule } from "~/types/capsule";
@@ -37,11 +36,9 @@ export default function DeliverBy({
     email: !!selected?.includes("email"),
     sms: !!selected?.includes("sms"),
     whatsapp: !!selected?.includes("whatsapp"),
-    phone: !!selected?.includes("phone"),
+    call: !!selected?.includes("call"),
   });
-  console.log("DELICERYYYY BYYY ", error);
 
-  // console.log("delivery By ", { selected: selected?.includes("email"), state });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
     const savedSendingMethods = getValue("sendingMethod") || [];
@@ -60,11 +57,27 @@ export default function DeliverBy({
     (key) => state[key] === true
   );
 
+  const buttons = Object.entries(state).map(([key, method]) => (
+    <div className="flex items-center" key={key}>
+      <p className="text-sm">{key}</p>
+      <label className="swap-rotate swap ">
+        <input
+          type="checkbox"
+          onChange={handleChange}
+          name={key}
+          checked={method}
+        />
+        <MdCheckBox className="swap-on w-full text-5xl" />
+        <MdCheckBoxOutlineBlank className="swap-off w-full text-5xl" />
+      </label>
+    </div>
+  ));
+
   return (
     <>
       <div
-        className={`border-3 w-full rounded-lg  p-6 pt-4 shadow-lg ${
-          error?.message ? "bg-red-200" : "bg-slate-100"
+        className={`border-3 w-full rounded-lg  bg-slate-100 p-6 pt-4 shadow-lg ${
+          error?.message ? "border-2 border-red-600 " : ""
         } `}
       >
         <p className="font-bold">Deliver by</p>
@@ -72,27 +85,7 @@ export default function DeliverBy({
           Select the method to recieve your time capsule
         </span>
 
-        <div className="mt-4 flex  justify-between">
-          {["email", "call", "sms", "whatsapp"].map((method) => (
-            <div className="flex items-center" key={method}>
-              <p className="text-sm">{method}</p>
-              <label className="swap-rotate swap ">
-                {/* <!-- this hidden checkbox controls the state --> */}
-                <input
-                  type="checkbox"
-                  onChange={handleChange}
-                  name={method}
-                  checked={state[method]}
-                  defaultChecked={!!selected?.includes(method)}
-                />
-                {/* <!-- hamburger icon --> */}
-                <MdCheckBox className="swap-on w-full text-5xl" />
-                {/* <!-- close icon --> */}
-                <MdCheckBoxOutlineBlank className="swap-off w-full text-5xl" />
-              </label>
-            </div>
-          ))}
-        </div>
+        <div className="mt-4 flex  justify-between">{buttons}</div>
       </div>
       <AnimatePresence>
         {contactMethodsSelected.length > 0 && (

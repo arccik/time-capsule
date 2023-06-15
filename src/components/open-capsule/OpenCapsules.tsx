@@ -6,7 +6,6 @@ import LikeButton from "./LikeButton";
 import CommentBar from "./CommentBar";
 import Pagination from "../layout/Pagination";
 import { useState } from "react";
-import Footer from "../layout/Footer";
 
 export default function OpenCapsules() {
   const [page, setPage] = useState(1);
@@ -42,7 +41,6 @@ export default function OpenCapsules() {
         totalPages={capsuleData[1]}
         setCurrentPage={setPage}
       />
-      <Footer />
     </div>
   );
 }
