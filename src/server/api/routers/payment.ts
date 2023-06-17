@@ -1,4 +1,4 @@
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 import { z } from "zod";
 import Stripe from "stripe";
@@ -15,7 +15,7 @@ export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
 });
 
 export const paymentRouter = createTRPCRouter({
-  createCheckout: protectedProcedure
+  createCheckout: publicProcedure
     .input(z.object({ capsuleId: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const stripeSession = await stripe.checkout.sessions.create({
@@ -38,7 +38,7 @@ export const paymentRouter = createTRPCRouter({
       });
       return stripeSession;
     }),
-  getStripeSession: protectedProcedure
+  getStripeSession: publicProcedure
     .input(
       z.object({
         sessionId: z.string(),
