@@ -27,8 +27,8 @@ export const paymentRouter = createTRPCRouter({
             quantity: 1,
           },
         ],
-        success_url: `${env.NEXTAUTH_URL}/dashboard/?success=true?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${env.NEXTAUTH_URL}/dashboard/?canceled=true`,
+        success_url: `http://www.messagettf.com/dashboard/?success=true?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `http://www.messagettf.com/dashboard/?canceled=true`,
       });
       await ctx.prisma.capsule.update({
         where: { id: input.capsuleId },
