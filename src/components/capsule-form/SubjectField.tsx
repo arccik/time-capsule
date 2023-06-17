@@ -18,10 +18,10 @@ export default function SubjectField({ register }: Props) {
         id="subject"
       />
       <label
-        className="text-md absolute right-5  top-1 hover:cursor-text"
+        className="text-md absolute right-5  top-1  hover:cursor-text"
         htmlFor="subject"
       >
-        <GrEdit className="text-white" />
+        <GrEdit />
       </label>
     </>
   );

@@ -62,40 +62,35 @@ export default function Header() {
         </Link>
       </div>
       <HelpDialog />
-      {status === "loading" ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="flex-none gap-2 md:hidden">
-            <div className="dropdown-end dropdown">
-              {sessionData?.user.image ? (
-                <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
-                  <div className="w-10 rounded-full">
-                    <Image
-                      width={60}
-                      height={60}
-                      alt="avatar"
-                      src={sessionData?.user.image}
-                    />
-                  </div>
-                </label>
-              ) : (
-                <TfiMenu className="m-2 cursor-pointer text-xl" tabIndex={0} />
-              )}
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
-              >
-                {menuItems}
-              </ul>
-            </div>
-          </div>
 
-          <div className="hidden flex-none gap-2 md:block">
-            <ul className="menu menu-horizontal px-1">{menuItems}</ul>
-          </div>
-        </>
-      )}
+      <div className="flex-none gap-2 md:hidden">
+        <div className="dropdown-end dropdown">
+          {sessionData?.user.image ? (
+            <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
+              <div className="w-10 rounded-full">
+                <Image
+                  width={60}
+                  height={60}
+                  alt="avatar"
+                  src={sessionData?.user.image}
+                />
+              </div>
+            </label>
+          ) : (
+            <TfiMenu className="m-2 cursor-pointer text-xl" tabIndex={0} />
+          )}
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
+          >
+            {menuItems}
+          </ul>
+        </div>
+      </div>
+
+      <div className="hidden flex-none gap-2 md:block">
+        <ul className="menu menu-horizontal px-1">{menuItems}</ul>
+      </div>
     </div>
   );
 }
