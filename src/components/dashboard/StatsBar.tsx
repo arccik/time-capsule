@@ -60,7 +60,7 @@ export default function StatsBar() {
         </div>
       </div>
 
-      {totalOpenCapsules && totalCapsules && (
+      {totalOpenCapsules && totalCapsules ? (
         <div className="stat">
           <div className="stat-figure text-primary">
             <BsPrescription className="text-4xl" />
@@ -71,7 +71,7 @@ export default function StatsBar() {
           <div className="stat-title">Capsules are closed</div>
           <div className="stat-desc text-secondary">Soonest will be open </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

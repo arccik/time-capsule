@@ -25,7 +25,7 @@ export default function PendingCapsules({
   });
   useEffect(() => {
     if (status === "success" && !data?.length) {
-      setActiveTab(3);
+      setActiveTab(2);
     }
   }, [data?.length]);
 

@@ -116,9 +116,6 @@ export default function TimeCapsuleForm() {
           <AiCountdown time={watch("dateTime")} />
           <MakePublicButton register={register("public")} />
           <SendButton disabled={Object.keys(errors).length > 0} />
-          <button type="button" onClick={() => reset()}>
-            clear form
-          </button>
         </form>
       </div>
     </>

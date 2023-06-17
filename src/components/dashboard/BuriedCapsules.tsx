@@ -30,7 +30,7 @@ export default function BuriedCapsules() {
             className="alert m-2 flex w-[95%] flex-row shadow-lg "
           >
             <div>
-              <BsClock />
+              <BsClock className="mr-2 text-2xl" />
               <span>
                 <p className="text-sm font-bold">
                   Will open on {dateFormatter(capsule.dateTime)}
@@ -41,7 +41,7 @@ export default function BuriedCapsules() {
               </span>
             </div>
             <div className="flex-none">
-              <button className="btn-secondary btn">
+              <button className="btn btn-secondary">
                 <BsTrash
                   className="text-2xl"
                   onClick={() => handleDelete(capsule.id)}

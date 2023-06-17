@@ -49,16 +49,16 @@ export default function AgeRange({ date, control, errors }: Props) {
           <Controller
             control={control}
             name="dateTime"
+            defaultValue={date}
             render={({ field }) => (
               <div className="m-3 grid justify-center p-3">
                 <Calendar
-                  defaultValue={Dayjs(date)}
                   disabledDate={(date) =>
                     Dayjs().add(6, "month") > date ||
                     Dayjs().add(10, "year") < date
                   }
                   fullscreen={false}
-                  onChange={(data) => field.onChange(data)}
+                  onChange={(data) => field.onChange(data.toDate())}
                   value={Dayjs(field.value)}
                 />
               </div>
