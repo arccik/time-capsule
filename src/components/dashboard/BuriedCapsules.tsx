@@ -23,7 +23,10 @@ export default function BuriedCapsules() {
   return (
     <>
       <div className="mt-2 w-full p-2">
-        <p className="text-3xl font-bold"> Buried Capsules</p>
+        <p className="text-3xl font-bold">
+          {" "}
+          <b className="text-secondary">Buried</b> Capsules
+        </p>
         {capsuleData.map((capsule) => (
           <div
             key={capsule.id}

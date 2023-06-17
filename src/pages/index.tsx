@@ -4,6 +4,7 @@ import Head from "next/head";
 import TimeCapsuleForm from "~/components/capsule-form/TimeCapsuleForm";
 
 const Home: NextPage = () => {
+
   return (
     <>
       <Head>
