@@ -1,73 +1,64 @@
-import Stripe from "stripe";
-import type { NextApiRequest, NextApiResponse } from "next";
-
+import type { NextApiResponse, NextApiRequest } from "next";
 import { buffer } from "micro";
+import Stripe from "stripe";
 import { env } from "~/env.mjs";
+import { prisma } from "~/server/db";
+export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
+  apiVersion: "2022-11-15",
+});
 
-const stripe = new Stripe(env.STRIPE_SECRET_KEY, { apiVersion: "2022-11-15" });
-
-const webhookSecret = env.STRIPE_WEBHOOK_SECRET;
-
-// Stripe requires the raw body to construct the event.
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const buf = await buffer(req);
-    const signature = req.headers["stripe-signature"];
+    const sig = req.headers["stripe-signature"] as string;
+    let event;
 
     try {
-      if (signature && webhookSecret) {
-        const event = stripe.webhooks.constructEvent(
-          buf.toString(),
-          signature,
-          webhookSecret
-        );
-        switch (event.type) {
-          case "payment_intent.succeeded": {
-            const paymentIntent = event.data.object as Stripe.PaymentIntent;
-            console.log(`PaymentIntent status: ${paymentIntent.status}`);
-            break;
-          }
-          case "payment_intent.payment_failed": {
-            const paymentIntent = event.data.object as Stripe.PaymentIntent;
-            console.log(
-              "❌ Payment failed:",
-              paymentIntent.last_payment_error?.message
-            );
-            break;
-          }
-          case "charge.succeeded": {
-            const charge = event.data.object as Stripe.Charge;
-            console.log(`Charge id: ${charge.id}`);
-            break;
-          }
-          default: {
-            console.warn(`Unhandled event type: ${event.type}`);
-            break;
-          }
-        }
-        // Return a response to acknowledge receipt of the event.
-        res.json({ received: true });
-      }
+      event = stripe.webhooks.constructEvent(
+        buf,
+        sig,
+        env.STRIPE_WEBHOOK_SECRET
+      );
     } catch (err) {
-      // On error, log and return the error message.
-      if (err instanceof Error) {
-        console.log(`❌ Error message: ${err.message}`);
-        res.status(400).send(`Webhook Error: ${err.message}`);
-      }
+      let message = "Unknown Error";
+      if (err instanceof Error) message = err.message;
+      res.status(400).send(`Webhook Error: ${message}`);
       return;
     }
+    switch (event.type) {
+      // case "payment_intent.succeeded":
+      //   const paymentIntentSucceeded = event.data.object as {
+      //     id: string;
+      //     receipt_email: string;
+      //   };
+      //   break;
 
-    // Successfully constructed event.
+      case "checkout.session.completed":
+        const checkoutSessionSucceeded = event.data.object as { id: string };
+        await prisma.capsule.update({
+          where: {
+            paymentId: checkoutSessionSucceeded.id,
+          },
+          data: {
+            paid: true,
+          },
+        });
+        break;
+      default:
+        console.log(`Unhandled event type ${event.type}`);
+        break;
+    }
+    res.json({ received: true });
   } else {
     res.setHeader("Allow", "POST");
     res.status(405).end("Method Not Allowed");
   }
 };
 
-export default webhookHandler;
+export default webhook;

@@ -18,6 +18,11 @@ export const capsuleRouter = createTRPCRouter({
       where: { userId: ctx.session.user.id },
     });
   }),
+  getAllBuried: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.capsule.findMany({
+      where: { userId: ctx.session.user.id, paid: true },
+    });
+  }),
 
   create: protectedProcedure
     .input(createCapsuleSchema)
@@ -83,4 +88,44 @@ export const capsuleRouter = createTRPCRouter({
         ctx.prisma.capsule.count({ where }),
       ]);
     }),
+  getOpenCapsuleByUser: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.capsule.findMany({
+      where: {
+        userId: ctx.session.user.id,
+        opened: true,
+      },
+    });
+  }),
+  getUnpaidCapsules: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.capsule.findMany({
+      where: {
+        userId: ctx.session.user.id,
+        paid: false,
+      },
+    });
+  }),
+  getTotalCapsules: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.capsule.count({
+      where: { userId: ctx.session.user.id },
+    });
+  }),
+  getTotalOpenCapsules: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.capsule.count({
+      where: { userId: ctx.session.user.id, opened: true },
+    });
+  }),
+
+  getTotalPublicCapsules: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.capsule.count({
+      where: { public: true, userId: ctx.session.user.id },
+    });
+  }),
+  getTotalUnpaidCapsules: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.capsule.count({
+      where: {
+        userId: ctx.session.user.id,
+        paid: false,
+      },
+    });
+  }),
 });

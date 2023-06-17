@@ -1,4 +1,4 @@
-import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 import { z } from "zod";
 import Stripe from "stripe";
@@ -15,42 +15,30 @@ export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
 });
 
 export const paymentRouter = createTRPCRouter({
-  isPaidEmail: publicProcedure
-    .input(
-      z.object({
-        email: z.string(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      // const account = await client
-      //   .get({
-      //     TableName: env.TABLE_NAME,
-      //     Key: {
-      //       pk: `email|${input.email}`,
-      //       sk: `email|${input.email}`,
-      //     },
-      //   })
-      //   .promise();
-
-      return {
-        isValid: "staitment" ? true : false,
-      };
-    }),
-  createCheckout: publicProcedure.mutation(() => {
-    return stripe.checkout.sessions.create({
-      mode: "payment",
-      payment_method_types: ["card", "us_bank_account"],
-      line_items: [
-        {
-          price: env.STRIPE_PRICE_ID,
-          quantity: 1,
+  createCheckout: protectedProcedure
+    .input(z.object({ capsuleId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const stripeSession = await stripe.checkout.sessions.create({
+        mode: "payment",
+        payment_method_types: ["card"],
+        line_items: [
+          {
+            price: env.STRIPE_PRICE_ID,
+            quantity: 1,
+          },
+        ],
+        success_url: `${env.NEXTAUTH_URL}/dashboard/?success=true?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${env.NEXTAUTH_URL}/dashboard/?canceled=true`,
+      });
+      await ctx.prisma.capsule.update({
+        where: { id: input.capsuleId },
+        data: {
+          paymentId: stripeSession.id,
         },
-      ],
-      success_url: `${env.NEXTAUTH_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${env.NEXTAUTH_URL}/`,
-    });
-  }),
-  getStripeSession: publicProcedure
+      });
+      return stripeSession;
+    }),
+  getStripeSession: protectedProcedure
     .input(
       z.object({
         sessionId: z.string(),

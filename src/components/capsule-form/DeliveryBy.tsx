@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
@@ -11,6 +11,7 @@ import type {
   UseFormUnregister,
 } from "react-hook-form";
 import { type Capsule } from "~/types/capsule";
+import useLocalStorage from "~/lib/hooks/useLocalStorage";
 
 type ContactMethods = {
   [key: string]: boolean;
@@ -21,23 +22,34 @@ export default function DeliverBy({
   unregister,
   setValue,
   getValue,
-  selected,
   error,
-}: // s
-{
+}: {
   register: UseFormRegister<Capsule>;
   unregister: UseFormUnregister<Capsule>;
   setValue: UseFormSetValue<Capsule>;
   getValue: UseFormGetValues<Capsule>;
-  selected: string[] | undefined;
   error: Merge<FieldError, FieldError | undefined> | undefined;
 }) {
+  const [capsuleInStorage] = useLocalStorage("capsuleData");
   const [state, setState] = useState<ContactMethods>({
-    email: !!selected?.includes("email"),
-    sms: !!selected?.includes("sms"),
-    whatsapp: !!selected?.includes("whatsapp"),
-    call: !!selected?.includes("call"),
+    email: false,
+    sms: false,
+    whatsapp: false,
+    call: false,
   });
+
+  useEffect(() => {
+    if (capsuleInStorage) {
+      setValue("sendingMethod", capsuleInStorage.sendingMethod);
+
+      setState({
+        email: !!capsuleInStorage?.sendingMethod?.includes("email"),
+        sms: !!capsuleInStorage?.sendingMethod?.includes("sms"),
+        whatsapp: !!capsuleInStorage?.sendingMethod?.includes("whatsapp"),
+        call: !!capsuleInStorage?.sendingMethod?.includes("call"),
+      });
+    }
+  }, [capsuleInStorage, setValue]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
@@ -57,7 +69,7 @@ export default function DeliverBy({
     (key) => state[key] === true
   );
 
-  const buttons = Object.entries(state).map(([key, method]) => (
+  const buttons = Object.entries(state).map(([key, value]) => (
     <div className="flex items-center" key={key}>
       <p className="text-sm">{key}</p>
       <label className="swap-rotate swap ">
@@ -65,7 +77,7 @@ export default function DeliverBy({
           type="checkbox"
           onChange={handleChange}
           name={key}
-          checked={method}
+          checked={value}
         />
         <MdCheckBox className="swap-on w-full text-5xl" />
         <MdCheckBoxOutlineBlank className="swap-off w-full text-5xl" />

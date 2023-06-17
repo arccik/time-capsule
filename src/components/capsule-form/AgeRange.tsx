@@ -15,20 +15,14 @@ import { useState } from "react";
 import { Calendar } from "antd";
 
 type Props = {
-  register: UseFormRegister<Capsule>;
+  register?: UseFormRegister<Capsule>;
   date: Date | undefined;
-  setValue: UseFormSetValue<Capsule>;
+  setValue?: UseFormSetValue<Capsule>;
   control: Control<Capsule>;
   errors: FieldError | undefined;
 };
 
-export default function AgeRange({
-  // register,
-  date,
-  // setValue,
-  control,
-  errors,
-}: Props) {
+export default function AgeRange({ date, control, errors }: Props) {
   const [showCalendar, setShowCalendar] = useState(false);
 
   return (
@@ -58,13 +52,14 @@ export default function AgeRange({
             render={({ field }) => (
               <div className="m-3 grid justify-center p-3">
                 <Calendar
-                  defaultValue={Dayjs().add(5, "month")}
+                  defaultValue={Dayjs(date)}
                   disabledDate={(date) =>
                     Dayjs().add(6, "month") > date ||
                     Dayjs().add(10, "year") < date
                   }
                   fullscreen={false}
                   onChange={(data) => field.onChange(data)}
+                  value={Dayjs(field.value)}
                 />
               </div>
             )}
@@ -73,6 +68,7 @@ export default function AgeRange({
           <Controller
             control={control}
             name="dateTime"
+            defaultValue={date}
             render={({ field }) => (
               <section className="mt-5">
                 <div>
@@ -80,6 +76,7 @@ export default function AgeRange({
                     type="range"
                     min="6"
                     max="120"
+                    value={Dayjs(date).diff(Dayjs(), "month")}
                     onChange={(data) => {
                       field.onChange(
                         Dayjs().add(+data.target.value, "month").toDate()

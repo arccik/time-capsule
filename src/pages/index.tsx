@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import ResponseAlert from "~/components/capsule-form/ResponseAlert";
 
 import TimeCapsuleForm from "~/components/capsule-form/TimeCapsuleForm";
 
@@ -23,7 +22,6 @@ const Home: NextPage = () => {
             "linear-gradient(114deg, rgba(20,146,244,1) 0%, rgba(192,0,255,0.552608735380117) 100%)",
         }}
       >
-        <ResponseAlert />
         <TimeCapsuleForm />
       </main>
     </>

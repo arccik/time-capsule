@@ -84,7 +84,7 @@ model Capsule {
     image         String?
     opened        Boolean   @default(false)
     userId        String
-    user          User      @relation(fields: [userId], references: [id])
+    user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt
     openIn        Int?
@@ -92,7 +92,10 @@ model Capsule {
     likes         Like[]
     Comment       Comment[]
     Payment       Payment[]
-    paid          Boolean @default(false)
+    paid          Boolean   @default(false)
+    paymentId     String?
+
+    @@unique([paymentId])
 }
 
 // model SendingMethod {
@@ -105,9 +108,9 @@ model Capsule {
 model Like {
     id        String   @id @default(cuid())
     userId    String
-    user      User     @relation(fields: [userId], references: [id])
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     capsuleId String
-    capsule   Capsule  @relation(fields: [capsuleId], references: [id])
+    capsule   Capsule  @relation(fields: [capsuleId], references: [id], onDelete: Cascade)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
@@ -118,7 +121,7 @@ model Comment {
     body      String
     user      User     @relation(fields: [userId], references: [id])
     capsuleId String
-    capsule   Capsule  @relation(fields: [capsuleId], references: [id])
+    capsule   Capsule  @relation(fields: [capsuleId], references: [id], onDelete: Cascade)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }

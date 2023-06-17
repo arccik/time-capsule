@@ -1,7 +1,7 @@
 import React from "react";
 import Loader from "~/components/layout/Loader";
 import { api } from "~/utils/api";
-import { BsCapsule, BsTrash } from "react-icons/bs";
+import { BsTrash, BsClock } from "react-icons/bs";
 import dateFormatter from "~/lib/dateFormatter";
 
 export default function BuriedCapsules() {
@@ -9,7 +9,7 @@ export default function BuriedCapsules() {
     data: capsuleData,
     status: capsuleStatus,
     refetch,
-  } = api.capsule.getAll.useQuery();
+  } = api.capsule.getAllBuried.useQuery();
   const deleteCapsule = api.capsule.delete.useMutation({
     onSuccess: () => refetch(),
   });
@@ -22,7 +22,7 @@ export default function BuriedCapsules() {
   if (capsuleData.length === 0) return null;
   return (
     <>
-      <div className="m-6">
+      <div className="mt-2 w-full p-2">
         <p className="text-3xl font-bold"> Buried Capsules</p>
         {capsuleData.map((capsule) => (
           <div
@@ -30,9 +30,11 @@ export default function BuriedCapsules() {
             className="alert m-2 flex w-[95%] flex-row shadow-lg "
           >
             <div>
-              <BsCapsule />
+              <BsClock />
               <span>
-                <p>Will be open at {dateFormatter(capsule.dateTime)}</p>
+                <p className="text-sm font-bold">
+                  Will open on {dateFormatter(capsule.dateTime)}
+                </p>
                 <span className="text-xs text-primary-focus">
                   {capsule.public ? "Public" : "Private"}
                 </span>

@@ -11,12 +11,16 @@ const useLocalStorage = (key = "capsuleData") => {
     }
   }, [key]);
 
+  const clear = () => {
+    localStorage.removeItem(key);
+  };
+
   useEffect(() => {
     if (data) {
       localStorage.setItem(key, JSON.stringify(data));
     }
   }, [data, key]);
 
-  return [data, setData] as const;
+  return [data, setData, clear] as const;
 };
 export default useLocalStorage;

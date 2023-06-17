@@ -6,7 +6,7 @@ export const createCapsuleSchema = z
     dateTime: z
       .date()
       .min(
-        new Date(new Date().setMonth(new Date().getMonth() + 6)),
+        new Date(new Date().setMonth(new Date().getMonth() + 5)),
         "Date must be in the future"
       )
       .max(

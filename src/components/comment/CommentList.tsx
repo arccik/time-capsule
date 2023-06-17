@@ -40,15 +40,15 @@ export default function CommentList({ id }: { id: string }) {
   };
 
   return (
-    <section className="mx-auto rounded-md  bg-slate-400  pt-8  dark:shadow-xl lg:py-16">
-      <div className="mx-auto px-4">
+    <section className="mx-auto rounded-md  ">
+      <div className="mx-auto">
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white lg:text-2xl">
+          <h2 className="text-lg font-bold text-white lg:text-2xl">
             Discussion ({capsuleComment?.length})
           </h2>
         </div>
-        <form className="mb-6" onSubmit={handleSubmit}>
-          <div className="mb-4 rounded-lg rounded-t-lg border border-gray-200 bg-white px-4 py-2 dark:border-gray-700 dark:bg-gray-800">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4 rounded-lg rounded-t-lg border border-gray-200  px-4 py-2">
             <label htmlFor="comment" className="sr-only">
               Your comment
             </label>
@@ -57,24 +57,18 @@ export default function CommentList({ id }: { id: string }) {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               rows={6}
-              className="w-full border-0 px-0 text-sm text-gray-900 focus:outline-none focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
+              className="w-full border-0 bg-transparent px-0 text-sm text-gray-900 focus:outline-none focus:ring-0"
               placeholder="Write a comment..."
               required
             ></textarea>
           </div>
-          <button
-            type="submit"
-            className="bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 inline-flex items-center rounded-lg px-4 py-2.5 text-center text-xs font-medium text-white focus:ring-4"
-          >
+          <button type="submit" className="btn btn-ghost text-white">
             Post comment
           </button>
         </form>
         {loading && <Loader />}
         {capsuleComment?.map((comment) => (
-          <article
-            className="mb-6 rounded-lg bg-white p-6 text-base dark:bg-gray-900"
-            key={comment.id}
-          >
+          <article className=" card glass mb-6 p-6 " key={comment.id}>
             <footer className="mb-2 flex items-center justify-between">
               <div className="flex items-center">
                 <p className="mr-3 inline-flex items-center text-sm text-gray-900 dark:text-white">
@@ -89,21 +83,23 @@ export default function CommentList({ id }: { id: string }) {
                   )}
                   {comment.user?.name}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  <time title="February 8th, 2022">Feb. 8, 2022</time>
+                <p className="text-sm text-gray-900 dark:text-gray-400">
+                  <time title="February 8th, 2022">
+                    {comment.createdAt.toDateString()}
+                  </time>
                 </p>
               </div>
               <button
                 id="dropdownComment1Button"
                 data-dropdown-toggle="dropdownComment1"
-                className="inline-flex items-center rounded-lg bg-white p-2 text-center text-sm font-medium text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-red-700 dark:focus:ring-gray-600"
+                className="inline-flex items-center rounded-lg bg-transparent bg-white p-2 text-center text-sm font-medium text-red-400 hover:bg-red-700  hover:text-white  focus:outline-none focus:ring-4 dark:focus:ring-gray-600"
                 type="button"
                 onClick={() => deleteComment.mutate({ id: comment.id })}
               >
                 <RiDeleteBin6Line />
               </button>
             </footer>
-            <p className="text-gray-500 dark:text-gray-400">{comment.body}</p>
+            <p>{comment.body}</p>
           </article>
         ))}
       </div>
