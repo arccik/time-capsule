@@ -32,13 +32,6 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
     switch (event.type) {
-      // case "payment_intent.succeeded":
-      //   const paymentIntentSucceeded = event.data.object as {
-      //     id: string;
-      //     receipt_email: string;
-      //   };
-      //   break;
-
       case "checkout.session.completed":
         const checkoutSessionSucceeded = event.data.object as { id: string };
         await prisma.capsule.update({
