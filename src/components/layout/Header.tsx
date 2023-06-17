@@ -12,13 +12,15 @@ export default function Header() {
     status === "authenticated" ? (
       <>
         <li>
+          <Link href="/" className="text-secondary">
+            Write a Capsule
+          </Link>
+        </li>
+        <li>
           <Link href="/dashboard">Dashboard</Link>
         </li>
         <li>
           <Link href="/open-capsules"> Public Capsules</Link>
-        </li>
-        <li>
-          <Link href="/">Write a Capsule</Link>
         </li>
         <li>
           <Link href="/profile" className="justify-between">
