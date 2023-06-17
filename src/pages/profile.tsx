@@ -25,7 +25,7 @@ export default function Profile() {
             Dear descendants, today is an extraordinary day — a century of
             Soviet power. We warmly congratulate you on this great and glorious
             jubilee. We know our time is interesting, but yours is even more
-            interesting. We are building communism, you're living under
+            interesting. We are building communism, you&apos;re living under
             communism.
           </p>
           <Link href="/dashboard" className="btn-primary btn">
