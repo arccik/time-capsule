@@ -7,8 +7,10 @@ import {
 } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
+// import CredentialsProvider from "next-auth/providers/credentials";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
+// import bycrypt from "bcrypt";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -63,6 +65,37 @@ export const authOptions: NextAuthOptions = {
       },
       from: env.EMAIL_FROM,
     }),
+    // CredentialsProvider({
+    //   name: "credentials",
+    //   credentials: {
+    //     email: { label: "email", type: "text" },
+    //     password: { label: "Password", type: "password" },
+    //     name: { label: "Name", type: "text" },
+    //   },
+    //   async authorize(credentials) {
+    //     if (!credentials?.email || !credentials?.password) {
+    //       throw new Error("Please enter email and password");
+    //     }
+    //     // check to see if user exist
+    //     const user = await prisma.user.findUnique({
+    //       where: { email: credentials.email },
+    //     });
+    //     // if no user was found
+    //     if (!user || !user.password) {
+    //       throw new Error("User not found");
+    //     }
+    //     // check if passwords are mathing
+    //     const passwordMatch = await bycrypt.compare(
+    //       credentials.password,
+    //       user.password
+    //     );
+    //     // if password does not match
+    //     if (!passwordMatch) {
+    //       throw new Error("Password is incorrect");
+    //     }
+    //     return user;
+    //   },
+    // }),
     /**
      * ...add more providers here.
      *
@@ -73,6 +106,11 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+  // secret: env.NEXTAUTH_SECRET,
+  // session: {
+  //   strategy: "jwt",
+  // },
+  // debug: env.NODE_ENV === "development",
 };
 
 /**

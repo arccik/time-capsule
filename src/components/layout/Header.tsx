@@ -1,6 +1,5 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import Loader from "./Loader";
 import Image from "next/image";
 import { TfiMenu } from "react-icons/tfi";
 import HelpDialog from "../capsule-form/HelpDialog";
@@ -28,7 +27,7 @@ export default function Header() {
             <span className="badge">Beta</span>
           </Link>
         </li>
-        <li onClick={() => void signOut()}>
+        <li onClick={() => void signOut({ callbackUrl: "/" })}>
           <a className="text-red-400">Logout</a>
         </li>
       </>
@@ -41,7 +40,7 @@ export default function Header() {
           <Link href="/open-capsules">Public Capsules</Link>
         </li>
         <li>
-          <Link href="/api/auth/signin">Login</Link>
+          <Link href="/auth/login">Login</Link>
         </li>
       </>
     );

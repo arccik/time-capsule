@@ -74,7 +74,6 @@ export default function TimeCapsuleForm() {
     const response = await createCheckout.mutateAsync({
       capsuleId: savedCapsule?.id,
     });
-    console.log("Handle Submit :))) ", { response });
     const stripe = await stripePromise;
 
     if (stripe !== null) {
