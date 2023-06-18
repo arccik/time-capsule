@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import CommentList from "../comment/CommentList";
+import { TfiCommentAlt } from "react-icons/tfi";
 
 export default function CommentBar({ id }: { id: string }) {
   const [showComment, setShowComment] = useState<boolean>(false);
@@ -9,9 +10,9 @@ export default function CommentBar({ id }: { id: string }) {
     <>
       <button
         onClick={() => setShowComment((prev) => !prev)}
-        className="btn-primary btn-xs btn"
+        className="btn-ghost btn-xs btn rounded-full border border-gray-500"
       >
-        Comments
+        <TfiCommentAlt className="mr-2" /> Comments
       </button>
       <AnimatePresence>
         {showComment && (

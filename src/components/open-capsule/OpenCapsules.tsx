@@ -12,6 +12,8 @@ import { FaTrash } from "react-icons/fa";
 export default function OpenCapsules() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState<string | null>(null);
+  const { data: sessionData } = useSession();
+
   const {
     data: capsuleData,
     status,
@@ -28,9 +30,9 @@ export default function OpenCapsules() {
       setLoading(capsule.id);
     },
   });
-  const { data: sessionData } = useSession();
   if (status !== "success") return <Loader />;
   if (!capsuleData?.length) return null;
+
   return (
     <div className="-inner grid grid-flow-row gap-4">
       <h1 className="ml-10 self-center text-xl font-bold text-primary md:text-3xl">
@@ -56,7 +58,7 @@ export default function OpenCapsules() {
               <p className="-mt-3 text-xs text-success-content">
                 Closed - <TimeAgo datetime={capsule.createdAt} />
               </p>
-              <p className="font- max-h-[160px] overflow-hidden whitespace-pre-line text-sm">
+              <p className="m-5  max-h-[160px] overflow-hidden whitespace-pre-line font-mono text-lg">
                 {capsule.message}
               </p>
               <div className="card-actions ">

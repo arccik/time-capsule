@@ -3,10 +3,13 @@ import React from "react";
 import { api } from "~/utils/api";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Loader from "../layout/Loader";
+import { useSession } from "next-auth/react";
 
 export default function CommentList({ id }: { id: string }) {
   const [comment, setComment] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
+  const { status, data: session } = useSession();
+  const isAuth = status === "authenticated";
   const {
     data: capsuleComment,
     status: commentStatus,
@@ -47,25 +50,27 @@ export default function CommentList({ id }: { id: string }) {
             Discussion ({capsuleComment?.length})
           </h2>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4 rounded-lg rounded-t-lg border border-gray-200  px-4 py-2">
-            <label htmlFor="comment" className="sr-only">
-              Your comment
-            </label>
-            <textarea
-              id="comment"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              rows={6}
-              className="w-full border-0 bg-transparent px-0 text-sm text-gray-900 focus:outline-none focus:ring-0"
-              placeholder="Write a comment..."
-              required
-            ></textarea>
-          </div>
-          <button type="submit" className="btn btn-ghost text-white">
-            Post comment
-          </button>
-        </form>
+        {isAuth && (
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4 rounded-lg rounded-t-lg border border-gray-200  px-4 py-2">
+              <label htmlFor="comment" className="sr-only">
+                Your comment
+              </label>
+              <textarea
+                id="comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows={6}
+                className="w-full border-0 bg-transparent px-0 text-sm text-gray-900 focus:outline-none focus:ring-0"
+                placeholder="Write a comment..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" className="btn-ghost btn text-white">
+              Post comment
+            </button>
+          </form>
+        )}
         {loading && <Loader />}
         {capsuleComment?.map((comment) => (
           <article className=" card glass mb-6 p-6 " key={comment.id}>
@@ -89,15 +94,17 @@ export default function CommentList({ id }: { id: string }) {
                   </time>
                 </p>
               </div>
-              <button
-                id="dropdownComment1Button"
-                data-dropdown-toggle="dropdownComment1"
-                className="inline-flex items-center rounded-lg bg-transparent bg-white p-2 text-center text-sm font-medium text-red-400 hover:bg-red-700  hover:text-white  focus:outline-none focus:ring-4 dark:focus:ring-gray-600"
-                type="button"
-                onClick={() => deleteComment.mutate({ id: comment.id })}
-              >
-                <RiDeleteBin6Line />
-              </button>
+              {isAuth && comment.user.id === session?.user.id && (
+                <button
+                  id="dropdownComment1Button"
+                  data-dropdown-toggle="dropdownComment1"
+                  className="inline-flex items-center rounded-lg bg-transparent bg-white p-2 text-center text-sm font-medium text-red-400 hover:bg-red-700  hover:text-white  focus:outline-none focus:ring-4 dark:focus:ring-gray-600"
+                  type="button"
+                  onClick={() => deleteComment.mutate({ id: comment.id })}
+                >
+                  <RiDeleteBin6Line />
+                </button>
+              )}
             </footer>
             <p>{comment.body}</p>
           </article>
