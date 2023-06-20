@@ -7,7 +7,7 @@ export default function HomePage() {
         {/* <span className="mb-5 rounded-lg border border-primary px-4 py-2 text-sm text-gray-400 transition duration-300 ease-in-out">
           <span className="text-blue-600"> Message To The Future</span>
         </span> */}
-        <h1 className="font-display mx-auto max-w-4xl text-5xl font-bold tracking-normal text-gray-300 sm:text-7xl">
+        <h1 className="font-display mx-auto max-w-4xl text-3xl font-bold tracking-normal text-gray-300 md:text-5xl">
           Craft Your
           <span className="relative whitespace-nowrap text-primary">
             <svg
