@@ -8,10 +8,10 @@ export default function Profile() {
 
   return (
     <div className="hero min-h-[600px] bg-base-200 ">
-      <div className="hero-content flex-col lg:flex-row">
+      <div className="hero-content w-2/3 flex-col lg:flex-row">
         {sessionData?.user?.image && (
           <Image
-            className="max-w-sm rounded-lg shadow-2xl"
+            className="mr-4 max-w-sm rounded-lg shadow-2xl"
             width={200}
             height={200}
             src={sessionData.user.image}

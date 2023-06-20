@@ -36,6 +36,7 @@ export const env = createEnv({
     AWS_ACCESS_KEY_ID: z.string(),
     AWS_SECRET_ACCESS_KEY: z.string(),
     AWS_REGION: z.string(),
+    AWS_BUCKET_NAME: z.string(),
 
     // POSTGRES_URL: z.string(),
     // POSTGRES_URL_NON_POOLING: z.string(),
@@ -103,6 +104,7 @@ export const env = createEnv({
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_PRICE_ID: process.env.STRIPE_PRICE_ID,
-    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+    AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME
   },
 });

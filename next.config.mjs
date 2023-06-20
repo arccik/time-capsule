@@ -10,9 +10,6 @@ const config = {
   images: {
     domains: ["lh3.googleusercontent.com"],
   },
-  experimental: {
-    esmExternals: false, // THIS IS THE FLAG THAT MATTERS FOR UPLOADTHING
-  },
 
   /**
    * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config

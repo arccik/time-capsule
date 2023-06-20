@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import DeliverBy from "./DeliveryBy";
 import dateFormatter from "~/lib/dateFormatter";
 import useLocalStorage from "~/lib/hooks/useLocalStorage";
-// import UploadFile from "./UploadFile";
 import SendButton from "./SendButton";
 import MakePublicButton from "./MakePublicButton";
 import MessageArea from "./MessageArea";
@@ -17,6 +16,7 @@ import AgeRange from "./AgeRange";
 import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import useStripe from "~/lib/hooks/useStripe";
+import Attachments from "./Attachments";
 
 export default function TimeCapsuleForm() {
   const { status } = useSession();
@@ -95,10 +95,8 @@ export default function TimeCapsuleForm() {
         >
           <SubjectField register={register("subject")} />
 
-          <div>
-            <MessageArea errors={errors} register={register("message")} />
-            {/* <UploadFile /> */}
-          </div>
+          <MessageArea errors={errors} register={register("message")} />
+          <Attachments />
           <AgeRange
             date={getValues("dateTime")}
             control={control}

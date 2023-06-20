@@ -11,7 +11,7 @@ export default function Header() {
     status === "authenticated" ? (
       <>
         <li>
-          <Link href="/" className="text-secondary">
+          <Link href="/new" className="text-secondary">
             Write a Capsule
           </Link>
         </li>
@@ -34,7 +34,7 @@ export default function Header() {
     ) : (
       <>
         <li>
-          <Link href="/">Write a Capsule</Link>
+          <Link href="/new">Write a Capsule</Link>
         </li>
         <li>
           <Link href="/open-capsules">Public Capsules</Link>
@@ -60,6 +60,7 @@ export default function Header() {
           </div>
         </Link>
       </div>
+      {/* <HelpDialog /> */}
       <HelpDialog />
 
       <div className="flex-none gap-2 md:hidden">

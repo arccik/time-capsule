@@ -9,7 +9,7 @@ export default function Footer() {
       <div>
         <GiTimeTrap className="text-5xl" />
         <p className="font-bold">
-          Time Capsule Industry LTD <br />
+          Time Industry LTD <br />
           <span className="text-secondary">
             Providing reliable virtual time capsules
           </span>

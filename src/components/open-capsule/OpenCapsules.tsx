@@ -36,7 +36,7 @@ export default function OpenCapsules() {
   return (
     <div className="-inner grid grid-flow-row gap-4">
       <h1 className="ml-10 self-center text-xl font-bold text-primary md:text-3xl">
-        Public time capsules<b className="text-secondary"> from the past </b>
+        <b className="text-secondary"> Public </b> time capsules from the past
       </h1>
       {capsuleData[0].map((capsule) => (
         <>

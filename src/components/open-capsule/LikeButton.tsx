@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { api } from "~/utils/api";
-import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import { FaThumbsUp } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 
 export default function LikeButton({ id }: { id: string }) {
@@ -39,10 +39,10 @@ export default function LikeButton({ id }: { id: string }) {
     return (
       <button
         onClick={handleLike}
-        className="btn-secondary btn-xs btn  absolute right-0 top-0"
+        className="btn-secondary btn-xs btn  absolute right-2 top-2"
       >
         {totalLikes && totalLikes > 0 ? totalLikes : null}
-        <FaThumbsDown className="ml-2 mr-2" size={18} color="#fff" />
+        <FaThumbsUp className="ml-2 mr-2" size={18} color="#fff" />
         Liked
       </button>
     );
@@ -52,8 +52,12 @@ export default function LikeButton({ id }: { id: string }) {
       onClick={handleLike}
       className="btn-ghost btn-xs btn  absolute right-2 top-2 text-white"
     >
+      {totalLikes && totalLikes > 1
+        ? totalLikes.toString() + " Likes"
+        : totalLikes && totalLikes > 0
+        ? "like"
+        : null}
       <FaThumbsUp className="ml-2 mr-2" size={18} color="#fff" />{" "}
-      {totalLikes && totalLikes > 0 ? totalLikes.toString() + " Likes" : null}
     </button>
   );
 }

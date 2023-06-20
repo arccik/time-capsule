@@ -5,6 +5,9 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
     years: 0,
     minutes: 0,
     seconds: 0,
+    months: 0,
+    days: 0,
+    hours: 0,
   });
 
   useEffect(() => {
@@ -16,17 +19,17 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
       const totalSeconds = Math.floor((targetDate - currentDate) / 1000);
 
       const years = Math.floor(totalSeconds / (3600 * 24 * 365));
-      //   const months = Math.floor(
-      //     (totalSeconds % (3600 * 24 * 365)) / (3600 * 24 * 30)
-      //   );
-      // const days = Math.floor(
-      //   ((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) / (3600 * 24)
-      // );
-      //   const hours = Math.floor(
-      //     (((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) %
-      //       (3600 * 24)) /
-      //       3600
-      //   );
+      const months = Math.floor(
+        (totalSeconds % (3600 * 24 * 365)) / (3600 * 24 * 30)
+      );
+      const days = Math.floor(
+        ((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) / (3600 * 24)
+      );
+      const hours = Math.floor(
+        (((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) %
+          (3600 * 24)) /
+          3600
+      );
       const minutes = Math.floor(
         ((((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) %
           (3600 * 24)) %
@@ -39,7 +42,7 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
           60
       );
 
-      setCountdown({ years, minutes, seconds });
+      setCountdown({ years, minutes, seconds, months, days, hours });
     };
 
     const countdownInterval = setInterval(calculateCountdown, 1000);
