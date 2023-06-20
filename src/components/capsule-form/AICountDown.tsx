@@ -5,9 +5,6 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
     years: 0,
     minutes: 0,
     seconds: 0,
-    months: 0,
-    days: 0,
-    hours: 0,
   });
 
   useEffect(() => {
@@ -42,7 +39,7 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
           60
       );
 
-      setCountdown({ years, minutes, seconds, months, days, hours });
+      setCountdown({ years, minutes, seconds });
     };
 
     const countdownInterval = setInterval(calculateCountdown, 1000);
