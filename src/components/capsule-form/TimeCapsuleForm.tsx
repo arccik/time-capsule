@@ -39,6 +39,7 @@ export default function TimeCapsuleForm() {
     getValues,
     control,
     reset,
+    clearErrors,
     formState: { errors },
   } = useForm<Capsule>({
     resolver: zodResolver(createCapsuleSchema),
@@ -108,6 +109,7 @@ export default function TimeCapsuleForm() {
             setValue={setValue}
             getValue={getValues}
             error={errors?.sendingMethod}
+            clearErrors={clearErrors}
           />
           <FormErrors errors={errors} />
           <AiCountdown time={watch("dateTime")} />

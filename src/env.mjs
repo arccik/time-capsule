@@ -56,7 +56,8 @@ export const env = createEnv({
     // Stripe for payments
     STRIPE_SECRET_KEY: z.string(),
     STRIPE_PRICE_ID: z.string(),
-    STRIPE_WEBHOOK_SECRET: z.string()
+    STRIPE_WEBHOOK_SECRET: z.string(),
+    CLIENT_URL: z.string()
   },
 
   /**
@@ -105,6 +106,7 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_PRICE_ID: process.env.STRIPE_PRICE_ID,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-    AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME
+    AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
+    CLIENT_URL: process.env.CLIENT_URL,
   },
 });

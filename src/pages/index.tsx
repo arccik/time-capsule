@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <div className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center py-2">
-      <main className="background-gradient mt-20 flex w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-20">
-        {/* <span className="mb-5 rounded-lg border border-primary px-4 py-2 text-sm text-gray-400 transition duration-300 ease-in-out">
+    <main className="background-gradient mt-20 flex w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-20">
+      <div className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center py-2">
+        <span className="mb-5 rounded-lg border border-primary px-4 py-2 text-sm text-gray-400 transition duration-300 ease-in-out">
           <span className="text-blue-600"> Message To The Future</span>
-        </span> */}
+        </span>
         <h1 className="font-display mx-auto max-w-4xl text-3xl font-bold tracking-normal text-gray-300 md:text-5xl">
           Craft Your
           <span className="relative whitespace-nowrap text-primary">
@@ -22,6 +22,7 @@ export default function HomePage() {
           </span>
           Memories!
         </h1>
+
         <h2 className="mx-auto mt-12 max-w-xl text-lg leading-7  text-gray-500 sm:text-gray-400">
           Embrace the power of the Digital Time Capsule, where you can store
           your cherished memories in the form of messages, photos, and audio
@@ -57,7 +58,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="mt-8 sm:mt-0">
+        {/* <div className="mt-8 sm:mt-0">
           <h3 className="mb-1 text-lg font-medium">
             Choose How Your Time Capsule Arrives!
           </h3>
@@ -120,8 +121,8 @@ export default function HomePage() {
               your time capsule to ensure it arrives in the way you prefer.
             </p>
           </div>
-        </div>
-      </main>
-    </div>
+        </div> */}
+      </div>
+    </main>
   );
 }

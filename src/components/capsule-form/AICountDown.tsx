@@ -16,17 +16,17 @@ const AiCountdown = ({ time }: { time: Date | undefined }) => {
       const totalSeconds = Math.floor((targetDate - currentDate) / 1000);
 
       const years = Math.floor(totalSeconds / (3600 * 24 * 365));
-      const months = Math.floor(
-        (totalSeconds % (3600 * 24 * 365)) / (3600 * 24 * 30)
-      );
-      const days = Math.floor(
-        ((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) / (3600 * 24)
-      );
-      const hours = Math.floor(
-        (((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) %
-          (3600 * 24)) /
-          3600
-      );
+      // const months = Math.floor(
+      //   (totalSeconds % (3600 * 24 * 365)) / (3600 * 24 * 30)
+      // );
+      // const days = Math.floor(
+      //   ((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) / (3600 * 24)
+      // );
+      // const hours = Math.floor(
+      //   (((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) %
+      //     (3600 * 24)) /
+      //     3600
+      // );
       const minutes = Math.floor(
         ((((totalSeconds % (3600 * 24 * 365)) % (3600 * 24 * 30)) %
           (3600 * 24)) %

@@ -5,6 +5,7 @@ import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 import type {
   FieldError,
   Merge,
+  UseFormClearErrors,
   UseFormGetValues,
   UseFormRegister,
   UseFormSetValue,
@@ -23,12 +24,14 @@ export default function DeliverBy({
   setValue,
   getValue,
   error,
+  clearErrors,
 }: {
   register: UseFormRegister<Capsule>;
   unregister: UseFormUnregister<Capsule>;
   setValue: UseFormSetValue<Capsule>;
   getValue: UseFormGetValues<Capsule>;
   error: Merge<FieldError, FieldError | undefined> | undefined;
+  clearErrors: UseFormClearErrors<Capsule>;
 }) {
   const [capsuleInStorage] = useLocalStorage("capsuleData");
   const [state, setState] = useState<ContactMethods>({
@@ -52,6 +55,7 @@ export default function DeliverBy({
   }, [capsuleInStorage, setValue]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearErrors("sendingMethod");
     setState({ ...state, [e.target.name]: e.target.checked });
     const savedSendingMethods = getValue("sendingMethod") || [];
     if (!e.target.checked) {
