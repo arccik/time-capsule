@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
+import { GrClose } from "react-icons/gr";
 
 export default function Recorder() {
   const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(
@@ -20,9 +21,13 @@ export default function Recorder() {
     setAudioElement(audio);
   };
 
+  const handleDelete = () => {
+    setAudioElement(null);
+  };
+
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex flex-row justify-center">
         <AudioRecorder
           onRecordingComplete={(blob) => addAudioElement(blob)}
           recorderControls={recorderControls}
@@ -30,10 +35,15 @@ export default function Recorder() {
           // downloadFileExtension="mp3"
           showVisualizer={true}
         />
-        {audioElement && (
-          <audio className="w-full" controls src={audioElement.src} />
-        )}
       </div>
+      {audioElement && (
+        <div className="flex w-full flex-row justify-center">
+          <audio controls src={audioElement.src} />
+          <button className="btn-error btn-circle btn" onClick={handleDelete}>
+            <GrClose />
+          </button>
+        </div>
+      )}
     </>
   );
 }

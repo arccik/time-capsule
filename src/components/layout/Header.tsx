@@ -2,7 +2,7 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { TfiMenu } from "react-icons/tfi";
-import HelpDialog from "../capsule-form/HelpDialog";
+import HelpDialog from "./HelpDialog";
 
 export default function Header() {
   const { data: sessionData, status } = useSession();

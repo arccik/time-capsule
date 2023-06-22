@@ -127,7 +127,7 @@ export default function DeliverBy({
                   </span>
                 </label>
                 <input
-                  {...register(method as "email" | "sms" | "whatsapp" | "call")}
+                  {...register(method as keyof Capsule)}
                   type="text"
                   placeholder={
                     method === "email"

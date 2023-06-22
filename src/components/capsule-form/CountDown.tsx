@@ -1,17 +1,17 @@
-export default function CountDown() {
+import TimeAgo from "timeago-react";
+
+export default function CountDown({ date }: { date: Date }) {
   return (
-    <div className="grid auto-cols-max grid-flow-col justify-center gap-5 text-center">
-      {["years", "months", "days", "hours", "minutes", "seconds"].map((key) => (
-        <div
-          className="rounded-box flex flex-col bg-neutral p-2 text-neutral-content"
-          key={key}
-        >
-          <span className="countdown font-mono text-5xl">
-            <span style={{ "--value": 15 } as React.CSSProperties}></span>
-          </span>
-          {key}
+    <div className=" flex min-h-[6rem] min-w-[18rem] max-w-4xl flex-wrap items-center justify-center gap-2 overflow-x-hidden  bg-cover bg-top p-4">
+      <div className="stats grid justify-items-center shadow drop-shadow-md">
+        <div className="stat">
+          <div className="stat-title">Message will be delivered</div>
+          <div className="stat-value">{date?.toDateString()}</div>
+          <div className="stat-desc">
+            <TimeAgo datetime={date} />
+          </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 }
