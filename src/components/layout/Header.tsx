@@ -10,7 +10,7 @@ export default function Header() {
   const menuItems =
     status === "authenticated" ? (
       <>
-        <li>
+        <li tabIndex={0}>
           <Link href="/new" className="text-secondary">
             Write a Capsule
           </Link>
@@ -81,7 +81,7 @@ export default function Header() {
           )}
           <ul
             tabIndex={0}
-            className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
+            className="dropdown-content menu rounded-box z-[1] mt-5 w-52 bg-base-100 p-2 shadow"
           >
             {menuItems}
           </ul>

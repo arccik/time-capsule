@@ -1,7 +1,7 @@
 import React from "react";
 import Recorder from "./Recoder";
 
-export default function Attachments() {
+export default function VoiceMessage() {
   return (
     <div className="border-3 w-full space-y-4  rounded-lg bg-slate-100 p-6 pt-4 shadow-lg">
       <h2 className="-mb-1 text-xl font-bold">Record your voice</h2>

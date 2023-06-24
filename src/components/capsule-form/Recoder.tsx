@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
-import { GrClose } from "react-icons/gr";
+import { GrTrash } from "react-icons/gr";
 
 export default function Recorder() {
   const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(
@@ -37,10 +37,13 @@ export default function Recorder() {
         />
       </div>
       {audioElement && (
-        <div className="flex w-full flex-row justify-center">
+        <div className="flex w-full flex-row items-center justify-center">
           <audio controls src={audioElement.src} />
-          <button className="btn-error btn-circle btn" onClick={handleDelete}>
-            <GrClose />
+          <button
+            className="btn-error btn-sm btn-circle btn"
+            onClick={handleDelete}
+          >
+            <GrTrash />
           </button>
         </div>
       )}

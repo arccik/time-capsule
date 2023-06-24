@@ -18,7 +18,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     },
     Expires: 60, // seconds
     Conditions: [
-      ["content-length-range", 0, 1048576], // up to 1 MB
+      ["content-length-range", 0, 12582912], // up to 12 MB
     ],
   });
 

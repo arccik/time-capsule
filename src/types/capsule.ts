@@ -24,6 +24,8 @@ export const createCapsuleSchema = z
     call: z.string().optional(),
     address: z.string().optional(),
     openIn: z.number().optional(),
+    image: z.string().optional(),
+    voiceMessage: z.string().optional(),
     likes: z
       .array(
         z.object({ id: z.string(), userId: z.string(), capsuleId: z.string() })

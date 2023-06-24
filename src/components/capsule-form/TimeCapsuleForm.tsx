@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import AiCountdown from "./AICountDown";
 import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import FormErrors from "./FormErrors";
 import { useRouter } from "next/router";
@@ -16,9 +15,9 @@ import AgeRange from "./AgeRange";
 import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import useStripe from "~/lib/hooks/useStripe";
-import Attachments from "./Attachments";
+import VoiceMessage from "./VoiceMessage";
 import CountDown from "./CountDown";
-import Upload from "./Upload";
+import UploadFile from "./UploadFile";
 
 export default function TimeCapsuleForm() {
   const { status } = useSession();
@@ -36,7 +35,6 @@ export default function TimeCapsuleForm() {
     register,
     handleSubmit,
     unregister,
-    watch,
     setValue,
     getValues,
     control,
@@ -99,9 +97,9 @@ export default function TimeCapsuleForm() {
           <SubjectField register={register("subject")} />
 
           <MessageArea errors={errors} register={register("message")} />
-          <Upload />
+          <UploadFile setValue={setValue} />
 
-          <Attachments />
+          <VoiceMessage />
           <AgeRange
             date={getValues("dateTime")}
             control={control}
@@ -118,7 +116,7 @@ export default function TimeCapsuleForm() {
           <FormErrors errors={errors} />
           {/* <AiCountdown time={watch("dateTime")} /> */}
           <MakePublicButton register={register("public")} />
-          <CountDown date={watch("dateTime")} />
+          <CountDown date={getValues("dateTime")} />
           <SendButton disabled={Object.keys(errors).length > 0} />
         </form>
       </div>

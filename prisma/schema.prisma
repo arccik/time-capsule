@@ -83,6 +83,7 @@ model Capsule {
     sms           String?
     call          String?
     image         String?
+    voiceMessage  String?
     opened        Boolean   @default(false)
     userId        String
     user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
