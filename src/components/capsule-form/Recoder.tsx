@@ -37,21 +37,19 @@ export default function Recorder() {
         />
       </div>
       {audioElement && (
-        <div className="flex w-full flex-row items-center justify-center">
-          <audio controls src={audioElement.src} />
-          <button
-            className="btn-error btn-sm btn-circle btn"
-            onClick={handleDelete}
-          >
-            <GrTrash />
-          </button>
-        </div>
+        <>
+          <div className="flex w-full flex-row items-center justify-center">
+            <audio controls src={audioElement.src} />
+            <button
+              className="btn-error btn-sm btn-circle btn"
+              onClick={handleDelete}
+            >
+              <GrTrash />
+            </button>
+          </div>
+        </>
       )}
     </>
   );
 }
 
-/*
-  In case you'd like to update colors of the icons just follow the instruction here:
-  https://github.com/samhirtarif/react-audio-recorder/issues/19#issuecomment-1420248073
-*/

@@ -16,7 +16,10 @@ export const createCapsuleSchema = z
     message: z.string().min(5, "Message must be at least 5 characters"),
     sendingMethod: z.array(z.string()),
     public: z.boolean().optional(),
-    email: z.string().email().optional(),
+    email: z
+      .string()
+      .min(5, { message: "Email is Required." })
+      .email("This is not a valid email."),
     post: z.string().optional(),
     phone: z.string().optional(),
     sms: z.string().optional(),

@@ -3,8 +3,6 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "~/components/auth/Input";
 import { api } from "~/utils/api";
-import { notification } from "antd";
-import { BsEmojiSmile, BsEmojiSmileUpsideDown } from "react-icons/bs";
 import { useState } from "react";
 import Loader from "~/components/layout/Loader";
 import { useRouter } from "next/router";
@@ -22,25 +20,26 @@ type Inputs = z.infer<typeof schema>;
 
 export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
-  const [notify, contextHolder] = notification.useNotification();
+  // const [notify, contextHolder] = notification.useNotification();
   const router = useRouter();
 
   const registerUser = api.user.register.useMutation({
     onError: (err) => {
       setLoading(false);
-      notify.error({
-        message: err.message,
-        icon: <BsEmojiSmileUpsideDown className="text-red-500" />,
-      });
+      console.log("Something went wrong with registration: ", err);
+      // notify.error({
+      //   message: err.message,
+      //   icon: <BsEmojiSmileUpsideDown className="text-red-500" />,
+      // });
     },
     onSuccess: () => {
       setLoading(false);
-      notify.success({
-        message: "User Successfully registered",
-        description:
-          "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
-        icon: <BsEmojiSmile className="text-green-500" />,
-      });
+      // notify.success({
+      //   message: "User Successfully registered",
+      //   description:
+      //     "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+      //   icon: <BsEmojiSmile className="text-green-500" />,
+      // });
       void router.push("/login");
     },
     onMutate: () => setLoading(true),
@@ -63,7 +62,7 @@ export default function SignUpPage() {
     <div className="hero min-h-[calc(100vh-70px)] bg-base-200">
       <div className="hero-content max-w-5xl flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          {contextHolder}
+          {/* {contextHolder} */}
           <h1 className="text-5xl font-bold">Sign Up Now!</h1>
           <h1 className="text-4xl font-bold text-secondary">
             Your Digital Time Capsule

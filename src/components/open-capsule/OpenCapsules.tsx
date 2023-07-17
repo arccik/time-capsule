@@ -35,8 +35,8 @@ export default function OpenCapsules() {
 
   return (
     <div className="-inner grid grid-flow-row gap-4">
-      <h1 className="ml-10 self-center text-xl font-bold text-primary md:text-3xl">
-        <b className="text-secondary"> Public </b> time capsules from the past
+      <h1 className="self-center font-serif text-xl font-bold drop-shadow-sm md:text-3xl">
+        Public Capsules
       </h1>
       {capsuleData[0].map((capsule) => (
         <>
@@ -47,23 +47,23 @@ export default function OpenCapsules() {
                 <div className="card-actions absolute right-4 top-4">
                   <button
                     onClick={() => deleteCapsule.mutate({ id: capsule.id })}
-                    className="btn-secondary btn-square btn-sm btn"
+                    className="btn-secondary btn-sm btn-square btn"
                   >
                     <FaTrash />
                   </button>
                 </div>
               )}
 
-              <h2 className="card-title">{capsule.subject}</h2>
-              <p className="-mt-3 text-xs text-success-content">
+              <h2 className="card-title font-bold">{capsule.subject}</h2>
+              <p className="-mt-3 text-xs text-secondary">
                 Closed - <TimeAgo datetime={capsule.createdAt} />
               </p>
-              <p className="m-5  max-h-[160px] overflow-hidden whitespace-pre-line font-mono text-lg">
+              <p className="max-h-[160px] overflow-hidden whitespace-pre-line text-lg">
                 {capsule.message}
               </p>
-              <div className="card-actions ">
-                <LikeButton id={capsule.id} />
+              <div className="card-actions">
                 <CommentBar id={capsule.id} />
+                <LikeButton id={capsule.id} />
               </div>
             </div>
           </div>

@@ -1,23 +1,22 @@
 import React, { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createCapsuleSchema, type Capsule } from "~/types/capsule";
-import FormErrors from "./FormErrors";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import DeliverBy from "./DeliveryBy";
-import dateFormatter from "~/lib/dateFormatter";
 import useLocalStorage from "~/lib/hooks/useLocalStorage";
 import SendButton from "./SendButton";
 import MakePublicButton from "./MakePublicButton";
 import MessageArea from "./MessageArea";
 import SubjectField from "./SubjectField";
-import AgeRange from "./AgeRange";
-import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import useStripe from "~/lib/hooks/useStripe";
 import VoiceMessage from "./VoiceMessage";
 import CountDown from "./CountDown";
 import UploadFile from "./UploadFile";
+import DeliveryIn from "~/components/capsule-form/DeliveryIn";
+import ContactDetails from "./ContactDetails";
 
 export default function TimeCapsuleForm() {
   const { status } = useSession();
@@ -37,14 +36,14 @@ export default function TimeCapsuleForm() {
     unregister,
     setValue,
     getValues,
-    control,
     reset,
+    watch,
     clearErrors,
     formState: { errors },
   } = useForm<Capsule>({
     resolver: zodResolver(createCapsuleSchema),
     defaultValues: {
-      subject: `A message from ${dateFormatter(new Date())}`,
+      subject: `Subject: A message from ${new Date().toDateString()}`,
     },
   });
 
@@ -60,7 +59,7 @@ export default function TimeCapsuleForm() {
       if (storage?.whatsapp) setValue("whatsapp", storage.whatsapp);
       if (storage?.dateTime) setValue("dateTime", new Date(storage.dateTime));
     }
-  }, [storage, setValue]);
+  }, [storage]);
 
   const onSubmit: SubmitHandler<Capsule> = async (data): Promise<void> => {
     if (createCapsuleSchema.safeParse(data).success === false) {
@@ -86,40 +85,52 @@ export default function TimeCapsuleForm() {
     }
   };
   return (
-    <>
-      <div className="grid-flow-cols card glass mb-10 mt-5 grid w-full grid-cols-1 transition-all duration-150 md:w-[700px]">
+    <section>
+      <div className="card m-2 md:glass md:ml-4 md:mr-4 md:p-4">
         <form
           onSubmit={(event) => {
             void handleSubmit(onSubmit)(event);
           }}
-          className="m-2 space-y-4"
         >
-          <SubjectField register={register("subject")} />
+          <div className="rounded-t-lg border-t p-2 pb-2 md:rounded-none md:border-none">
+            <SubjectField register={register("subject")} />
+          </div>
+          <div className="gap-2 md:grid md:grid-flow-col md:grid-rows-3">
+            <div className="col-span-8 row-span-3">
+              <MessageArea errors={errors?.message} register={register} />
+            </div>
+            <div className="col-span-1 row-span-3">
+              <div className="space-y-2">
+                <DeliveryIn
+                  setValue={setValue}
+                  errors={errors?.dateTime}
+                  clearErrors={clearErrors}
+                  unregister={unregister}
+                />
+                <DeliverBy
+                  unregister={unregister}
+                  setValue={setValue}
+                  getValue={getValues}
+                  errors={errors?.sendingMethod}
+                  clearErrors={clearErrors}
+                />
+                <UploadFile setValue={setValue} unregister={unregister} />
 
-          <MessageArea errors={errors} register={register("message")} />
-          <UploadFile setValue={setValue} />
+                <VoiceMessage />
 
-          <VoiceMessage />
-          <AgeRange
-            date={getValues("dateTime")}
-            control={control}
-            errors={errors?.dateTime}
-          />
-          <DeliverBy
-            register={register}
-            unregister={unregister}
-            setValue={setValue}
-            getValue={getValues}
-            error={errors?.sendingMethod}
-            clearErrors={clearErrors}
-          />
-          <FormErrors errors={errors} />
-          {/* <AiCountdown time={watch("dateTime")} /> */}
-          <MakePublicButton register={register("public")} />
-          <CountDown date={getValues("dateTime")} />
+                <ContactDetails
+                  register={register}
+                  errors={errors?.phone || errors?.email}
+                />
+                <MakePublicButton register={register("public")} />
+              </div>
+            </div>
+          </div>
+          {JSON.stringify(watch())}
           <SendButton disabled={Object.keys(errors).length > 0} />
         </form>
       </div>
-    </>
+      <CountDown date={getValues("dateTime")} />
+    </section>
   );
 }

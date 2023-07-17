@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { api } from "~/utils/api";
 import { FaThumbsUp } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 
 export default function LikeButton({ id }: { id: string }) {
+  const { status: sessionStatus } = useSession();
   const { data: totalLikes, refetch: refetchTotal } =
     api.capsule.totalLikes.useQuery({ id });
 
@@ -17,47 +18,24 @@ export default function LikeButton({ id }: { id: string }) {
     onSuccess: async () => {
       await refetchTotal();
       await refetchLiked();
-      setPressed(true);
     },
   });
-  const { status: sessionStatus } = useSession();
-  const [pressed, setPressed] = useState(false);
-
-  useEffect(() => {
-    setPressed(!!liked);
-  }, [liked]);
-
-  // if (likesStatus === "loading" || checkStatus === "loading") return <Loader />;
 
   const handleLike = () => {
     if (sessionStatus === "unauthenticated") return;
-    setPressed((prev) => !prev);
     proccedLike.mutate({ id });
   };
 
-  if (pressed)
-    return (
-      <button
-        onClick={handleLike}
-        className="btn-secondary btn-xs btn  absolute right-2 top-2"
-      >
-        {totalLikes && totalLikes > 0 ? totalLikes : null}
-        <FaThumbsUp className="ml-2 mr-2" size={18} color="#fff" />
-        Liked
-      </button>
-    );
-
   return (
     <button
+      disabled={sessionStatus === "unauthenticated"}
       onClick={handleLike}
-      className="btn-ghost btn-xs btn  absolute right-2 top-2 text-white"
+      className={
+        "btn-ghost btn-xs btn rounded-full border border-white text-xs text-white disabled:border disabled:border-white disabled:bg-transparent disabled:text-white"
+      }
     >
-      {totalLikes && totalLikes > 1
-        ? totalLikes.toString() + " Likes"
-        : totalLikes && totalLikes > 0
-        ? "like"
-        : null}
-      <FaThumbsUp className="ml-2 mr-2" size={18} color="#fff" />{" "}
+      {totalLikes}
+      <FaThumbsUp className="ml-2" size={12} color="#fff" />
     </button>
   );
 }

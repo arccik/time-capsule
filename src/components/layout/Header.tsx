@@ -11,9 +11,7 @@ export default function Header() {
     status === "authenticated" ? (
       <>
         <li tabIndex={0}>
-          <Link href="/new" className="text-secondary">
-            Write a Capsule
-          </Link>
+          <Link href="/">Home</Link>
         </li>
         <li>
           <Link href="/dashboard">Dashboard</Link>
@@ -34,7 +32,7 @@ export default function Header() {
     ) : (
       <>
         <li>
-          <Link href="/new">Write a Capsule</Link>
+          <Link href="/">Write a Capsule</Link>
         </li>
         <li>
           <Link href="/open-capsules">Public Capsules</Link>
@@ -46,7 +44,7 @@ export default function Header() {
     );
 
   return (
-    <div className="navbar bg-base-100 transition-all duration-500">
+    <div className="navbar  bg-base-100 transition-all duration-500">
       <div className="flex-1">
         <Link
           href="/"

@@ -10,7 +10,7 @@ export default function MakePublicButton({
       <div className="border-3 form-control w-full rounded-lg bg-slate-100 p-1 shadow-lg">
         <label className="label cursor-pointer">
           <span className="label-text">
-            Make your capsule visible when time comes ?
+            Public <span className="text-sm">(Everyone can see it)</span>
           </span>
           <input
             type="checkbox"

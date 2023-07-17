@@ -1,28 +1,25 @@
-import type { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
-import type { Capsule } from "~/types/capsule";
+import type { FormProps } from "~/types/useFormProps";
 
-type Props = {
-  register?: UseFormRegisterReturn<"message">;
-  errors: FieldErrors<Capsule>;
-};
-
-export default function MessageArea({ register, errors }: Props) {
+export default function MessageArea({
+  register,
+  errors,
+}: Pick<FormProps, "register" | "errors">) {
   return (
-    <>
+    <div className="relative h-full w-full">
       <textarea
         id="messageField"
-        {...register}
-        placeholder="Write something that will make you smile"
+        {...register("message")}
+        placeholder="Write something emotional or what will make you smile"
         rows={7}
-        className={`textarea-bordered textarea textarea-lg w-full drop-shadow-lg  focus:border-blue-800  ${
-          errors.message ? "textarea-secondary text-secondary " : ""
+        className={`textarea-bordered textarea textarea-lg h-full w-full drop-shadow-lg  focus:border-blue-800  ${
+          errors?.message ? "textarea-secondary text-secondary " : ""
         }`}
       />
-      {errors.message && (
+      {errors?.message && (
         <p className="text-sx text-right leading-tight text-red-600">
-          {errors.message?.message}
+          {errors?.message}
         </p>
       )}
-    </>
+    </div>
   );
 }

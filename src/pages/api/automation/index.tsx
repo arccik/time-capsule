@@ -30,7 +30,8 @@ export default async function handler(
     },
   });
   if (!readyToBeSentCapsules.length) {
-    return res.status(204);
+    res.status(204);
+    return;
   } else {
     readyToBeSentCapsules.forEach((capsule) => {
       console.log(capsule.id);
@@ -88,5 +89,5 @@ export default async function handler(
     where: { dateTime: { gte: startDate, lt: endDate } },
     data: { opened: true },
   });
-  return res.status(200).json({ sent: true });
+  res.status(200).json({ sent: true });
 }
