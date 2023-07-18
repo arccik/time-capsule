@@ -4,7 +4,7 @@ import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 
 import useLocalStorage from "~/lib/hooks/useLocalStorage";
 import Card from "../layout/Card";
-import type { FormProps } from "~/types/useFormProps";
+import type { FormProps } from "~/types/formProps";
 
 type ContactMethods = {
   [key: string]: boolean;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiFillCalendar, AiFillCloseCircle } from "react-icons/ai";
 import Calendar from "react-calendar";
 import Card from "../layout/Card";
-import type { FormProps } from "~/types/useFormProps";
+import type { FormProps } from "~/types/formProps";
 import "react-calendar/dist/Calendar.css";
 
 export default function DeliveryIn({
@@ -74,7 +74,7 @@ export default function DeliveryIn({
       {date ? (
         <p className="text-center text-2xl font-bold">{date.toDateString()}</p>
       ) : (
-        <div className="mt-2 flex  justify-between">
+        <div className="mt-2  flex flex-wrap md:justify-between">
           <button
             type="button"
             className="btn-primary btn-xs btn"
@@ -91,21 +91,21 @@ export default function DeliveryIn({
           </button>
           <button
             type="button"
-            className="btn-primary btn-xs btn "
+            className="btn-primary btn-xs btn"
             onClick={() => handleButtonClick(36)}
           >
             3 years
           </button>
           <button
             type="button"
-            className="btn-primary btn-xs btn "
+            className="btn-primary btn-xs btn grow md:grow-0"
             onClick={() => handleButtonClick(60)}
           >
             5 years
           </button>
           <button
             type="button"
-            className="btn-primary btn-xs btn"
+            className="btn-primary btn-xs btn grow md:grow-0"
             onClick={() => handleButtonClick(120)}
           >
             10 years

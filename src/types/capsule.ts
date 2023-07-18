@@ -42,12 +42,12 @@ export const createCapsuleSchema = z
   })
   .refine(
     (data) => {
-      const path = ["sms", "email", "call", "whatsapp"];
+      const path = ["phone", "email", "whatsapp"];
       if (path.some((p) => data.sendingMethod.includes(p))) {
         return true;
       }
     },
-    { message: "Required", path: ["sms", "email", "call", "whatsapp"] }
+    { message: "Required", path: ["phone", "email", "whatsapp"] }
   );
 
 export type Capsule = z.infer<typeof createCapsuleSchema>;

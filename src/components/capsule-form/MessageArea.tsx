@@ -1,4 +1,4 @@
-import type { FormProps } from "~/types/useFormProps";
+import type { FormProps } from "~/types/formProps";
 
 export default function MessageArea({
   register,

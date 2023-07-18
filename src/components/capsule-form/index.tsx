@@ -126,7 +126,7 @@ export default function TimeCapsuleForm() {
               </div>
             </div>
           </div>
-          {JSON.stringify(watch())}
+          {/* {JSON.stringify(watch())} */}
           <SendButton disabled={Object.keys(errors).length > 0} />
         </form>
       </div>
