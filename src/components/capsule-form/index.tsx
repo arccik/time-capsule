@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { createCapsuleSchema, type Capsule } from "~/types/capsule";
-import DeliverBy from "./DeliveryBy";
+import DeliverBy from "./DeliverTo";
 import useLocalStorage from "~/lib/hooks/useLocalStorage";
 import SendButton from "./SendButton";
 import MakePublicButton from "./MakePublicButton";

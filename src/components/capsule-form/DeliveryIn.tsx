@@ -17,14 +17,28 @@ export default function DeliveryIn({
   const MIN_DATE = new Date(new Date().setMonth(new Date().getMonth() + 5));
   const MAX_DATE = new Date(new Date().setMonth(new Date().getMonth() + 121));
 
+  const rangeButtons = ["6 months", "1 year", "3 years", "5 years", "10 years"];
+
   const handleDateChange = (value: Date) => {
     setDate(value);
     setValue("dateTime", value);
     clearErrors("dateTime");
   };
-  const handleButtonClick = (value: number) => {
+  const handleButtonClick = (index: number) => {
     const date = new Date();
-    const newDate = new Date(date.setMonth(date.getMonth() + value));
+    const monthsToAdd = !index
+      ? 6
+      : index === 1
+      ? 12
+      : index === 2
+      ? 36
+      : index === 3
+      ? 60
+      : index === 4
+      ? 120
+      : 0;
+
+    const newDate = new Date(date.setMonth(date.getMonth() + monthsToAdd));
     handleDateChange(newDate);
     clearErrors("dateTime");
   };
@@ -48,16 +62,24 @@ export default function DeliveryIn({
           <div className="form-control">
             <label className="label cursor-pointer">
               <span className="label-text mr-4">Calendar</span>
-              <AiFillCalendar
-                className="text-2xl"
-                onClick={() => setShowCalendar((prev) => !prev)}
-              />
+              {showCalendar ? (
+                <AiFillCalendar
+                  className="text-2xl"
+                  onClick={() => setShowCalendar((prev) => !prev)}
+                />
+              ) : (
+                <AiFillCalendar
+                  className="text-2xl"
+                  onClick={() => setShowCalendar((prev) => !prev)}
+                />
+              )}
             </label>
             {showCalendar && (
               <Calendar
                 className="absolute right-10 top-32 z-10"
                 minDate={MIN_DATE}
                 maxDate={MAX_DATE}
+                defaultActiveStartDate={MIN_DATE}
                 value={date}
                 onChange={(e) => {
                   if (e instanceof Date) {
@@ -74,42 +96,17 @@ export default function DeliveryIn({
       {date ? (
         <p className="text-center text-2xl font-bold">{date.toDateString()}</p>
       ) : (
-        <div className="mt-2  flex flex-wrap md:justify-between">
-          <button
-            type="button"
-            className="btn-primary btn-xs btn"
-            onClick={() => handleButtonClick(6)}
-          >
-            6 months
-          </button>
-          <button
-            type="button"
-            className="btn-primary btn-xs btn "
-            onClick={() => handleButtonClick(12)}
-          >
-            1 year
-          </button>
-          <button
-            type="button"
-            className="btn-primary btn-xs btn"
-            onClick={() => handleButtonClick(36)}
-          >
-            3 years
-          </button>
-          <button
-            type="button"
-            className="btn-primary btn-xs btn grow md:grow-0"
-            onClick={() => handleButtonClick(60)}
-          >
-            5 years
-          </button>
-          <button
-            type="button"
-            className="btn-primary btn-xs btn grow md:grow-0"
-            onClick={() => handleButtonClick(120)}
-          >
-            10 years
-          </button>
+        <div className="mt-2  flex flex-wrap gap-4 md:justify-between">
+          {rangeButtons.map((button, index) => (
+            <button
+              key={button}
+              type="button"
+              className="btn-primary btn-xs btn grow md:grow-0"
+              onClick={() => handleButtonClick(index)}
+            >
+              {button}
+            </button>
+          ))}
         </div>
       )}
     </Card>

@@ -1,20 +1,20 @@
-// import { createClient } from "@supabase/supabase-js";
-// import { env } from "~/env.mjs";
+import { api } from "~/utils/api";
 
-// const supabase = createClient(
-//   env.SUPABASE_STORAGE_URL || "",
-//   env.SUPABASE_SERVICE_KEY || ""
-// );
+export default async (file: File | null): Promise<boolean | undefined> => {
+  if (!file) return;
+  const getUrl = api.uploader.getUrl.useMutation();
+  const { url, fields } = await getUrl.mutateAsync({
+    fileName: file.name,
+    fileType: file.type,
+  });
+  const formData = new FormData();
+  Object.entries({ ...fields, file }).forEach(([key, value]) => {
+    formData.append(key, value as string);
+  });
 
-// export default async function uploadImage(
-//   e: React.ChangeEvent<HTMLInputElement>
-// ) {
-//   const file = e.target.files?.[0]!;
-//   const { data, error } = await supabase.storage
-//     .from("time-capsule-files")
-//     .list();
-
-//   // .getBucket("time-capsule-files");
-
-//   console.log("SUPABASE STORAGE :))) ", data, error);
-// }
+  const upload = await fetch(url, {
+    method: "POST",
+    body: formData,
+  });
+  return upload.ok;
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 import { api } from "~/utils/api";
 import { FaThumbsUp } from "react-icons/fa";
 import { useSession } from "next-auth/react";
@@ -11,7 +12,8 @@ export default function LikeButton({ id }: { id: string }) {
   const { data: liked, refetch: refetchLiked } = api.like.checkIfLiked.useQuery(
     {
       id,
-    }
+    },
+    { enabled: sessionStatus === "unauthenticated" }
   );
 
   const proccedLike = api.capsule.like.useMutation({
@@ -30,9 +32,11 @@ export default function LikeButton({ id }: { id: string }) {
     <button
       disabled={sessionStatus === "unauthenticated"}
       onClick={handleLike}
-      className={
-        "btn-ghost btn-xs btn rounded-full border border-white text-xs text-white disabled:border disabled:border-white disabled:bg-transparent disabled:text-white"
-      }
+      className={clsx({
+        "btn-ghost btn-xs btn rounded-full border  text-xs text-white disabled:border disabled:border-white disabled:bg-transparent disabled:text-white":
+          true,
+        "border-red-200": liked,
+      })}
     >
       {totalLikes}
       <FaThumbsUp className="ml-2" size={12} color="#fff" />

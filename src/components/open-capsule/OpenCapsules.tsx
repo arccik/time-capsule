@@ -47,7 +47,7 @@ export default function OpenCapsules() {
                 <div className="card-actions absolute right-4 top-4">
                   <button
                     onClick={() => deleteCapsule.mutate({ id: capsule.id })}
-                    className="btn-secondary btn-sm btn-square btn"
+                    className="btn-secondary btn-square btn-sm btn"
                   >
                     <FaTrash />
                   </button>

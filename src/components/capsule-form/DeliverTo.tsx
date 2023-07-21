@@ -10,7 +10,7 @@ type ContactMethods = {
   [key: string]: boolean;
 };
 
-export default function DeliverBy({
+export default function DeliverTo({
   unregister,
   setValue,
   getValue,
@@ -54,7 +54,7 @@ export default function DeliverBy({
   const buttons = Object.entries(state).map(([key, value]) => (
     <div className="flex items-center" key={key}>
       <p className="text-sm">{key}</p>
-      <label className="swap-rotate swap ">
+      <label className="swap-rotate swap">
         <input
           type="checkbox"
           onChange={handleChange}
