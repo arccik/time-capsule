@@ -76,8 +76,8 @@ export const capsuleRouter = createTRPCRouter({
       };
       return ctx.prisma.$transaction([
         ctx.prisma.capsule.findMany({
-          skip: 5 * (input.page - 1),
-          take: 5,
+          skip: 12 * (input.page - 1),
+          take: 12,
           where,
           orderBy: { dateTime: "desc" },
           include: {

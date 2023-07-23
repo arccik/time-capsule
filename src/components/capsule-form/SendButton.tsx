@@ -18,7 +18,7 @@ export default function SendButton({ disabled }: Props) {
             className="btn-secondary btn w-full"
           >
             Send to the Future
-            <span className="badge-primary badge ml-4">£1</span>
+            <span className="badge-primary badge ml-4 text-base-100">£3</span>
           </button>
         </div>
       ) : (

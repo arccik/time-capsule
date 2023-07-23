@@ -1,7 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
 import CommentList from "../comment/CommentList";
-import { TfiCommentAlt } from "react-icons/tfi";
 
 export default function CommentBar({ id }: { id: string }) {
   return (

@@ -1,8 +1,3 @@
-import { BiMessageAltDetail } from "react-icons/bi";
-import { BsFillCalendarDateFill } from "react-icons/bs";
-import { FaFileAudio, FaPhotoVideo } from "react-icons/fa";
-import { GiFireworkRocket } from "react-icons/gi";
-
 export default function Home() {
   return (
     <main className="grid gap-3">
@@ -124,9 +119,9 @@ export default function Home() {
                   </svg>
                   <blockquote className="relative">
                     <p className="text-lg tracking-tight text-slate-900">
-                      You've done a great job coming up with a clean and usable
-                      customer experience to transcribe audio and video. Well
-                      done!
+                      You&apos;ve done a great job coming up with a clean and
+                      usable customer experience to transcribe audio and video.
+                      Well done!
                     </p>
                   </blockquote>
                   <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
@@ -218,7 +213,7 @@ export default function Home() {
                   </svg>
                   <blockquote className="relative">
                     <p className="text-lg tracking-tight text-slate-900">
-                      I'd definitely pay more for this as your audio
+                      I&apos;d definitely pay more for this as your audio
                       transcription is miles ahead of the rest.
                     </p>
                   </blockquote>

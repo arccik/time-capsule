@@ -2,13 +2,11 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
-import { FaTrash } from "react-icons/fa";
+import { FaQuoteLeft, FaQuoteRight, FaTrash } from "react-icons/fa";
 import TimeAgo from "timeago-react";
 import Loader from "~/components/layout/Loader";
 import CommentBar from "~/components/open-capsule/CommentBar";
 import { api } from "~/utils/api";
-
-type Props = {};
 
 export default function OpenCapsulePage() {
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
@@ -32,7 +30,7 @@ export default function OpenCapsulePage() {
   return (
     <main className="animate-gradient-x bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90% pb-10">
       <button
-        className="btn-ghost btn-xs btn ml-3 mt-10 border border-stone-300"
+        className="btn-ghost btn-xs btn ml-3 mt-10 border border-stone-300 md:ml-10"
         onClick={() => back()}
       >
         <BiArrowBack />
@@ -52,13 +50,14 @@ export default function OpenCapsulePage() {
               </div>
             )}
 
-            <h2 className="card-title font-bold">{data.subject}</h2>
-            <p className="-mt-3 text-xs text-secondary">
+            <h2 className="card-title font-bold md:text-2xl">{data.subject}</h2>
+            <p className="-mt-3 text-sm text-base-200">
               Closed - <TimeAgo datetime={data.createdAt} />
             </p>
-            <p className="max-h-[160px] overflow-hidden whitespace-pre-line text-lg">
-              {data.message}
+            <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg italic">
+              <q>{data.message}</q>
             </p>
+
             <div className="card-actions mt-10">
               <CommentBar id={data.id} />
             </div>

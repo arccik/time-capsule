@@ -9,7 +9,7 @@ type Props =
       type: "like";
       id: string;
       totalLikes: number;
-      refetch: () => void;
+      // refetch: () => void;
     }
   | {
       type: "comment";
@@ -35,20 +35,21 @@ export default function ActionButton(props: Props) {
   const proccedLike = api.capsule.like.useMutation({
     onSuccess: async () => {
       console.log("Page Liked");
+      await refetchLiked();
     },
   });
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (status === "unauthenticated") {
-      router.push("/auth/login");
+      await router.push("/auth/login");
     }
     if (type === "like") {
       proccedLike.mutate({ id: props.id });
-      props.refetch();
-      refetchLiked();
+      // void props.refetch();
+      await refetchLiked();
     }
     if (type === "comment") {
-      router.push(`/message/${props.id}`);
+      await router.push(`/message/${props.id}`);
     }
   };
 
@@ -59,7 +60,7 @@ export default function ActionButton(props: Props) {
           className={clsx("cursor-pointer hover:text-slate-900", {
             "text-red-700 hover:text-red-400": type === "like" && likedByUser,
           })}
-          onClick={handleClick}
+          onClick={void handleClick}
         >
           {type === "comment" ? "💬 Comment" : "♡  Like"}
         </span>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import ActionButton from "./ActionButton";
 import TimeAgo from "timeago-react";
 
+
 type Props = {
   id: string;
   subject: string;
@@ -9,7 +10,7 @@ type Props = {
   message: string;
   totalLikes: number;
   totalComments: number;
-  refetch: () => void;
+  // refetch: () => void;
 };
 
 export default function MessageCard({
@@ -19,15 +20,15 @@ export default function MessageCard({
   message,
   totalLikes,
   totalComments,
-  refetch,
-}: Props) {
+}: // refetch,
+Props) {
   return (
     <li>
       <figure className="glass relative rounded-2xl p-6 shadow-xl shadow-slate-900/10">
         <Link href={`/message/${id}`}>
-          <h1>{subject}</h1>
+          <h1 className="text-sm text-slate-500">{subject}</h1>
           <blockquote className="relative">
-            <p className="truncate text-lg tracking-tight text-slate-900">
+            <p className="mb-5 line-clamp-3 text-lg tracking-tight text-slate-900">
               {message}
             </p>
           </blockquote>
@@ -43,7 +44,7 @@ export default function MessageCard({
                 type="like"
                 id={id}
                 totalLikes={totalLikes}
-                refetch={refetch}
+                // refetch={refetch}
               />
               <ActionButton
                 type="comment"

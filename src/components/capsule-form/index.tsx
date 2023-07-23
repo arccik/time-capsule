@@ -37,7 +37,6 @@ export default function TimeCapsuleForm() {
     setValue,
     getValues,
     reset,
-    watch,
     clearErrors,
     formState: { errors },
   } = useForm<Capsule>({

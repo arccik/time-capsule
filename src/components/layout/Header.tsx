@@ -17,7 +17,7 @@ export default function Header() {
           <Link href="/dashboard">Dashboard</Link>
         </li>
         <li>
-          <Link href="/open-capsules"> Public Capsules</Link>
+          <Link href="/messages"> Public Capsules</Link>
         </li>
         <li>
           <Link href="/profile" className="justify-between">
@@ -35,7 +35,7 @@ export default function Header() {
           <Link href="/">Write a Capsule</Link>
         </li>
         <li>
-          <Link href="/open-capsules">Public Capsules</Link>
+          <Link href="/messages">Public Capsules</Link>
         </li>
         <li>
           <Link href="/auth/login">Login</Link>
