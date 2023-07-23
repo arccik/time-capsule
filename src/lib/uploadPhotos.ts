@@ -1,6 +1,8 @@
 import { api } from "~/utils/api";
 
-export default async (file: File | null): Promise<boolean | undefined> => {
+const uploadPhotos = async (
+  file: File | null
+): Promise<boolean | undefined> => {
   if (!file) return;
   const getUrl = api.uploader.getUrl.useMutation();
   const { url, fields } = await getUrl.mutateAsync({
@@ -18,3 +20,4 @@ export default async (file: File | null): Promise<boolean | undefined> => {
   });
   return upload.ok;
 };
+export default uploadPhotos;

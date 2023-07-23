@@ -14,7 +14,7 @@ export default function SubjectField({ register }: Props) {
       <input
         {...register}
         placeholder="Subject"
-        className="input-bordered w-full select-all rounded-lg bg-transparent p-2 pl-0 font-bold text-base-200  placeholder-base-100 md:text-xl"
+        className="input-bordered w-full select-all rounded-lg bg-transparent p-2 pl-0 font-bold text-base-200  placeholder-base-300 md:text-xl"
         id="subject"
       />
 

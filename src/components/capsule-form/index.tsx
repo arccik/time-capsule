@@ -113,14 +113,14 @@ export default function TimeCapsuleForm() {
                   errors={errors?.sendingMethod}
                   clearErrors={clearErrors}
                 />
-                <UploadFile setValue={setValue} unregister={unregister} />
-
-                <VoiceMessage />
-
                 <ContactDetails
                   register={register}
                   errors={errors?.phone || errors?.email}
                 />
+                <UploadFile setValue={setValue} unregister={unregister} />
+
+                <VoiceMessage />
+
                 <MakePublicButton register={register("public")} />
               </div>
             </div>

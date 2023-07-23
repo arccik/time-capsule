@@ -24,7 +24,6 @@ export default function OpenCapsules() {
   const deleteCapsule = api.capsule.delete.useMutation({
     onSuccess: async () => {
       await refetch();
-      console.log("success");
     },
     onMutate: (capsule) => {
       setLoadingMessage(capsule.id);

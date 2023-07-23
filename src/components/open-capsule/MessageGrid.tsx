@@ -7,13 +7,16 @@ import { scrolltoHash } from "~/lib/scrollToHash";
 
 export default function MessageGrid() {
   const [page, setPage] = useState(1);
-  const { data, status, refetch } = api.capsule.getOpenCapsules.useQuery({
-    page,
-  });
-  console.log("capsule data: ", data);
+  const { data, status, isInitialLoading } =
+    api.capsule.getOpenCapsules.useQuery({
+      page,
+    });
+
   useEffect(() => {
-    status === "success" && scrolltoHash("public-messages");
-  }, [page, status]);
+    status === "success" &&
+      !isInitialLoading &&
+      scrolltoHash("public-messages");
+  }, [status, isInitialLoading]);
 
   if (status !== "success") return <Loader />;
   if (!data?.length) return null;
@@ -38,7 +41,6 @@ export default function MessageGrid() {
             subject={capsule.subject}
             createdAt={capsule.createdAt}
             totalComments={capsule.comments.length}
-            // refetch={refetch}
           />
         ))}
       </ul>

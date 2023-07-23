@@ -10,16 +10,16 @@ export default function MessageArea({
       <textarea
         id="messageField"
         {...register("message")}
-        placeholder="Write something emotional or what will make you smile"
+        placeholder="Write something emotional what will make you smile when you read this message in the future"
         rows={7}
         className={clsx({
-          "textarea-bordered textarea textarea-lg h-full w-full drop-shadow-lg  focus:border-blue-800":
+          "textarea-bordered textarea textarea-lg h-full w-full drop-shadow-lg  focus:border-blue-800 focus:placeholder-transparent":
             true,
-          "textarea-secondary text-secondary": errors?.message,
+          "textarea-error border-2": errors,
         })}
       />
       {errors?.message && (
-        <p className="text-sx text-right leading-tight text-red-600">
+        <p className="-mt-2 text-right text-xs text-red-600">
           {errors?.message}
         </p>
       )}

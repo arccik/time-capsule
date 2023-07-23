@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
-import { FaQuoteLeft, FaQuoteRight, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import TimeAgo from "timeago-react";
 import Loader from "~/components/layout/Loader";
 import CommentBar from "~/components/open-capsule/CommentBar";
@@ -18,7 +18,6 @@ export default function OpenCapsulePage() {
   const deleteCapsule = api.capsule.delete.useMutation({
     onSuccess: async () => {
       await refetch();
-      console.log("success");
     },
     onMutate: (capsule) => {
       setLoadingMessage(capsule.id);

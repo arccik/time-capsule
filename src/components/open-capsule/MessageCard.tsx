@@ -3,6 +3,7 @@ import ActionButton from "./ActionButton";
 import TimeAgo from "timeago-react";
 import { HiLockOpen } from "react-icons/hi2";
 
+
 type Props = {
   id: string;
   subject: string;
@@ -10,7 +11,6 @@ type Props = {
   message: string;
   totalLikes: number;
   totalComments: number;
-  // refetch: () => void;
 };
 
 export default function MessageCard({
@@ -48,12 +48,7 @@ Props) {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <ActionButton
-                type="like"
-                id={id}
-                totalLikes={totalLikes}
-                // refetch={refetch}
-              />
+              <ActionButton type="like" id={id} totalLikes={totalLikes} />
               <ActionButton
                 type="comment"
                 id={id}

@@ -53,7 +53,7 @@ export const createCapsuleSchema = z
         return true;
       }
     },
-    { message: "Required", path: ["phone", "email", "whatsapp"] }
+    { message: "Required", path: ["phone", "email"] }
   );
 
 export type Capsule = z.infer<typeof createCapsuleSchema>;
