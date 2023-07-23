@@ -9,6 +9,9 @@ export default function Pagination({
   totalPages: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
 }) {
+  const handleClick = (buttonIndex: number) => {
+    setCurrentPage(buttonIndex);
+  };
   const pageNumbers = useMemo(
     () =>
       Array.from({ length: totalPages }, (_, i) => i + 1).map((v) => (
@@ -17,8 +20,8 @@ export default function Pagination({
           type="radio"
           name="options"
           data-title={v}
-          className="btn-ghost glass btn-sm btn"
-          onClick={() => setCurrentPage(v)}
+          className="btn-xl btn-ghost glass btn"
+          onClick={() => handleClick(v)}
           defaultChecked={v === currentPage}
         />
       )),
@@ -27,7 +30,7 @@ export default function Pagination({
   if (totalPages === 1) return null;
 
   return (
-    <div className="m-10 flex justify-center">
+    <div className="mb-10 mt-10 flex justify-center">
       <div className="btn-group">{pageNumbers}</div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 import clsx from "clsx";
@@ -40,6 +40,9 @@ export default function ActionButton(props: Props) {
   });
 
   const handleClick = async () => {
+    if (type === "comment") {
+      await router.push(`/message/${props.id}`);
+    }
     if (status === "unauthenticated") {
       await router.push("/auth/login");
     }
@@ -47,9 +50,6 @@ export default function ActionButton(props: Props) {
       proccedLike.mutate({ id: props.id });
       // void props.refetch();
       await refetchLiked();
-    }
-    if (type === "comment") {
-      await router.push(`/message/${props.id}`);
     }
   };
 
@@ -60,7 +60,7 @@ export default function ActionButton(props: Props) {
           className={clsx("cursor-pointer hover:text-slate-900", {
             "text-red-700 hover:text-red-400": type === "like" && likedByUser,
           })}
-          onClick={void handleClick}
+          onClick={handleClick}
         >
           {type === "comment" ? "💬 Comment" : "♡  Like"}
         </span>

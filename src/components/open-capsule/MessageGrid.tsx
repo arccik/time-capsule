@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MessageCard from "./MessageCard";
 import { api } from "~/utils/api";
 import Loader from "../layout/Loader";
 import Pagination from "../layout/Pagination";
+import { scrolltoHash } from "~/lib/scrollToHash";
 
 export default function MessageGrid() {
   const [page, setPage] = useState(1);
   const { data, status, refetch } = api.capsule.getOpenCapsules.useQuery({
     page,
   });
+  console.log("capsule data: ", data);
+  useEffect(() => {
+    status === "success" && scrolltoHash("public-messages");
+  }, [page, status]);
 
   if (status !== "success") return <Loader />;
   if (!data?.length) return null;
   return (
-    <section className="items-center p-2 md:p-10">
+    <section className="items-center p-2 md:p-10" id="public-messages">
       <h1 className="mb-10 mt-10 text-center text-5xl font-bold">
         Public Messages
       </h1>
@@ -37,7 +42,11 @@ export default function MessageGrid() {
           />
         ))}
       </ul>
-      <Pagination currentPage={page} setCurrentPage={setPage} totalPages={10} />
+      <Pagination
+        currentPage={page}
+        setCurrentPage={setPage}
+        totalPages={Math.floor(data[1] / 12 + 1)}
+      />
     </section>
   );
 }

@@ -4,7 +4,6 @@ import Head from "next/head";
 import TimeCapsuleForm from "~/components/capsule-form";
 import Hero from "~/components/capsule-form/Hero";
 import MessageGrid from "~/components/open-capsule/MessageGrid";
-import OpenCapsules from "~/components/open-capsule/OpenCapsules";
 
 const HomePage: NextPage = () => {
   return (

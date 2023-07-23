@@ -30,7 +30,7 @@ export default function OpenCapsulePage() {
   return (
     <main className="animate-gradient-x bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90% pb-10">
       <button
-        className="btn-ghost btn-xs btn ml-3 mt-10 border border-stone-300 md:ml-10"
+        className="btn-ghost btn-xs btn ml-3 mt-10 text-white md:ml-10"
         onClick={() => back()}
       >
         <BiArrowBack />
