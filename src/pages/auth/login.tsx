@@ -15,7 +15,6 @@ type Inputs = z.infer<typeof schema>;
 
 export default function SignUpPage() {
   const { status } = useSession();
-  // const [notify, contextHolder] = notification.useNotification();
   if (status === "authenticated") {
     window.location.href = "/";
   }
@@ -71,11 +70,6 @@ export default function SignUpPage() {
                   error={errors.email}
                   register={register("email")}
                 />
-                {/* <Input
-                  label="Password"
-                  error={errors.password}
-                  register={register("password")}
-                /> */}
 
                 <div className="form-control mt-6">
                   <button type="submit" className="btn-primary btn">

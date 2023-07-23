@@ -90,10 +90,10 @@ model Capsule {
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt
     openIn        Int?
-    subject       String?
+    subject       String
     likes         Like[]
-    Comment       Comment[]
-    Payment       Payment[]
+    comments      Comment[]
+    payment       Payment[]
     paid          Boolean   @default(false)
     paymentId     String?
 

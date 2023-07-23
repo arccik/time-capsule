@@ -35,6 +35,12 @@ export const createCapsuleSchema = z
       )
       .optional()
       .default([]),
+    comments: z
+      .array(
+        z.object({ id: z.string(), userId: z.string(), capsuleId: z.string() })
+      )
+      .optional()
+      .default([]),
     subject: z
       .string()
       .min(5, "Subject must be at least 5 characters")

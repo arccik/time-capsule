@@ -43,15 +43,15 @@ export default function CommentList({ id }: { id: string }) {
   };
 
   return (
-    <section className="mx-auto rounded-md  ">
+    <section className="mx-auto rounded-md">
       <div className="mx-auto">
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-white lg:text-2xl">
-            Discussion ({capsuleComment?.length})
+          <h2 className="text-lg font-bold text-base-200 lg:text-2xl">
+            Comments ({capsuleComment?.length})
           </h2>
         </div>
         {isAuth && (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="mb-10">
             <div className="mb-4 rounded-lg rounded-t-lg border border-gray-200  px-4 py-2">
               <label htmlFor="comment" className="sr-only">
                 Your comment
@@ -61,12 +61,15 @@ export default function CommentList({ id }: { id: string }) {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={6}
-                className="w-full border-0 bg-transparent px-0 text-sm text-gray-900 focus:outline-none focus:ring-0"
+                className="w-full border-0 bg-transparent px-0 text-sm text-gray-900  focus:outline-none focus:ring-0"
                 placeholder="Write a comment..."
                 required
               ></textarea>
             </div>
-            <button type="submit" className="btn-ghost btn text-white">
+            <button
+              type="submit"
+              className="btn-ghost btn border border-stone-300"
+            >
               Post comment
             </button>
           </form>

@@ -5,13 +5,13 @@ import TimeAgo from "timeago-react";
 import LikeButton from "./LikeButton";
 import CommentBar from "./CommentBar";
 import Pagination from "../layout/Pagination";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useSession } from "next-auth/react";
 import { FaTrash } from "react-icons/fa";
 
 export default function OpenCapsules() {
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState<string | null>(null);
+  const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
   const { data: sessionData } = useSession();
 
   const {
@@ -27,7 +27,7 @@ export default function OpenCapsules() {
       console.log("success");
     },
     onMutate: (capsule) => {
-      setLoading(capsule.id);
+      setLoadingMessage(capsule.id);
     },
   });
   if (status !== "success") return <Loader />;
@@ -35,13 +35,13 @@ export default function OpenCapsules() {
 
   return (
     <div className="-inner grid grid-flow-row gap-4">
-      <h1 className="self-center font-serif text-xl font-bold drop-shadow-sm md:text-3xl">
-        Public Capsules
+      <h1 className="mb-10 mt-10 text-center text-5xl font-bold">
+        Public Messages
       </h1>
       {capsuleData[0].map((capsule) => (
-        <>
-          {loading === capsule.id && <Loader />}
-          <div className="card glass" key={capsule.id}>
+        <Fragment key={capsule.id}>
+          {loadingMessage === capsule.id && <Loader />}
+          <div className="card glass">
             <div className="card-body">
               {sessionData?.user?.id === capsule.userId && (
                 <div className="card-actions absolute right-4 top-4">
@@ -67,7 +67,7 @@ export default function OpenCapsules() {
               </div>
             </div>
           </div>
-        </>
+        </Fragment>
       ))}
       <Pagination
         currentPage={page}

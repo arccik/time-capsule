@@ -83,6 +83,7 @@ export const capsuleRouter = createTRPCRouter({
           include: {
             user: true,
             likes: true,
+            comments: true,
           },
         }),
         ctx.prisma.capsule.count({ where }),
