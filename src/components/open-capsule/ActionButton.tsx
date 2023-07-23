@@ -60,7 +60,7 @@ export default function ActionButton(props: Props) {
           className={clsx("cursor-pointer hover:text-slate-900", {
             "text-red-700 hover:text-red-400": type === "like" && likedByUser,
           })}
-          onClick={handleClick}
+          onClick={void handleClick}
         >
           {type === "comment" ? "💬 Comment" : "♡  Like"}
         </span>
