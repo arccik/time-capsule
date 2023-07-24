@@ -40,22 +40,23 @@ export default function ActionButton(props: Props) {
     },
   });
 
-  const handleClick = async () => {
-    if (status !== "authenticated") {
-      await router.push("/auth/login");
-    } else {
-      if (type === "comment") {
-        await router.push(`/message/${props.id}`);
+  const handleClick = () => {
+    if (type === "comment") {
+      void router.push(`/message/${props.id}`);
+      return;
+    }
+    if (status !== "authenticated" && type === "like") {
+      void router.push("/auth/login");
+      return;
+    }
+    if (type === "like") {
+      proccedLike.mutate({ id: props.id });
+      if (likedByUser) {
+        setTotalCount((prev) => prev - 1);
+      } else {
+        setTotalCount((prev) => prev + 1);
       }
-      if (type === "like") {
-        proccedLike.mutate({ id: props.id });
-        if (likedByUser) {
-          setTotalCount((prev) => prev - 1);
-        } else {
-          setTotalCount((prev) => prev + 1);
-        }
-        await refetchLiked();
-      }
+      void refetchLiked();
     }
   };
   return (
@@ -65,7 +66,7 @@ export default function ActionButton(props: Props) {
           className={clsx("cursor-pointer hover:text-slate-900", {
             "text-red-700 hover:text-red-400": type === "like" && likedByUser,
           })}
-          onClick={void handleClick}
+          onClick={handleClick}
         >
           {type === "comment" ? "💬 Comment" : "♡  Like"}
         </span>
