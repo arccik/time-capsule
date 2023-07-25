@@ -1,11 +1,5 @@
 import { useRouter } from "next/router";
-import {
-  useMemo,
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { useMemo, useEffect, useState } from "react";
 import { scrolltoHash } from "~/lib/scrollToHash";
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
@@ -19,8 +13,23 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   };
   useEffect(() => {
     router.query.page = page.toString();
-    router.push(router, undefined, { scroll: false });
+    router
+      .push(
+        {
+          pathname: "/",
+          query: { page },
+        },
+        undefined,
+        { scroll: false }
+      )
+      .catch((e: Error | undefined) => console.error(e?.message));
   }, [page]);
+
+  useEffect(() => {
+    if (router.query.page) {
+      setPage(parseInt(router.query.page as string));
+    }
+  }, [router.query.page]);
 
   const pageNumbers = useMemo(
     () =>

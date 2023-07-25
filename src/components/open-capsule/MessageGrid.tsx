@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import MessageCard from "./MessageCard";
 import Pagination from "../layout/Pagination";
-import { Capsule } from "@prisma/client";
+import { type Capsule } from "@prisma/client";
 
 export default function MessageGrid({
   data,

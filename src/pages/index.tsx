@@ -1,4 +1,4 @@
-import { Capsule, PrismaClient } from "@prisma/client";
+import { type Capsule, PrismaClient } from "@prisma/client";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -30,7 +30,9 @@ export const getServerSideProps = async ({
   });
   const totalMessages = await prisma.capsule.count({ where });
   const totalPages = Math.floor(totalMessages / 12 + 1);
-  const data = openMsg?.map((item) => JSON.parse(JSON.stringify(item)));
+  const data = openMsg?.map<Capsule[]>(
+    (item) => JSON.parse(JSON.stringify(item)) as Capsule[]
+  );
   return { props: { data, totalPages } };
 };
 

@@ -27,7 +27,7 @@ export default function PendingCapsules({
     if (status === "success" && !data?.length) {
       setActiveTab(2);
     }
-  }, [data?.length, status]);
+  }, [status]);
 
   if (status === "loading") return <Loader />;
   if (status === "error") return <div>Error...</div>;
