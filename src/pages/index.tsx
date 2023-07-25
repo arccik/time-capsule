@@ -40,7 +40,6 @@ const HomePage: NextPage<{ data: Capsule[]; totalPages: number }> = ({
   data,
   totalPages,
 }) => {
-  console.log("Home Page : ", data);
   return (
     <>
       <Head>

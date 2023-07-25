@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 
-import useLocalStorage from "~/lib/hooks/useLocalStorage";
+import useLocalStorage from "~/hooks/useLocalStorage";
 import Card from "../layout/Card";
 import type { FormProps } from "~/types/formProps";
 

@@ -11,19 +11,28 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     setPage(buttonIndex);
     scrolltoHash("public-messages");
   };
+
   useEffect(() => {
-    router.query.page = page.toString();
-    router
-      .push(
-        {
-          pathname: "/",
-          query: { page },
-        },
-        undefined,
-        { scroll: false }
-      )
-      .catch((e: Error | undefined) => console.error(e?.message));
+    if (
+      typeof router.query.page === "string" &&
+      parseInt(router.query.page) !== page
+    ) {
+      router
+        .push(
+          {
+            pathname: router.pathname,
+            query: { page },
+          },
+          undefined,
+          { scroll: false }
+        )
+        .then(() => ({
+          success: true,
+        }))
+        .catch((e: Error) => console.error(e.message));
+    }
   }, [page]);
+
 
   useEffect(() => {
     if (router.query.page) {

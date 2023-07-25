@@ -2,7 +2,7 @@ import { MdDeleteForever, MdPayment } from "react-icons/md";
 import { api } from "~/utils/api";
 import Loader from "../layout/Loader";
 import { useEffect, useState } from "react";
-import useStripe from "~/lib/hooks/useStripe";
+import useStripe from "~/hooks/useStripe";
 
 export default function PendingCapsules({
   setActiveTab,
