@@ -2,26 +2,32 @@ import { useRouter } from "next/router";
 import { useMemo, useEffect, useState } from "react";
 import { scrolltoHash } from "~/lib/scrollToHash";
 
-export default function Pagination({ totalPages }: { totalPages: number }) {
-  const [page, setPage] = useState(1);
-
+export default function Pagination({
+  totalPages,
+  currentPage,
+  setCurrentPage,
+}: {
+  totalPages: number;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}) {
   const router = useRouter();
 
   const handleClick = (buttonIndex: number) => {
-    setPage(buttonIndex);
+    setCurrentPage(buttonIndex);
     scrolltoHash("public-messages");
   };
 
   useEffect(() => {
     if (
       typeof router.query.page === "string" &&
-      parseInt(router.query.page) !== page
+      parseInt(router.query.page) !== currentPage
     ) {
       router
         .push(
           {
             pathname: router.pathname,
-            query: { page },
+            query: { currentPage },
           },
           undefined,
           { scroll: false }
@@ -31,12 +37,11 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
         }))
         .catch((e: Error) => console.error(e.message));
     }
-  }, [page]);
-
+  }, [currentPage]);
 
   useEffect(() => {
     if (router.query.page) {
-      setPage(parseInt(router.query.page as string));
+      setCurrentPage(parseInt(router.query.page as string));
     }
   }, [router.query.page]);
 
@@ -44,13 +49,13 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     () =>
       Array.from({ length: totalPages }, (_, i) => i + 1).map((v) => (
         <input
-          key={v + page}
+          key={v + currentPage}
           type="radio"
           name="options"
           data-title={v}
           className="btn-xl btn-ghost glass btn"
           onClick={() => handleClick(v)}
-          defaultChecked={v === page}
+          defaultChecked={v === currentPage}
         />
       )),
     [totalPages]
