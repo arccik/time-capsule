@@ -68,11 +68,7 @@ export default function OpenCapsules() {
           </div>
         </Fragment>
       ))}
-      <Pagination
-        currentPage={page}
-        totalPages={capsuleData[1] / 5}
-        setCurrentPage={setPage}
-      />
+      <Pagination totalPages={capsuleData[1] / 5} />
     </div>
   );
 }
