@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 
-type Props = {};
 
-export default function ScrollToTop({}: Props) {
-  const [showBtn, setShowBtn] = useState<Boolean>(false);
+export default function ScrollToTop() {
+  const [showBtn, setShowBtn] = useState<boolean>(false);
   const handleClick = () => {
     window.scrollTo({
       top: 0,
