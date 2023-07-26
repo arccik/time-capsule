@@ -4,6 +4,7 @@ import Head from "next/head";
 
 import TimeCapsuleForm from "~/components/capsule-form";
 import Hero from "~/components/capsule-form/Hero";
+import ScrollToTop from "~/components/layout/ScrollToTop";
 import MessageGrid from "~/components/open-capsule/MessageGrid";
 
 // export const getStaticProps = async ({
@@ -53,6 +54,7 @@ const HomePage: NextPage = () => {
         <Hero />
         <TimeCapsuleForm />
         <MessageGrid />
+        <ScrollToTop />
       </main>
     </>
   );
