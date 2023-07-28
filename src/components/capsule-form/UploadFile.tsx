@@ -12,9 +12,8 @@ Pick<FormProps, "setValue" | "unregister">) {
   const [show, setShow] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const getUrl = api.uploader.getUrl.useMutation();
-  const uploadPhoto = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): Promise<void> => {
+
+  const uploadPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const { url, fields } = await getUrl.mutateAsync({
@@ -34,6 +33,7 @@ Pick<FormProps, "setValue" | "unregister">) {
     if (upload.ok) {
       setValue("image", env.NEXT_PUBLIC_AWS_S3_BACKET_URL + file.name);
       setFile(file);
+      console.log("Upload successful.");
     } else {
       setFile(null);
       console.error("Upload failed.");
@@ -58,23 +58,25 @@ Pick<FormProps, "setValue" | "unregister">) {
       }
     >
       {file ? (
-        <div className="indicator">
-          <span
-            className="badge-error badge indicator-item cursor-pointer"
-            onClick={() => {
-              setFile(null);
-              // unregister("image");
-            }}
-          >
-            X
-          </span>
-          <Image
-            className="rounded-lg"
-            width={200}
-            height={200}
-            src={URL.createObjectURL(file)}
-            alt="uploading image"
-          />
+        <div className="flex items-center justify-center">
+          <div className="indicator">
+            <span
+              className="badge badge-error indicator-item cursor-pointer"
+              onClick={() => {
+                setFile(null);
+                // unregister("image");
+              }}
+            >
+              X
+            </span>
+            <Image
+              className="rounded-lg"
+              width={200}
+              height={200}
+              src={URL.createObjectURL(file)}
+              alt="uploading image"
+            />
+          </div>
         </div>
       ) : (
         show && (

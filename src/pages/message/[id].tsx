@@ -10,7 +10,7 @@ import { api } from "~/utils/api";
 
 export default function OpenCapsulePage() {
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
-  const { query, push } = useRouter();
+  const { query, back } = useRouter();
   const { data: sessionData } = useSession();
   const { data, status, refetch } = api.capsule.getOne.useQuery({
     id: query.id as string,
@@ -24,23 +24,17 @@ export default function OpenCapsulePage() {
     },
   });
 
-  const handleBackClick = () => {
-    push({ pathname: "/" }, undefined, { scroll: false })
-      .then()
-      .catch((e) => console.error("Something went wrong"));
-  };
-
-  if (status === "error" || !data) return <div>Ops. something went wrong!</div>;
+  if (status === "error") return <div>Ops. something went wrong!</div>;
   return (
     <main className="animate-gradient-x bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90% pb-10">
       <button
         className="btn-ghost btn-xs btn ml-3 mt-10 text-white md:ml-10"
-        onClick={handleBackClick}
+        onClick={() => back()}
       >
         <BiArrowBack />
         Back
       </button>
-      {status === "success" ? (
+      {status === "success" && data ? (
         <div className="relative mx-auto max-w-[800px]">
           <div className="card glass m-2 mt-10 self-center">
             <div className="card-body">

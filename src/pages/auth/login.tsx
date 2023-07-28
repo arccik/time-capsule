@@ -5,6 +5,8 @@ import Input from "~/components/auth/Input";
 // import { notification } from "antd";
 import { FcGoogle } from "react-icons/fc";
 import { signIn, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const schema = z.object({
   email: z.string().min(1, { message: "Email is required" }),
@@ -13,11 +15,20 @@ const schema = z.object({
 
 type Inputs = z.infer<typeof schema>;
 
-export default function SignUpPage() {
+export default function LoginPage() {
+  const [redirectUrl, setRedirectUrl] = useState<string>("/dashboard");
   const { status } = useSession();
+  const router = useRouter();
+
   if (status === "authenticated") {
-    window.location.href = "/";
+    window.location.href = redirectUrl;
   }
+
+  useEffect(() => {
+    if (router.query.callbackUrl) {
+      setRedirectUrl(router.query.callbackUrl as string);
+    }
+  }, [router.query.callbackUrl]);
   const {
     register,
     handleSubmit,
@@ -42,7 +53,10 @@ export default function SignUpPage() {
     //     window.location.href = "/";
     //   }
     // });
-    await signIn("email", { ...data, callbackUrl: "/dashboard" });
+    await signIn("email", {
+      ...data,
+      callbackUrl: redirectUrl,
+    });
   };
 
   return (
@@ -78,7 +92,7 @@ export default function SignUpPage() {
                   <div className="divider">OR</div>
                   <button
                     onClick={() =>
-                      void signIn("google", { callbackUrl: "/dashboard" })
+                      void signIn("google", { callbackUrl: redirectUrl })
                     }
                     type="button"
                     className="btn-ghost btn border border-primary"

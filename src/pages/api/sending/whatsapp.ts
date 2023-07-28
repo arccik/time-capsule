@@ -24,6 +24,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       })
       .then((call) => console.log(call.sid))
       .catch((e) => console.error(e));
-    return res.status(200).json({ message: `Calling to ${number}` });
+    res.status(200).json({ message: `Calling to ${number}` });
   }
 }

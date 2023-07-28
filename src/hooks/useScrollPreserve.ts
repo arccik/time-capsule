@@ -1,31 +1,40 @@
+import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 
-// Hook to preserve scroll position
-const useScrollPreservation = (): number => {
-  const scrollYRef = useRef<number>(0);
+export const useScrollPreserve = () => {
+  const router = useRouter();
+
+  const scrollPositions = useRef<{ [url: string]: number }>({});
+  const isBack = useRef(false);
 
   useEffect(() => {
-    // Save the current scroll position when the component unmounts or changes
-    const saveScrollPosition = () => {
-      scrollYRef.current = window.scrollY;
+    router.beforePopState(() => {
+      isBack.current = true;
+      return true;
+    });
+
+    const onRouteChangeStart = () => {
+      const url = router.pathname;
+      scrollPositions.current[url] = window.scrollY;
     };
 
-    // Restore the scroll position on component mount
-    const restoreScrollPosition = () => {
-      window.scrollTo(0, scrollYRef.current);
+    const onRouteChangeComplete = (url: string) => {
+      if (isBack.current && scrollPositions.current[url]) {
+        window.scroll({
+          top: scrollPositions.current[url],
+          behavior: "auto",
+        });
+      }
+
+      isBack.current = false;
     };
 
-    // Add event listeners to save and restore scroll position
-    window.addEventListener("beforeunload", saveScrollPosition);
-    window.addEventListener("popstate", restoreScrollPosition);
+    router.events.on("routeChangeStart", onRouteChangeStart);
+    router.events.on("routeChangeComplete", onRouteChangeComplete);
 
     return () => {
-      // Clean up the event listeners
-      window.removeEventListener("beforeunload", saveScrollPosition);
-      window.removeEventListener("popstate", restoreScrollPosition);
+      router.events.off("routeChangeStart", onRouteChangeStart);
+      router.events.off("routeChangeComplete", onRouteChangeComplete);
     };
-  }, []);
-  return scrollYRef.current;
+  }, [router]);
 };
-
-export default useScrollPreservation;

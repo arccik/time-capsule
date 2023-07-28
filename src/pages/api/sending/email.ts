@@ -14,7 +14,7 @@ export default async function handler(
       const { email, message } = schema.parse(req.body);
       if ("email" in req.body && "message" in req.body) {
         if (!message || !email) {
-          return res.status(400).json({ message: "Missing message or email" });
+          res.status(400).json({ message: "Missing message or email" });
         }
         const info = await transporter.sendMail({
           from: env.EMAIL_FROM,
@@ -26,12 +26,12 @@ export default async function handler(
         });
 
         if (info.messageId) {
-          return res.status(200).json({ message: "Email sent" });
+          res.status(200).json({ message: "Email sent" });
         }
       }
     } catch (error) {
       console.log("Error Sending emails: ", error);
-      return res.status(500).json({ message: "Error Sending emails" });
+       res.status(500).json({ message: "Error Sending emails" });
     }
   }
 }

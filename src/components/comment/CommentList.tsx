@@ -3,11 +3,13 @@ import React from "react";
 import { api } from "~/utils/api";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Loader from "../layout/Loader";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function CommentList({ id }: { id: string }) {
   const [comment, setComment] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
+  const router = useRouter();
   const { status, data: session } = useSession();
   const isAuth = status === "authenticated";
   const {
@@ -35,6 +37,15 @@ export default function CommentList({ id }: { id: string }) {
 
   if (commentStatus === "loading") return <div>Loading...</div>;
   if (commentStatus === "error") return <div>Error...</div>;
+  if (!isAuth)
+    return (
+      <button
+        className="btn-ghost btn-sm btn text-sm text-white"
+        onClick={() => void signIn(undefined, { callbackUrl: router.asPath })}
+      >
+        Login to comment
+      </button>
+    );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,7 +57,7 @@ export default function CommentList({ id }: { id: string }) {
     <section className="mx-auto rounded-md">
       <div className="mx-auto">
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-base-200 lg:text-2xl">
+          <h2 className="text-lg font-bold text-base-200 lg:text-xl">
             Comments ({capsuleComment?.length})
           </h2>
         </div>
@@ -68,7 +79,7 @@ export default function CommentList({ id }: { id: string }) {
             </div>
             <button
               type="submit"
-              className="btn-ghost btn border border-stone-300"
+              className="btn-ghost btn border border-stone-300 text-stone-200"
             >
               Post comment
             </button>

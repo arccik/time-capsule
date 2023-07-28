@@ -9,7 +9,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { message, number } = zodChecker.parse(req.body);
 
     if (!message || !number) {
-      return res.status(400).json({ message: "Invalid Input" });
+      res.status(400).json({ message: "Invalid Input" });
     }
 
     twilioClient.calls
@@ -20,6 +20,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       })
       .then((call) => console.log(call.sid))
       .catch((e) => console.error(e));
-    return res.status(200).json({ message: `Calling to ${number}` });
+    res.status(200).json({ message: `Calling to ${number}` });
   }
 }

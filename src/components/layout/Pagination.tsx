@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect } from "react";
 import { scrolltoHash } from "~/lib/scrollToHash";
 
 export default function Pagination({

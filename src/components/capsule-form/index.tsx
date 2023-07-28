@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { createCapsuleSchema, type Capsule } from "~/types/capsule";
 import DeliverBy from "./DeliverTo";
@@ -66,7 +66,7 @@ export default function TimeCapsuleForm() {
     }
     if (status !== "authenticated") {
       setCapsuleInStorage(data);
-      void router.push("/api/auth/signin");
+      await signIn(undefined, { callbackUrl: router.asPath });
       return;
     }
     const savedCapsule = await saveCapsule.mutateAsync(data);
@@ -117,9 +117,13 @@ export default function TimeCapsuleForm() {
                   register={register}
                   errors={errors?.phone || errors?.email}
                 />
-                <UploadFile setValue={setValue} unregister={unregister} />
+                {status === "authenticated" && (
+                  <>
+                    <UploadFile setValue={setValue} unregister={unregister} />
 
-                <VoiceMessage />
+                    <VoiceMessage />
+                  </>
+                )}
 
                 <MakePublicButton register={register("public")} />
               </div>

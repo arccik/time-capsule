@@ -12,7 +12,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const { message, number } = smsSchema.parse(req.body);
     if (!number || !message) {
-      return res.status(405).json({ message: "Number or message Missing" });
+      res.status(405).json({ message: "Number or message Missing" });
     }
     twilioClient.messages
       .create({
@@ -22,6 +22,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       })
       .then((call) => console.log(call.sid))
       .catch((e) => console.error(e));
-    return res.status(200).json({ message: `Calling to ${number}` });
+    res.status(200).json({ message: `Calling to ${number}` });
   }
 }
