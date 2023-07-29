@@ -20,7 +20,6 @@ export const createCapsuleSchema = z
       .string()
       .min(5, { message: "Email is Required." })
       .email("This is not a valid email."),
-    post: z.string().optional(),
     phone: z.string().optional(),
     sms: z.string().optional(),
     whatsapp: z.string().optional(),
