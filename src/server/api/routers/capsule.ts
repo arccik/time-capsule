@@ -29,7 +29,6 @@ export const capsuleRouter = createTRPCRouter({
     .mutation(({ ctx, input }) => {
       const capsule = {
         dateTime: input.dateTime,
-        post: input.post,
         phone: input.phone,
         email: input.email,
         sendingMethod: input.sendingMethod,
@@ -38,7 +37,6 @@ export const capsuleRouter = createTRPCRouter({
         userId: ctx.session.user.id,
         sms: input.sms,
         subject: input.subject,
-        openIn: input?.openIn,
       };
       return ctx.prisma.capsule.create({
         data: capsule,
