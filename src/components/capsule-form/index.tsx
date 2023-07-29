@@ -24,6 +24,7 @@ export default function TimeCapsuleForm() {
   const createCheckout = api.payment.createCheckout.useMutation();
   const stripePromise = useStripe();
   const router = useRouter();
+
   const saveCapsule = api.capsule.create.useMutation<Capsule | null>({
     onSuccess: async () => {
       await router.push(`/dashboard`);

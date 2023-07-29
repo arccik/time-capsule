@@ -13,7 +13,7 @@ export default function ScrollToTop() {
   };
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
+      if (window.scrollY > 800) {
         setShowBtn(true);
       } else {
         setShowBtn(false);
@@ -25,9 +25,9 @@ export default function ScrollToTop() {
     <div className="toast">
       <button
         onClick={handleClick}
-        className="btn-outline btn-square btn-sm btn"
+        className="btn-outline btn-square btn-sm btn border-white"
       >
-        <FaArrowUp />
+        <FaArrowUp color="white" />
       </button>
     </div>
   );

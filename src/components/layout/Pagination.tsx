@@ -18,26 +18,26 @@ export default function Pagination({
     scrolltoHash("public-messages");
   };
 
-  useEffect(() => {
-    if (
-      typeof router.query.page === "string" &&
-      parseInt(router.query.page) !== currentPage
-    ) {
-      router
-        .push(
-          {
-            pathname: router.pathname,
-            query: { currentPage },
-          },
-          undefined,
-          { scroll: false }
-        )
-        .then(() => ({
-          success: true,
-        }))
-        .catch((e: Error) => console.error(e.message));
-    }
-  }, [currentPage]);
+  // useEffect(() => {
+  //   if (
+  //     typeof router.query.page === "string" &&
+  //     parseInt(router.query.page) !== currentPage
+  //   ) {
+  //     router
+  //       .push(
+  //         {
+  //           pathname: router.pathname,
+  //           query: { currentPage },
+  //         },
+  //         undefined,
+  //         { scroll: false }
+  //       )
+  //       .then(() => ({
+  //         success: true,
+  //       }))
+  //       .catch((e: Error) => console.error(e.message));
+  //   }
+  // }, [currentPage]);
 
   useEffect(() => {
     if (router.query.page) {

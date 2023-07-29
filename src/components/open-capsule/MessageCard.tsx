@@ -11,6 +11,7 @@ type Props = {
   message: string;
   totalLikes: number;
   totalComments: number;
+  image: string | null;
 };
 
 export default function MessageCard({
@@ -20,12 +21,13 @@ export default function MessageCard({
   message,
   totalLikes,
   totalComments,
+  image,
 }: // refetch,
 Props) {
   return (
     <li>
       <figure className="glass relative rounded-2xl p-6 shadow-xl shadow-slate-900/10">
-        <div className="badge-ghost badge glass badge-sm absolute right-0 top-0 mr-4 mt-4">
+        <div className="badge badge-ghost glass badge-sm absolute right-0 top-0 mr-4 mt-4">
           <p>
             <TimeAgo datetime={createdAt} />
             <HiLockOpen className="float-left mr-2" />
