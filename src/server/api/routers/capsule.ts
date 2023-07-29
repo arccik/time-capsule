@@ -129,4 +129,16 @@ export const capsuleRouter = createTRPCRouter({
       },
     });
   }),
+  openToPublic: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const capsule = await ctx.prisma.capsule.findFirst({
+        where: { id: input.id, public: true },
+        select: { public: true },
+      });
+      return ctx.prisma.capsule.update({
+        where: { id: input.id },
+        data: { public: capsule ? false : true },
+      });
+    }),
 });

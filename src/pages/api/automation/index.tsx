@@ -47,21 +47,21 @@ export default async function handler(
             .then((call) => console.log(call.sid))
             .catch((e) => console.error(e));
         }
-        if (method === "sms" && capsule.sms) {
+        if (method === "sms" && capsule.phone) {
           twilioClient.messages
             .create({
               from: "+447360265035",
-              to: capsule.sms,
+              to: capsule.phone,
               body: capsule.message,
             })
             .then((call) => console.log("[sms sent] id:", call.sid))
             .catch((e) => console.error(e));
         }
-        if (method === "whatsapp" && capsule.whatsapp) {
+        if (method === "whatsapp" && capsule.phone) {
           twilioClient.messages
             .create({
               from: "+447360265035",
-              to: `whatsapp:${capsule.whatsapp}`,
+              to: `whatsapp:${capsule.phone}`,
               body: capsule.message,
             })
             .then((call) => console.log("[whats app sent] id:", call.sid))

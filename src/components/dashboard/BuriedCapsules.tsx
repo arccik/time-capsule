@@ -24,13 +24,12 @@ export default function BuriedCapsules() {
     <>
       <div className="mt-2 w-full p-2">
         <p className="text-3xl font-bold">
-          {" "}
-          <b className="text-secondary">Buried</b> Capsules
+          <b className="text-secondary">Buried</b> Messages
         </p>
         {capsuleData.map((capsule) => (
           <div
             key={capsule.id}
-            className="alert m-2 flex w-[95%] flex-row shadow-lg "
+            className="alert m-2 flex w-[95%] flex-row shadow-lg"
           >
             <div>
               <BsClock className="mr-2 text-2xl" />
@@ -44,7 +43,7 @@ export default function BuriedCapsules() {
               </span>
             </div>
             <div className="flex-none">
-              <button className="btn btn-secondary">
+              <button className="btn-secondary btn">
                 <BsTrash
                   className="text-2xl"
                   onClick={() => handleDelete(capsule.id)}

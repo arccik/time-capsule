@@ -2,17 +2,10 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["jsonProtocol"]
-    // binaryTargets = ["native", "rhel-openssl-1.0.x"] // for AWS Lambda
+    provider = "prisma-client-js"
 }
 
 datasource db {
-    // provider = "sqlite"
-    // // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // provider = "postgresql"
-    // url      = env("DATABASE_URL")
-
     // for Vercel database 
     provider          = "postgresql"
     url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
@@ -78,14 +71,11 @@ model Capsule {
     public        Boolean   @default(false)
     email         String?
     phone         String?
-    post          String?
-    whatsapp      String?
-    sms           String?
-    call          String?
     image         String?
     voiceMessage  String?
     opened        Boolean   @default(false)
     openedAt      DateTime?
+    call          String?
     userId        String
     user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
     createdAt     DateTime  @default(now())
@@ -100,13 +90,6 @@ model Capsule {
 
     @@unique([paymentId])
 }
-
-// model SendingMethod {
-//     id        String   @id @default(uuid())
-//     name      String
-//     Capsule   Capsule? @relation(fields: [capsuleId], references: [id])
-//     capsuleId String?
-// }
 
 model Like {
     id        String   @id @default(cuid())
