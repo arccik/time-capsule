@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 import Modal from "../layout/Modal";
 import dateFormatter from "~/lib/dateFormatter";
-import { api } from "~/utils/api";
 
 type Props = {
   opened: Date;
@@ -25,8 +24,6 @@ export default function OpenMessage({
 }: Props) {
   const [expand, setExpand] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-
-  const makePublic = api.capsule.openToPublic.useMutation();
 
   const handleDelete = () => {
     setIsDeleteClicked(false);

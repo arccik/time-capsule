@@ -11,7 +11,7 @@ export default function Pagination({
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  const { query, push, pathname } = useRouter();
+  const { push, pathname } = useRouter();
 
   const handleClick = (buttonIndex: number) => {
     setCurrentPage(buttonIndex);
@@ -19,7 +19,7 @@ export default function Pagination({
   };
 
   useEffect(() => {
-    push(
+    void push(
       {
         pathname: pathname,
         query: { page: currentPage },
