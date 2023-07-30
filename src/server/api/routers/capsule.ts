@@ -103,6 +103,7 @@ export const capsuleRouter = createTRPCRouter({
       },
     });
   }),
+
   getTotalCapsules: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.capsule.count({
       where: { userId: ctx.session.user.id },

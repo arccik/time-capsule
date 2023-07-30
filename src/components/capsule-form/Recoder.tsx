@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
-import { GrTrash, GrAdd } from "react-icons/gr";
+import { GrTrash, GrAdd, GrClose } from "react-icons/gr";
 import { IoCloudDone } from "react-icons/io5";
 import { api } from "~/utils/api";
 
@@ -10,7 +10,7 @@ export default function Recorder() {
     null
   );
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
-  const [uploadSuccess, setUploadSuccess] = useState(true);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
   const getUploaderURL = api.uploader.getUrl.useMutation();
   const recorderControls = useAudioRecorder(
     {
@@ -57,11 +57,11 @@ export default function Recorder() {
       <div className="flex items-center justify-center">
         <div className="indicator">
           <span
-            className="badge badge-error indicator-item cursor-pointer"
+            className="indicator-item cursor-pointer hover:badge-error hover:badge"
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={handleCancelClic}
           >
-            X
+            <GrClose />
           </span>
           <IoCloudDone size={50} color="green" />
         </div>

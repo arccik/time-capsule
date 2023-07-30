@@ -41,7 +41,10 @@ export default {
           },
         },
       },
-
+      transitionProperty: {
+        height: "height",
+        spacing: "margin, padding",
+      },
     },
   },
   plugins: [require("daisyui"), require("@tailwindcss/typography")],

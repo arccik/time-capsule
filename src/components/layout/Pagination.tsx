@@ -1,5 +1,4 @@
-import { useRouter } from "next/router";
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import { scrolltoHash } from "~/lib/scrollToHash";
 
 export default function Pagination({
@@ -11,23 +10,23 @@ export default function Pagination({
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  const { push, pathname } = useRouter();
+  // const { push, pathname } = useRouter();
 
   const handleClick = (buttonIndex: number) => {
     setCurrentPage(buttonIndex);
     scrolltoHash("public-messages");
   };
 
-  useEffect(() => {
-    void push(
-      {
-        pathname: pathname,
-        query: { page: currentPage },
-      },
-      undefined,
-      { scroll: false }
-    );
-  }, [currentPage]);
+  // useEffect(() => {
+  //   void push(
+  //     {
+  //       pathname: pathname,
+  //       query: { page: currentPage },
+  //     },
+  //     undefined,
+  //     { scroll: false }
+  //   );
+  // }, [currentPage]);
 
   const pageNumbers = useMemo(
     () =>

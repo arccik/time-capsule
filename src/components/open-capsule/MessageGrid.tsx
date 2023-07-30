@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import MessageCard from "./MessageCard";
 import { api } from "~/utils/api";
 import Loader from "../layout/Loader";
 import Pagination from "../layout/Pagination";
-import { scrolltoHash } from "~/lib/scrollToHash";
 
 export default function MessageGrid() {
   const [page, setPage] = useState(1);

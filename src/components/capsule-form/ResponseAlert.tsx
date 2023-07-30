@@ -2,11 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { GrFormClose } from "react-icons/gr";
 
-export default function ResponseAlert({
-  setActiveTab,
-}: {
-  setActiveTab: React.Dispatch<React.SetStateAction<number>>;
-}) {
+export default function ResponseAlert() {
   const [show, setShow] = useState(true);
   const [response, setResponse] = useState<{
     success: boolean;
@@ -23,7 +19,6 @@ export default function ResponseAlert({
         title: "Success!",
         message: "Order placed! You will receive an email confirmation.",
       });
-      setActiveTab(2);
     }
     if (query.get("canceled")) {
       setResponse({
@@ -32,7 +27,7 @@ export default function ResponseAlert({
         message: "You can come back and complete payment at any time",
       });
     }
-  }, [setActiveTab]);
+  }, []);
 
   const handleShow = () => {
     setShow(false);
@@ -54,7 +49,7 @@ export default function ResponseAlert({
           <div className="flex-1 justify-between">
             <h3 className="font-bold">{response.title}</h3>
             <div className="text-xs">{response.message}</div>
-            <button onClick={handleShow} className="btn btn-ghost btn-circle">
+            <button onClick={handleShow} className="btn-ghost btn-circle btn">
               <GrFormClose />
             </button>
           </div>

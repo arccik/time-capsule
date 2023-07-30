@@ -35,7 +35,7 @@ export default function CommentList({ id }: { id: string }) {
       console.error("Could not delete your comment, try again", error),
   });
 
-  if (commentStatus === "loading") return <div>Loading...</div>;
+  if (commentStatus === "loading") return <Loader />;
   if (commentStatus === "error") return <div>Error...</div>;
   if (!isAuth)
     return (

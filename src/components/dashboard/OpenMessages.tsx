@@ -1,5 +1,6 @@
 import { api } from "~/utils/api";
 import OpenMessage from "./OpenMessage";
+import Loader from "../layout/Loader";
 export default function OpenMessages() {
   const { data, status, refetch } = api.capsule.getOpenCapsuleByUser.useQuery();
   const triggerOpenToPublic = api.capsule.openToPublic.useMutation();
@@ -11,8 +12,11 @@ export default function OpenMessages() {
       .catch((e) => console.log(e));
   };
 
-  if (status === "loading") return <div>Loading...</div>;
-  if (status === "error") return <div>Error</div>;
+  if (status === "loading") return <Loader />;
+  if (status === "error")
+    return (
+      <div className="h-20 w-20 text-red-500">Ops. something went wrong</div>
+    );
   if (!data?.length) return null;
   return (
     <div className="mt-2 w-full p-2">

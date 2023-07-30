@@ -23,7 +23,8 @@
 //         id: capsule.id,
 //       },
 //       data: {
-//         dateTime: randomDate(new Date(2013, 0, 1), new Date(2023, 1, 1)),
+//         // createdAt: randomDate(new Date(2013, 0, 1), new Date(2023, 1, 1)),
+//         createdAt: capsule.dateTime,
 //       },
 //     });
 //   });

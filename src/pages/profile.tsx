@@ -1,10 +1,11 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import Loader from "~/components/layout/Loader";
 
 export default function Profile() {
   const { data: sessionData, status } = useSession();
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading") return <Loader />;
 
   return (
     <div className="hero min-h-[600px] bg-base-200 ">

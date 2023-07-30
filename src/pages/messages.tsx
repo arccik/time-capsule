@@ -1,5 +1,4 @@
 import MessageGrid from "~/components/open-capsule/MessageGrid";
-import { type Capsule, PrismaClient } from "@prisma/client";
 
 export default function OpenCapsulesPage() {
   return (

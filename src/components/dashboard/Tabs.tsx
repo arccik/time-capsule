@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 
 type Props = {
@@ -6,32 +7,18 @@ type Props = {
 };
 
 export default function Tabs({ setActiveTab, activeTab }: Props) {
-  return (
-    <div className="tabs w-full">
-      <button
-        className={"tab-lifted tab " + (activeTab === 1 ? "tab-active" : "")}
-        onClick={() => setActiveTab(1)}
-      >
-        Pending
-      </button>
-      <button
-        className={"tab-lifted tab  " + (activeTab === 2 ? "tab-active" : "")}
-        onClick={() => setActiveTab(2)}
-      >
-        Dashboard
-      </button>
-      <button
-        className={"tab-lifted tab " + (activeTab === 3 ? "tab-active" : "")}
-        onClick={() => setActiveTab(3)}
-      >
-        Closed
-      </button>
-      <button
-        className={"tab-lifted tab " + (activeTab === 4 ? "tab-active" : "")}
-        onClick={() => setActiveTab(4)}
-      >
-        Opened
-      </button>
-    </div>
-  );
+  const tabsTitle = ["Pending", "Dashboard", "Closed", "Opened"];
+
+  const tabs = tabsTitle.map((tab, index) => (
+    <button
+      key={tab}
+      className={clsx("tab-lifted tab", {
+        "tab-active": activeTab === index,
+      })}
+      onClick={() => setActiveTab(index)}
+    >
+      {tab}
+    </button>
+  ));
+  return tabs;
 }

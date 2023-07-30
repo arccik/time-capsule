@@ -1,14 +1,10 @@
 import { MdDeleteForever, MdPayment } from "react-icons/md";
 import { api } from "~/utils/api";
 import Loader from "../layout/Loader";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useStripe from "~/hooks/useStripe";
 
-export default function PendingCapsules({
-  setActiveTab,
-}: {
-  setActiveTab: React.Dispatch<React.SetStateAction<number>>;
-}) {
+export default function PendingCapsules() {
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const createCheckout = api.payment.createCheckout.useMutation({
     onMutate: (capsule) => setLoadingId(capsule.capsuleId),
@@ -23,11 +19,6 @@ export default function PendingCapsules({
       await refetch();
     },
   });
-  useEffect(() => {
-    if (status === "success" && !data?.length) {
-      setActiveTab(2);
-    }
-  }, [status, data?.length]);
 
   if (status === "loading") return <Loader />;
   if (status === "error") return <div>Error...</div>;
@@ -81,12 +72,12 @@ export default function PendingCapsules({
               <div className="btn-group btn-group-horizontal">
                 <button
                   onClick={() => void handlePayment(capsule.id)}
-                  className="btn btn-primary  btn-xs  text-xs"
+                  className="btn-primary btn-xs  btn  text-xs"
                 >
                   Pay <MdPayment className="ml-1 text-xl" />
                 </button>
                 <button
-                  className="btn btn-secondary btn-xs  text-xs"
+                  className="btn-secondary btn-xs btn  text-xs"
                   onClick={() => handleDelete(capsule.id)}
                 >
                   Delete <MdDeleteForever className="ml-1 text-xl" />
