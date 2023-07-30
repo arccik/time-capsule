@@ -55,7 +55,7 @@ export default function OpenCapsulePage() {
               <p className="-mt-3 text-sm text-base-200">
                 Closed - <TimeAgo datetime={data.createdAt} />
               </p>
-              <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg italic">
+              <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold">
                 <q>{data.message}</q>
               </p>
 
