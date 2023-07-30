@@ -134,7 +134,7 @@ export default function TimeCapsuleForm() {
           <SendButton disabled={Object.keys(errors).length > 0} />
         </form>
       </div>
-      {status === "authenticated" && <CountDown date={getValues("dateTime")} />}
+      {/* {status === "authenticated" && <CountDown date={getValues("dateTime")} />} */}
     </section>
   );
 }

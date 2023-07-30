@@ -20,7 +20,7 @@ export default function MessageGrid() {
         Public Messages
       </h1>
       <p className="-mt-10 text-center text-base-300">
-        Here is going to be some nice slogan
+        Connecting Hearts, Inspiring Minds
       </p>
       <ul
         role="list"
