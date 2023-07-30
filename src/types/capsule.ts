@@ -25,7 +25,6 @@ export const createCapsuleSchema = z
     whatsapp: z.string().optional(),
     call: z.string().optional(),
     address: z.string().optional(),
-    openIn: z.number().optional(),
     image: z.string().optional(),
     voiceMessage: z.string().optional(),
     likes: z

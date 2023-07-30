@@ -11,39 +11,23 @@ export default function Pagination({
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  const router = useRouter();
+  const { query, push, pathname } = useRouter();
 
   const handleClick = (buttonIndex: number) => {
     setCurrentPage(buttonIndex);
     scrolltoHash("public-messages");
   };
 
-  // useEffect(() => {
-  //   if (
-  //     typeof router.query.page === "string" &&
-  //     parseInt(router.query.page) !== currentPage
-  //   ) {
-  //     router
-  //       .push(
-  //         {
-  //           pathname: router.pathname,
-  //           query: { currentPage },
-  //         },
-  //         undefined,
-  //         { scroll: false }
-  //       )
-  //       .then(() => ({
-  //         success: true,
-  //       }))
-  //       .catch((e: Error) => console.error(e.message));
-  //   }
-  // }, [currentPage]);
-
   useEffect(() => {
-    if (router.query.page) {
-      setCurrentPage(parseInt(router.query.page as string));
-    }
-  }, [router.query.page]);
+    push(
+      {
+        pathname: pathname,
+        query: { page: currentPage },
+      },
+      undefined,
+      { scroll: false }
+    );
+  }, [currentPage]);
 
   const pageNumbers = useMemo(
     () =>

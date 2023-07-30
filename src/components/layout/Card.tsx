@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { FieldError, Merge } from "react-hook-form";
 
 export default function Card({
@@ -16,13 +17,20 @@ export default function Card({
   return (
     <>
       <div
-        className={`border-3 w-full space-y-4 rounded-lg bg-slate-100 p-6 pt-4 shadow-lg  ${
-          errors ? "mb-2 border-2 border-red-600" : ""
-        }`}
+        className={clsx(
+          "border-3 w-full space-y-4 rounded-lg bg-slate-100 p-6 pt-4 shadow-lg ",
+          {
+            "mb-2 border-2 border-red-600": errors,
+          }
+        )}
       >
         <div className="flex justify-between">
           <div>
-            <p className={`font-bold ${errors ? "text-red-600" : ""}`}>
+            <p
+              className={clsx("font-bold", {
+                "text-red-600": errors,
+              })}
+            >
               {title}
             </p>
             <span className="text-xs text-primary">{subtitle}</span>
