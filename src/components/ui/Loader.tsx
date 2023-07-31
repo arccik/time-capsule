@@ -1,9 +1,22 @@
-export default function Loader() {
+import clsx from "clsx";
+import { CSSProperties } from "react";
+
+export default function Loader({
+  fullScreen,
+  ...rest
+}: {
+  fullScreen?: boolean;
+}) {
   return (
-    <div role="status" className="m-10 flex h-auto items-center justify-center">
+    <div
+      role="status"
+      className={clsx("m-10 flex h-auto  items-center justify-center", {
+        "h-screen": fullScreen,
+      })}
+    >
       <svg
         aria-hidden="true"
-        className="mr-2 inline h-8 w-8 animate-spin fill-purple-600 text-gray-200 dark:text-gray-300"
+        className="mr-2 inline h-8 w-8 animate-spin fill-green-600 text-gray-200 dark:text-gray-300"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

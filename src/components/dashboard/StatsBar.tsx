@@ -1,6 +1,6 @@
 import React from "react";
 import { api } from "~/utils/api";
-import Loader from "../layout/Loader";
+import Loader from "../ui/Loader";
 import { BsCapsulePill, BsHeart, BsPrescription } from "react-icons/bs";
 import { SlEnvelopeOpen } from "react-icons/sl";
 

@@ -1,5 +1,5 @@
 import type { FormProps } from "~/types/formProps";
-import Card from "../layout/Card";
+import Card from "../ui/Card";
 
 export default function ContactDetails({
   register,

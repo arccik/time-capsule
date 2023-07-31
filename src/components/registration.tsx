@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "~/components/auth/Input";
 import { api } from "~/utils/api";
 import { useState } from "react";
-import Loader from "~/components/layout/Loader";
+import Loader from "~/components/ui/Loader";
 import { useRouter } from "next/router";
 
 const schema = z.object({

@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import BuriedCapsules from "~/components/dashboard/BuriedCapsules";
+import ClosedMessages from "~/components/dashboard/ClosedMessages";
 import StatsBar from "~/components/dashboard/StatsBar";
 import PandingCapsules from "~/components/dashboard/PendingCapsules";
 import Tabs from "~/components/dashboard/Tabs";
@@ -15,7 +15,7 @@ export default function DashboardPage() {
   const displayTabArray = [
     <PandingCapsules key="panding" />,
     <StatsBar key="stats" />,
-    <BuriedCapsules key="closed" />,
+    <ClosedMessages key="closed" />,
     <OpenMessages key="open" />,
   ];
 

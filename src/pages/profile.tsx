@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import Loader from "~/components/layout/Loader";
+import Loader from "~/components/ui/Loader";
 
 export default function Profile() {
   const { data: sessionData, status } = useSession();
@@ -23,11 +23,11 @@ export default function Profile() {
           <h1 className="text-5xl font-bold">{sessionData?.user?.name}</h1>
           <p className="font-bold text-primary">{sessionData?.user.email}</p>
           <p className="py-5">
-            Dear descendants, today is an extraordinary day — a century of
-            Soviet power. We warmly congratulate you on this great and glorious
-            jubilee. We know our time is interesting, but yours is even more
-            interesting. We are building communism, you&apos;re living under
-            communism.
+            MessageTTF is an innovative online platform that lets you create and
+            preserve memories in the form of messages, photos and voice messages
+            ensuring they remain securely stored until a future date of your
+            choosing. With ChronoCapsule, you can capture the essence of a
+            moment and experience the joy of revisiting it in the future.
           </p>
           <Link href="/dashboard" className="btn-primary btn">
             To Dashboard

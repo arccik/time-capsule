@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "~/components/layout/Loader";
+import Loader from "~/components/ui/Loader";
 import { api } from "~/utils/api";
 import { BsTrash, BsClock } from "react-icons/bs";
 import dateFormatter from "~/lib/dateFormatter";
@@ -19,7 +19,19 @@ export default function BuriedCapsules() {
   };
 
   if (capsuleStatus !== "success") return <Loader />;
-  if (capsuleData.length === 0) return null;
+  if (capsuleData.length === 0) {
+    return (
+      <div className="mt-2 w-full p-2">
+        <p className="text-3xl font-bold">
+          <b className="text-secondary">Closed</b> Messages
+        </p>
+        <p className="mt-10  text-center text-sm text-secondary">
+          You have no open messages.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="mt-2 w-full p-2">

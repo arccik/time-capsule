@@ -4,16 +4,16 @@ import { useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { FaTrash } from "react-icons/fa";
 import TimeAgo from "timeago-react";
-import Loader from "~/components/layout/Loader";
+import Loader from "~/components/ui/Loader";
 import CommentBar from "~/components/open-capsule/CommentBar";
 import { api } from "~/utils/api";
 
 export default function OpenCapsulePage() {
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
-  const { query, back } = useRouter();
+  const router = useRouter();
   const { data: sessionData } = useSession();
   const { data, status, refetch } = api.capsule.getOne.useQuery({
-    id: query.id as string,
+    id: router.query.id as string,
   });
   const deleteCapsule = api.capsule.delete.useMutation({
     onSuccess: async () => {
@@ -24,12 +24,18 @@ export default function OpenCapsulePage() {
     },
   });
 
+  const handleBackClick = () => {
+    router
+      .push("/")
+      .then((v) => v)
+      .catch((e: Error) => console.log(e.message));
+  };
   if (status === "error") return <div>Ops. something went wrong!</div>;
   return (
     <main className="animate-gradient-x bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90% pb-10">
       <button
         className="btn-ghost btn-xs btn ml-3 mt-10 text-white md:ml-10"
-        onClick={() => back()}
+        onClick={handleBackClick}
       >
         <BiArrowBack />
         Back
@@ -42,7 +48,7 @@ export default function OpenCapsulePage() {
                 <div className="card-actions absolute right-4 top-4">
                   <button
                     onClick={() => deleteCapsule.mutate({ id: data.id })}
-                    className="btn-secondary btn-square btn-sm btn"
+                    className="btn-secondary btn-sm btn-square btn"
                   >
                     <FaTrash />
                   </button>

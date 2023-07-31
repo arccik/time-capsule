@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 
 import useLocalStorage from "~/hooks/useLocalStorage";
-import Card from "../layout/Card";
+import Card from "../ui/Card";
 import type { FormProps } from "~/types/formProps";
 
 type ContactMethods = {

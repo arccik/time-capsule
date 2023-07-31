@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Recorder from "./Recoder";
-import Card from "../layout/Card";
+import Card from "../ui/Card";
 
 export default function VoiceMessage() {
   const [show, setShow] = useState(false);

@@ -1,11 +1,13 @@
 import { MdDeleteForever, MdPayment } from "react-icons/md";
 import { api } from "~/utils/api";
-import Loader from "../layout/Loader";
+import Loader from "../ui/Loader";
 import { useState } from "react";
 import useStripe from "~/hooks/useStripe";
+import Modal from "../ui/Modal";
 
 export default function PendingCapsules() {
   const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const createCheckout = api.payment.createCheckout.useMutation({
     onMutate: (capsule) => setLoadingId(capsule.capsuleId),
   });
@@ -77,12 +79,35 @@ export default function PendingCapsules() {
                   Pay <MdPayment className="ml-1 text-xl" />
                 </button>
                 <button
-                  className="btn-secondary btn-xs btn  text-xs"
-                  onClick={() => handleDelete(capsule.id)}
+                  onClick={() => setIsDeleteClicked(true)}
+                  className="btn-secondary btn-xs btn text-xs"
                 >
                   Delete <MdDeleteForever className="ml-1 text-xl" />
                 </button>
               </div>
+              {isDeleteClicked && (
+                <Modal>
+                  <h3 className="text-lg font-bold">Delete this message?</h3>
+                  <p className="py-4">
+                    The message will be permanently deleted and cannot be
+                    recovered.
+                  </p>
+                  <div className="modal-action">
+                    <button
+                      onClick={() => setIsDeleteClicked(false)}
+                      className="btn-outline btn"
+                    >
+                      No
+                    </button>
+                    <button
+                      onClick={() => handleDelete(capsule.id)}
+                      className="btn-warning btn"
+                    >
+                      Yes
+                    </button>
+                  </div>
+                </Modal>
+              )}
             </div>
           );
         })}

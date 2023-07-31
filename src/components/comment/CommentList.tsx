@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { api } from "~/utils/api";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import Loader from "../layout/Loader";
+import Loader from "../ui/Loader";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 

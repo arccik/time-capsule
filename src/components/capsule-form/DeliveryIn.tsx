@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiFillCalendar, AiFillCloseCircle } from "react-icons/ai";
 import Calendar from "react-calendar";
-import Card from "../layout/Card";
+import Card from "../ui/Card";
 import type { FormProps } from "~/types/formProps";
 import "react-calendar/dist/Calendar.css";
 

@@ -2,8 +2,9 @@ import { useState } from "react";
 import { TiEdit, TiLockOpen, TiMessages, TiTimesOutline } from "react-icons/ti";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
-import Modal from "../layout/Modal";
+import Modal from "../ui/Modal";
 import dateFormatter from "~/lib/dateFormatter";
+import { api } from "~/utils/api";
 
 type Props = {
   opened: Date;
@@ -11,6 +12,7 @@ type Props = {
   isPublic: boolean;
   message: string;
   closed: Date;
+  deleteMessage: () => void;
   triggerPublic: () => void;
 };
 
@@ -21,12 +23,14 @@ export default function OpenMessage({
   closed,
   subject,
   triggerPublic,
+  deleteMessage,
 }: Props) {
   const [expand, setExpand] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
 
   const handleDelete = () => {
     setIsDeleteClicked(false);
+    deleteMessage();
   };
   return (
     <>
@@ -90,11 +94,23 @@ export default function OpenMessage({
         )}
       </AnimatePresence>
       {isDeleteClicked && (
-        <Modal
-          title="Delete message"
-          message="Are you sure you want to delete this message?"
-          handleConfirm={handleDelete}
-        />
+        <Modal>
+          <h3 className="text-lg font-bold">Delete this message?</h3>
+          <p className="py-4">
+            The message will be permanently deleted and cannot be recovered.
+          </p>
+          <div className="modal-action">
+            <button
+              onClick={() => setIsDeleteClicked(false)}
+              className="btn-outline btn"
+            >
+              No
+            </button>
+            <button onClick={handleDelete} className="btn-warning btn">
+              Yes
+            </button>
+          </div>
+        </Modal>
       )}
     </>
   );
