@@ -9,11 +9,17 @@ import CommentBar from "~/components/open-capsule/CommentBar";
 import { api } from "~/utils/api";
 import { GrFacebook, GrInstagram } from "react-icons/gr";
 import {
+  AiFillFacebook,
   AiOutlineFacebook,
-  AiOutlineInstagram,
+  AiOutlineWhatsApp,
   AiOutlineTwitter,
 } from "react-icons/ai";
-import { FacebookShareButton, TwitterShareButton } from "react-share";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+} from "react-share";
 
 export default function OpenCapsulePage() {
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
@@ -71,21 +77,23 @@ export default function OpenCapsulePage() {
               <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold">
                 <q>{data.message}</q>
               </p>
-              <div className="card-actions absolute right-5 top-5">
+              <div className="card-actions absolute bottom-2 right-5 text-slate-500">
                 Share
                 <FacebookShareButton
                   url={window.location.href}
-                  quote={data.message}
+                  quote={data.message.slice(0, 100)}
                 >
                   <AiOutlineFacebook
                     className="cursor-pointer hover:text-sky-800"
                     size={25}
                   />
                 </FacebookShareButton>
-                <AiOutlineInstagram
-                  className="cursor-pointer hover:text-sky-800"
-                  size={25}
-                />
+                <WhatsappShareButton url={window.location.href}>
+                  <AiOutlineWhatsApp
+                    className="cursor-pointer hover:text-sky-800"
+                    size={25}
+                  />
+                </WhatsappShareButton>
                 <TwitterShareButton url={window.location.href}>
                   <AiOutlineTwitter
                     className="cursor-pointer hover:text-sky-800"

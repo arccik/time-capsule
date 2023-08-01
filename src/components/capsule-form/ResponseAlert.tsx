@@ -24,7 +24,7 @@ export default function ResponseAlert() {
       setResponse({
         success: false,
         title: "Order Canceled",
-        message: "You can come back and complete payment at any time",
+        message: "You can come back to complete your payment at any time",
       });
     }
   }, []);
@@ -49,11 +49,10 @@ export default function ResponseAlert() {
           <div className="flex-1 justify-between">
             <h3 className="font-bold">{response.title}</h3>
             <div className="text-xs">{response.message}</div>
-            <button onClick={handleShow} className="btn-ghost btn-circle btn">
-              <GrFormClose />
-            </button>
           </div>
-          <span></span>
+          <button onClick={handleShow} className="btn-ghost btn-circle btn">
+            <GrFormClose />
+          </button>
         </div>
       )}
     </div>
