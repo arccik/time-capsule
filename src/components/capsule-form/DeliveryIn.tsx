@@ -63,7 +63,7 @@ export default function DeliveryIn({
             <label className="label cursor-pointer">
               <span className="label-text mr-4">Calendar</span>
               {showCalendar ? (
-                <AiFillCalendar
+                <AiFillCloseCircle
                   className="text-2xl"
                   onClick={() => setShowCalendar((prev) => !prev)}
                 />
@@ -76,7 +76,7 @@ export default function DeliveryIn({
             </label>
             {showCalendar && (
               <Calendar
-                className="absolute right-10 top-32 z-10"
+                className="absolute right-0 z-10 mt-10 rounded-md  shadow-xl  md:right-10"
                 minDate={MIN_DATE}
                 maxDate={MAX_DATE}
                 defaultActiveStartDate={MIN_DATE}

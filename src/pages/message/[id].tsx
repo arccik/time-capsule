@@ -7,6 +7,13 @@ import TimeAgo from "timeago-react";
 import Loader from "~/components/ui/Loader";
 import CommentBar from "~/components/open-capsule/CommentBar";
 import { api } from "~/utils/api";
+import { GrFacebook, GrInstagram } from "react-icons/gr";
+import {
+  AiOutlineFacebook,
+  AiOutlineInstagram,
+  AiOutlineTwitter,
+} from "react-icons/ai";
+import { FacebookShareButton, TwitterShareButton } from "react-share";
 
 export default function OpenCapsulePage() {
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
@@ -64,6 +71,28 @@ export default function OpenCapsulePage() {
               <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold">
                 <q>{data.message}</q>
               </p>
+              <div className="card-actions absolute right-5 top-5">
+                Share
+                <FacebookShareButton
+                  url={window.location.href}
+                  quote={data.message}
+                >
+                  <AiOutlineFacebook
+                    className="cursor-pointer hover:text-sky-800"
+                    size={25}
+                  />
+                </FacebookShareButton>
+                <AiOutlineInstagram
+                  className="cursor-pointer hover:text-sky-800"
+                  size={25}
+                />
+                <TwitterShareButton url={window.location.href}>
+                  <AiOutlineTwitter
+                    className="cursor-pointer hover:text-sky-800"
+                    size={25}
+                  />
+                </TwitterShareButton>
+              </div>
 
               <div className="card-actions mt-10">
                 <CommentBar id={data.id} />

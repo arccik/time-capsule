@@ -36,7 +36,8 @@ export default function Pagination({
           type="radio"
           name="options"
           data-title={v}
-          className="btn-xl btn-ghost glass btn"
+          aria-label={v.toString()}
+          className="join-item btn-xl btn-ghost glass btn"
           onClick={() => handleClick(v)}
           defaultChecked={v === currentPage}
         />
@@ -46,8 +47,8 @@ export default function Pagination({
   if (totalPages === 1) return null;
 
   return (
-    <div className="mb-10 mt-10 flex justify-center">
-      <div className="btn-group">{pageNumbers}</div>
+    <div className="mb-10 mt-10 flex justify-center ">
+      <div className="join">{pageNumbers}</div>
     </div>
   );
 }
