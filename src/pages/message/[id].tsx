@@ -42,7 +42,7 @@ export default function OpenCapsulePage() {
   };
   if (status === "error") return <div>Ops. something went wrong!</div>;
   return (
-    <main className="animate-gradient-x bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90% pb-10">
+    <main className="animate-gradient-x bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90% pb-10 dark:from-slate-800 dark:to-slate-950">
       <button
         className="btn-ghost btn-xs btn ml-3 mt-10 text-white md:ml-10"
         onClick={handleBackClick}
@@ -74,10 +74,8 @@ export default function OpenCapsulePage() {
               <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold">
                 <q>{data.message}</q>
               </p>
-              <div className="card-actions absolute bottom-2 right-5 text-slate-500">
-                <p className="align-text-bottom text-xs font-semibold italic">
-                  Share
-                </p>
+              <div className="card-actions absolute bottom-2 right-5 flex text-slate-500 dark:text-slate-200">
+                <p className="self-center text-xs font-semibold">Share</p>
                 <FacebookShareButton
                   url={window.location.href}
                   quote={data.message.slice(0, 100)}

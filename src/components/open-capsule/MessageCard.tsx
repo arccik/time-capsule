@@ -26,17 +26,19 @@ export default function MessageCard({
 Props) {
   return (
     <li>
-      <figure className="glass relative rounded-2xl p-6 shadow-xl shadow-slate-900/10">
-        <div className="badge-ghost badge glass badge-sm absolute right-0 top-0 mr-4 mt-4">
+      <figure className="card relative rounded-xl p-6 shadow-xl shadow-slate-900/10 dark:shadow-slate-200/10">
+        <div className="badge-ghost badge glass badge-sm absolute right-0 top-0 mr-4 mt-4 dark:text-slate-100">
           <p>
             <TimeAgo datetime={createdAt} />
             <HiLockOpen className="float-left mr-2" />
           </p>
         </div>
         <Link href={`/message/${id}`}>
-          <h1 className="text-sm text-slate-500">{subject}</h1>
+          <h1 className="text-sm text-slate-500 dark:text-slate-300">
+            {subject}
+          </h1>
           <blockquote className="relative">
-            <p className="mb-5 line-clamp-3 text-lg tracking-tight text-slate-900">
+            <p className="mb-5 line-clamp-3 text-lg tracking-tight text-slate-900 dark:text-slate-50">
               {message}
             </p>
           </blockquote>

@@ -17,7 +17,7 @@ const HomePage: NextPage = () => {
         />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main className="animate-gradient-x bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90%">
+      <main className="animate-gradient-x bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90% dark:from-slate-800 dark:to-slate-950">
         <Hero />
         <TimeCapsuleForm />
         <MessageGrid />

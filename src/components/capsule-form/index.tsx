@@ -92,7 +92,7 @@ export default function TimeCapsuleForm() {
             void handleSubmit(onSubmit)(event);
           }}
         >
-          <div className="rounded-t-lg border-t p-2 pb-2 md:rounded-none md:border-none">
+          <div className="rounded-t-lg border-t p-2 pb-2  md:rounded-none md:border-none">
             <SubjectField register={register("subject")} />
           </div>
           <div className="gap-2 md:grid md:grid-flow-col md:grid-rows-3">
