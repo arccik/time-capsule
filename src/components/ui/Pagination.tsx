@@ -14,7 +14,7 @@ export default function Pagination({
   const { push, pathname } = useRouter();
 
   const handleClick = (buttonIndex: number) => {
-    push(
+    void push(
       {
         pathname: pathname,
         query: { page: buttonIndex },

@@ -7,9 +7,7 @@ import TimeAgo from "timeago-react";
 import Loader from "~/components/ui/Loader";
 import CommentBar from "~/components/open-capsule/CommentBar";
 import { api } from "~/utils/api";
-import { GrFacebook, GrInstagram } from "react-icons/gr";
 import {
-  AiFillFacebook,
   AiOutlineFacebook,
   AiOutlineWhatsApp,
   AiOutlineTwitter,
@@ -18,7 +16,6 @@ import {
   FacebookShareButton,
   TwitterShareButton,
   WhatsappShareButton,
-  WhatsappIcon,
 } from "react-share";
 
 export default function OpenCapsulePage() {
