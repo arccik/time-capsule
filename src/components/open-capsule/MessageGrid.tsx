@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import MessageCard from "./MessageCard";
 import { api } from "~/utils/api";
 import Loader from "../ui/Loader";
@@ -10,6 +10,14 @@ export default function MessageGrid() {
     page,
   });
 
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    const pageNumber = query.get("page");
+    if (pageNumber) {
+      setPage(parseInt(pageNumber));
+    }
+  }, []);
+
   return (
     <section className="items-center p-2 md:p-10" id="public-messages">
       <h1 className="mb-10 mt-10 text-center text-5xl font-bold">
@@ -18,11 +26,11 @@ export default function MessageGrid() {
       <p className="-mt-10 text-center text-base-300">
         Connecting Hearts, Inspiring Minds
       </p>
-      <ul
-        role="list"
-        className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
-      >
-        <Suspense fallback={<Loader fullScreen={true} />}>
+      <Suspense fallback={<Loader fullScreen={true} />}>
+        <ul
+          role="list"
+          className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
+        >
           {data &&
             data[0]?.map((capsule) => (
               <MessageCard
@@ -36,8 +44,8 @@ export default function MessageGrid() {
                 image={capsule.image}
               />
             ))}
-        </Suspense>
-      </ul>
+        </ul>
+      </Suspense>
       <Pagination
         currentPage={page}
         setCurrentPage={setPage}

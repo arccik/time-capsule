@@ -38,10 +38,7 @@ export default function OpenCapsulePage() {
   });
 
   const handleBackClick = () => {
-    router
-      .push("/")
-      .then((v) => v)
-      .catch((e: Error) => console.log(e.message));
+    router.back();
   };
   if (status === "error") return <div>Ops. something went wrong!</div>;
   return (
@@ -78,7 +75,9 @@ export default function OpenCapsulePage() {
                 <q>{data.message}</q>
               </p>
               <div className="card-actions absolute bottom-2 right-5 text-slate-500">
-                Share
+                <p className="align-text-bottom text-xs font-semibold italic">
+                  Share
+                </p>
                 <FacebookShareButton
                   url={window.location.href}
                   quote={data.message.slice(0, 100)}
