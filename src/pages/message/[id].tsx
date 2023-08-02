@@ -5,7 +5,7 @@ import { BiArrowBack } from "react-icons/bi";
 import { FaTrash } from "react-icons/fa";
 import TimeAgo from "timeago-react";
 import Loader from "~/components/ui/Loader";
-import CommentBar from "~/components/open-capsule/CommentBar";
+import CommentBar from "~/components/open-messages/CommentBar";
 import { api } from "~/utils/api";
 import {
   AiOutlineFacebook,

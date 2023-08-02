@@ -28,7 +28,7 @@ export default function OpenMessages() {
       <p className="text-3xl font-bold">
         <b className="text-secondary">Opened</b> Messages
       </p>
-      <Suspense fallback={<Loader fullScreen={true} />}>
+      <Suspense fallback={<Loader />}>
         <div className="ld:mx-0 mx-auto grid grid-flow-row ">
           {data.length ? (
             data.map((capsule) => (

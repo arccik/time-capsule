@@ -19,9 +19,7 @@ export default function MessageArea({
         })}
       />
       {errors?.message && (
-        <p className="-mt-2 text-right text-xs text-red-600">
-          {errors?.message}
-        </p>
+        <p className="text-right text-xs text-red-600">{errors?.message}</p>
       )}
     </div>
   );

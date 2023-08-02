@@ -3,12 +3,16 @@ import MessageCard from "./MessageCard";
 import { api } from "~/utils/api";
 import Loader from "../ui/Loader";
 import Pagination from "../ui/Pagination";
+import Hero from "./Hero";
+import { set } from "zod";
+import { scrolltoHash } from "~/lib/scrollToHash";
 
 export default function MessageGrid() {
   const [page, setPage] = useState(1);
-  const { data } = api.capsule.getOpenCapsules.useQuery({
-    page,
-  });
+  const { data, status, isInitialLoading } =
+    api.capsule.getOpenCapsules.useQuery({
+      page,
+    });
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -16,17 +20,19 @@ export default function MessageGrid() {
     if (pageNumber) {
       setPage(parseInt(pageNumber));
     }
+    if (status === "success" && page !== 1) {
+      scrolltoHash("public-messages");
+    }
   }, []);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   return (
     <section className="items-center p-2 md:p-10" id="public-messages">
-      <h1 className="mb-10 mt-10 text-center text-5xl font-bold">
-        Public Messages
-      </h1>
-      <p className="-mt-10 text-center text-base-300 dark:text-slate-500">
-        Connecting Hearts, Inspiring Minds
-      </p>
-      <Suspense fallback={<Loader fullScreen={true} />}>
+      <Hero />
+      <Suspense fallback={<Loader />}>
         <ul
           role="list"
           className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"

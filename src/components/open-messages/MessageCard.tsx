@@ -3,7 +3,6 @@ import ActionButton from "./ActionButton";
 import TimeAgo from "timeago-react";
 import { HiLockOpen } from "react-icons/hi2";
 
-
 type Props = {
   id: string;
   subject: string;
@@ -26,19 +25,13 @@ export default function MessageCard({
 Props) {
   return (
     <li>
-      <figure className="card relative rounded-xl p-6 shadow-xl shadow-slate-900/10 dark:shadow-slate-200/10">
-        <div className="badge-ghost badge glass badge-sm absolute right-0 top-0 mr-4 mt-4 dark:text-slate-100">
-          <p>
-            <TimeAgo datetime={createdAt} />
-            <HiLockOpen className="float-left mr-2" />
-          </p>
-        </div>
+      <figure className="card glass relative rounded-xl p-6 shadow-xl shadow-slate-900/10 dark:shadow-slate-200/10 dark:drop-shadow-lg">
         <Link href={`/message/${id}`}>
           <h1 className="text-sm text-slate-500 dark:text-slate-300">
             {subject}
           </h1>
           <blockquote className="relative">
-            <p className="mb-5 line-clamp-3 text-lg tracking-tight text-slate-900 dark:text-slate-50">
+            <p className="mb-5 line-clamp-3 text-lg tracking-tight text-slate-900 dark:text-white">
               {message}
             </p>
           </blockquote>
@@ -48,7 +41,8 @@ Props) {
           <div>
             <div className="font-display text-sm text-slate-300">
               <p>
-                Closed - <TimeAgo datetime={createdAt} />
+                <TimeAgo datetime={createdAt} />
+                <HiLockOpen className="float-left mr-2" />
               </p>
             </div>
             <div className="flex items-center gap-2">

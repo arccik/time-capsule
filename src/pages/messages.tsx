@@ -1,4 +1,4 @@
-import MessageGrid from "~/components/open-capsule/MessageGrid";
+import MessageGrid from "~/components/open-messages/MessageGrid";
 
 export default function OpenCapsulesPage() {
   return (
