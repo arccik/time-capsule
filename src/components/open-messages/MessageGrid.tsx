@@ -1,10 +1,9 @@
 import { Suspense, useEffect, useState } from "react";
-import MessageCard from "./MessageCard";
+import MessageCard from "./MessageGridCard";
 import { api } from "~/utils/api";
 import Loader from "../ui/Loader";
 import Pagination from "../ui/Pagination";
 import Hero from "./Hero";
-import { set } from "zod";
 import { scrolltoHash } from "~/lib/scrollToHash";
 
 export default function MessageGrid() {
@@ -39,16 +38,9 @@ export default function MessageGrid() {
         >
           {data &&
             data[0]?.map((capsule) => (
-              <MessageCard
-                totalLikes={capsule.likes.length}
-                id={capsule.id}
-                key={capsule.id}
-                message={capsule.message}
-                subject={capsule.subject}
-                createdAt={capsule.createdAt}
-                totalComments={capsule.comments.length}
-                image={capsule.image}
-              />
+              <li key={capsule.id}>
+                <MessageCard data={capsule} />
+              </li>
             ))}
         </ul>
       </Suspense>

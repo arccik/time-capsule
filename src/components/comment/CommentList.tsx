@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import { useState } from "react";
 import { api } from "~/utils/api";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Loader from "../ui/Loader";
@@ -7,8 +7,9 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 export default function CommentList({ id }: { id: string }) {
-  const [comment, setComment] = React.useState<string>("");
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const [comment, setComment] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showCommentBar, setShowCommentBar] = useState<boolean>(false);
   const router = useRouter();
   const { status, data: session } = useSession();
   const isAuth = status === "authenticated";
@@ -22,7 +23,7 @@ export default function CommentList({ id }: { id: string }) {
       setLoading(false);
       await refetch();
     },
-    onMutate: () => void setLoading(true),
+    onMutate: () => setLoading(true),
   });
 
   const deleteComment = api.comment.delete.useMutation({
@@ -35,7 +36,7 @@ export default function CommentList({ id }: { id: string }) {
       console.error("Could not delete your comment, try again", error),
   });
 
-  if (commentStatus === "loading") return <Loader />;
+  // if (commentStatus === "loading") return <Loader />;
   if (commentStatus === "error") return <div>Error...</div>;
   if (!isAuth)
     return (
@@ -57,11 +58,14 @@ export default function CommentList({ id }: { id: string }) {
     <section className="mx-auto rounded-md">
       <div className="mx-auto">
         <div className=" flex items-center justify-between">
-          <h2 className="text-md font-bold text-base-300">
+          <h2
+            className="text-md cursor-pointer font-bold text-base-300 hover:text-base-100 dark:text-base-300 dark:hover:text-base-100"
+            onClick={() => setShowCommentBar(!showCommentBar)}
+          >
             Comments ({capsuleComment?.length})
           </h2>
         </div>
-        {isAuth && (
+        {isAuth && showCommentBar && (
           <form onSubmit={handleSubmit} className="mb-10">
             <div className="mb-4 rounded-lg rounded-t-lg border border-base-300 px-4 py-2">
               <label htmlFor="comment" className="sr-only">
