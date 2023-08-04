@@ -22,14 +22,16 @@ export default function OpenMessage(props: Props) {
     <div className="relative mx-auto max-w-[800px]">
       <div className="card glass m-2 mt-10 self-center">
         <div className="card-body">
-          <h2 className="card-title font-bold md:text-2xl">{data.subject}</h2>
-          <p className="-mt-3 text-sm text-base-200">
+          <h2 className="card-title font-bold text-slate-600 dark:text-slate-200 md:text-2xl">
+            {data.subject}
+          </h2>
+          <p className="-mt-3 text-sm  text-slate-500 dark:text-slate-400">
             Closed - <TimeAgo datetime={data.createdAt} />
           </p>
-          <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold">
+          <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold dark:text-white">
             <q>{data.message}</q>
           </p>
-          <div className="card-actions absolute bottom-2 right-5 flex text-slate-500 dark:text-slate-200">
+          <div className="card-actions absolute bottom-2 right-5 flex text-slate-600 dark:text-slate-500">
             <p className="self-center text-xs font-semibold">Share</p>
             <FacebookShareButton
               url={window.location.href}

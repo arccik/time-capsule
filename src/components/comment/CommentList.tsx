@@ -59,7 +59,7 @@ export default function CommentList({ id }: { id: string }) {
       <div className="mx-auto">
         <div className=" flex items-center justify-between">
           <h2
-            className="text-md cursor-pointer font-bold text-base-300 hover:text-base-100 dark:text-base-300 dark:hover:text-base-100"
+            className="text-md cursor-pointer font-bold text-slate-500 hover:text-base-100 dark:text-slate-400 dark:hover:text-base-100"
             onClick={() => setShowCommentBar(!showCommentBar)}
           >
             Comments ({capsuleComment?.length})
