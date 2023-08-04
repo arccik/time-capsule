@@ -1,15 +1,14 @@
 import ActionButton from "./ActionButton";
-import TimeAgo from "timeago-react";
-import { HiLockOpen } from "react-icons/hi2";
+import { HiLockClosed, HiLockOpen } from "react-icons/hi2";
 import { Drawer } from "vaul";
 import OpenMessage from "./OpenMessage";
 import { Capsule } from "@prisma/client";
-import Link from "next/link";
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 export default function MessageCard({ data }: { data: Capsule }) {
   return (
     <>
-      <Drawer.Root shouldScaleBackground>
+      <Drawer.Root>
         <figure className="card glass relative rounded-xl p-6 shadow-xl shadow-slate-900/10 dark:shadow-slate-200/10 dark:drop-shadow-lg">
           <Drawer.Trigger asChild>
             <button className="text-left">
@@ -24,13 +23,20 @@ export default function MessageCard({ data }: { data: Capsule }) {
             </button>
           </Drawer.Trigger>
 
-          <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-300 pt-6">
+          <figcaption className="relative mt-6  items-center justify-between border-t border-slate-300 pt-6">
             <div>
-              <div className="font-display text-sm text-slate-300">
+              <div className="font-display flex w-full flex-row justify-between text-sm text-slate-300 ">
                 <p>
-                  <TimeAgo datetime={data.createdAt} />
-                  <HiLockOpen className="float-left mr-2" />
+                  {data.createdAt.toDateString()}
+                  <HiLockClosed className="float-left mr-2" />
                 </p>
+                <FaLongArrowAltRight />
+                {data.openedAt && (
+                  <p>
+                    {data.openedAt.toDateString()}
+                    <HiLockOpen className="float-left mr-2" />
+                  </p>
+                )}
               </div>
               <div className="flex items-center gap-2">
                 <ActionButton type="like" id={data.id} totalLikes={0} />

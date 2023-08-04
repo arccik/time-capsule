@@ -14,17 +14,24 @@
 //     );
 //   }
 
-//   const data = await prisma.capsule.findMany({
-//     where: { email: "alexklan34@gmail.com" },
-//   });
+//   function subtractYears(date: Date | null, years: number) {
+//     if (!date) return;
+//     date.setFullYear(date.getFullYear() - years);
+//     return date;
+//   }
+
+//   const data = await prisma.capsule.findMany();
 //   data?.forEach(async (capsule) => {
 //     await prisma.capsule.update({
 //       where: {
 //         id: capsule.id,
 //       },
 //       data: {
-//         // createdAt: randomDate(new Date(2013, 0, 1), new Date(2023, 1, 1)),
-//         createdAt: capsule.dateTime,
+//         // openedAt: randomDate(new Date(2018, 0, 1), new Date(2023, 8, 1)),
+//         createdAt: subtractYears(
+//           capsule.openedAt,
+//           Math.floor(Math.random() * 10) + 1
+//         ),
 //       },
 //     });
 //   });
