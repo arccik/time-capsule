@@ -8,6 +8,7 @@ import { scrolltoHash } from "~/lib/scrollToHash";
 
 export default function MessageGrid() {
   const [page, setPage] = useState(1);
+
   const { data, status, isInitialLoading } =
     api.capsule.getOpenCapsules.useQuery(
       {

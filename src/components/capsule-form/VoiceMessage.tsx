@@ -3,7 +3,7 @@ import Recorder from "./Recoder";
 import Card from "../ui/Card";
 
 export default function VoiceMessage() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   return (
     <Card
       title="Record voice message"

@@ -12,22 +12,21 @@ import {
 } from "react-share";
 import { Capsule } from "@prisma/client";
 
-type Props = {
-  data: Capsule;
-};
 
-export default function OpenMessage(props: Props) {
-  const data = props.data;
+
+export default function OpenMessage({ data }: { data: Capsule }) {
   return (
     <div className="relative mx-auto max-w-[800px]">
-      <div className="card glass m-2 mt-10 self-center">
+      <div className="card self-center">
         <div className="card-body">
-          <h2 className="card-title font-bold text-slate-600 dark:text-slate-200 md:text-2xl">
+          <h2 className="card-title font-bold  dark:text-slate-200 md:text-2xl">
             {data.subject}
           </h2>
-          <p className="-mt-3 text-sm  text-slate-500 dark:text-slate-400">
-            Closed - <TimeAgo datetime={data.createdAt} />
-          </p>
+          <div>
+            <p className="-mt-3 text-sm text-slate-700 dark:text-slate-300">
+              Opened - {data.openedAt?.toDateString()}
+            </p>
+          </div>
           <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold dark:text-white">
             <q>{data.message}</q>
           </p>

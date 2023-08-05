@@ -74,8 +74,7 @@ export default function Recorder() {
       <div
         className={clsx({
           "flex flex-row justify-center": true,
-          hidden: uploadSuccess,
-          "loading-ring loading-lg loading": !uploadSuccess,
+          "loading loading-ring loading-lg": uploadSuccess,
         })}
       >
         <AudioRecorder

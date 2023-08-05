@@ -55,11 +55,11 @@ export default function CommentList({ id }: { id: string }) {
   };
 
   return (
-    <section className="mx-auto rounded-md">
+    <section className="mx-auto w-full rounded-md">
       <div className="mx-auto">
         <div className=" flex items-center justify-between">
           <h2
-            className="text-md cursor-pointer font-bold text-slate-500 hover:text-base-100 dark:text-slate-400 dark:hover:text-base-100"
+            className="text-md cursor-pointer font-bold text-slate-400 hover:text-base-100 dark:text-slate-400 dark:hover:text-base-100"
             onClick={() => setShowCommentBar(!showCommentBar)}
           >
             Comments ({capsuleComment?.length})
@@ -76,7 +76,7 @@ export default function CommentList({ id }: { id: string }) {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={4}
-                className="w-full  bg-transparent px-0 text-sm text-gray-900 placeholder-base-300  focus:outline-none focus:ring-0"
+                className="w-full bg-transparent  px-0 text-sm text-gray-900 placeholder-base-300 focus:outline-none  focus:ring-0 dark:border-white"
                 placeholder="Write a comment..."
                 required
               ></textarea>
