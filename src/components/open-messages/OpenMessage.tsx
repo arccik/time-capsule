@@ -1,4 +1,3 @@
-import TimeAgo from "timeago-react";
 import CommentBar from "~/components/open-messages/CommentBar";
 import {
   AiOutlineFacebook,
@@ -11,8 +10,6 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { Capsule } from "@prisma/client";
-
-
 
 export default function OpenMessage({ data }: { data: Capsule }) {
   return (

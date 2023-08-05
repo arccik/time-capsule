@@ -15,7 +15,7 @@ export default function MessageGrid() {
     );
 
   const handleFetchNextPage = () => {
-    fetchNextPage();
+    fetchNextPage().catch((e) => console.log(e));
   };
 
   const dataByPage = data?.pages.map((page) => page.items);

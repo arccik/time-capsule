@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 import Modal from "../ui/Modal";
 import dateFormatter from "~/lib/dateFormatter";
-import { api } from "~/utils/api";
 
 type Props = {
   opened: Date;
