@@ -53,16 +53,16 @@ export default function DeliverTo({
 
   const buttons = Object.entries(state).map(([key, value]) => (
     <div className="flex items-center" key={key}>
-      <p className="text-sm">{key}</p>
-      <label className="swap-rotate swap">
+      <p className="text-sm">{key.toUpperCase()}</p>
+      <label className="swap-rotate swap space-x-2">
         <input
           type="checkbox"
           onChange={handleChange}
           name={key}
           checked={value}
         />
-        <MdCheckBox className="swap-on w-full text-5xl" />
-        <MdCheckBoxOutlineBlank className="swap-off w-full text-5xl" />
+        <MdCheckBox className="swap-on w-full text-2xl  text-primary" />
+        <MdCheckBoxOutlineBlank className="swap-off w-full text-2xl" />
       </label>
     </div>
   ));

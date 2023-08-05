@@ -4,7 +4,7 @@ import { Drawer } from "vaul";
 import OpenMessage from "./OpenMessage";
 import { Capsule } from "@prisma/client";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { AiFillCloseCircle } from "react-icons/ai";
+import Image from "next/image";
 
 export default function MessageCard({
   data,
@@ -20,6 +20,15 @@ export default function MessageCard({
           <h1 className=" mb-1 text-gray-300  dark:text-slate-300">
             {data.subject}
           </h1>
+          {data.image && (
+            <Image
+              width={300}
+              height={170}
+              className="rounded-xl"
+              src={data.image}
+              alt={data.subject}
+            />
+          )}
           <blockquote className="relative">
             <p className="mb-5 line-clamp-3 text-lg tracking-tight text-slate-900 dark:text-white">
               {data.message}
