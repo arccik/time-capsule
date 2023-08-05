@@ -4,6 +4,7 @@ import { Drawer } from "vaul";
 import OpenMessage from "./OpenMessage";
 import { Capsule } from "@prisma/client";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 export default function MessageCard({ data }: { data: Capsule }) {
   return (
@@ -51,8 +52,8 @@ export default function MessageCard({ data }: { data: Capsule }) {
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
           <Drawer.Content className="glass fixed bottom-0 left-0 right-0 mt-24 flex h-[96%] flex-col content-center  justify-center rounded-t-[10px] dark:bg-gray-900">
             <OpenMessage data={data} />
-            <Drawer.Close className="btn-error btn-outline btn-xs btn absolute right-5 top-12 rounded-full text-slate-300 md:right-24 md:top-12">
-              X
+            <Drawer.Close className=" absolute right-5 top-12 rounded-full text-slate-300 hover:btn-outline md:right-24 md:top-12">
+              <AiFillCloseCircle size={25} color="#c10000" />
             </Drawer.Close>
           </Drawer.Content>
         </Drawer.Portal>
