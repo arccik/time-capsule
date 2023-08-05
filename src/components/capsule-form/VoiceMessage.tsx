@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Recorder from "./Recoder";
 import Card from "../ui/Card";
+import type { FormProps } from "~/types/formProps";
 
-export default function VoiceMessage() {
+
+export default function VoiceMessage({
+  setValue,
+}: Pick<FormProps, "setValue" | "unregister">) {
   const [show, setShow] = useState(false);
   return (
     <Card
@@ -19,7 +23,7 @@ export default function VoiceMessage() {
         />
       }
     >
-      {show && <Recorder />}
+      {show && <Recorder setValue={setValue} />}
     </Card>
   );
 }

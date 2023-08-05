@@ -120,7 +120,7 @@ export default function TimeCapsuleForm() {
                 {status === "authenticated" && (
                   <>
                     <UploadFile setValue={setValue} unregister={unregister} />
-                    <VoiceMessage />
+                    <VoiceMessage setValue={setValue} unregister={unregister} />
                   </>
                 )}
 

@@ -3,9 +3,11 @@ import { useState } from "react";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import { GrTrash, GrAdd, GrClose } from "react-icons/gr";
 import { IoCloudDone } from "react-icons/io5";
+import { env } from "~/env.mjs";
+import { FormProps } from "~/types/formProps";
 import { api } from "~/utils/api";
 
-export default function Recorder() {
+export default function Recorder({ setValue }: Pick<FormProps, "setValue">) {
   const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(
     null
   );
@@ -47,6 +49,7 @@ export default function Recorder() {
     });
     if (upload.ok) {
       setUploadSuccess(true);
+      setValue("voiceMessage", env.NEXT_PUBLIC_AWS_S3_BACKET_URL + uploadURL);
     }
   };
   const handleCancelClic = () => {
@@ -57,8 +60,7 @@ export default function Recorder() {
       <div className="flex items-center justify-center">
         <div className="indicator">
           <span
-            className="indicator-item cursor-pointer hover:badge-error hover:badge"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            className="indicator-item cursor-pointer hover:badge hover:badge-error"
             onClick={handleCancelClic}
           >
             <GrClose />
