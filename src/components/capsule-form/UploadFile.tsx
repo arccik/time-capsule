@@ -13,32 +13,38 @@ Pick<FormProps, "setValue" | "unregister">) {
   const [file, setFile] = useState<File | null>(null);
   const getUrl = api.uploader.getUrl.useMutation();
 
-  const uploadPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  async function uploadPhotoHandler(
+    event: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> {
+    const file = event.target.files?.[0];
     if (!file) return;
-    const { url, fields } = await getUrl.mutateAsync({
-      fileName: file.name,
-      fileType: file.type,
-    });
-    const formData = new FormData();
-    Object.entries({ ...fields, file }).forEach(([key, value]) => {
-      formData.append(key, value as string);
-    });
+    try {
+      const { url, fields } = await getUrl.mutateAsync({
+        fileName: file.name,
+        fileType: file.type,
+      });
+      const formData = new FormData();
+      Object.entries({ ...fields, file }).forEach(([key, value]) => {
+        formData.append(key, value as string);
+      });
 
-    const upload = await fetch(url, {
-      method: "POST",
-      body: formData,
-    });
+      const upload = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
 
-    if (upload.ok) {
-      setValue("image", env.NEXT_PUBLIC_AWS_S3_BACKET_URL + file.name);
-      setFile(file);
-      console.log("Upload successful.");
-    } else {
-      setFile(null);
-      console.error("Upload failed.");
+      if (upload.ok) {
+        setValue("image", env.NEXT_PUBLIC_AWS_S3_BACKET_URL + file.name);
+        setFile(file);
+        console.log("Upload successful.");
+      } else {
+        setFile(null);
+        console.error("Upload failed.");
+      }
+    } catch (err) {
+      console.log("something went wrong when uploading file to server");
     }
-  };
+  }
 
   return (
     <Card
@@ -83,7 +89,7 @@ Pick<FormProps, "setValue" | "unregister">) {
           <div className="flex items-center justify-between">
             <input
               type="file"
-              onChange={void uploadPhoto}
+              onChange={(e) => void (async () => await uploadPhotoHandler(e))()}
               accept="image/* video/*"
               className="file-input-bordered file-input-primary file-input w-full drop-shadow-md"
             />
