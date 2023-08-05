@@ -16,7 +16,7 @@ export default function OpenMessage({ data }: { data: Capsule }) {
     <div className="relative mx-auto max-w-[800px]">
       <div className="card self-center">
         <div className="card-body">
-          <h2 className="card-title font-bold  dark:text-slate-200 md:text-2xl">
+          <h2 className="font-bol card-title  text-slate-200 md:text-xl">
             {data.subject}
           </h2>
           <div>
@@ -24,7 +24,7 @@ export default function OpenMessage({ data }: { data: Capsule }) {
               Opened - {data.openedAt?.toDateString()}
             </p>
           </div>
-          <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold dark:text-white">
+          <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold dark:text-white md:text-2xl">
             <q>{data.message}</q>
           </p>
           <div className="card-actions absolute bottom-2 right-5 flex text-slate-600 dark:text-slate-500">

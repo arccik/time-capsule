@@ -27,6 +27,8 @@
 //         id: capsule.id,
 //       },
 //       data: {
+//         // paid: true,
+//         opened: true,
 //         // openedAt: randomDate(new Date(2018, 0, 1), new Date(2023, 8, 1)),
 //         createdAt: subtractYears(
 //           capsule.openedAt,

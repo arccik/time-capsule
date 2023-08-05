@@ -13,7 +13,6 @@ import SubjectField from "./SubjectField";
 import { api } from "~/utils/api";
 import useStripe from "~/hooks/useStripe";
 import VoiceMessage from "./VoiceMessage";
-// import CountDown from "./CountDown";
 import UploadFile from "./UploadFile";
 import DeliveryIn from "~/components/capsule-form/DeliveryIn";
 import ContactDetails from "./ContactDetails";
@@ -133,7 +132,6 @@ export default function TimeCapsuleForm() {
           <SendButton disabled={Object.keys(errors).length > 0} />
         </form>
       </div>
-      {/* {status === "authenticated" && <CountDown date={getValues("dateTime")} />} */}
     </section>
   );
 }
