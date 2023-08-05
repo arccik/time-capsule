@@ -65,6 +65,57 @@ export const capsuleRouter = createTRPCRouter({
     .mutation(({ ctx, input }) => {
       return ctx.prisma.capsule.delete({ where: { id: input.id } });
     }),
+  // replacement to implement infinity load
+  // getOpenMessages: publicProcedure
+  //   .input(
+  //     z.object({
+  //       limit: z.number().min(1).max(100).nullish(),
+  //       cursor: z.number().nullish(),
+  //     })
+  //   )
+  //   .query(({ ctx, input }) => {
+  //     const limit = input.limit ?? 50;
+  //     const { cursor } = input;
+
+  //     return ctx.prisma.capsule.findMany({
+  //       take: limit + 1, // get an extra item at the end which we'll use as next cursor
+  //       where: {
+  //         public: true,
+  //         opened: true,
+  //       },
+  //       cursor: cursor ? { myCursor: cursor } : undefined,
+  //       orderBy: {
+  //         myCursor: "asc",
+  //       },
+  //     });
+  //   }),
+  getInfinityMessages: publicProcedure
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100),
+        cursor: z.string().nullish(),
+        skip: z.number().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { limit, skip, cursor } = input;
+      const items = await ctx.prisma.capsule.findMany({
+        take: limit + 1,
+        skip: skip,
+        cursor: cursor ? { id: cursor } : undefined,
+        where: {
+          public: true,
+          opened: true,
+        },
+      });
+      let nextCursor: typeof cursor | undefined = undefined;
+      if (items.length > limit) {
+        const nextItem = items.pop();
+        nextCursor = nextItem?.id;
+      }
+      return { items, nextCursor };
+    }),
+
   getOpenCapsules: publicProcedure
     .input(z.object({ page: z.number() }))
     .query(({ ctx, input }) => {

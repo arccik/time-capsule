@@ -1,61 +1,48 @@
-import { Suspense, useEffect, useState } from "react";
 import MessageCard from "./MessageGridCard";
 import { api } from "~/utils/api";
-import Loader from "../ui/Loader";
-import Pagination from "../ui/Pagination";
 import Hero from "./Hero";
-import { scrolltoHash } from "~/lib/scrollToHash";
+import Loader from "../ui/Loader";
 
 export default function MessageGrid() {
-  const [page, setPage] = useState(1);
-
-  const { data, status, isInitialLoading } =
-    api.capsule.getOpenCapsules.useQuery(
+  const { data, status, fetchNextPage, isFetchingNextPage } =
+    api.capsule.getInfinityMessages.useInfiniteQuery(
       {
-        page,
+        limit: 12,
       },
       {
-        onSuccess() {
-          if (page !== 1) {
-            scrolltoHash("public-messages");
-          }
-        },
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
       }
     );
 
-  useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    const pageNumber = query.get("page");
-    if (pageNumber) {
-      setPage(parseInt(pageNumber));
-    }
-  }, []);
-
-  const handlePageChange = (newPage: number) => {
-    scrolltoHash("public-messages");
-    setPage(newPage);
+  const handleFetchNextPage = () => {
+    fetchNextPage();
   };
+
+  const dataByPage = data?.pages.map((page) => page.items);
+
+  const toShow = dataByPage?.reduce((a, b) => a.concat(b), []);
 
   return (
     <section className="items-center p-2 md:p-10" id="public-messages">
       <Hero />
-      {status === "loading" && <Loader />}
       <ul
         role="list"
         className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
       >
-        {data &&
-          data[0]?.map((capsule) => (
-            <li key={capsule.id}>
-              <MessageCard data={capsule} />
-            </li>
-          ))}
+        {toShow?.map((message) => (
+          <li key={message.id}>
+            <MessageCard data={message} />
+          </li>
+        ))}
       </ul>
-      <Pagination
-        currentPage={page}
-        setCurrentPage={(page) => handlePageChange(page as number)}
-        totalPages={(data && Math.floor(data[1] / 12 + 1)) || 1}
-      />
+      {(status === "loading" || isFetchingNextPage) && <Loader />}
+      <button
+        className="btn-primary btn mt-10 w-full"
+        disabled={!data?.pages?.at(-1)?.nextCursor}
+        onClick={handleFetchNextPage}
+      >
+        Load more
+      </button>
     </section>
   );
 }
