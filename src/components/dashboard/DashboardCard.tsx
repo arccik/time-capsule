@@ -1,9 +1,9 @@
-import { Capsule } from "@prisma/client";
 import React from "react";
 import { BsClock, BsTrash } from "react-icons/bs";
 import dateFormatter from "~/lib/dateFormatter";
 import { api } from "~/utils/api";
 import Modal from "../ui/Modal";
+import type { QueryObserverResult } from "@tanstack/react-query";
 
 type Props = {
   date: Date;
@@ -11,7 +11,7 @@ type Props = {
   actions?: React.ReactNode;
   icon?: React.ReactNode;
   id: string;
-  refetch: () => Promise<Capsule>;
+  refetch: () => Promise<QueryObserverResult>;
 };
 
 export default function DashboardCard({
@@ -29,7 +29,7 @@ export default function DashboardCard({
     },
   });
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     deleteMessage.mutate({ id });
     setShowModal(false);
   };

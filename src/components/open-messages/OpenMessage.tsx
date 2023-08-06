@@ -9,7 +9,7 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
-import { Capsule } from "@prisma/client";
+import type { Capsule } from "@prisma/client";
 
 export default function OpenMessage({ data }: { data: Capsule }) {
   return (

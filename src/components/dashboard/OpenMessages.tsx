@@ -33,7 +33,9 @@ export default function OpenMessages() {
             data.map((capsule) => (
               <OpenMessage
                 id={capsule.id}
-                triggerPublic={() => handleActivateForPublic(capsule.id)}
+                triggerPublic={() =>
+                  void (async () => await handleActivateForPublic(capsule.id))
+                }
                 opened={capsule.dateTime}
                 closed={capsule.createdAt}
                 message={capsule.message}

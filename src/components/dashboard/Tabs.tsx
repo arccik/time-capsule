@@ -13,10 +13,12 @@ export default function Tabs({ setActiveTab, activeTab }: Props) {
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
-    router.push({
-      pathname: router.pathname,
-      query: { openTab: index.toString() },
-    });
+    router
+      .push({
+        pathname: router.pathname,
+        query: { openTab: index.toString() },
+      })
+      .catch((e) => console.log("check the router in tabs component", e));
   };
 
   const tabs = tabsTitle.map((tab, index) => (

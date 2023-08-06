@@ -2,7 +2,6 @@ import React from "react";
 import Loader from "~/components/ui/Loader";
 import { api } from "~/utils/api";
 import DashboardCard from "./DashboardCard";
-import { Bs0CircleFill, BsTrash } from "react-icons/bs";
 
 export default function BuriedCapsules() {
   const {
@@ -10,13 +9,6 @@ export default function BuriedCapsules() {
     status: capsuleStatus,
     refetch,
   } = api.capsule.getAllBuried.useQuery();
-  const deleteCapsule = api.capsule.delete.useMutation({
-    onSuccess: () => refetch(),
-  });
-
-  const handleDelete = (id: string) => {
-    deleteCapsule.mutate({ id });
-  };
 
   if (capsuleStatus !== "success") return <Loader />;
   if (capsuleData.length === 0) {
@@ -40,6 +32,8 @@ export default function BuriedCapsules() {
         </p>
         {capsuleData.map((capsule) => (
           <DashboardCard
+            key={capsule.id}
+            refetch={refetch}
             id={capsule.id}
             isPublic={capsule.public}
             date={capsule.createdAt}

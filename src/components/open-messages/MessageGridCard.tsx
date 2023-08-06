@@ -1,10 +1,7 @@
 import ActionButton from "./ActionButton";
-import { HiLockClosed, HiLockOpen } from "react-icons/hi2";
-import { Drawer } from "vaul";
-import OpenMessage from "./OpenMessage";
-import { Capsule } from "@prisma/client";
-import { FaLongArrowAltRight } from "react-icons/fa";
+import type { Capsule } from "@prisma/client";
 import Image from "next/image";
+import ShowFromToDate from "./ShowFromToDate";
 
 export default function MessageCard({
   data,
@@ -35,19 +32,7 @@ export default function MessageCard({
             </p>
           </blockquote>
         </button>
-        <div className="font-display flex w-full flex-row justify-between text-sm text-slate-300 ">
-          <p>
-            {data.createdAt.toDateString()}
-            <HiLockClosed className="float-left mr-2" />
-          </p>
-          <FaLongArrowAltRight />
-          {data.openedAt && (
-            <p>
-              {data.openedAt.toDateString()}
-              <HiLockOpen className="float-left mr-2" />
-            </p>
-          )}
-        </div>
+        <ShowFromToDate from={data.createdAt} to={data.openedAt} />
 
         <figcaption className="relative mt-6  items-center justify-between border-t border-slate-300 pt-6">
           <div>

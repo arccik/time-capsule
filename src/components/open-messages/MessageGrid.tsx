@@ -3,13 +3,13 @@ import { api } from "~/utils/api";
 import Hero from "./Hero";
 import Loader from "../ui/Loader";
 import { useState } from "react";
-import { Capsule } from "@prisma/client";
-import { Drawer } from "vaul";
-import { AiFillCloseCircle } from "react-icons/ai";
-import OpenMessage from "./OpenMessage";
+import type { Capsule } from "@prisma/client";
+import OpenMessageModal from "./OpenMessageModal";
 
 export default function MessageGrid() {
   const [activeCard, setActiveCard] = useState<null | Capsule>(null);
+  const [openModal, setOpenModal] = useState(false);
+
   const { data, status, fetchNextPage, isFetchingNextPage } =
     api.capsule.getInfinityMessages.useInfiniteQuery(
       {
@@ -26,7 +26,13 @@ export default function MessageGrid() {
 
   const handleCardClick = (id: string) => {
     const selectedCard = toShow?.find((data) => data.id === id);
-    if (selectedCard) setActiveCard(selectedCard);
+    if (selectedCard) {
+      setOpenModal(true);
+      setActiveCard(selectedCard);
+    } else {
+      setOpenModal(false);
+      setActiveCard(null);
+    }
   };
 
   const dataByPage = data?.pages.map((page) => page.items);
@@ -48,17 +54,11 @@ export default function MessageGrid() {
       </ul>
       {(status === "loading" || isFetchingNextPage) && <Loader />}
 
-      <Drawer.Root open={!!activeCard} onOpenChange={() => setActiveCard(null)}>
-        <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-          <Drawer.Content className="glass fixed bottom-0 left-0 right-0 mt-24 flex h-[96%] flex-col content-center  justify-center rounded-t-[10px] dark:bg-gray-900">
-            {activeCard && <OpenMessage data={activeCard} />}
-            <Drawer.Close className=" absolute right-5 top-12 rounded-full text-slate-300 hover:btn-outline md:right-24 md:top-12">
-              <AiFillCloseCircle size={22} />
-            </Drawer.Close>
-          </Drawer.Content>
-        </Drawer.Portal>
-      </Drawer.Root>
+      <OpenMessageModal
+        activeCard={activeCard}
+        isOpen={openModal}
+        closeModal={() => setOpenModal(false)}
+      />
       <button
         className="btn-primary btn mt-10 w-full"
         disabled={!data?.pages?.at(-1)?.nextCursor}

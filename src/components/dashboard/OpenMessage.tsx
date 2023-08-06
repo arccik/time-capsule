@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TiEdit, TiLockOpen, TiMessages } from "react-icons/ti";
 import { AnimatePresence, motion } from "framer-motion";
 import DashboardCard from "./DashboardCard";
-import { Capsule } from "@prisma/client";
+import type { QueryObserverResult } from "@tanstack/react-query";
 
 type Props = {
   opened: Date;
@@ -12,7 +12,7 @@ type Props = {
   closed: Date;
   id: string;
   triggerPublic: () => void;
-  refetch: () => Promise<Capsule>;
+  refetch: () => Promise<QueryObserverResult>;
 };
 
 export default function OpenMessage({
