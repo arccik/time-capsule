@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { TiEdit, TiLockOpen, TiMessages, TiTimesOutline } from "react-icons/ti";
+import { TiEdit, TiLockOpen, TiMessages } from "react-icons/ti";
 import { AnimatePresence, motion } from "framer-motion";
-import clsx from "clsx";
-import Modal from "../ui/Modal";
-import dateFormatter from "~/lib/dateFormatter";
+import DashboardCard from "./DashboardCard";
+import { Capsule } from "@prisma/client";
 
 type Props = {
   opened: Date;
@@ -11,8 +10,9 @@ type Props = {
   isPublic: boolean;
   message: string;
   closed: Date;
-  deleteMessage: () => void;
+  id: string;
   triggerPublic: () => void;
+  refetch: () => Promise<Capsule>;
 };
 
 export default function OpenMessage({
@@ -22,46 +22,29 @@ export default function OpenMessage({
   closed,
   subject,
   triggerPublic,
-  deleteMessage,
+  id,
+  refetch,
 }: Props) {
   const [expand, setExpand] = useState(false);
-  const [isDeleteClicked, setIsDeleteClicked] = useState(false);
 
-  const handleDelete = () => {
-    setIsDeleteClicked(false);
-    deleteMessage();
-  };
   return (
     <>
-      <div
-        className={clsx("alert m-2 flex w-[95%] flex-row shadow-lg", {
-          "alert-success": isPublic,
-        })}
-      >
-        <div>
-          <TiLockOpen className="mr-2 text-2xl" />
-          <span>
-            <p className="text-sm font-bold">Opened: {dateFormatter(opened)}</p>
-            <span className="text-xs text-secondary">
-              {isPublic ? "Public" : "Private"}
-            </span>
-          </span>
-        </div>
-        <div className="flex-none">
+      <DashboardCard
+        isPublic={isPublic}
+        date={opened}
+        icon={<TiLockOpen />}
+        id={id}
+        refetch={refetch}
+        actions={
           <button
             className="btn-green-200 btn"
             onClick={() => setExpand((prev) => !prev)}
           >
             <TiMessages className="text-2xl" />
           </button>
-          <button
-            className="btn-secondary btn"
-            onClick={() => setIsDeleteClicked(true)}
-          >
-            <TiTimesOutline className="text-2xl" />
-          </button>
-        </div>
-      </div>
+        }
+      />
+
       <AnimatePresence>
         {expand && (
           <motion.div
@@ -69,7 +52,7 @@ export default function OpenMessage({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -50, opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="border-red-20 h-[300px] w-full rounded-md border bg-base-200 p-10 drop-shadow-md"
+            className="border-red-20 w-full rounded-md border bg-base-200 p-10 drop-shadow-md"
           >
             <h1 className="mb-4 text-2xl font-bold">{subject}</h1>{" "}
             <p>{message}</p>
@@ -92,25 +75,6 @@ export default function OpenMessage({
           </motion.div>
         )}
       </AnimatePresence>
-      {isDeleteClicked && (
-        <Modal>
-          <h3 className="text-lg font-bold">Delete this message?</h3>
-          <p className="py-4">
-            The message will be permanently deleted and cannot be recovered.
-          </p>
-          <div className="modal-action">
-            <button
-              onClick={() => setIsDeleteClicked(false)}
-              className="btn-outline btn"
-            >
-              No
-            </button>
-            <button onClick={handleDelete} className="btn-warning btn">
-              Yes
-            </button>
-          </div>
-        </Modal>
-      )}
     </>
   );
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import Loader from "~/components/ui/Loader";
 import { api } from "~/utils/api";
-import { BsTrash, BsClock } from "react-icons/bs";
-import dateFormatter from "~/lib/dateFormatter";
+import DashboardCard from "./DashboardCard";
+import { Bs0CircleFill, BsTrash } from "react-icons/bs";
 
 export default function BuriedCapsules() {
   const {
@@ -39,30 +39,11 @@ export default function BuriedCapsules() {
           <b className="text-secondary">Buried</b> Messages
         </p>
         {capsuleData.map((capsule) => (
-          <div
-            key={capsule.id}
-            className="alert m-2 flex w-[95%] flex-row shadow-lg"
-          >
-            <div>
-              <BsClock className="mr-2 text-2xl" />
-              <span>
-                <p className="text-sm font-bold">
-                  Will open on {dateFormatter(capsule.dateTime)}
-                </p>
-                <span className="text-xs text-primary-focus">
-                  {capsule.public ? "Public" : "Private"}
-                </span>
-              </span>
-            </div>
-            <div className="flex-none">
-              <button className="btn-secondary btn">
-                <BsTrash
-                  className="text-2xl"
-                  onClick={() => handleDelete(capsule.id)}
-                />
-              </button>
-            </div>
-          </div>
+          <DashboardCard
+            id={capsule.id}
+            isPublic={capsule.public}
+            date={capsule.createdAt}
+          />
         ))}
       </div>
     </>

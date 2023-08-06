@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useRouter } from "next/router";
 import React from "react";
 
 type Props = {
@@ -7,7 +8,16 @@ type Props = {
 };
 
 export default function Tabs({ setActiveTab, activeTab }: Props) {
+  const router = useRouter();
   const tabsTitle = ["Pending", "Dashboard", "Closed", "Opened"];
+
+  const handleTabClick = (index: number) => {
+    setActiveTab(index);
+    router.push({
+      pathname: router.pathname,
+      query: { openTab: index.toString() },
+    });
+  };
 
   const tabs = tabsTitle.map((tab, index) => (
     <button
@@ -15,7 +25,7 @@ export default function Tabs({ setActiveTab, activeTab }: Props) {
       className={clsx("tab-lifted tab", {
         "tab-active": activeTab === index,
       })}
-      onClick={() => setActiveTab(index)}
+      onClick={() => handleTabClick(index)}
     >
       {tab}
     </button>
