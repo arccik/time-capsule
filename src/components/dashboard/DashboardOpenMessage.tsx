@@ -3,6 +3,7 @@ import { TiEdit, TiLockOpen, TiMessages } from "react-icons/ti";
 import { AnimatePresence, motion } from "framer-motion";
 import DashboardCard from "./DashboardCard";
 import type { QueryObserverResult } from "@tanstack/react-query";
+import Image from "next/image";
 
 type Props = {
   opened: Date;
@@ -11,6 +12,7 @@ type Props = {
   message: string;
   closed: Date;
   id: string;
+  image: string | null;
   triggerPublic: () => void;
   refetch: () => Promise<QueryObserverResult>;
 };
@@ -24,6 +26,7 @@ export default function OpenMessage({
   triggerPublic,
   id,
   refetch,
+  image,
 }: Props) {
   const [expand, setExpand] = useState(false);
 
@@ -54,8 +57,11 @@ export default function OpenMessage({
             transition={{ duration: 0.5 }}
             className="border-red-20 w-full rounded-md border bg-base-200 p-10 drop-shadow-md"
           >
-            <h1 className="mb-4 text-2xl font-bold">{subject}</h1>{" "}
-            <p>{message}</p>
+            <h1 className="mb-4 text-2xl font-bold">{subject}</h1>
+            <p className="whitespace-pre-line">{message}</p>
+            {image && (
+              <Image src={image} width={150} height={150} alt={subject} />
+            )}
             <TiEdit
               size={24}
               className="cursor-pointer hover:text-primary-focus"

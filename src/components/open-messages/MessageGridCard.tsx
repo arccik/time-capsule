@@ -12,7 +12,7 @@ export default function MessageCard({
 }) {
   return (
     <>
-      <figure className="card glass relative rounded-xl p-6 shadow-xl shadow-slate-900/10 dark:shadow-slate-200/10 dark:drop-shadow-lg">
+      <figure className="card glass relative rounded-xl p-6 shadow-slate-900/10 dark:shadow-slate-200/10 dark:drop-shadow-lg">
         <button className="text-left" onClick={() => setActiveCard(data.id)}>
           <h1 className=" mb-1 text-gray-300  dark:text-slate-300">
             {data.subject}

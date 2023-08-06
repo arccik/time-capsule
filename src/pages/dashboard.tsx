@@ -1,11 +1,11 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import ClosedMessages from "~/components/dashboard/ClosedMessages";
-import StatsBar from "~/components/dashboard/StatsBar";
-import PandingCapsules from "~/components/dashboard/PendingCapsules";
-import Tabs from "~/components/dashboard/Tabs";
+import ClosedMessages from "~/components/dashboard/DashboardClosedMessages";
+import StatsBar from "~/components/dashboard/DashboardStatsBar";
+import PandingCapsules from "~/components/dashboard/DashboardPendingMessages";
+import Tabs from "~/components/dashboard/DashboardTabs";
 import ResponseAlert from "~/components/capsule-form/ResponseAlert";
-import OpenMessages from "~/components/dashboard/OpenMessages";
+import OpenMessages from "~/components/dashboard/DashboardOpenMessages";
 import { useRouter } from "next/router";
 
 export default function DashboardPage() {

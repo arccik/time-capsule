@@ -45,16 +45,16 @@ export default function OpenMessageModal({
               <Dialog.Panel className="glass w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all dark:bg-gray-800   dark:text-gray-200">
                 <Dialog.Title
                   as="h3"
-                  className="font-medium leading-6 text-gray-900 dark:text-gray-200 md:text-lg"
+                  className="font-medium leading-6 text-gray-900 dark:text-gray-400 md:text-lg"
                 >
                   {activeCard?.subject}
                 </Dialog.Title>
-                <ShowFromToDate
+                {/* <ShowFromToDate
                   from={activeCard.createdAt}
                   to={activeCard?.openedAt}
-                />
+                /> */}
                 <div className="mt-2">
-                  <p className="text-md dark:text-gray-200">
+                  <p className="text-md whitespace-break-spaces  dark:text-gray-200">
                     {activeCard?.message}
                   </p>
                 </div>

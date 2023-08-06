@@ -35,9 +35,8 @@ export default function MessageGrid() {
     }
   };
 
-  const dataByPage = data?.pages.map((page) => page.items);
+  const toShow = data?.pages.map((page) => page.items).flat();
 
-  const toShow = dataByPage?.reduce((a, b) => a.concat(b), []);
 
   return (
     <section className="items-center p-2 md:p-10" id="public-messages">

@@ -1,8 +1,7 @@
 import { api } from "~/utils/api";
-import OpenMessage from "./OpenMessage";
+import OpenMessage from "./DashboardOpenMessage";
 import Loader from "../ui/Loader";
 import { Suspense } from "react";
-
 
 export default function OpenMessages() {
   const { data, status, refetch } =
@@ -43,6 +42,7 @@ export default function OpenMessages() {
                 isPublic={capsule.public}
                 key={capsule.id}
                 refetch={refetch}
+                image={capsule.image}
               />
             ))
           ) : (
