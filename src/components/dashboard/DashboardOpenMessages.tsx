@@ -3,7 +3,7 @@ import OpenMessage from "./DashboardOpenMessage";
 import Loader from "../ui/Loader";
 import { Suspense } from "react";
 
-export default function OpenMessages() {
+export default function DashboardOpenMessages() {
   const { data, status, refetch } =
     api.capsule.getOpenCapsulesByUser.useQuery();
   const triggerOpenToPublic = api.capsule.openToPublic.useMutation();

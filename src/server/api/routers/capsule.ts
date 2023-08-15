@@ -110,6 +110,7 @@ export const capsuleRouter = createTRPCRouter({
           public: true,
           opened: true,
         },
+        include: { likes: true, comments: true },
       });
       let nextCursor: typeof cursor | undefined = undefined;
       if (items.length > limit) {

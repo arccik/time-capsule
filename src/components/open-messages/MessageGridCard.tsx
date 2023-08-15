@@ -2,12 +2,13 @@ import ActionButton from "./ActionButton";
 import type { Capsule } from "@prisma/client";
 import Image from "next/image";
 import ShowFromToDate from "./ShowFromToDate";
+import { api } from "~/utils/api";
 
 export default function MessageCard({
   data,
   setActiveCard,
 }: {
-  data: Capsule;
+  data: Capsule & { likes: { id: string }[]; comments: { id: string }[] };
   setActiveCard: (id: string) => void;
 }) {
   return (
@@ -37,8 +38,16 @@ export default function MessageCard({
         <figcaption className="relative mt-6  items-center justify-between border-t border-slate-300 pt-6">
           <div>
             <div className="flex items-center gap-2">
-              <ActionButton type="like" id={data.id} totalLikes={0} />
-              <ActionButton type="comment" id={data.id} totalComments={0} />
+              <ActionButton
+                type="like"
+                id={data.id}
+                totalLikes={data.likes.length}
+              />
+              <ActionButton
+                type="comment"
+                id={data.id}
+                totalComments={data.comments.length}
+              />
             </div>
           </div>
           <div className="overflow-hidden rounded-full bg-slate-50"></div>

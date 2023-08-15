@@ -8,18 +8,18 @@ type Props =
   | {
       type: "like";
       id: string;
-      totalLikes: number;
+      totalLikes?: number;
     }
   | {
       type: "comment";
       id: string;
-      totalComments: number;
+      totalComments?: number;
     };
 
 export default function ActionButton(props: Props) {
   const { type } = props;
   const [totalCount, setTotalCount] = useState(
-    type === "comment" ? props.totalComments : props.totalLikes
+    (type === "comment" ? props.totalComments : props.totalLikes) || 0
   );
   const { status } = useSession();
   const router = useRouter();

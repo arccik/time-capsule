@@ -59,7 +59,7 @@ export default function CommentBar({ id }: { id: string }) {
       <div className="mx-auto">
         <div className=" flex items-center justify-between">
           <h2
-            className="text-md ml-0 cursor-pointer rounded-md font-bold hover:text-slate-800 dark:text-slate-400 "
+            className="text-md mb-5  ml-0 cursor-pointer rounded-md font-bold hover:text-slate-800 dark:text-slate-400 "
             onClick={() => setShowCommentBar(!showCommentBar)}
           >
             Leave a comment

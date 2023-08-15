@@ -25,7 +25,7 @@ export default function OpenMessage({ data }: { data: Capsule }) {
               Opened - {data.openedAt?.toDateString()}
             </p>
           </div>
-          <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold dark:text-white md:text-2xl">
+          <p className="mt-10  text-lg font-semibold dark:text-white md:text-2xl">
             <q>{data.message}</q>
           </p>
           <SocialShareButtons message={data.message} title={data.subject} />

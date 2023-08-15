@@ -31,6 +31,11 @@ export const commentRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       return ctx.prisma.comment.delete({ where: { id: input.id } });
     }),
+  totalComments: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.comment.count({ where: { capsuleId: input.id } });
+    }),
 });
 
 //   like: protectedProcedure
@@ -47,11 +52,7 @@ export const commentRouter = createTRPCRouter({
 //         data: { capsuleId: input.id, userId: ctx.session.user.id },
 //       });
 //     }),
-//   totalLikes: publicProcedure
-//     .input(z.object({ id: z.string() }))
-//     .query(({ ctx, input }) => {
-//       return ctx.prisma.like.count({ where: { capsuleId: input.id } });
-//     }),
+
 //   checkIfLiked: protectedProcedure
 //     .input(z.object({ id: z.string() }))
 //     .query(({ ctx, input }) => {
