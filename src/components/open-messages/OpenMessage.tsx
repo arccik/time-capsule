@@ -28,7 +28,7 @@ export default function OpenMessage({ data }: { data: Capsule }) {
           <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold dark:text-white md:text-2xl">
             <q>{data.message}</q>
           </p>
-          <SocialShareButtons />
+          <SocialShareButtons message={data.message} title={data.subject} />
 
           <div className="card-actions mt-10">
             <CommentBar id={data.id} />
