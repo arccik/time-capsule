@@ -10,6 +10,7 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import type { Capsule } from "@prisma/client";
+import SocialShareButtons from "./SocialShareButtons";
 
 export default function OpenMessage({ data }: { data: Capsule }) {
   return (
@@ -27,30 +28,7 @@ export default function OpenMessage({ data }: { data: Capsule }) {
           <p className="float-right mt-10 flex max-h-[160px] overflow-hidden whitespace-pre-line text-lg font-semibold dark:text-white md:text-2xl">
             <q>{data.message}</q>
           </p>
-          <div className="card-actions absolute bottom-2 right-5 flex text-slate-600 dark:text-slate-500">
-            <p className="self-center text-xs font-semibold">Share</p>
-            <FacebookShareButton
-              url={window.location.href}
-              quote={data.message.slice(0, 100)}
-            >
-              <AiOutlineFacebook
-                className="cursor-pointer hover:text-sky-800"
-                size={25}
-              />
-            </FacebookShareButton>
-            <WhatsappShareButton url={window.location.href}>
-              <AiOutlineWhatsApp
-                className="cursor-pointer hover:text-sky-800"
-                size={25}
-              />
-            </WhatsappShareButton>
-            <TwitterShareButton url={window.location.href}>
-              <AiOutlineTwitter
-                className="cursor-pointer hover:text-sky-800"
-                size={25}
-              />
-            </TwitterShareButton>
-          </div>
+          <SocialShareButtons />
 
           <div className="card-actions mt-10">
             <CommentBar id={data.id} />

@@ -73,7 +73,7 @@ export default function CommentBar({ id }: { id: string }) {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={4}
-                className="w-full bg-transparent  px-0 text-sm text-gray-900 placeholder-slate-300 focus:outline-none  focus:ring-0 dark:border-white"
+                className="w-full bg-transparent  px-0 text-sm text-gray-900 placeholder-slate-300 focus:outline-none focus:ring-0  dark:border-white dark:text-gray-50"
                 placeholder="Write a comment..."
                 required
               ></textarea>

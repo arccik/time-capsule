@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import CommentBar from "./CommentBar";
 import { AiFillCloseCircle } from "react-icons/ai";
 import ShowFromToDate from "./ShowFromToDate";
+import SocialShareButtons from "./SocialShareButtons";
 type Props = {
   activeCard: Capsule | null;
   closeModal: () => void;
@@ -45,7 +46,7 @@ export default function OpenMessageModal({
               <Dialog.Panel className="glass w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all dark:bg-gray-800   dark:text-gray-200">
                 <Dialog.Title
                   as="h3"
-                  className="font-medium leading-6 text-gray-900 dark:text-gray-400 md:text-lg"
+                  className="text-xl font-medium leading-6 text-gray-900 dark:text-gray-200"
                 >
                   {activeCard?.subject}
                 </Dialog.Title>
@@ -66,6 +67,10 @@ export default function OpenMessageModal({
                 <div className="mt-4">
                   <CommentBar id={activeCard.id} />
                 </div>
+                <SocialShareButtons
+                  message={activeCard?.message}
+                  title={activeCard.subject}
+                />
               </Dialog.Panel>
             </Transition.Child>
           </div>

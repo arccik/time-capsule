@@ -100,6 +100,9 @@ export const capsuleRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const { limit, skip, cursor } = input;
       const items = await ctx.prisma.capsule.findMany({
+        orderBy: {
+          updatedAt: "desc",
+        },
         take: limit + 1,
         skip: skip,
         cursor: cursor ? { id: cursor } : undefined,
