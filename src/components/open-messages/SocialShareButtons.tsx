@@ -8,19 +8,23 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
+import { env } from "~/env.mjs";
 
 export default function SocialShareButtons({
   message,
   title,
+  id,
 }: {
   message: string;
   title?: string;
+  id: string;
 }) {
+  const url = `${env.NEXT_PUBLIC_CLIENT_URL}/messages/${id}`;
   return (
-    <div className="card-actions absolute bottom-2 right-5 flex text-slate-600 dark:text-slate-500">
+    <div className="card-actions absolute bottom-2 right-5 flex text-slate-600">
       <p className="self-center text-xs font-semibold">Share</p>
       <FacebookShareButton
-        url={window.location.href}
+        url={url}
         quote={message}
         hashtag={"messageTTF, Time Caspule"}
       >
@@ -29,14 +33,14 @@ export default function SocialShareButtons({
           size={25}
         />
       </FacebookShareButton>
-      <WhatsappShareButton url={window.location.href} title={""}>
+      <WhatsappShareButton url={url} title={""}>
         <AiOutlineWhatsApp
           className="cursor-pointer hover:text-sky-800"
           size={25}
         />
       </WhatsappShareButton>
       <TwitterShareButton
-        url={window.location.href}
+        url={url}
         hashtags={["messageTTF", "TimeCaspule", "fromThePast"]}
         title={message}
       >

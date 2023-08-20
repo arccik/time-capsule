@@ -44,7 +44,7 @@ export default function Header() {
     );
 
   return (
-    <div className="navbar  bg-base-100 transition-all duration-500">
+    <div className="navbar bg-slate-100 transition-all duration-500">
       <div className="flex-1">
         <Link
           href="/"
@@ -54,7 +54,7 @@ export default function Header() {
         >
           <div className="inline-flex text-lg font-bold text-primary transition-all duration-200 md:text-3xl">
             <span className="lowercase">message</span>{" "}
-            <span className="uppercase text-base-content">TTF</span>
+            <span className="text-slate-content uppercase">TTF</span>
           </div>
         </Link>
       </div>
@@ -79,7 +79,7 @@ export default function Header() {
           )}
           <ul
             tabIndex={0}
-            className="dropdown-content menu rounded-box z-[1] mt-5 w-52 bg-base-100 p-2 shadow"
+            className="dropdown-content menu rounded-box z-[1] mt-5 w-52 bg-slate-100 p-2 shadow"
           >
             {menuItems}
           </ul>

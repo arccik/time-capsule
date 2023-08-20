@@ -13,11 +13,9 @@ export default function MessageCard({
 }) {
   return (
     <>
-      <figure className="card glass relative rounded-xl p-6 shadow-slate-900/10 dark:shadow-slate-200/10 dark:drop-shadow-lg">
+      <figure className="card glass relative rounded-xl p-6 shadow-slate-900/10">
         <button className="text-left" onClick={() => setActiveCard(data.id)}>
-          <h1 className=" mb-1 text-gray-300  dark:text-slate-300">
-            {data.subject}
-          </h1>
+          <h1 className=" mb-1 text-gray-300">{data.subject}</h1>
           {data.image && (
             <Image
               width={300}
@@ -28,7 +26,7 @@ export default function MessageCard({
             />
           )}
           <blockquote className="relative">
-            <p className="mb-5 line-clamp-3 text-lg tracking-tight text-slate-900 dark:text-white">
+            <p className="mb-5 line-clamp-3 text-lg tracking-tight text-slate-900">
               {data.message}
             </p>
           </blockquote>

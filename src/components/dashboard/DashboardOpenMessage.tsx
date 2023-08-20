@@ -55,7 +55,7 @@ export default function OpenMessage({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -50, opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="border-red-20 w-full rounded-md border bg-base-200 p-10 drop-shadow-md"
+            className="border-red-20 w-full rounded-md border bg-slate-200 p-10 drop-shadow-md"
           >
             <h1 className="mb-4 text-2xl font-bold">{subject}</h1>
             <p className="whitespace-pre-line">{message}</p>

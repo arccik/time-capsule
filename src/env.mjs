@@ -68,7 +68,8 @@ export const env = createEnv({
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().min(1),
-    NEXT_PUBLIC_AWS_S3_BACKET_URL: z.string()
+    NEXT_PUBLIC_AWS_S3_BACKET_URL: z.string(),
+    NEXT_PUBLIC_CLIENT_URL: z.string()
   },
 
   /**
@@ -109,6 +110,7 @@ export const env = createEnv({
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
     CLIENT_URL: process.env.CLIENT_URL,
-    NEXT_PUBLIC_AWS_S3_BACKET_URL: process.env.NEXT_PUBLIC_AWS_S3_BACKET_URL
+    NEXT_PUBLIC_AWS_S3_BACKET_URL: process.env.NEXT_PUBLIC_AWS_S3_BACKET_URL,
+    NEXT_PUBLIC_CLIENT_URL: process.env.NEXT_PUBLIC_CLIENT_URL
   },
 });

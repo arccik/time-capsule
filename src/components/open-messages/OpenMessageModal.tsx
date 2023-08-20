@@ -1,9 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import type { Capsule } from "@prisma/client";
 import { Dialog, Transition } from "@headlessui/react";
 import CommentBar from "./CommentBar";
-import { AiFillCloseCircle } from "react-icons/ai";
-import ShowFromToDate from "./ShowFromToDate";
+import { AiFillCloseCircle, AiOutlineClose } from "react-icons/ai";
 import SocialShareButtons from "./SocialShareButtons";
 type Props = {
   activeCard: Capsule | null;
@@ -16,6 +15,14 @@ export default function OpenMessageModal({
   closeModal,
   isOpen,
 }: Props) {
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dialogRef?.current?.scrollTo({ top: 0, behavior: "smooth" });
+    }, 300);
+  });
+
   if (!activeCard) return;
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -32,7 +39,7 @@ export default function OpenMessageModal({
           <div className="fixed inset-0 bg-black bg-opacity-40" />
         </Transition.Child>
 
-        <div className="fixed inset-0 overflow-y-auto">
+        <div className="fixed inset-0 overflow-y-auto" ref={dialogRef}>
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Transition.Child
               as={Fragment}
@@ -43,10 +50,10 @@ export default function OpenMessageModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="glass w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all dark:bg-gray-800   dark:text-gray-200">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-100 p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-xl font-medium leading-6 text-gray-900 dark:text-gray-200"
+                  className="text-xl font-medium leading-6 text-gray-900"
                 >
                   {activeCard?.subject}
                 </Dialog.Title>
@@ -55,7 +62,7 @@ export default function OpenMessageModal({
                   to={activeCard?.openedAt}
                 /> */}
                 <div className="mt-2">
-                  <p className="text-md whitespace-break-spaces  dark:text-gray-200">
+                  <p className="text-md whitespace-break-spaces">
                     {activeCard?.message}
                   </p>
                 </div>
@@ -70,7 +77,13 @@ export default function OpenMessageModal({
                 <SocialShareButtons
                   message={activeCard?.message}
                   title={activeCard.subject}
+                  id={activeCard.id}
                 />
+                {activeCard.message.length > 300 && (
+                  <span className="cursor-pointer" onClick={closeModal}>
+                    Close
+                  </span>
+                )}
               </Dialog.Panel>
             </Transition.Child>
           </div>

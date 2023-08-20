@@ -1,14 +1,4 @@
 import CommentBar from "~/components/open-messages/CommentBar";
-import {
-  AiOutlineFacebook,
-  AiOutlineWhatsApp,
-  AiOutlineTwitter,
-} from "react-icons/ai";
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-} from "react-share";
 import type { Capsule } from "@prisma/client";
 import SocialShareButtons from "./SocialShareButtons";
 
@@ -21,11 +11,11 @@ export default function OpenMessage({ data }: { data: Capsule }) {
             {data.subject}
           </h2>
           <div>
-            <p className="-mt-3 text-sm text-slate-700 dark:text-slate-300">
+            <p className="-mt-3 text-sm text-slate-700">
               Opened - {data.openedAt?.toDateString()}
             </p>
           </div>
-          <p className="mt-10  text-lg font-semibold dark:text-white md:text-2xl">
+          <p className="mt-10  text-lg font-semibold">
             <q>{data.message}</q>
           </p>
           <SocialShareButtons message={data.message} title={data.subject} />

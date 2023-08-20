@@ -59,7 +59,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="hero min-h-[calc(100vh-70px)] bg-base-200">
+    <div className="hero min-h-[calc(100vh-70px)] bg-slate-200">
       <div className="hero-content max-w-5xl flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           {/* {contextHolder} */}
@@ -81,7 +81,7 @@ export default function SignUpPage() {
             <Loader />
           </div>
         ) : (
-          <div className="card w-full max-w-sm flex-shrink-0 bg-base-100 shadow-2xl">
+          <div className="card w-full max-w-sm flex-shrink-0 bg-slate-100 shadow-2xl">
             <div className="card-body">
               <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
                 <Input

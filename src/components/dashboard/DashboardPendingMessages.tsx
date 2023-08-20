@@ -43,7 +43,7 @@ export default function PendingCapsules() {
     }
   };
   return (
-    <div className="card w-full bg-base-100 shadow-xl">
+    <div className="card w-full bg-slate-100 shadow-xl">
       <div className="card-body">
         <h2 className="card-title">Pending Capsules - awaiting payment</h2>
 
@@ -73,13 +73,13 @@ export default function PendingCapsules() {
                 <div className="btn-group btn-group-horizontal">
                   <button
                     onClick={() => void handlePayment(capsule.id)}
-                    className="btn-outline btn-primary btn-xs btn text-xs"
+                    className="btn-primary btn-outline btn-xs btn text-xs"
                   >
                     Pay <MdPayment className="ml-1 text-xl" />
                   </button>
                   <button
                     onClick={() => setIsDeleteClicked(true)}
-                    className="btn-outline btn-secondary btn-xs btn text-xs"
+                    className="btn-secondary btn-outline btn-xs btn text-xs"
                   >
                     Delete <MdDeleteForever className="ml-1 text-xl" />
                   </button>

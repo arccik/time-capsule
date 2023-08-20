@@ -7,7 +7,7 @@ export default function MakePublicButton({
 }) {
   return (
     <div>
-      <div className="border-3 form-control w-full rounded-lg bg-slate-100 p-1 shadow-lg dark:bg-[#1d232a]">
+      <div className="border-3 form-control w-full rounded-lg bg-slate-100 p-1 shadow-lg">
         <label className="label cursor-pointer">
           <span className="label-text">
             Public <span className="text-sm">(Everyone can see it)</span>

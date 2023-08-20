@@ -8,7 +8,7 @@ export default function Profile() {
   if (status === "loading") return <Loader />;
 
   return (
-    <div className="hero min-h-[600px] bg-base-200 ">
+    <div className="hero min-h-[600px] bg-slate-200 ">
       <div className="hero-content w-2/3 flex-col lg:flex-row">
         {sessionData?.user?.image && (
           <Image
@@ -37,7 +37,7 @@ export default function Profile() {
     </div>
   );
   // return (
-  //   <div className="card mx-auto mb-10 w-[90%] bg-base-100 shadow-xl">
+  //   <div className="card mx-auto mb-10 w-[90%] bg-slate-100 shadow-xl">
   //     <figure>
   //       {sessionData?.user?.image && (
   //         <Image

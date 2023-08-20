@@ -4,7 +4,7 @@ export default function Hero() {
       <h1 className="mb-10 mt-10 text-center text-5xl font-bold">
         Public Messages
       </h1>
-      <p className="-mt-10 text-center text-base-300 dark:text-slate-500">
+      <p className="-mt-10 text-center text-slate-300">
         Connecting Hearts, Inspiring Minds
       </p>
     </div>

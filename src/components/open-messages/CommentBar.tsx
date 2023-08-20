@@ -59,7 +59,7 @@ export default function CommentBar({ id }: { id: string }) {
       <div className="mx-auto">
         <div className=" flex items-center justify-between">
           <h2
-            className="text-md mb-5  ml-0 cursor-pointer rounded-md font-bold hover:text-slate-800 dark:text-slate-400 "
+            className="text-md mb-5  ml-0 cursor-pointer rounded-md font-bold hover:text-slate-800"
             onClick={() => setShowCommentBar(!showCommentBar)}
           >
             Leave a comment
@@ -67,20 +67,20 @@ export default function CommentBar({ id }: { id: string }) {
         </div>
         {isAuth && showCommentBar && (
           <form onSubmit={handleSubmit} className="mb-10">
-            <div className="mb-4 rounded-lg rounded-t-lg border border-base-300 px-4 py-2">
+            <div className="mb-4 rounded-lg rounded-t-lg border border-slate-700 px-4 py-2">
               <textarea
                 id="comment"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={4}
-                className="w-full bg-transparent  px-0 text-sm text-gray-900 placeholder-slate-300 focus:outline-none focus:ring-0  dark:border-white dark:text-gray-50"
+                className="w-full bg-transparent  px-0 text-sm text-gray-900 placeholder-slate-700 focus:outline-none focus:ring-0"
                 placeholder="Write a comment..."
                 required
               ></textarea>
             </div>
             <button
               type="submit"
-              className="btn-outline btn-sm btn border-stone-300 text-stone-200"
+              className="btn-outline btn-sm btn border-stone-700 text-stone-700"
             >
               Post comment
             </button>
@@ -91,7 +91,7 @@ export default function CommentBar({ id }: { id: string }) {
           <article className=" card glass mb-6 p-6 " key={comment.id}>
             <footer className="mb-2 flex items-center justify-between">
               <div className="flex items-center">
-                <p className="mr-3 inline-flex items-center text-sm text-gray-900 dark:text-white">
+                <p className="mr-3 inline-flex items-center text-sm text-gray-900">
                   {comment.user.image && (
                     <Image
                       width={60}
@@ -103,7 +103,7 @@ export default function CommentBar({ id }: { id: string }) {
                   )}
                   {comment.user?.name}
                 </p>
-                <p className="text-sm text-gray-900 dark:text-gray-400">
+                <p className="text-sm text-gray-900">
                   <time title="February 8th, 2022">
                     {comment.createdAt.toDateString()}
                   </time>
@@ -111,9 +111,7 @@ export default function CommentBar({ id }: { id: string }) {
               </div>
               {isAuth && comment.user.id === session?.user.id && (
                 <button
-                  id="dropdownComment1Button"
-                  data-dropdown-toggle="dropdownComment1"
-                  className="absolute right-1 top-1 inline-flex items-center rounded-lg bg-transparent text-center text-sm font-medium text-red-400 hover:bg-red-700  hover:text-white  focus:outline-none focus:ring-4 dark:focus:ring-gray-600"
+                  className="absolute right-1 top-1 inline-flex items-center rounded-lg bg-transparent text-center text-sm font-medium text-red-400 hover:bg-red-700  hover:text-white  focus:outline-none focus:ring-4"
                   type="button"
                   onClick={() => deleteComment.mutate({ id: comment.id })}
                 >
