@@ -10,15 +10,7 @@ import {
 } from "react-share";
 import { env } from "~/env.mjs";
 
-export default function SocialShareButtons({
-  message,
-  title,
-  id,
-}: {
-  message: string;
-  title?: string;
-  id: string;
-}) {
+export default function SocialShareButtons({ message, id }: { message: string; id: string }) {
   const url = `${env.NEXT_PUBLIC_CLIENT_URL}/messages/${id}`;
   return (
     <div className="card-actions absolute bottom-2 right-5 flex text-slate-600">

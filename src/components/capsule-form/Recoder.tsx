@@ -4,7 +4,7 @@ import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import { GrTrash, GrAdd, GrClose } from "react-icons/gr";
 import { IoCloudDone } from "react-icons/io5";
 import { env } from "~/env.mjs";
-import { FormProps } from "~/types/formProps";
+import { type FormProps } from "~/types/formProps";
 import { api } from "~/utils/api";
 
 export default function Recorder({ setValue }: Pick<FormProps, "setValue">) {

@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef } from "react";
 import type { Capsule } from "@prisma/client";
 import { Dialog, Transition } from "@headlessui/react";
 import CommentBar from "./CommentBar";
-import { AiFillCloseCircle, AiOutlineClose } from "react-icons/ai";
+import { AiFillCloseCircle } from "react-icons/ai";
 import SocialShareButtons from "./SocialShareButtons";
 type Props = {
   activeCard: Capsule | null;
@@ -76,7 +76,6 @@ export default function OpenMessageModal({
                 </div>
                 <SocialShareButtons
                   message={activeCard?.message}
-                  title={activeCard.subject}
                   id={activeCard.id}
                 />
                 {activeCard.message.length > 300 && (

@@ -2,7 +2,6 @@ import ActionButton from "./ActionButton";
 import type { Capsule } from "@prisma/client";
 import Image from "next/image";
 import ShowFromToDate from "./ShowFromToDate";
-import { api } from "~/utils/api";
 
 export default function MessageCard({
   data,

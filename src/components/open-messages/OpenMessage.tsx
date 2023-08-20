@@ -18,7 +18,7 @@ export default function OpenMessage({ data }: { data: Capsule }) {
           <p className="mt-10  text-lg font-semibold">
             <q>{data.message}</q>
           </p>
-          <SocialShareButtons message={data.message} title={data.subject} />
+          <SocialShareButtons message={data.message} id={data.id} />
 
           <div className="card-actions mt-10">
             <CommentBar id={data.id} />
