@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
     <div className="p-4">
-      <h1 className="mb-5 text-3xl font-bold text-white md:mb-0 md:mt-5 md:text-5xl">
+      <h1 className="text-2xl font-bold text-white  md:mt-5 md:text-5xl">
         Message To The FUTURE
       </h1>
       <p className="text-white">

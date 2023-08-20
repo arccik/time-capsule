@@ -63,7 +63,7 @@ export default function OpenMessageModal({
                   <Image
                     width={400}
                     height={200}
-                    src="/images/bg-time-capsule-found.jpeg"
+                    src={activeCard.image}
                     alt={activeCard.subject}
                   />
                 )}

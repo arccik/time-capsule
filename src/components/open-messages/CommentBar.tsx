@@ -37,7 +37,8 @@ export default function CommentBar({ id }: { id: string }) {
   });
 
   // if (commentStatus === "loading") return <Loader />;
-  if (commentStatus === "error") return <div>Error...</div>;
+  if (commentStatus === "error")
+    return <div>Couldn't load comments, something went wrong</div>;
   if (!isAuth)
     return (
       <button

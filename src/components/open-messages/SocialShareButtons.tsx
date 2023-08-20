@@ -11,7 +11,7 @@ import {
 import { env } from "~/env.mjs";
 
 export default function SocialShareButtons({ message, id }: { message: string; id: string }) {
-  const url = `${env.NEXT_PUBLIC_CLIENT_URL}/messages/${id}`;
+  const url = `${env.NEXT_PUBLIC_CLIENT_URL}/message/${id}`;
   return (
     <div className="card-actions absolute bottom-2 right-5 flex text-slate-600">
       <p className="self-center text-xs font-semibold">Share</p>

@@ -22,6 +22,10 @@ export default function HelpDialog() {
             <b className=" font-bold">Submit & wait:</b> Send your request and
             await the specified date or delivery.
           </li>
+          <li>
+            <b className=" font-bold">Credit Card Required</b> Invest in the
+            creators behind the magic. Your payment fuels their creativity.
+          </li>
         </ol>
       </div>
     </div>

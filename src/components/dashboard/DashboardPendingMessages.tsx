@@ -1,7 +1,7 @@
 import { MdDeleteForever, MdPayment } from "react-icons/md";
 import { api } from "~/utils/api";
 import Loader from "../ui/Loader";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import useStripe from "~/hooks/useStripe";
 import Modal from "../ui/Modal";
 
@@ -59,7 +59,7 @@ export default function PendingCapsules() {
               </div>
             );
           return (
-            <>
+            <Fragment key={capsule.id}>
               <div
                 key={capsule.id}
                 className="mb-3 flex w-full flex-row  border-t border-gray-200 pb-5 pt-5"
@@ -112,7 +112,7 @@ export default function PendingCapsules() {
               <p className="left-0 hidden text-xs md:block">
                 Created: {capsule.createdAt.toDateString()}
               </p>
-            </>
+            </Fragment>
           );
         })}
       </div>

@@ -31,6 +31,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(400).send(`Webhook Error: ${message}`);
       return;
     }
+    console.log("EVENT RECEIVED:", event.type);
     switch (event.type) {
       case "checkout.session.completed":
         const checkoutSessionSucceeded = event.data.object as { id: string };
@@ -42,6 +43,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
             paid: true,
           },
         });
+        console.log("PAYMENT SUCCESSFULLY COMPLETED");
         break;
       default:
         console.log(`Unhandled event type ${event.type}`);
