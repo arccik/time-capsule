@@ -4,6 +4,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import CommentBar from "./CommentBar";
 import { AiFillCloseCircle } from "react-icons/ai";
 import SocialShareButtons from "./SocialShareButtons";
+import Image from "next/image";
+
 type Props = {
   activeCard: Capsule | null;
   closeModal: () => void;
@@ -21,7 +23,7 @@ export default function OpenMessageModal({
     setTimeout(() => {
       dialogRef?.current?.scrollTo({ top: 0, behavior: "smooth" });
     }, 300);
-  });
+  }, [activeCard]);
 
   if (!activeCard) return;
   return (
@@ -40,7 +42,7 @@ export default function OpenMessageModal({
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto" ref={dialogRef}>
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <div className="flex min-h-full items-center justify-center p-2 text-center  md:p-4">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -50,17 +52,22 @@ export default function OpenMessageModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-100 p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-100 p-4 text-left align-middle shadow-xl transition-all md:p-6">
                 <Dialog.Title
                   as="h3"
                   className="text-xl font-medium leading-6 text-gray-900"
                 >
                   {activeCard?.subject}
                 </Dialog.Title>
-                {/* <ShowFromToDate
-                  from={activeCard.createdAt}
-                  to={activeCard?.openedAt}
-                /> */}
+                {activeCard?.image && (
+                  <Image
+                    width={400}
+                    height={200}
+                    src="/images/bg-time-capsule-found.jpeg"
+                    alt={activeCard.subject}
+                  />
+                )}
+
                 <div className="mt-2">
                   <p className="text-md whitespace-break-spaces">
                     {activeCard?.message}

@@ -1,22 +1,23 @@
 import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi2";
+import dateFormatter from "~/lib/dateFormatter";
 
 type Props = { from: Date | null; to: Date | null };
 
 export default function ShowFromToDate({ from, to }: Props) {
   return (
-    <div className="font-display flex w-full flex-row justify-between text-sm text-slate-300 ">
+    <div className="font-display flex w-full flex-row justify-between text-xs text-slate-300 md:text-sm ">
       {from && (
         <p>
-          {from.toDateString()}
+          {from.toLocaleDateString()}
           <HiLockClosed className="float-left mr-2" />
         </p>
       )}
       <FaLongArrowAltRight />
       {to && (
         <p>
-          {to.toDateString()}
+          {to.toLocaleDateString()}
           <HiLockOpen className="float-left mr-2" />
         </p>
       )}

@@ -59,7 +59,7 @@ export default function CommentBar({ id }: { id: string }) {
       <div className="mx-auto">
         <div className=" flex items-center justify-between">
           <h2
-            className="text-md mb-5  ml-0 cursor-pointer rounded-md font-bold hover:text-slate-800"
+            className="text-md mb-5 ml-0 cursor-pointer rounded-md font-bold hover:text-slate-800"
             onClick={() => setShowCommentBar(!showCommentBar)}
           >
             Leave a comment
@@ -88,7 +88,7 @@ export default function CommentBar({ id }: { id: string }) {
         )}
         {loading && <Loader />}
         {capsuleComment?.map((comment) => (
-          <article className=" card glass mb-6 p-6 " key={comment.id}>
+          <article className=" card glass mb-6 p-3 md:p-6 " key={comment.id}>
             <footer className="mb-2 flex items-center justify-between">
               <div className="flex items-center">
                 <p className="mr-3 inline-flex items-center text-sm text-gray-900">
