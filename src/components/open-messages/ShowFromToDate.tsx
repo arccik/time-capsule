@@ -1,7 +1,6 @@
 import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi2";
-import dateFormatter from "~/lib/dateFormatter";
 
 type Props = { from: Date | null; to: Date | null };
 
