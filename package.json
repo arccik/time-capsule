@@ -41,6 +41,7 @@
     "react-share": "^4.4.1",
     "stripe": "^12.9.0",
     "superjson": "1.12.2",
+    "timeago-react": "^3.0.6",
     "twilio": "^4.11.2",
     "zod": "^3.21.4"
   },

@@ -26,7 +26,7 @@ export default function SignUpPage() {
   const registerUser = api.user.register.useMutation({
     onError: (err) => {
       setLoading(false);
-      console.log("Something went wrong with registration: ", err);
+      console.error("Something went wrong with registration: ", err);
       // notify.error({
       //   message: err.message,
       //   icon: <BsEmojiSmileUpsideDown className="text-red-500" />,

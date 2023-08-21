@@ -4,6 +4,7 @@ import Loader from "../ui/Loader";
 import { Fragment, useState } from "react";
 import useStripe from "~/hooks/useStripe";
 import Modal from "../ui/Modal";
+import Link from "next/link";
 
 export default function PendingCapsules() {
   const [loadingId, setLoadingId] = useState<string | null>(null);
@@ -43,11 +44,24 @@ export default function PendingCapsules() {
     }
   };
   return (
-    <div className="card w-full bg-slate-100 shadow-xl">
+    <div className="card w-full">
       <div className="card-body">
-        <h2 className="card-title">Pending Capsules - awaiting payment</h2>
+        <p className="text-3xl font-bold">
+          <b className="text-secondary">Pending: </b> Messages awaiting payment
+        </p>
 
-        <p className="text-xs font-bold text-primary">Total: {data.length}</p>
+        {data.length > 0 ? (
+          <p className="text-xs font-bold text-primary">Total: {data.length}</p>
+        ) : (
+          <>
+            <p className="text-center text-sm text-secondary">
+              You do not haveany messages yet.
+            </p>
+            <Link href="/" className="btn-primary btn-sm btn mt-10">
+              Create your first message
+            </Link>
+          </>
+        )}
         {data?.map((capsule) => {
           if (loadingId === capsule.id)
             return (

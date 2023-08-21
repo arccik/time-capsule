@@ -1,12 +1,12 @@
 import { api } from "~/utils/api";
-import Loader from "../layout/Loader";
+import Loader from "../ui/Loader";
 
 import TimeAgo from "timeago-react";
 import LikeButton from "./LikeButton";
 import CommentBar from "./CommentBar";
-import Pagination from "../layout/Pagination";
+import Pagination from "../ui/Pagination";
 import { useState } from "react";
-import Footer from "../layout/Footer";
+import Footer from "../ui/Footer";
 
 export default function OpenCapsules() {
   const [page, setPage] = useState(1);

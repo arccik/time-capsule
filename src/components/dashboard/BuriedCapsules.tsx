@@ -1,8 +1,8 @@
 import React from "react";
-import Loader from "~/components/layout/Loader";
 import { api } from "~/utils/api";
 import { BsCapsule, BsTrash } from "react-icons/bs";
 import dateFormatter from "~/lib/dateFormatter";
+import Loader from "../ui/Loader";
 
 export default function BuriedCapsules() {
   const {

@@ -34,7 +34,7 @@ Pick<FormProps, "setValue" | "unregister">) {
         body: formData,
       });
 
-      if (upload.ok) {
+      if (upload.ok && fields.key) {
         setValue("image", env.NEXT_PUBLIC_AWS_S3_BACKET_URL + fields.key);
         setFile(file);
         console.log("Upload successful.");

@@ -37,7 +37,6 @@ export default function TimeCapsuleForm() {
     setValue,
     getValues,
     reset,
-    watch,
     clearErrors,
     formState: { errors },
   } = useForm<Capsule>({
@@ -88,7 +87,6 @@ export default function TimeCapsuleForm() {
   return (
     <section>
       <div className="card m-2 md:glass md:ml-4 md:mr-4 md:p-4">
-        {JSON.stringify(watch())}
         <form
           onSubmit={(event) => {
             void handleSubmit(onSubmit)(event);
