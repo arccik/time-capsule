@@ -13,8 +13,11 @@ export default function MessageCard({
   return (
     <>
       <figure className="card glass relative rounded-xl p-4 shadow-slate-900/10 md:p-6">
+        <ShowFromToDate from={data.createdAt} to={data.openedAt} />
         <button className="text-left" onClick={() => setActiveCard(data.id)}>
-          <h1 className=" mb-1 text-gray-300">{data.subject}</h1>
+          <h1 className=" mb-2 mt-5 text-center text-xl font-bold text-slate-700">
+            {data.subject}
+          </h1>
           {data.image && (
             <Image
               width={300}
@@ -25,12 +28,11 @@ export default function MessageCard({
             />
           )}
           <blockquote className="relative">
-            <p className="mb-5 line-clamp-3 text-lg tracking-tight text-slate-900">
+            <p className="mt-5 line-clamp-3 text-lg tracking-tight text-slate-900">
               {data.message}
             </p>
           </blockquote>
         </button>
-        <ShowFromToDate from={data.createdAt} to={data.openedAt} />
 
         <figcaption className="relative mt-6  items-center justify-between border-t border-slate-300 pt-6">
           <div>
