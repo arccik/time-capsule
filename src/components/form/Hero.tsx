@@ -2,13 +2,9 @@ export default function Hero() {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold text-white  md:mt-5 md:text-5xl">
-        Message To The FUTURE
+        Message To The Future
       </h1>
-      <p className="text-white">
-        Write heartfelt messages, upload captivating photos, and record
-        unforgettable sound bites. MessageTTF will preserve your memories for
-        future enjoyment.
-      </p>
+      <p className="italic text-base-300">Connecting Hearts, Inspiring Minds</p>
     </div>
   );
 }

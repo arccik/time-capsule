@@ -53,7 +53,7 @@ export default function Header() {
           className="flex-0 btn-ghost btn px-2"
         >
           <div className="inline-flex text-lg font-bold text-primary transition-all duration-200 md:text-3xl">
-            <span className="lowercase">message</span>{" "}
+            <span className="lowercase">message</span>
             <span className="text-slate-content uppercase">TTF</span>
           </div>
         </Link>
