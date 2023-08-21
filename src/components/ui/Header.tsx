@@ -44,7 +44,7 @@ export default function Header() {
     );
 
   return (
-    <div className="navbar bg-slate-100 transition-all duration-500">
+    <div className="-all navbar duration-500">
       <div className="flex-1">
         <Link
           href="/"

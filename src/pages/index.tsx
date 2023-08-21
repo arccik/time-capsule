@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import TimeCapsuleForm from "~/components/capsule-form";
-import Hero from "~/components/capsule-form/Hero";
+import TimeCapsuleForm from "~/components/form";
+import Hero from "~/components/form/Hero";
 import ScrollToTop from "~/components/ui/ScrollToTop";
 import MessageGrid from "~/components/open-messages/MessageGrid";
 

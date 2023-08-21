@@ -35,8 +35,9 @@ export const capsuleRouter = createTRPCRouter({
         message: input.message,
         public: input.public,
         userId: ctx.session.user.id,
-        sms: input.sms,
         subject: input.subject,
+        image: input.image,
+        voiceMessage: input.voiceMessage,
       };
       return ctx.prisma.capsule.create({
         data: capsule,

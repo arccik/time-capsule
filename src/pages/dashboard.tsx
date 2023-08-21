@@ -4,7 +4,7 @@ import ClosedMessages from "~/components/dashboard/DashboardClosedMessages";
 import StatsBar from "~/components/dashboard/DashboardStatsBar";
 import PandingCapsules from "~/components/dashboard/DashboardPendingMessages";
 import Tabs from "~/components/dashboard/DashboardTabs";
-import ResponseAlert from "~/components/capsule-form/ResponseAlert";
+import ResponseAlert from "~/components/form/ResponseAlert";
 import OpenMessages from "~/components/dashboard/DashboardOpenMessages";
 import { useRouter } from "next/router";
 

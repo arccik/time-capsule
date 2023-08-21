@@ -19,7 +19,7 @@ export default function MessageCard({
             <Image
               width={300}
               height={170}
-              className="rounded-xl"
+              className="mx-auto  rounded-xl shadow-lg"
               src={data.image}
               alt={data.subject}
             />

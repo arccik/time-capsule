@@ -7,6 +7,7 @@ import Image from "next/image";
 
 export default function UploadFile({
   setValue,
+  unregister,
 }: // unregister,
 Pick<FormProps, "setValue" | "unregister">) {
   const [show, setShow] = useState(false);
@@ -34,7 +35,7 @@ Pick<FormProps, "setValue" | "unregister">) {
       });
 
       if (upload.ok) {
-        setValue("image", env.NEXT_PUBLIC_AWS_S3_BACKET_URL + file.name);
+        setValue("image", env.NEXT_PUBLIC_AWS_S3_BACKET_URL + fields.key);
         setFile(file);
         console.log("Upload successful.");
       } else {
@@ -57,7 +58,7 @@ Pick<FormProps, "setValue" | "unregister">) {
           onChange={() => {
             setFile(null);
             setShow((prev) => !prev);
-            // unregister("image");
+            unregister("image");
           }}
           checked={show}
         />
@@ -70,7 +71,7 @@ Pick<FormProps, "setValue" | "unregister">) {
               className="badge badge-error indicator-item cursor-pointer"
               onClick={() => {
                 setFile(null);
-                // unregister("image");
+                unregister("image");
               }}
             >
               X

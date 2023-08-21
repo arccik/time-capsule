@@ -14,7 +14,7 @@ import { api } from "~/utils/api";
 import useStripe from "~/hooks/useStripe";
 import VoiceMessage from "./VoiceMessage";
 import UploadFile from "./UploadFile";
-import DeliveryIn from "~/components/capsule-form/DeliveryIn";
+import DeliveryIn from "~/components/form/DeliveryIn";
 import ContactDetails from "./ContactDetails";
 
 export default function TimeCapsuleForm() {
@@ -37,6 +37,7 @@ export default function TimeCapsuleForm() {
     setValue,
     getValues,
     reset,
+    watch,
     clearErrors,
     formState: { errors },
   } = useForm<Capsule>({
@@ -83,9 +84,11 @@ export default function TimeCapsuleForm() {
       });
     }
   };
+
   return (
     <section>
       <div className="card m-2 md:glass md:ml-4 md:mr-4 md:p-4">
+        {JSON.stringify(watch())}
         <form
           onSubmit={(event) => {
             void handleSubmit(onSubmit)(event);
