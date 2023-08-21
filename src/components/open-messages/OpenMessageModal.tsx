@@ -55,10 +55,11 @@ export default function OpenMessageModal({
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-100 p-4 text-left align-middle shadow-xl transition-all md:p-6">
                 <Dialog.Title
                   as="h3"
-                  className="text-xl font-medium leading-6 text-gray-900"
+                  className="mb-5 text-xl font-medium leading-6 text-black"
                 >
                   {activeCard?.subject}
                 </Dialog.Title>
+                <div className="mx-auto w-1/2 border-t-2  pt-6 drop-shadow-xl"></div>
                 {activeCard?.image && (
                   <Image
                     width={400}
@@ -68,11 +69,9 @@ export default function OpenMessageModal({
                   />
                 )}
 
-                <div className="mt-2">
-                  <p className="text-md whitespace-break-spaces">
-                    {activeCard?.message}
-                  </p>
-                </div>
+                <p className="text-md whitespace-break-spaces">
+                  {activeCard?.message}
+                </p>
 
                 <AiFillCloseCircle
                   className="absolute right-2 top-2 cursor-pointer"
