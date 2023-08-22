@@ -47,9 +47,9 @@ export default function Recorder({ setValue }: Pick<FormProps, "setValue">) {
       method: "POST",
       body: formData,
     });
-    if (upload.ok) {
+    if (upload.ok && fields.key) {
       setUploadSuccess(true);
-      setValue("voiceMessage", env.NEXT_PUBLIC_AWS_S3_BACKET_URL + uploadURL);
+      setValue("voiceMessage", env.NEXT_PUBLIC_AWS_S3_BACKET_URL + fields.key);
     }
   };
   const handleCancelClic = () => {

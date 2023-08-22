@@ -4,7 +4,7 @@ import {
   getServerSession,
   type NextAuthOptions,
   type DefaultSession,
-  User,
+  type User,
 } from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
 import EmailProvider from "next-auth/providers/email";

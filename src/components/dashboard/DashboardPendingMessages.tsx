@@ -46,16 +46,20 @@ export default function PendingCapsules() {
   return (
     <div className="card w-full">
       <div className="card-body">
-        <p className="text-3xl font-bold">
-          <b className="text-secondary">Pending: </b> Messages awaiting payment
-        </p>
-
         {data.length > 0 ? (
-          <p className="text-xs font-bold text-primary">Total: {data.length}</p>
+          <>
+            <p className="text-3xl font-bold">
+              <b className="text-secondary">Pending: </b> Messages awaiting
+              payment
+            </p>
+            <p className="text-xs font-bold text-primary">
+              Total: {data.length}
+            </p>
+          </>
         ) : (
           <>
             <p className="text-center text-sm text-secondary">
-              You do not haveany messages yet.
+              You do not have any messages yet.
             </p>
             <Link href="/" className="btn-primary btn-sm btn mt-10">
               Create your first message
