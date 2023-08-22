@@ -19,13 +19,14 @@ export default function MessageCard({
             {data.subject}
           </h1>
           {data.image && (
-            <Image
-              width={300}
-              height={170}
-              className="mx-auto  rounded-xl shadow-lg"
-              src={data.image}
-              alt={data.subject}
-            />
+            <div className="relative mx-auto aspect-video">
+              <Image
+                fill
+                src={data.image}
+                alt={data.subject}
+                className="rounded-sm object-cover drop-shadow-2xl transition-shadow"
+              />
+            </div>
           )}
           <blockquote className="relative">
             <p className="mt-5 line-clamp-3 text-lg tracking-tight text-slate-900">

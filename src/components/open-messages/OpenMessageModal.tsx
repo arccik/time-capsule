@@ -66,6 +66,7 @@ export default function OpenMessageModal({
                     height={200}
                     src={activeCard.image}
                     alt={activeCard.subject}
+                    className="mb-5"
                   />
                 )}
 
