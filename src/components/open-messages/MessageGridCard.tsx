@@ -2,6 +2,7 @@ import ActionButton from "./ActionButton";
 import type { Capsule } from "@prisma/client";
 import Image from "next/image";
 import ShowFromToDate from "./ShowFromToDate";
+import AudioPlayer from "./AudioPlayer";
 
 export default function MessageCard({
   data,
@@ -14,20 +15,24 @@ export default function MessageCard({
     <>
       <figure className="card glass relative rounded-xl p-4 shadow-slate-900/10 md:p-6">
         <ShowFromToDate from={data.createdAt} to={data.openedAt} />
+        <h1
+          className=" mb-2 mt-5 cursor-pointer text-center text-xl font-bold text-slate-700"
+          onClick={() => setActiveCard(data.id)}
+        >
+          {data.subject}
+        </h1>
+        {data.image && (
+          <div className="relative mx-auto aspect-video">
+            <Image
+              fill
+              src={data.image}
+              alt={data.subject}
+              className="rounded-sm object-cover drop-shadow-2xl transition-shadow"
+            />
+          </div>
+        )}
+        {data.voiceMessage && <AudioPlayer url={data.voiceMessage} />}
         <button className="text-left" onClick={() => setActiveCard(data.id)}>
-          <h1 className=" mb-2 mt-5 text-center text-xl font-bold text-slate-700">
-            {data.subject}
-          </h1>
-          {data.image && (
-            <div className="relative mx-auto aspect-video">
-              <Image
-                fill
-                src={data.image}
-                alt={data.subject}
-                className="rounded-sm object-cover drop-shadow-2xl transition-shadow"
-              />
-            </div>
-          )}
           <blockquote className="relative">
             <p className="mt-5 line-clamp-3 text-lg tracking-tight text-slate-900">
               {data.message}

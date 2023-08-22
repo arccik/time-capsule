@@ -1,7 +1,7 @@
 import { env } from "~/env.mjs";
 import type { FormProps } from "~/types/formProps";
 import { api } from "~/utils/api";
-import Card from "../ui/Card";
+import Card from "../ui/FormCard";
 import { useState } from "react";
 import Image from "next/image";
 

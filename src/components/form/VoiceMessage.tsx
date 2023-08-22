@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Recorder from "./Recoder";
-import Card from "../ui/Card";
+import Card from "../ui/FormCard";
 import type { FormProps } from "~/types/formProps";
 
 

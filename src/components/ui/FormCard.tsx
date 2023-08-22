@@ -18,7 +18,7 @@ export default function Card({
     <>
       <div
         className={clsx(
-          "border-3 w-full space-y-4 rounded-lg bg-slate-100 p-6 pt-4 shadow-lg ",
+          "border-3 space-y-4 rounded-lg bg-slate-100 p-6 pt-4 shadow-lg ",
           {
             "mb-2 border-2 border-red-600": errors,
           }
@@ -35,9 +35,8 @@ export default function Card({
             </p>
             <span className="text-xs text-primary">{subtitle}</span>
           </div>
-          {actions && <div>{actions}</div>}
+          {actions && <span>{actions}</span>}
         </div>
-
         {children}
       </div>
       {errors?.message && (
