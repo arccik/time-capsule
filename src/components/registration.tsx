@@ -71,8 +71,8 @@ export default function SignUpPage() {
             MessageTTF is an innovative online platform that lets you create and
             preserve memories in the form of messages, photos and voice messages
             ensuring they remain securely stored until a future date of your
-            choosing. With ChronoCapsule, you can capture the essence of a
-            moment and experience the joy of revisiting it in the future.
+            choosing. With MessageTTF, you can capture the essence of a moment
+            and experience the joy of revisiting it in the future.
           </p>
         </div>
 

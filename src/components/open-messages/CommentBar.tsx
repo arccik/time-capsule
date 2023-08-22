@@ -42,7 +42,7 @@ export default function CommentBar({ id }: { id: string }) {
   if (!isAuth)
     return (
       <button
-        className="btn-ghost btn-sm btn text-sm text-white"
+        className="btn-ghost btn-sm btn pl-0 text-sm"
         onClick={() => void signIn(undefined, { callbackUrl: router.asPath })}
       >
         Login to comment

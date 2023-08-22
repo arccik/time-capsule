@@ -2,7 +2,6 @@ import { z } from "zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "~/components/auth/Input";
-// import { notification } from "antd";
 import { FcGoogle } from "react-icons/fc";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -10,7 +9,6 @@ import { useRouter } from "next/router";
 
 const schema = z.object({
   email: z.string().min(1, { message: "Email is required" }),
-  // password: z.string().min(1, { message: "Password is required" }),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -19,10 +17,6 @@ export default function LoginPage() {
   const [redirectUrl, setRedirectUrl] = useState<string>("/dashboard");
   const { status } = useSession();
   const router = useRouter();
-
-  if (status === "authenticated") {
-    window.location.href = redirectUrl;
-  }
 
   useEffect(() => {
     if (router.query.callbackUrl) {
@@ -36,29 +30,21 @@ export default function LoginPage() {
   } = useForm<Inputs>({
     resolver: zodResolver(schema),
   });
-
   const onSubmit: SubmitHandler<Inputs> = async (data): Promise<void> => {
     // signIn("credentials", { ...data, redirect: false }).then((callback) => {
-    //   if (callback?.error) {
-    //     notify.error({
-    //       message: callback.error,
-    //       icon: <BsEmojiSmileUpsideDown className="text-2xl text-red-500" />,
-    //     });
-    //   }
-    //   if (callback?.ok && !callback?.error) {
-    //     notify.success({
-    //       message: "Login Successful",
-    //       icon: <BsEmojiSmile className="text-2xl text-green-500" />,
-    //     });
-    //     window.location.href = "/";
-    //   }
+    //   console.log("CallBack  ", callback);
+    //   return false;
     // });
+
     await signIn("email", {
       ...data,
       callbackUrl: redirectUrl,
     });
   };
 
+  if (status === "authenticated") {
+    window.location.href = redirectUrl;
+  }
   return (
     <>
       <div className="hero min-h-[calc(100vh-70px)] bg-slate-200">
@@ -72,8 +58,8 @@ export default function LoginPage() {
               MessageTTF is an innovative online platform that lets you create
               and preserve memories in the form of messages, photos and voice
               messages ensuring they remain securely stored until a future date
-              of your choosing. With ChronoCapsule, you can capture the essence
-              of a moment and experience the joy of revisiting it in the future.
+              of your choosing. With MessageTTF, you can capture the essence of
+              a moment and experience the joy of revisiting it in the future.
             </p>
           </div>
           <div className="card w-full max-w-sm flex-shrink-0 bg-slate-100 shadow-2xl">

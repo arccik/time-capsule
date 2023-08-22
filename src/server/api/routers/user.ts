@@ -38,4 +38,18 @@ export const userRouter = createTRPCRouter({
         return { success: true, user };
       }
     }),
+  isExist: publicProcedure
+    .input(
+      z.object({
+        email: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const user = await ctx.prisma.user.findFirst({
+        where: {
+          email: input.email,
+        },
+      });
+      return user;
+    }),
 });

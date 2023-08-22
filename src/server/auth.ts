@@ -4,7 +4,9 @@ import {
   getServerSession,
   type NextAuthOptions,
   type DefaultSession,
+  User,
 } from "next-auth";
+import { AdapterUser } from "next-auth/adapters";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 // import CredentialsProvider from "next-auth/providers/credentials";
@@ -47,6 +49,21 @@ export const authOptions: NextAuthOptions = {
         id: user.id,
       },
     }),
+    async signIn({ user }: { user: AdapterUser | User }) {
+      const isUserExist = await prisma.user.findFirst({
+        where: { email: user.email },
+      });
+      if (isUserExist) return true;
+      const newUser = await prisma.user.create({
+        data: {
+          email: user.email,
+        },
+      });
+      if (newUser) {
+        return true;
+      }
+      return false;
+    },
   },
   adapter: PrismaAdapter(prisma),
   providers: [
