@@ -41,9 +41,9 @@ export default function TimeCapsuleForm() {
     formState: { errors },
   } = useForm<Capsule>({
     resolver: zodResolver(createCapsuleSchema),
-    defaultValues: {
-      subject: `Subject: A message from ${new Date().toDateString()}`,
-    },
+    // defaultValues: {
+    //   subject: `Subject: A message from ${new Date().toDateString()}`,
+    // },
   });
 
   useEffect(() => {

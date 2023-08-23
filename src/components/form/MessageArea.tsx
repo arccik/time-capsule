@@ -10,7 +10,7 @@ export default function MessageArea({
       <textarea
         id="messageField"
         {...register("message")}
-        placeholder="Write something emotional what will make you smile when you read this message in the future"
+        placeholder="Write something emotional to yourself, relatives or friends what will make you smile when you read this message in the future"
         rows={7}
         className={clsx({
           "textarea-bordered textarea textarea-lg h-full w-full drop-shadow-lg  focus:border-blue-800 focus:placeholder-transparent":

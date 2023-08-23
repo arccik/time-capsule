@@ -13,8 +13,8 @@ export default function SubjectField({ register }: Props) {
     <div className="relative">
       <input
         {...register}
-        placeholder="Subject"
-        className="placeholder-slate-300md:text-xl input-bordered w-full select-all rounded-lg bg-transparent p-2 pl-0 font-bold text-slate-200"
+        placeholder="Subject:"
+        className="input-bordered w-full select-all rounded-lg bg-transparent p-2 pl-0 font-bold text-white placeholder-slate-100 md:text-xl"
         id="subject"
       />
 
@@ -22,7 +22,7 @@ export default function SubjectField({ register }: Props) {
         className="absolute right-2 top-3  hover:cursor-text"
         htmlFor="subject"
       >
-        <GrEdit />
+        <GrEdit color="white" size={20} className="hover:cursor-pointer" />
       </label>
     </div>
   );
