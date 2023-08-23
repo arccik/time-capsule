@@ -18,6 +18,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
       if (audio) {
         setCurrentTime(audio.currentTime);
         setDuration(audio.duration);
+        if (audio.currentTime === audio.duration) {
+          setIsPlaying(false);
+        }
       }
     };
 
@@ -54,8 +57,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
           style={
             {
               "--value": (currentTime / duration) * 100,
-              "--size": "10rem",
-              "--thickness": "3px",
+              "--size": "8rem",
+              "--thickness": "2px",
             } as CSSProperties
           }
         >
