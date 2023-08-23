@@ -5,7 +5,6 @@ import CommentBar from "./CommentBar";
 import { AiFillCloseCircle } from "react-icons/ai";
 import SocialShareButtons from "./SocialShareButtons";
 import Image from "next/image";
-import AudioPlayer from "./AudioPlayer";
 
 type Props = {
   activeCard: Capsule | null;

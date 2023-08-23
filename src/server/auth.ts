@@ -6,7 +6,7 @@ import {
   type DefaultSession,
   type User,
 } from "next-auth";
-import { AdapterUser } from "next-auth/adapters";
+import { type AdapterUser } from "next-auth/adapters";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 // import CredentialsProvider from "next-auth/providers/credentials";

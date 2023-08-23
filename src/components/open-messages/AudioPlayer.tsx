@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, CSSProperties } from "react";
+import React, { useState, useRef, useEffect, type CSSProperties } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 
 interface AudioPlayerProps {
@@ -32,14 +32,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
     };
   }, []);
 
-  const togglePlay = () => {
+  const togglePlay = async (): Promise<void> => {
     const audio = audioRef.current;
 
     if (audio) {
       if (isPlaying) {
         audio.pause();
       } else {
-        audio.play();
+        await audio.play();
       }
 
       setIsPlaying(!isPlaying);
@@ -54,14 +54,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
           style={
             {
               "--value": (currentTime / duration) * 100,
-              "--size": "12rem",
-              "--thickness": "2px",
+              "--size": "10rem",
+              "--thickness": "3px",
             } as CSSProperties
           }
         >
           <div className="z-10">
             <audio ref={audioRef} src={url}></audio>
-            <button onClick={togglePlay}>
+            <button onClick={() => void togglePlay()}>
               {isPlaying ? <FaPause size={32} /> : <FaPlay size={32} />}
             </button>
           </div>
