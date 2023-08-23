@@ -48,7 +48,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
       setIsPlaying(!isPlaying);
     }
   };
-
+  return (
+    <audio controls className="w-full ">
+      <source src={url} type="audio/mp3" />
+    </audio>
+  );
   return (
     <>
       <div className="mx-auto mt-10">
