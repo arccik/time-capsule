@@ -1,8 +1,9 @@
 import CommentBar from "~/components/open-messages/CommentBar";
 import type { Capsule } from "@prisma/client";
 import SocialShareButtons from "./SocialShareButtons";
+import AudioPlayer from "./AudioPlayer";
 
-export default function OpenMessage({ data }: { data: Capsule }) {
+export default function PageOpenMessage({ data }: { data: Capsule }) {
   return (
     <div className="relative mx-auto max-w-[800px]">
       <div className="card self-center">
@@ -15,6 +16,7 @@ export default function OpenMessage({ data }: { data: Capsule }) {
               Opened - {data.openedAt?.toDateString()}
             </p>
           </div>
+          {data.voiceMessage && <AudioPlayer url={data.voiceMessage} />}
           <p className="mt-10  text-lg font-semibold">
             <q>{data.message}</q>
           </p>

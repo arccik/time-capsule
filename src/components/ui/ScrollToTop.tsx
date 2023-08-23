@@ -25,7 +25,7 @@ export default function ScrollToTop() {
     <div className="toast">
       <button
         onClick={handleClick}
-        className="btn-outline btn-square btn-sm btn border-white"
+        className="btn-outline btn-sm btn-square btn border-slate-300"
       >
         <FaArrowUp color="white" />
       </button>

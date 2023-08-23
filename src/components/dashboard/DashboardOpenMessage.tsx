@@ -17,7 +17,7 @@ type Props = {
   refetch: () => Promise<QueryObserverResult>;
 };
 
-export default function OpenMessage({
+export default function DashboardOpenMessage({
   opened,
   isPublic,
   message,

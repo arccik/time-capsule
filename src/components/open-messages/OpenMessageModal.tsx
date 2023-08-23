@@ -5,6 +5,7 @@ import CommentBar from "./CommentBar";
 import { AiFillCloseCircle } from "react-icons/ai";
 import SocialShareButtons from "./SocialShareButtons";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 type Props = {
   activeCard: Capsule | null;
@@ -17,6 +18,7 @@ export default function OpenMessageModal({
   closeModal,
   isOpen,
 }: Props) {
+  const router = useRouter();
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

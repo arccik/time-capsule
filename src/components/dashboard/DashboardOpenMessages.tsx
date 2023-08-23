@@ -1,5 +1,5 @@
 import { api } from "~/utils/api";
-import OpenMessage from "./DashboardOpenMessage";
+import DashboardOpenMessage from "./DashboardOpenMessage";
 import Loader from "../ui/Loader";
 import { Suspense } from "react";
 
@@ -30,7 +30,7 @@ export default function DashboardOpenMessages() {
         <div className="ld:mx-0 mx-auto grid grid-flow-row ">
           {data.length ? (
             data.map((capsule) => (
-              <OpenMessage
+              <DashboardOpenMessage
                 id={capsule.id}
                 triggerPublic={() =>
                   void (async () => await handleActivateForPublic(capsule.id))

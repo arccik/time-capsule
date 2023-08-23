@@ -3,7 +3,7 @@ import { BiArrowBack } from "react-icons/bi";
 import Loader from "~/components/ui/Loader";
 import { api } from "~/utils/api";
 
-import OpenMessage from "~/components/open-messages/OpenMessage";
+import PageOpenMessage from "~/components/open-messages/PageOpenMessage";
 
 export default function OpenMessagePage() {
   const router = useRouter();
@@ -23,7 +23,11 @@ export default function OpenMessagePage() {
         <BiArrowBack />
         Back
       </button>
-      {status === "success" && data ? <OpenMessage data={data} /> : <Loader />}
+      {status === "success" && data ? (
+        <PageOpenMessage data={data} />
+      ) : (
+        <Loader />
+      )}
       {status === "error" && <div>Ops. something went wrong!</div>}
     </main>
   );
