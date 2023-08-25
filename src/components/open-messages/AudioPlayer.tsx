@@ -48,14 +48,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
       setIsPlaying(!isPlaying);
     }
   };
-  return (
-    <audio controls className="w-full ">
-      <source src={url} type="audio/mp3" />
-    </audio>
-  );
+  // return (
+  //   <audio controls className="w-full ">
+  //     <source src={url} type="audio/mp3" />
+  //   </audio>
+  // );
   return (
     <>
-      <div className="mx-auto mt-10">
+      <div className="mx-auto">
         <div
           className="radial-progress  bg-transparent text-primary-content drop-shadow-2xl"
           style={
@@ -67,7 +67,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
           }
         >
           <div className="z-10">
-            <audio ref={audioRef} src={url}></audio>
+            <audio ref={audioRef}>
+              {" "}
+              <source src={url} type="audio/mp3" />
+            </audio>
             <button onClick={() => void togglePlay()}>
               {isPlaying ? <FaPause size={32} /> : <FaPlay size={32} />}
             </button>
