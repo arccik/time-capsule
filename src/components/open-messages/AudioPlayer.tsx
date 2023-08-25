@@ -68,7 +68,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
         >
           <div className="z-10">
             <audio ref={audioRef}>
-              {" "}
               <source src={url} type="audio/mp3" />
             </audio>
             <button onClick={() => void togglePlay()}>
@@ -76,6 +75,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
             </button>
           </div>
         </div>
+        <p className="mt-2 text-center text-xs text-slate-300">
+          {Math.floor(currentTime)} / {Math.floor(duration)} sec
+        </p>
       </div>
     </>
   );
