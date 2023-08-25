@@ -50,12 +50,8 @@ export default function ActionButton(props: Props) {
     }
     if (type === "like") {
       proccedLike.mutate({ id: props.id });
-      if (likedByUser) {
-        setTotalCount((prev) => prev - 1);
-      } else {
-        setTotalCount((prev) => prev + 1);
-      }
-      void refetchLiked();
+
+      refetchLiked().then(console.log).catch(console.error);
     }
   };
   return (
@@ -70,7 +66,7 @@ export default function ActionButton(props: Props) {
           {type === "comment" ? "💬 Comment" : "♡  Like"}
         </span>
         <span className="ml-1 h-5 w-10 rounded-md bg-slate-100 bg-opacity-30 text-center drop-shadow-md">
-          {totalCount}
+          {totalCount + (likedByUser ? 1 : 0)}
         </span>
       </div>
     </div>

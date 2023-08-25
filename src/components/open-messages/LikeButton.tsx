@@ -33,7 +33,7 @@ export default function LikeButton({ id }: { id: string }) {
       disabled={sessionStatus === "unauthenticated"}
       onClick={handleLike}
       className={clsx({
-        "btn-ghost btn-xs btn rounded-full border  text-xs text-white disabled:border disabled:border-white disabled:bg-transparent disabled:text-white":
+        "btn btn-ghost btn-xs rounded-full border  text-xs text-white disabled:border disabled:border-white disabled:bg-transparent disabled:text-white":
           true,
         "border-red-200": liked,
       })}
