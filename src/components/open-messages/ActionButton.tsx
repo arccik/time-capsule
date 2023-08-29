@@ -54,6 +54,8 @@ export default function ActionButton(props: Props) {
       refetchLiked().then(console.log).catch(console.error);
     }
   };
+  const buttonLabel =
+    type === "comment" ? "💬 Comment" : likedByUser ? "♡ Liked" : "♡  Like";
   return (
     <div className="mt-1 text-sm">
       <div className="flex items-center text-slate-500">
@@ -63,7 +65,7 @@ export default function ActionButton(props: Props) {
           })}
           onClick={handleClick}
         >
-          {type === "comment" ? "💬 Comment" : "♡  Like"}
+          {buttonLabel}
         </span>
         <span className="ml-1 h-5 w-10 rounded-md bg-slate-100 bg-opacity-30 text-center drop-shadow-md">
           {totalCount + (likedByUser ? 1 : 0)}

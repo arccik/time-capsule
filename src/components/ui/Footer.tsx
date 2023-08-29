@@ -7,18 +7,14 @@ export default function Footer() {
   return (
     <footer className="footer footer-center p-10 text-inherit">
       <div>
-        <GiTimeTrap className="text-5xl" />
-        <p className="font-bold">
-          Time Industry LTD <br />
-          <span className="text-secondary">
-            Providing reliable virtual time capsules
-          </span>
-        </p>
-        <p>Copyright © 2023 - All mahovny reserved</p>
+        {/* <GiTimeTrap className="text-5xl" /> */}
+        <img src="/images/logo.png" alt="" />
+        <span className="font-bold text-secondary">
+          Providing reliable virtual time capsules
+        </span>
       </div>
       <div>
-        <div className="grid grid-flow-col gap-4">
-          <Link href="/privacy-policy">Privacy Policy</Link>
+        <div className="m-none p-none grid grid-flow-col gap-4">
           <a>
             <FaTwitter className="text-2xl" />
           </a>
@@ -29,6 +25,11 @@ export default function Footer() {
             <FaFacebook className="text-2xl" />
           </a>
         </div>
+      </div>
+      <div className="grid grid-flow-col gap-4">
+        <Link href="/docs/termsandconditions">Terms and Conditions</Link>
+        <Link href="/docs/privacy-policy">Privacy Policy</Link>
+        <Link href="/contactus">Contact Us</Link>
       </div>
     </footer>
   );

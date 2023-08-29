@@ -18,16 +18,25 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
     const buf = await buffer(req);
     const sig = req.headers["stripe-signature"] as string;
     let event;
-
+    
+    console.log("STRIPE WEBHOOK TRIGGER", env.STRIPE_WEBHOOK_SECRET, {
+      sig,
+      buf,
+    });
     try {
       event = stripe.webhooks.constructEvent(
         buf,
         sig,
         env.STRIPE_WEBHOOK_SECRET
       );
+      console.log("EVENT:", event);
     } catch (err) {
       let message = "Unknown Error";
-      if (err instanceof Error) message = err.message;
+      if (err instanceof Error) {
+        console.log("WEBHOOOK ERROR: ", err?.message);
+
+        message = err.message;
+      }
       res.status(400).send(`Webhook Error: ${message}`);
       return;
     }

@@ -8,7 +8,7 @@ await import("./src/env.mjs");
 const config = {
   reactStrictMode: true,
   images: {
-    domains: ['messagettf-user-data.s3.eu-west-2.amazonaws.com', 'lh3.googleusercontent.com'],
+    domains: ['messagettf-user-data.s3.eu-west-2.amazonaws.com', 'lh3.googleusercontent.com', 's3.eu-west-2.amazonaws.com'],
   },
 
   /**

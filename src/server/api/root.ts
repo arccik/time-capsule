@@ -1,4 +1,4 @@
-// import { sendingRouter } from "~/server/api/routers/sending";
+import { sendingRouter } from "~/server/api/routers/emailSender";
 import { createTRPCRouter } from "~/server/api/trpc";
 import { capsuleRouter } from "./routers/capsule";
 import { likesRouter } from "./routers/likes";
@@ -14,7 +14,7 @@ import { uploaderRouter } from "./routers/uploader";
  */
 export const appRouter = createTRPCRouter({
   capsule: capsuleRouter,
-  // sending: sendingRouter,
+  sending: sendingRouter,
   like: likesRouter,
   comment: commentRouter,
   payment: paymentRouter,
