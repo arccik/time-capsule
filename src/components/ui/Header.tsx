@@ -38,13 +38,22 @@ export default function Header() {
           <Link href="/messages">Public Messages</Link>
         </li>
         <li>
+          <Link href="/docs/privacy-policy">Privacy Policy</Link>
+        </li>
+        <li>
+          <Link href="/docs/termsandconditions">Terms and Conditions</Link>
+        </li>
+        <li>
+          <Link href="/contactus">Contact Us</Link>
+        </li>
+        <li>
           <Link href="/auth/login">Login</Link>
         </li>
       </>
     );
 
   return (
-    <div className="-all navbar duration-500">
+    <div className=" navbar duration-500">
       <div className="flex-1">
         <Link
           href="/"
@@ -61,7 +70,7 @@ export default function Header() {
       <div className="flex-none gap-2 md:hidden">
         <div className="dropdown-end dropdown">
           {sessionData?.user.image ? (
-            <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
+            <label tabIndex={0} className="avatar btn btn-circle btn-ghost">
               <div className="w-10 rounded-full">
                 <Image
                   width={60}
@@ -76,7 +85,7 @@ export default function Header() {
           )}
           <ul
             tabIndex={0}
-            className="dropdown-content menu rounded-box z-[1] mt-5 w-52 bg-slate-100 p-2 shadow"
+            className="menu dropdown-content rounded-box z-[1] mt-5 w-52 bg-slate-100 p-2 shadow"
           >
             {menuItems}
           </ul>
