@@ -16,7 +16,7 @@ const HomePage: NextPage = () => {
           name="description"
           content="This website will be soon available"
         />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-1R65VE5XQB" />
       <Script id="google-analytics">
