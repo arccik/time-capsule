@@ -19,12 +19,12 @@ export default function HelpDialog() {
             recipient&apos;s contact information.
           </li>
           <li>
-            <b className=" font-bold">Submit & wait:</b> Send your request and
-            await the specified date or delivery.
+            <b className=" font-bold">Submit:</b> Send your message to the
+            future and wait for it to come.
           </li>
           <li>
-            <b className=" font-bold">Credit Card Required</b> Invest in the
-            creators behind the magic. Your payment fuels their creativity.
+            <b className=" font-bold">Credit Card Required:</b> Tiny investment
+            to keep server running.
           </li>
         </ol>
       </div>

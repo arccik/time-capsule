@@ -37,12 +37,7 @@ export default function Header() {
         <li>
           <Link href="/messages">Public Messages</Link>
         </li>
-        <li>
-          <Link href="/docs/privacy-policy">Privacy Policy</Link>
-        </li>
-        <li>
-          <Link href="/docs/termsandconditions">Terms and Conditions</Link>
-        </li>
+
         <li>
           <Link href="/contactus">Contact Us</Link>
         </li>

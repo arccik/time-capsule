@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "~/utils/api";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Loader from "../ui/Loader";
@@ -35,6 +35,11 @@ export default function CommentBar({ id }: { id: string }) {
     onError: (error) =>
       console.error("Could not delete your comment, try again", error),
   });
+  useEffect(() => {
+    if (router.query.showCommentBar === "true") {
+      setShowCommentBar(true);
+    }
+  }, []);
 
   // if (commentStatus === "loading") return <Loader />;
   if (commentStatus === "error")

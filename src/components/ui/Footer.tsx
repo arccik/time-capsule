@@ -28,7 +28,7 @@ export default function Footer() {
         </div>
         <p> Copyright © 2023</p>
       </div>
-      <div className="flex flex-col gap-4 ">
+      <div className="flex flex-col gap-4 md:flex-row ">
         <Link href="/contactus">Contact Us</Link>
         <Link className="col-span-2" href="/docs/termsandconditions">
           Terms and Conditions

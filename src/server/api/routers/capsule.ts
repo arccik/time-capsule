@@ -66,6 +66,22 @@ export const capsuleRouter = createTRPCRouter({
     .mutation(({ ctx, input }) => {
       return ctx.prisma.capsule.delete({ where: { id: input.id } });
     }),
+  openNext: publicProcedure.query(({ ctx }) => {
+    const today = new Date();
+    return ctx.prisma.capsule.findFirst({
+      where: {
+        dateTime: {
+          gte: today,
+        },
+      },
+      orderBy: {
+        dateTime: "asc",
+      },
+      select: {
+        dateTime: true,
+      },
+    });
+  }),
   // replacement to implement infinity load
   // getOpenMessages: publicProcedure
   //   .input(

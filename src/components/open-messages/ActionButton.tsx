@@ -41,7 +41,7 @@ export default function ActionButton(props: Props) {
 
   const handleClick = () => {
     if (type === "comment") {
-      void router.push(`/message/${props.id}`);
+      void router.push(`/message/${props.id}?showCommentBar=true`);
       return;
     }
     if (status !== "authenticated" && type === "like") {

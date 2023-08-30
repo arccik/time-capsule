@@ -75,9 +75,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
             </button>
           </div>
         </div>
-        <p className="mt-2 text-center text-xs text-slate-300">
-          {Math.floor(currentTime)} / {Math.floor(duration)} sec
-        </p>
+        {!!duration && (
+          <p className="mt-2 text-center text-xs text-slate-300">
+            {Math.floor(currentTime)} / {Math.floor(duration)} sec
+          </p>
+        )}
       </div>
     </>
   );

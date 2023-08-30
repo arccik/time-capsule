@@ -22,9 +22,7 @@ export default function Pagination({
       { scroll: false }
     );
     setCurrentPage(buttonIndex);
-    // setTimeout(() => {
-    //   scrolltoHash("public-messages");
-    // }, 500);
+
   };
 
   const pageNumbers = useMemo(

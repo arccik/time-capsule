@@ -1,30 +1,22 @@
-// import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import CountDownToNextMessage from "./CountDownToNextMessage";
 
 export default function Hero() {
   return (
-    <div className="hero mb-10 bg-slate-100">
-      <div className="hero-content flex-col lg:flex-row">
-        {/* <Image
-          width={200}
-          height={300}
-          alt="Time Capsule old"
-          src="/images/locked_in_a_time.png"
-          className="max-w-sm rounded-lg"
-        /> */}
-        <div>
-          <h1 className="text-5xl font-bold">Virtual Time Capsule</h1>
-          <p className="py-9">
-            Platform to commemorate the present time or significant events by
-            gathering digital objects or information that will be preserved and
-            accessible for future generations.
-          </p>
-          <Link href="/" className="btn-primary btn bg-[570df8]">
-            Get Started
-          </Link>
-        </div>
+    <div className="grid grid-flow-row grid-cols-1 p-4 md:grid-cols-2">
+      <div>
+        <h1 className="text-2xl font-bold text-white  md:mt-5 md:text-5xl">
+          Message To The Future
+        </h1>
+        <p className="italic text-base-300">
+          Connecting Hearts, Inspiring Minds
+        </p>
       </div>
+      {/* <div className="mx-auto">
+        <CountDownToNextMessage />
+        <h1 className="inline-block rotate-6 rounded bg-primary p-2 text-center text-white">
+          Time to next public message
+        </h1>
+      </div> */}
     </div>
   );
 }

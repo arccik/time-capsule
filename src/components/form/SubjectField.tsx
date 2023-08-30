@@ -13,7 +13,7 @@ export default function SubjectField({ register }: Props) {
     <div className="relative">
       <input
         {...register}
-        placeholder="Title:"
+        placeholder="Subject:"
         className="input-bordered w-full select-all rounded-lg bg-transparent p-2 pl-0 font-bold text-white placeholder-slate-100 md:text-xl"
         id="subject"
       />

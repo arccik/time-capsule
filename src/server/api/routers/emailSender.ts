@@ -1,14 +1,10 @@
 import { env } from "~/env.mjs";
 import { z } from "zod";
 import { transporter } from "~/lib/emailTransporter";
-import {
-  createTRPCRouter,
-  publicProcedure,
-  protectedProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const sendingRouter = createTRPCRouter({
-  email: protectedProcedure
+  email: publicProcedure
     .input(
       z.object({ email: z.string(), subject: z.string(), text: z.string() })
     )

@@ -21,16 +21,7 @@ export default function MessageCard({
         >
           {data.subject}
         </h1>
-        {data.image && (
-          <div className="relative mx-auto aspect-video">
-            <Image
-              fill
-              src={data.image}
-              alt={data.subject}
-              className="rounded-sm object-cover drop-shadow-2xl transition-shadow"
-            />
-          </div>
-        )}
+
         {data.voiceMessage && <AudioPlayer url={data.voiceMessage} />}
         <button className="text-left" onClick={() => setActiveCard(data.id)}>
           <blockquote className="relative">

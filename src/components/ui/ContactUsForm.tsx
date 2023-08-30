@@ -53,8 +53,7 @@ export default function ContactUsForm({ setSent }: Props) {
           Contact Us
         </h2>
         <p className="mb-8 text-center font-light text-gray-500  sm:text-xl lg:mb-16">
-          Got a technical issue? Want to send us your feedback? Need details
-          about our Business plan? Let us know.
+          Got a technical issue? Want to send us your feedback? Let us know.
         </p>
         <form
           className="space-y-8"
