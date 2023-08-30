@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { GrSend } from "react-icons/gr";
 import ContactUsForm from "~/components/ui/ContactUsForm";
 
 export default function ContactUs() {
