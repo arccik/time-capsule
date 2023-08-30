@@ -1,4 +1,4 @@
-// import CountDownToNextMessage from "./CountDownToNextMessage";
+import CountDown from "./CountDown";
 
 export default function Hero() {
   return (
@@ -11,12 +11,12 @@ export default function Hero() {
           Connecting Hearts, Inspiring Minds
         </p>
       </div>
-      {/* <div className="mx-auto">
-        <CountDownToNextMessage />
-        <h1 className="inline-block rotate-6 rounded bg-primary p-2 text-center text-white">
-          Time to next public message
+      <div className="m-5 mx-auto">
+        <h1 className="mb-2 inline-block rotate-2  rounded border p-2 text-center text-white md:mb-0 md:bg-secondary">
+          Next Public Message open in
         </h1>
-      </div> */}
+        <CountDown />
+      </div>
     </div>
   );
 }

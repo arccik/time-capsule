@@ -8,7 +8,7 @@ export const sendingRouter = createTRPCRouter({
     .input(
       z.object({ email: z.string(), subject: z.string(), text: z.string() })
     )
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ input }) => {
       const { email, subject, text } = input;
       const response = await transporter.sendMail({
         from: email,
