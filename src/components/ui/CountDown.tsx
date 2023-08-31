@@ -43,14 +43,14 @@ function YearCountdown() {
       hours,
       minutes,
       seconds,
-    }).filter(([, value]) => value > 0);
+    }).filter(([key, value]) => value > 0 || key === "seconds");
 
     const toDisplay = filtredListOfboxesToShow.map(([key, value]) => (
       <div
         key={key}
-        className="rounded-box flex flex-col p-2 text-neutral-content"
+        className="rounded-box flex w-20 flex-col border p-2 text-neutral-content md:border-none"
       >
-        <span className="countdown justify-center font-mono text-2xl md:text-5xl">
+        <span className="countdown justify-center p-2 font-mono text-2xl md:text-5xl">
           <span style={{ "--value": value } as CSSProperties}></span>
         </span>
         {key}

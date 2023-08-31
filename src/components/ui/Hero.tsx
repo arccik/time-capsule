@@ -11,9 +11,9 @@ export default function Hero() {
           Connecting Hearts, Inspiring Minds
         </p>
       </div>
-      <div className="m-5 mx-auto">
-        <h1 className="inline-block rounded-xl p-2 text-center text-white drop-shadow-md ">
-          Next Public Message will Open in
+      <div className="mx-auto mt-5 ">
+        <h1 className="inline-block rounded-xl pb-1 text-center font-thin text-white drop-shadow-md ">
+          Next Public Message will be Open in
         </h1>
         <CountDown />
       </div>
