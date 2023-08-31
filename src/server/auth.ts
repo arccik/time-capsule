@@ -77,7 +77,7 @@ export const authOptions: NextAuthOptions = {
         port: Number(env.SMTP_PORT),
         auth: {
           user: env.SMTP_USER,
-          pass: env.SMTP_PASSWORD,
+          pass: env.GOOGLE_APP_PASSWORD,
         },
       },
       from: env.EMAIL_FROM,

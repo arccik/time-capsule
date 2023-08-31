@@ -12,8 +12,8 @@ export default function Hero() {
         </p>
       </div>
       <div className="m-5 mx-auto">
-        <h1 className="mb-2 inline-block rotate-2  rounded border p-2 text-center text-white md:mb-0 md:bg-secondary">
-          Next Public Message open in
+        <h1 className="mb-2 inline-block rotate-2  rounded-xl border p-2 text-center text-white md:mb-0 md:bg-secondary">
+          Next Public Message will Open in
         </h1>
         <CountDown />
       </div>

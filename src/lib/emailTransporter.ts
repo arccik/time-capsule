@@ -3,16 +3,15 @@ import { env } from "~/env.mjs";
 
 export default async function sendEmail() {
   // create reusable transporter object using the default SMTP transport
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: env.SMTP_USER,
-      pass: env.SMTP_PASSWORD,
-    },
-  });
-  console.log("----------------", env.SMTP_USER, env.SMTP_PASSWORD);
+  // const transporter = nodemailer.createTransport({
+  //   host: "smtp.gmail.com",
+  //   port: 465,
+  //   secure: true,
+  //   auth: {
+  //     user: env.SMTP_USER,
+  //     pass: env.SMTP_PASSWORD,
+  //   },
+  // });
   // send mail with defined transport object
   const info = await transporter.sendMail({
     from: '"Fred Foo 👻" <arccik@gmail.com>', // sender address
@@ -37,6 +36,6 @@ export const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     user: env.SMTP_USER,
-    pass: env.SMTP_PASSWORD,
+    pass: env.GOOGLE_APP_PASSWORD,
   },
 });

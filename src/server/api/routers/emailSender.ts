@@ -10,12 +10,11 @@ export const sendingRouter = createTRPCRouter({
     )
     .mutation(async ({ input }) => {
       const { email, subject, text } = input;
-      const response = await transporter.sendMail({
+      await transporter.sendMail({
         from: email,
         to: env.EMAIL_FROM,
         subject,
-        text,
+        text: `${text} \n\n Sent from ${email} \n`,
       });
-      console.log("TRPCC RESPONSE :>>> ", response);
     }),
 });

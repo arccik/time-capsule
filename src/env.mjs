@@ -29,6 +29,7 @@ export const env = createEnv({
     EMAIL_FROM: z.string(),
     SMTP_USER: z.string(),
     SMTP_PASSWORD: z.string(),
+    GOOGLE_APP_PASSWORD: z.string(),
 
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
@@ -113,6 +114,7 @@ export const env = createEnv({
     CLIENT_URL: process.env.CLIENT_URL,
     NEXT_PUBLIC_AWS_S3_BACKET_URL: process.env.NEXT_PUBLIC_AWS_S3_BACKET_URL,
     NEXT_PUBLIC_CLIENT_URL: process.env.NEXT_PUBLIC_CLIENT_URL,
-    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
+    GOOGLE_APP_PASSWORD: process.env.GOOGLE_APP_PASSWORD
   },
 });

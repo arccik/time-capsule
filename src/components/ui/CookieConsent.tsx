@@ -4,17 +4,18 @@ export default function CookieConsentModal() {
   return (
     <CookieConsent
       location="bottom"
-      buttonText="Accept"
-      buttonClasses="btn btn-primary btn-xs"
+      buttonText="Got it!"
       cookieName="cookieConsent"
-      //   style={{ background: "#2B373B" }}
-      containerClasses="rounded mx-auto"
-      //   buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+      buttonStyle={{
+        backgroundColor: "#4caf50",
+        color: "white",
+        borderRadius: "5px",
+      }}
       expires={150}
     >
       This website uses cookies to enhance the user experience.
       <span style={{ fontSize: "10px" }}>
-        By clicking &quotAccept&quot, you consent to our use of cookies.
+        By using this website, you consent to our use of cookies.
       </span>
     </CookieConsent>
   );

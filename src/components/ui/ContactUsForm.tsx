@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { api } from "~/utils/api";
+import Loader from "./Loader";
 
 const schema = z.object({
   email: z.string().min(1, { message: "Email is required" }).email(),
@@ -20,18 +21,21 @@ type Props = {
 
 export default function ContactUsForm({ setSent }: Props) {
   const [submitError, setSubmitError] = useState<null | string>(null);
+  const [loading, setLoading] = useState(false);
   const emailSender = api.sending.email.useMutation({
     onError: (err) => {
       setSubmitError(
-        "Something went wrong on the server, try to send email to" +
-          env.SMTP_HOST
+        "Something went wrong on the server, try to send email to"
       );
       console.error("Something went wrong with sending email: ", err);
     },
     onSuccess: () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
       setSent(true);
+      setSubmitError(null);
     },
+    onMutate: () => setLoading(true),
+    onSettled: () => setLoading(false),
   });
 
   const {
@@ -120,10 +124,13 @@ export default function ContactUsForm({ setSent }: Props) {
           <button
             className="btn btn-primary"
             type="submit"
-            disabled={!!Object.keys(errors).length}
+            disabled={!!Object.keys(errors).length || loading}
           >
             Send message
           </button>
+          {loading && (
+            <span className="loading loading-spinner loading-xs ml-2"></span>
+          )}
           {submitError && (
             <div className="alert alert-error">{submitError}</div>
           )}
