@@ -48,9 +48,9 @@ function YearCountdown() {
     const toDisplay = filtredListOfboxesToShow.map(([key, value]) => (
       <div
         key={key}
-        className="rounded-box flex flex-col bg-primary p-2 text-neutral-content drop-shadow-md"
+        className="rounded-box flex flex-col p-2 text-neutral-content"
       >
-        <span className="countdown justify-center font-mono md:md:text-5xl">
+        <span className="countdown justify-center font-mono text-2xl md:text-5xl">
           <span style={{ "--value": value } as CSSProperties}></span>
         </span>
         {key}
