@@ -3,9 +3,7 @@ import { buffer } from "micro";
 import Stripe from "stripe";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
-export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
-  apiVersion: "2022-11-15",
-});
+import getRawBody from "raw-body";
 
 export const config = {
   api: {
@@ -14,22 +12,17 @@ export const config = {
 };
 
 const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
+  const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
+    apiVersion: "2022-11-15",
+  });
+  const webhookSecret: string = env.STRIPE_WEBHOOK_SECRET;
   if (req.method === "POST") {
-    const buf = await buffer(req);
+    const body = await getRawBody(req);
     const sig = req.headers["stripe-signature"] as string;
-    let event;
-    
-    console.log("STRIPE WEBHOOK TRIGGER", env.STRIPE_WEBHOOK_SECRET, {
-      sig,
-      buf,
-    });
+    let event: Stripe.Event;
+
     try {
-      event = stripe.webhooks.constructEvent(
-        buf,
-        sig,
-        env.STRIPE_WEBHOOK_SECRET
-      );
-      console.log("EVENT:", event);
+      event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
     } catch (err) {
       let message = "Unknown Error";
       if (err instanceof Error) {

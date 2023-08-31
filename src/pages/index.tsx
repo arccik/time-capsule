@@ -17,6 +17,10 @@ const HomePage: NextPage = () => {
           content="This website will be soon available"
         />
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+        />
       </Head>
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-1R65VE5XQB" />
       <Script id="google-analytics">

@@ -28,7 +28,7 @@ export const paymentRouter = createTRPCRouter({
           },
         ],
         success_url: `${env.CLIENT_URL}/dashboard/?success=true?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${env.CLIENT_URL}/dashboard/?canceled=true`,
+        cancel_url: `${env.CLIENT_URL}/dashboard/?canceled=true&openTab=0`,
       });
       await ctx.prisma.capsule.update({
         where: { id: input.capsuleId },
