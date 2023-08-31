@@ -31,11 +31,6 @@ export default function LoginPage() {
     resolver: zodResolver(schema),
   });
   const onSubmit: SubmitHandler<Inputs> = async (data): Promise<void> => {
-    // signIn("credentials", { ...data, redirect: false }).then((callback) => {
-    //   console.log("CallBack  ", callback);
-    //   return false;
-    // });
-
     await signIn("email", {
       ...data,
       callbackUrl: redirectUrl,
