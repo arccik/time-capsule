@@ -44,31 +44,39 @@ export default function CommentBar({ id }: { id: string }) {
   // if (commentStatus === "loading") return <Loader />;
   if (commentStatus === "error")
     return <div>Could not load comments, something went wrong</div>;
-  if (!isAuth)
-    return (
-      <button
-        className="btn-ghost btn-sm btn pl-0 text-sm"
-        onClick={() => void signIn(undefined, { callbackUrl: router.asPath })}
-      >
-        Login to comment
-      </button>
-    );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    saveComment.mutate({ capsuleId: id, body: comment });
+    void saveComment.mutate({ capsuleId: id, body: comment });
     setComment("");
   };
 
+  const handleClick = () => {
+    if (isAuth) {
+      setShowCommentBar(!showCommentBar);
+    } else {
+      void signIn(undefined, { callbackUrl: router.asPath });
+    }
+  };
+
+  // if (!isAuth)
+  // return (
+  //   <button
+  //     className="btn text-sm text-primary"
+  //     onClick={() => void signIn(undefined, { callbackUrl: router.asPath })}
+  //   >
+  //     Login to comment
+  //   </button>
+  // );
   return (
     <section className="mx-auto w-full rounded-md">
       <div className="mx-auto">
         <div className=" flex items-center justify-between">
           <h2
             className="text-md mb-5 ml-0 cursor-pointer rounded-md font-bold hover:text-slate-800"
-            onClick={() => setShowCommentBar(!showCommentBar)}
+            onClick={handleClick}
           >
-            Leave a comment
+            {isAuth ? "Leave a comment" : "Login to comment"}
           </h2>
         </div>
         {isAuth && showCommentBar && (
@@ -86,7 +94,7 @@ export default function CommentBar({ id }: { id: string }) {
             </div>
             <button
               type="submit"
-              className="btn-outline btn-sm btn border-stone-700 text-stone-700"
+              className="btn btn-outline btn-sm border-stone-700 text-stone-700"
             >
               Post comment
             </button>

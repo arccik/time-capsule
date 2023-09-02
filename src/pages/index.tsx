@@ -32,7 +32,8 @@ const HomePage: NextPage = () => {
           gtag('config', 'G-1R65VE5XQB');
         `}
       </Script>
-      <main className="bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90%">
+      {/* <main className="bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90%"> */}
+      <main className="bg-[url('/images/bg_bggenerator.png')] bg-fixed">
         <Hero />
         <TimeCapsuleForm />
         <MessageGrid />

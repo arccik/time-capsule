@@ -77,7 +77,7 @@ export default function OpenMessageModal({
                 </p>
 
                 <AiFillCloseCircle
-                  className="absolute right-2 top-2 cursor-pointer"
+                  className="absolute right-2 top-2 cursor-pointer text-2xl text-red-500"
                   onClick={closeModal}
                 />
                 <div className="mt-4">
@@ -88,7 +88,10 @@ export default function OpenMessageModal({
                   id={activeCard.id}
                 />
                 {activeCard.message.length > 300 && (
-                  <span className="cursor-pointer" onClick={closeModal}>
+                  <span
+                    className="cursor-pointer text-red-400"
+                    onClick={closeModal}
+                  >
                     Close
                   </span>
                 )}
