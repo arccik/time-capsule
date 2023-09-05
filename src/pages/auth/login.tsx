@@ -45,16 +45,23 @@ export default function LoginPage() {
       <div className="hero min-h-[calc(100vh-70px)] bg-slate-200">
         <div className="hero-content max-w-5xl flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login to your account</h1>
+            <h1 className="text-5xl font-bold">Welcome to MessageTTF</h1>
             <h1 className="text-4xl font-bold text-secondary">
-              Your Digital Time Capsule
+              Where Memories Await!
             </h1>
-            <p className="py-6">
+            {/* <p className="py-6">
               MessageTTF is an innovative online platform that lets you create
               and preserve memories in the form of messages, photos and voice
               messages ensuring they remain securely stored until a future date
               of your choosing. With MessageTTF, you can capture the essence of
               a moment and experience the joy of revisiting it in the future.
+            </p> */}
+            <p className="py-6">
+              Once you've entered your email, click the "Sign in" button. We
+              will send you an email shortly with a secure login link. This link
+              will grant you access to your account, where you can begin
+              crafting beautiful memories or revisiting those you've already
+              created.
             </p>
           </div>
           <div className="card w-full max-w-sm flex-shrink-0 bg-slate-100 shadow-2xl">
@@ -67,8 +74,8 @@ export default function LoginPage() {
                 />
 
                 <div className="form-control mt-6">
-                  <button type="submit" className="btn-primary btn">
-                    Sign in with Email
+                  <button type="submit" className="btn btn-primary">
+                    Sign in
                   </button>
                   <div className="divider">OR</div>
                   <button
@@ -76,7 +83,7 @@ export default function LoginPage() {
                       void signIn("google", { callbackUrl: redirectUrl })
                     }
                     type="button"
-                    className="btn-ghost btn border border-primary"
+                    className="btn btn-ghost border border-primary"
                   >
                     <FcGoogle className="mr-3 text-2xl" />
                     Sign in with Google

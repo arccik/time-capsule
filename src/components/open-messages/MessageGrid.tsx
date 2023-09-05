@@ -54,12 +54,12 @@ export default function MessageGrid() {
       {(status === "loading" || isFetchingNextPage) && <Loader />}
 
       <OpenMessageModal
-        activeCard={activeCard}
+        data={activeCard}
         isOpen={openModal}
         closeModal={() => setOpenModal(false)}
       />
       <button
-        className="btn-primary btn mt-10 w-full"
+        className="btn btn-primary mt-10 w-full"
         disabled={!data?.pages?.at(-1)?.nextCursor}
         onClick={handleFetchNextPage}
       >

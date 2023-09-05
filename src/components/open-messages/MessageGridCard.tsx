@@ -1,26 +1,49 @@
 import ActionButton from "./ActionButton";
-import type { Capsule } from "@prisma/client";
+import type { Capsule, User } from "@prisma/client";
 import Image from "next/image";
 import ShowFromToDate from "./ShowFromToDate";
 import AudioPlayer from "./AudioPlayer";
 
-export default function MessageCard({
-  data,
-  setActiveCard,
-}: {
-  data: Capsule & { likes: { id: string }[]; comments: { id: string }[] };
+type MessageCardType = {
+  data: Capsule & {
+    likes: { id: string }[];
+    comments: { id: string }[];
+    user: {
+      image: string | null;
+      name: string | null;
+      email: string | null;
+    };
+  };
   setActiveCard: (id: string) => void;
-}) {
+};
+
+export default function MessageCard({ data, setActiveCard }: MessageCardType) {
   return (
     <>
       <figure className="card glass relative rounded-xl p-4 shadow-slate-900/10 md:p-6">
-        <ShowFromToDate from={data.createdAt} to={data.openedAt} />
+        {/* author section */}
+
+        <div className="mb-4 flex items-center">
+          {/* {data?.user.image && (
+            <img
+              className="mr-2 h-5 w-5 rounded-full"
+              src={data?.user.image}
+              alt="avatar"
+            />
+          )} */}
+          <div className="text-sm">
+            <p className="leading-none text-slate-500 ">
+              Author {data.user.name}
+            </p>
+          </div>
+        </div>
         <h1
-          className=" mb-2 mt-5 cursor-pointer text-center text-xl font-bold text-slate-700"
+          className=" mb-4 cursor-pointer text-xl font-bold text-slate-700"
           onClick={() => setActiveCard(data.id)}
         >
           {data.subject}
         </h1>
+        <ShowFromToDate from={data.createdAt} to={data.openedAt} />
 
         {data.voiceMessage && <AudioPlayer url={data.voiceMessage} />}
         <button className="text-left" onClick={() => setActiveCard(data.id)}>

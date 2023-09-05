@@ -5,29 +5,23 @@ import CommentBar from "./CommentBar";
 import { AiFillCloseCircle } from "react-icons/ai";
 import SocialShareButtons from "./SocialShareButtons";
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 type Props = {
-  activeCard: Capsule | null;
+  data: Capsule | null;
   closeModal: () => void;
   isOpen: boolean;
 };
 
-export default function OpenMessageModal({
-  activeCard,
-  closeModal,
-  isOpen,
-}: Props) {
-  const router = useRouter();
+export default function OpenMessageModal({ data, closeModal, isOpen }: Props) {
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setTimeout(() => {
       dialogRef?.current?.scrollTo({ top: 0, behavior: "smooth" });
     }, 300);
-  }, [activeCard]);
+  }, [data]);
 
-  if (!activeCard) return;
+  if (!data) return;
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -57,23 +51,23 @@ export default function OpenMessageModal({
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-100 p-4 text-left align-middle shadow-xl transition-all md:p-6">
                 <Dialog.Title
                   as="h3"
-                  className="mb-5 text-xl font-medium leading-6 text-black"
+                  className="text-xl font-medium leading-6 text-black"
                 >
-                  {activeCard?.subject}
+                  {data?.subject}
                 </Dialog.Title>
-                <div className="mx-auto w-1/2 border-t-2  pt-6 drop-shadow-xl"></div>
-                {activeCard?.image && (
+                {/* <p className="mb-5 text-sm text-slate-400">By Oleh Saga</p> */}
+                {data?.image && (
                   <Image
                     width={400}
                     height={200}
-                    src={activeCard.image}
-                    alt={activeCard.subject}
+                    src={data.image}
+                    alt={data.subject}
                     className="mb-5"
                   />
                 )}
 
                 <p className="text-md whitespace-break-spaces">
-                  {activeCard?.message}
+                  {data?.message}
                 </p>
 
                 <AiFillCloseCircle
@@ -81,13 +75,10 @@ export default function OpenMessageModal({
                   onClick={closeModal}
                 />
                 <div className="mt-4">
-                  <CommentBar id={activeCard.id} />
+                  <CommentBar id={data.id} />
                 </div>
-                <SocialShareButtons
-                  message={activeCard?.message}
-                  id={activeCard.id}
-                />
-                {activeCard.message.length > 300 && (
+                <SocialShareButtons message={data?.message} id={data.id} />
+                {data.message.length > 300 && (
                   <span
                     className="cursor-pointer text-red-400"
                     onClick={closeModal}

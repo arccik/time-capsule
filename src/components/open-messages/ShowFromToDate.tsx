@@ -6,7 +6,7 @@ type Props = { from: Date | null; to: Date | null };
 
 export default function ShowFromToDate({ from, to }: Props) {
   return (
-    <div className="font-display flex w-full flex-row justify-between text-xs text-slate-800 md:text-sm ">
+    <div className="font-display flex w-full flex-row justify-center gap-4 text-xs text-slate-800 md:text-sm ">
       {from && (
         <p>
           {from.toLocaleDateString()}
