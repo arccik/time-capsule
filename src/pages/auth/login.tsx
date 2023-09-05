@@ -57,11 +57,11 @@ export default function LoginPage() {
               a moment and experience the joy of revisiting it in the future.
             </p> */}
             <p className="py-6">
-              Once you've entered your email, click the "Sign in" button. We
-              will send you an email shortly with a secure login link. This link
-              will grant you access to your account, where you can begin
-              crafting beautiful memories or revisiting those you've already
-              created.
+              Once you have entered your email, click the &rsquo;Sign in&rsquo;
+              button. We will send you an email shortly with a secure login
+              link. This link will grant you access to your account, where you
+              can begin crafting beautiful memories or revisiting those you have
+              already created.
             </p>
           </div>
           <div className="card w-full max-w-sm flex-shrink-0 bg-slate-100 shadow-2xl">
