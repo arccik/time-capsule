@@ -126,6 +126,7 @@ export const authOptions: NextAuthOptions = {
 
   pages: {
     signIn: "/auth/login",
+    verifyRequest: "/auth/verify-request",
   },
   // secret: env.NEXTAUTH_SECRET,
   // session: {
