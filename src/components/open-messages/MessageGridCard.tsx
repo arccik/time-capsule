@@ -21,16 +21,7 @@ export default function MessageCard({ data, setActiveCard }: MessageCardType) {
   return (
     <>
       <figure className="card glass relative rounded-xl p-4 shadow-slate-900/10 md:p-6">
-        {/* author section */}
-
         <div className="mb-4 flex items-center">
-          {/* {data?.user.image && (
-            <img
-              className="mr-2 h-5 w-5 rounded-full"
-              src={data?.user.image}
-              alt="avatar"
-            />
-          )} */}
           <div className="text-sm">
             <p className="leading-none text-slate-500 ">
               Author {data.user.name}

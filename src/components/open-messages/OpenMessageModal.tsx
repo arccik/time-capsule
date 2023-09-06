@@ -5,9 +5,18 @@ import CommentBar from "./CommentBar";
 import { AiFillCloseCircle } from "react-icons/ai";
 import SocialShareButtons from "./SocialShareButtons";
 import Image from "next/image";
+import ShowFromToDate from "./ShowFromToDate";
 
 type Props = {
-  data: Capsule | null;
+  data:
+    | (Capsule & {
+        user: {
+          image: string | null;
+          name: string | null;
+          email: string | null;
+        };
+      })
+    | null;
   closeModal: () => void;
   isOpen: boolean;
 };
@@ -55,7 +64,9 @@ export default function OpenMessageModal({ data, closeModal, isOpen }: Props) {
                 >
                   {data?.subject}
                 </Dialog.Title>
-                {/* <p className="mb-5 text-sm text-slate-400">By Oleh Saga</p> */}
+                <p className="mb-5 text-sm text-slate-400">
+                  By {data.user.name}
+                </p>
                 {data?.image && (
                   <Image
                     width={400}
@@ -65,8 +76,9 @@ export default function OpenMessageModal({ data, closeModal, isOpen }: Props) {
                     className="mb-5"
                   />
                 )}
+                <ShowFromToDate from={data.createdAt} to={data.openedAt} />
 
-                <p className="text-md whitespace-break-spaces">
+                <p className="text-md mt-5 whitespace-break-spaces">
                   {data?.message}
                 </p>
 

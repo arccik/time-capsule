@@ -3,11 +3,20 @@ import { api } from "~/utils/api";
 import Hero from "./Hero";
 import Loader from "../ui/Loader";
 import { useState } from "react";
-import type { Capsule } from "@prisma/client";
+import type { Capsule, User } from "@prisma/client";
 import OpenMessageModal from "./OpenMessageModal";
 
 export default function MessageGrid() {
-  const [activeCard, setActiveCard] = useState<null | Capsule>(null);
+  const [activeCard, setActiveCard] = useState<
+    | null
+    | (Capsule & {
+        user: {
+          image: string | null;
+          name: string | null;
+          email: string | null;
+        };
+      })
+  >(null);
   const [openModal, setOpenModal] = useState(false);
 
   const { data, status, fetchNextPage, isFetchingNextPage } =
@@ -36,7 +45,6 @@ export default function MessageGrid() {
   };
 
   const toShow = data?.pages.map((page) => page.items).flat();
-
 
   return (
     <section className="items-center p-2 md:p-10" id="public-messages">

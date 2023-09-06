@@ -11,7 +11,10 @@ export const capsuleRouter = createTRPCRouter({
   getOne: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.capsule.findFirst({ where: { id: input.id } });
+      return ctx.prisma.capsule.findFirst({
+        where: { id: input.id },
+        include: { user: { select: { name: true, email: true, image: true } } },
+      });
     }),
   getAll: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.capsule.findMany({
