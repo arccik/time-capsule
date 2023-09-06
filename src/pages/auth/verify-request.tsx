@@ -11,8 +11,8 @@ export default function VerifyRequestPage() {
               <h1 className="font-bold text-secondary">To Login</h1>
 
               <p className="py-6">
-                Please check your email for the secure login link we've just
-                sent you.
+                Please check your email for the secure login link we&lsquo;ve
+                just sent you.
               </p>
             </div>
           </div>

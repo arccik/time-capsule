@@ -1,5 +1,5 @@
-import React, { CSSProperties } from "react";
-import Countdown, { CountdownRenderProps } from "react-countdown";
+import React, { type CSSProperties } from "react";
+import Countdown, { type CountdownRenderProps } from "react-countdown";
 import { api } from "~/utils/api";
 import Loader from "./Loader";
 

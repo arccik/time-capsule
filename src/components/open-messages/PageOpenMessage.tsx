@@ -1,5 +1,5 @@
 import CommentBar from "~/components/open-messages/CommentBar";
-import type { Capsule, User } from "@prisma/client";
+import type { Capsule } from "@prisma/client";
 import SocialShareButtons from "./SocialShareButtons";
 import AudioPlayer from "./AudioPlayer";
 import dateFormatter from "~/lib/dateFormatter";

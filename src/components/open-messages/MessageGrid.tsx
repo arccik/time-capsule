@@ -3,7 +3,7 @@ import { api } from "~/utils/api";
 import Hero from "./Hero";
 import Loader from "../ui/Loader";
 import { useState } from "react";
-import type { Capsule, User } from "@prisma/client";
+import type { Capsule } from "@prisma/client";
 import OpenMessageModal from "./OpenMessageModal";
 
 export default function MessageGrid() {

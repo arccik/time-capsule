@@ -1,6 +1,5 @@
 import ActionButton from "./ActionButton";
-import type { Capsule, User } from "@prisma/client";
-import Image from "next/image";
+import type { Capsule } from "@prisma/client";
 import ShowFromToDate from "./ShowFromToDate";
 import AudioPlayer from "./AudioPlayer";
 

@@ -1,11 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
-import { env } from "~/env.mjs";
-import { Dispatch, SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { api } from "~/utils/api";
-import Loader from "./Loader";
 
 const schema = z.object({
   email: z.string().min(1, { message: "Email is required" }).email(),
