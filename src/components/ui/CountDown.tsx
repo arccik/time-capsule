@@ -45,20 +45,20 @@ function YearCountdown() {
       seconds,
     }).filter(([key, value]) => value > 0 || key === "seconds");
 
-    const toDisplay = filtredListOfboxesToShow.map(([key, value]) => (
-      <div
-        key={key}
-        className="rounded-box flex min-w-[80px] flex-col border p-2 text-neutral-content md:border-none"
-      >
-        <span className="countdown justify-center p-2 font-mono text-2xl md:text-5xl">
-          <span style={{ "--value": value } as CSSProperties}></span>
-        </span>
-        {key}
-      </div>
-    ));
+
     return (
-      <div className="grid auto-cols-max grid-flow-col gap-2 text-center md:gap-5">
-        {toDisplay}
+      <div className="grid  grid-flow-col gap-2 text-center md:gap-5">
+        {filtredListOfboxesToShow.map(([key, value]) => (
+          <div
+            key={key}
+            className="rounded-box mt-1 flex flex-col gap-1 text-neutral-content md:border-none"
+          >
+            <span className="countdown justify-center font-mono  text-xl md:text-5xl">
+              <span style={{ "--value": value } as CSSProperties}></span>
+            </span>
+            {key}
+          </div>
+        ))}
       </div>
     );
   };

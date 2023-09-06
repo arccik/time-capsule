@@ -75,7 +75,7 @@ export default function LoginPage() {
 
                 <div className="form-control mt-6">
                   <button type="submit" className="btn btn-primary">
-                    Login to using email
+                    Login with email
                   </button>
                   <div className="divider">OR</div>
                   <button
