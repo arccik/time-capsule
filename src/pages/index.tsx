@@ -7,16 +7,23 @@ import ScrollToTop from "~/components/ui/ScrollToTop";
 import MessageGrid from "~/components/open-messages/MessageGrid";
 import Script from "next/script";
 
+const metaDataDescription =
+  "Welcome to MessageTTF (Message to the Future), a platform that allows you to send messages, images, and audio recordings to yourself, relatives, friends, or family members. ";
+
 const HomePage: NextPage = () => {
   return (
     <>
       <Head>
         <title>Message to the future - digital time capsules.</title>
-        <meta
-          name="description"
-          content="This website will be soon available"
-        />
+
         <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content={metaDataDescription} key="desc" />
+        <meta
+          property="og:title"
+          content="MessageTTF (Message to the Future)"
+        />
+        <meta property="og:description" content={metaDataDescription} />
+        <meta property="og:image" content="/images/logo.png" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
