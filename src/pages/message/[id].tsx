@@ -21,10 +21,13 @@ export default function OpenMessagePage() {
       <Head>
         <title>{data?.subject}</title>
         <meta name="description" content={data?.message} key="desc" />
-        <meta property="og:title" content={"MessageTTF - " + data?.subject} />
+        <meta
+          property="og:title"
+          content={"MessageTTF - ".concat(data?.subject || "")}
+        />
         <meta
           property="og:description"
-          content={data?.message.substring(0, 100) + "..."}
+          content={data?.message.substring(0, 100).concat("...")}
         />
         {data?.image && <meta property="og:image" content={data?.image} />}
       </Head>

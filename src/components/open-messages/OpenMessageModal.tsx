@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef } from "react";
 import type { Capsule } from "@prisma/client";
 import { Dialog, Transition } from "@headlessui/react";
 import CommentBar from "./CommentBar";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { AiFillCloseCircle, AiOutlineShareAlt } from "react-icons/ai";
 import SocialShareButtons from "./SocialShareButtons";
 import Image from "next/image";
 import ShowFromToDate from "./ShowFromToDate";
@@ -77,6 +77,7 @@ export default function OpenMessageModal({ data, closeModal, isOpen }: Props) {
                   />
                 )}
                 <ShowFromToDate from={data.createdAt} to={data.openedAt} />
+                <div className="mb-5 mt-5 divide-x-2 border-b-2"></div>
 
                 <p className="text-md mt-5 whitespace-break-spaces">
                   {data?.message}
@@ -86,9 +87,12 @@ export default function OpenMessageModal({ data, closeModal, isOpen }: Props) {
                   className="absolute right-2 top-2 cursor-pointer text-2xl text-red-500"
                   onClick={closeModal}
                 />
+
+                <div className="mb-5 mt-5 divide-x-2 border-b-2"></div>
                 <div className="mt-4">
                   <CommentBar id={data.id} />
                 </div>
+
                 <SocialShareButtons message={data?.message} id={data.id} />
                 {data.message.length > 300 && (
                   <span
