@@ -17,7 +17,7 @@ export default function OpenMessagePage() {
   };
   return (
     // <main className="min-h-screen animate-gradient-x whitespace-pre-line bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90% pb-10">
-    <main className="bg-[url('/images/bg_bggenerator.png')] bg-cover bg-fixed bg-no-repeat">
+    <main className="bg-[url('/images/bg-green-brown.png')] bg-cover bg-fixed bg-no-repeat">
       <Head>
         <title>{data?.subject}</title>
         <meta name="description" content={data?.message} key="desc" />
