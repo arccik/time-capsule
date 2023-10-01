@@ -45,7 +45,10 @@ export default function LikeButton({ id }: { id: string }) {
     );
 
   return (
-    <button onClick={handleLike} className="btn-primary btn-xs btn">
+    <button
+      onClick={handleLike}
+      className="btn btn-xs bg-[#88E0D0] md:btn-primary"
+    >
       {totalLikes}{" "}
       <AiOutlineHeart className="ml-2 mr-2" size={18} color="#fff" /> Like{" "}
     </button>

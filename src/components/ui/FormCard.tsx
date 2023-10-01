@@ -33,7 +33,9 @@ export default function Card({
             >
               {title}
             </p>
-            <span className="text-xs text-primary">{subtitle}</span>
+            <span className="text-xs text-[#4C5F7A] md:text-primary">
+              {subtitle}
+            </span>
           </div>
           {actions && <span>{actions}</span>}
         </div>

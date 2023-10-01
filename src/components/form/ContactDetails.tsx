@@ -14,7 +14,7 @@ export default function ContactDetails({
       >
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text text-xs text-secondary">
+            <span className="label-text text-xs text-slate-400">
               Email Address
             </span>
           </label>
@@ -22,12 +22,12 @@ export default function ContactDetails({
             type="email"
             {...register("email")}
             placeholder="example@mail.com"
-            className="input-bordered input w-full "
+            className="input input-bordered w-full "
           />
         </div>
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text text-xs text-secondary">
+            <span className="label-text text-xs text-slate-400">
               Phone Number
             </span>
           </label>
@@ -35,7 +35,7 @@ export default function ContactDetails({
             {...register("phone")}
             type="text"
             placeholder="+44 799999999"
-            className="input-bordered input w-full"
+            className="input input-bordered w-full"
           />
         </div>
       </Card>

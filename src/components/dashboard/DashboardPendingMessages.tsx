@@ -61,7 +61,10 @@ export default function PendingCapsules() {
             <p className="text-center text-sm text-secondary">
               You do not have any messages yet.
             </p>
-            <Link href="/" className="btn-primary btn-sm btn mt-10">
+            <Link
+              href="/"
+              className="btn btn-sm mt-10 bg-[#88E0D0] md:btn-primary "
+            >
               Create your first message
             </Link>
           </>
@@ -91,13 +94,13 @@ export default function PendingCapsules() {
                 <div className="btn-group btn-group-horizontal">
                   <button
                     onClick={() => void handlePayment(capsule.id)}
-                    className="btn-primary btn-outline btn-xs btn text-xs"
+                    className="btn btn-outline btn-xs bg-[#88E0D0] text-xs md:btn-primary"
                   >
                     Pay <MdPayment className="ml-1 text-xl" />
                   </button>
                   <button
                     onClick={() => setIsDeleteClicked(true)}
-                    className="btn-secondary btn-outline btn-xs btn text-xs"
+                    className="btn btn-secondary btn-outline btn-xs text-xs"
                   >
                     Delete <MdDeleteForever className="ml-1 text-xl" />
                   </button>
@@ -113,13 +116,13 @@ export default function PendingCapsules() {
                     <div className="modal-action">
                       <button
                         onClick={() => setIsDeleteClicked(false)}
-                        className="btn-outline btn"
+                        className="btn btn-outline"
                       >
                         No
                       </button>
                       <button
                         onClick={() => handleDelete(capsule.id)}
-                        className="btn-error btn"
+                        className="btn btn-error"
                       >
                         Yes
                       </button>

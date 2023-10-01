@@ -110,12 +110,12 @@ export default function SignUpPage() {
                   </label>
                   <input
                     type="file"
-                    className="file-input-bordered file-input-primary file-input w-full max-w-xs"
+                    className="file-input file-input-bordered file-input-primary w-full max-w-xs"
                   />
                 </div>
                 <div className="form-control mt-6">
                   <button
-                    className="btn-primary btn"
+                    className="btn bg-[#88E0D0] md:btn-primary"
                     disabled={Object.keys(errors).length > 0}
                   >
                     Register

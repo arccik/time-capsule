@@ -67,7 +67,7 @@ export default function MessageGrid() {
         closeModal={() => setOpenModal(false)}
       />
       <button
-        className="btn btn-primary mt-10 w-full"
+        className="btn mt-10 w-full bg-[#88E0D0] md:btn-primary"
         disabled={!data?.pages?.at(-1)?.nextCursor}
         onClick={handleFetchNextPage}
       >
