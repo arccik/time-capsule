@@ -125,7 +125,7 @@ export default function CommentBar({ id }: { id: string }) {
               </div>
               {isAuth && comment.user.id === session?.user.id && (
                 <button
-                  className="absolute right-1 top-1 inline-flex items-center rounded-lg bg-transparent text-center text-sm font-medium text-red-400 hover:bg-red-700  hover:text-white  focus:outline-none focus:ring-4"
+                  className="absolute right-1 top-1 inline-flex items-center rounded-lg bg-transparent text-center text-sm font-medium text-red-400 hover:bg-red-700  hover:text-slate-800  focus:outline-none focus:ring-4"
                   type="button"
                   onClick={() => deleteComment.mutate({ id: comment.id })}
                 >

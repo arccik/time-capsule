@@ -32,7 +32,7 @@ export default function OpenMessagePage() {
         {data?.image && <meta property="og:image" content={data?.image} />}
       </Head>
       <button
-        className="btn btn-ghost btn-xs ml-3 mt-10 text-white md:ml-10"
+        className="btn btn-ghost btn-xs ml-3 mt-10 text-slate-800 md:ml-10"
         onClick={handleBackClick}
       >
         <BiArrowBack />
