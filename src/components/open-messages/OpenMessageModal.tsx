@@ -64,7 +64,7 @@ export default function OpenMessageModal({ data, closeModal, isOpen }: Props) {
                 >
                   {data?.subject}
                 </Dialog.Title>
-                <p className="mb-5 text-sm text-slate-400">
+                <p className="mb-2 text-sm text-slate-400">
                   By {data.user.name}
                 </p>
                 {data?.image && (
