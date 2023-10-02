@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="footer footer-center pb-10 pt-10 text-inherit">
       <div>
         <img src="/images/logo.png" alt="" />
-        <span className="font-bold text-secondary">
+        <span className="font-bold text-slate-600">
           Providing reliable virtual time capsules
         </span>
       </div>
