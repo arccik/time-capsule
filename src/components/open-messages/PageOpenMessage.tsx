@@ -3,6 +3,7 @@ import type { Capsule } from "@prisma/client";
 import SocialShareButtons from "./SocialShareButtons";
 import AudioPlayer from "./AudioPlayer";
 import dateFormatter from "~/lib/dateFormatter";
+import ShowFromToDate from "./ShowFromToDate";
 
 export default function PageOpenMessage({
   data,
@@ -25,15 +26,12 @@ export default function PageOpenMessage({
           <div>
             <p className="-mt-3 text-sm text-slate-700">By {data.user.name}</p>
           </div>
+          <ShowFromToDate from={data.createdAt} to={data.openedAt} />
+
           {data.voiceMessage && <AudioPlayer url={data.voiceMessage} />}
           <p className="mt-10  text-lg font-semibold">
             <q>{data.message}</q>
           </p>
-          {data.openedAt && (
-            <p className="mt-10 text-sm text-slate-700">
-              Opened - {dateFormatter(data.openedAt)}
-            </p>
-          )}
 
           <div className="card-actions mt-10">
             <CommentBar id={data.id} />
