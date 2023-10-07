@@ -53,6 +53,12 @@ model User {
     Like          Like[]
     Comment       Comment[]
     Payment       Payment[]
+    role          Role?     @default(USER)
+}
+
+enum Role {
+    USER
+    ADMIN
 }
 
 model VerificationToken {

@@ -1,12 +1,17 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import AdminPanel from "~/components/auth/adminPanel";
 import Loader from "~/components/ui/Loader";
 
 export default function Profile() {
   const { data: sessionData, status } = useSession();
+  console.log("Profile Data: ", sessionData);
   if (status === "loading") return <Loader />;
 
+  if (sessionData?.user.role === "ADMIN") {
+    return <AdminPanel />;
+  }
   return (
     <div className="hero min-h-[600px] bg-slate-200 ">
       <div className="hero-content w-2/3 flex-col lg:flex-row">
