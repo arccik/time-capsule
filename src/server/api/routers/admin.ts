@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const adminRouter = createTRPCRouter({
-  getTotalCapsules: protectedProcedure.query(({ ctx, input }) => {
+  getTotalCapsules: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.capsule.count();
   }),
   getTotalOpenCapsules: protectedProcedure.query(({ ctx }) => {

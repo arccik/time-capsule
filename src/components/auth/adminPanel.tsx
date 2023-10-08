@@ -1,7 +1,7 @@
 import { api } from "~/utils/api";
 import Loader from "../ui/Loader";
 import Modal from "../ui/Modal";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 export default function AdminPanel() {
   const [selectedCapsuleId, setSelectedCapsuleId] = useState<string | null>(
@@ -28,7 +28,7 @@ export default function AdminPanel() {
     onError: () => console.error("Something went wrong, record not deleted"),
   });
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = (id: string) => {
     deleteCapsule.mutate({ id });
     setSelectedCapsuleId(null);
   };
