@@ -1,18 +1,54 @@
 import { api } from "~/utils/api";
+import Loader from "../ui/Loader";
+import Modal from "../ui/Modal";
+import { Fragment, useState } from "react";
 
 export default function AdminPanel() {
-  const { data: totalCapsules } = api.admin.getTotalCapsules.useQuery();
-  const { data: totalUsers } = api.admin.getTotalUsers.useQuery();
-  const { data: totalOpenCapsules } = api.admin.getTotalOpenCapsules.useQuery();
-  const { data: mostRecentCapsule } =
+  const [selectedCapsuleId, setSelectedCapsuleId] = useState<string | null>(
+    null
+  );
+  const { data: totalCapsules, status: totalCapsuleStatus } =
+    api.admin.getTotalCapsules.useQuery();
+  const { data: totalUsers, status: totalUsersStatus } =
+    api.admin.getTotalUsers.useQuery();
+  const { data: totalOpenCapsules, status: totalOpenCapsulesStatus } =
+    api.admin.getTotalOpenCapsules.useQuery();
+  const { data: mostRecentCapsule, status: mostRecentCapsuleStatus } =
     api.admin.getMostReacentCapsule.useQuery();
-  const { data: totalComments } = api.admin.getTotalComments.useQuery();
+  const { data: totalComments, status: totalCommentsStatus } =
+    api.admin.getTotalComments.useQuery();
 
-  const { data: capsules } = api.admin.getAll.useQuery();
+  const {
+    data: capsules,
+    status: capsulesStatus,
+    refetch,
+  } = api.admin.getAll.useQuery();
+  const deleteCapsule = api.admin.deleteCapsule.useMutation({
+    onSuccess: async () => await refetch(),
+    onError: () => console.error("Something went wrong, record not deleted"),
+  });
+
+  const handleDelete = async (id: string) => {
+    deleteCapsule.mutate({ id });
+    setSelectedCapsuleId(null);
+  };
+
+  if (
+    [
+      totalCapsuleStatus,
+      totalUsersStatus,
+      totalOpenCapsulesStatus,
+      mostRecentCapsuleStatus,
+      totalCommentsStatus,
+      capsulesStatus,
+    ].includes("loading")
+  ) {
+    return <Loader />;
+  }
   return (
     <section>
-      <div className="flex justify-center">
-        <div className="stats shadow">
+      <div className="flex justify-center md:mt-10">
+        <div className="stats stats-vertical shadow md:stats-horizontal">
           <div className="stat place-items-center">
             <div className="stat-title">Total Capsules</div>
             <div className="stat-value">{totalCapsules}</div>
@@ -41,7 +77,28 @@ export default function AdminPanel() {
           </div>
         </div>
       </div>
-      <div className="m-10 overflow-x-auto">
+
+      <div className="overflow-x-auto md:m-10">
+        <Modal show={!!selectedCapsuleId}>
+          <h3 className="text-lg font-bold">Delete this message?</h3>
+          <p className="py-4">
+            The message will be permanently deleted and cannot be recovered.
+          </p>
+          <div className="modal-action">
+            <button
+              onClick={() => setSelectedCapsuleId(null)}
+              className="btn btn-outline"
+            >
+              No
+            </button>
+            <button
+              onClick={() => handleDelete(selectedCapsuleId!)}
+              className="btn btn-error"
+            >
+              Yes
+            </button>
+          </div>
+        </Modal>
         <table className="table">
           {/* head */}
           <thead>
@@ -103,6 +160,12 @@ export default function AdminPanel() {
                     className="btn btn-ghost btn-xs"
                   >
                     Open
+                  </button>
+                  <button
+                    onClick={() => setSelectedCapsuleId(capsule.id)}
+                    className="btn btn-error btn-xs"
+                  >
+                    Delete
                   </button>
                 </th>
               </tr>

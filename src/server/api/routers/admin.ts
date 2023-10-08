@@ -16,6 +16,7 @@ export const adminRouter = createTRPCRouter({
   getAll: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.capsule.findMany({
       include: { user: true },
+      orderBy: { createdAt: "desc" },
     });
   }),
   getTotalUsers: protectedProcedure.query(({ ctx }) => {
@@ -30,4 +31,11 @@ export const adminRouter = createTRPCRouter({
   getTotalComments: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.comment.count();
   }),
+  deleteCapsule: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.capsule.delete({
+        where: { id: input.id },
+      });
+    }),
 });

@@ -3,9 +3,11 @@ import React from "react";
 
 type Props = {
   children: React.ReactNode;
+  show?: boolean;
 };
 
-const Modal = ({ children }: Props) => {
+const Modal = ({ children, show }: Props) => {
+  if (!show) return null;
   return (
     // we add modal-bottom and modal-middle classes to make it responsive
     //add modal-open for now to test the modal

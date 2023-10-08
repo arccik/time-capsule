@@ -10,6 +10,14 @@ export default function Header() {
   const menuItems =
     status === "authenticated" ? (
       <>
+        {sessionData.user.role === "ADMIN" && (
+          <li>
+            <Link href="/auth/admin-panel" className="justify-between">
+              Admin Panel
+              <span className="badge badge-primary">Boss</span>
+            </Link>
+          </li>
+        )}
         <li tabIndex={0}>
           <Link href="/">Home</Link>
         </li>
