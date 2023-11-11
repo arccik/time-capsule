@@ -23,11 +23,7 @@ export default function CheckOutBox() {
   return (
     <form action="/api/checkout_sessions" method="POST">
       <section>
-        <button
-          type="submit"
-          role="link"
-          className="btn bg-[#88E0D0] md:btn-primary"
-        >
+        <button type="submit" role="link" className="btn btn-primary">
           Checkout
         </button>
       </section>

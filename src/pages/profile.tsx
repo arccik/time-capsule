@@ -29,7 +29,7 @@ export default function Profile() {
             choosing. With MessageTTF, you can capture the essence of a moment
             and experience the joy of revisiting it in the future.
           </p>
-          <Link href="/dashboard" className="btn bg-[#88E0D0] md:btn-primary">
+          <Link href="/dashboard" className="btn btn-primary">
             To Dashboard
           </Link>
         </div>

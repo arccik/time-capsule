@@ -120,7 +120,7 @@ export default function ContactUsForm({ setSent }: Props) {
             )}
           </div>
           <button
-            className="btn bg-[#88E0D0] md:btn-primary"
+            className="btn btn-primary"
             type="submit"
             disabled={!!Object.keys(errors).length || loading}
           >

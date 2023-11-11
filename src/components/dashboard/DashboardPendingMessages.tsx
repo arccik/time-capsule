@@ -61,10 +61,7 @@ export default function PendingCapsules() {
             <p className="text-center text-sm text-secondary">
               You do not have any messages yet.
             </p>
-            <Link
-              href="/"
-              className="btn btn-sm mt-10 bg-[#88E0D0] md:btn-primary "
-            >
+            <Link href="/" className="btn btn-primary btn-sm mt-10 ">
               Create your first message
             </Link>
           </>
@@ -94,7 +91,7 @@ export default function PendingCapsules() {
                 <div className="btn-group btn-group-horizontal">
                   <button
                     onClick={() => void handlePayment(capsule.id)}
-                    className="btn btn-outline btn-xs bg-[#88E0D0] text-xs md:btn-primary"
+                    className="btn btn-primary btn-outline btn-xs text-xs"
                   >
                     Pay <MdPayment className="ml-1 text-xl" />
                   </button>

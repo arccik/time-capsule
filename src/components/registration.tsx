@@ -115,7 +115,7 @@ export default function SignUpPage() {
                 </div>
                 <div className="form-control mt-6">
                   <button
-                    className="btn bg-[#88E0D0] md:btn-primary"
+                    className="btn btn-primary"
                     disabled={Object.keys(errors).length > 0}
                   >
                     Register

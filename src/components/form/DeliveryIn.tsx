@@ -101,7 +101,7 @@ export default function DeliveryIn({
             <button
               key={button}
               type="button"
-              className="btn btn-xs grow bg-[#88E0D0] md:btn-primary md:grow-0"
+              className="btn btn-primary btn-xs grow md:grow-0"
               onClick={() => handleButtonClick(index)}
             >
               {button}

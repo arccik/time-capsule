@@ -15,13 +15,13 @@ export default function SendButton({ disabled }: Props) {
           <button
             type="submit"
             disabled={disabled}
-            className="btn-[#88E0D0] btn w-full md:btn-primary"
+            className="btn btn-primary w-full"
           >
             Send to the Future
           </button>
         </div>
       ) : (
-        <button className="btn w-full bg-[#88E0D0] md:btn-primary">
+        <button className="btn btn-primary w-full">
           Sign in to send the message
         </button>
       )}

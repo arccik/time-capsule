@@ -40,7 +40,8 @@ const HomePage: NextPage = () => {
         `}
       </Script>
       {/* <main className="bg-gradient-to-r from-green-700 from-10% via-sky-600 via-30% to-emerald-500 to-90%"> */}
-      <main className="bg-[#c0e2fe] bg-cover bg-fixed bg-no-repeat text-black md:bg-[url('/images/bg-green.png')]">
+      {/* <main className="bg-[#c0e2fe] bg-cover bg-fixed bg-no-repeat text-black md:bg-[url('/images/bg-green.png')] "> */}
+      <main className="animate-gradient-x bg-gradient-to-r from-cyan-500 to-blue-500 p-3">
         <div className="mx-auto lg:max-w-[2000px]">
           <Hero />
           <TimeCapsuleForm />

@@ -62,9 +62,10 @@ export default function Header() {
           href="/"
           aria-current="page"
           aria-label="Homepage"
-          className="flex-0 -ml-5"
+          className="flex-0 btn btn-ghost text-xl normal-case"
         >
-          <img src="/images/logo.png" className="scale-75" alt="logo" />
+          {/* <img src="/images/logo.png" className="scale-75" alt="logo" /> */}
+          message <span className="-ml-2 font-extrabold text-primary">TTF</span>
         </Link>
       </div>
       {/* <HelpDialog /> */}
